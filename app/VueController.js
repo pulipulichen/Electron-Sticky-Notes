@@ -4,9 +4,10 @@ let VueControllerConfig = {
     
     config: {
     },
-    
-    mode: null,
-    
+    status: {
+      mode: null,
+      isAlwaysOnTop: true,
+    },
     cache: {
       
     },
@@ -35,7 +36,7 @@ let VueControllerConfig = {
     this.lib.electron = RequireHelper.require('electron')
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
-    this.mode = this.lib.win.mode
+    this.status.mode = this.lib.win.mode
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     // 其他
@@ -46,14 +47,19 @@ let VueControllerConfig = {
   methods: {
     _afterMounted: function () {
       //this.lib.ipc.send('resize', 100, 200);
-      let $app = $(this.$refs.APP)
-      window.resizeTo($app.width() + 10,$app.height())
+      this.resizeToFit()
       
       //this.lib.win.setAlwaysOnTop(true)
       
     },
+    resizeToFit: function () {
+      let $app = $(this.$refs.APP)
+      window.resizeTo($app.width() + 10,$app.height())
+      return this
+    },
     toggleAlwaysOnTop: function () {
-      this.lib.win.setAlwaysOnTop(true)
+      this.lib.win.setAlwaysOnTop((this.status.isAlwaysOnTop === false))
+      return this
     },
   } // methods
 }

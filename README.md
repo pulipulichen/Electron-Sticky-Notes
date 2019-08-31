@@ -16,6 +16,12 @@ compression = normal “store” | “normal” | “maximum”
 
 ----
 
+# Image Viewer
+
+https://openseadragon.github.io/examples/ui-viewport-navigator/
+
+----
+
 # Icon Resources
 - https://findicons.com/icon/238126/table
 - https://www.stockio.com/free-icon/emilio-spreadsheet-table
