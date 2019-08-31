@@ -45,7 +45,15 @@ let VueControllerConfig = {
   },  // mounted: function () {
   methods: {
     _afterMounted: function () {
+      //this.lib.ipc.send('resize', 100, 200);
+      let $app = $(this.$refs.APP)
+      window.resizeTo($app.width() + 10,$app.height())
       
+      //this.lib.win.setAlwaysOnTop(true)
+      
+    },
+    toggleAlwaysOnTop: function () {
+      this.lib.win.setAlwaysOnTop(true)
     },
   } // methods
 }

@@ -54,9 +54,10 @@ module.exports = function (shortcutsDirPath, callback) {
     frame: false,
     icon: iconPath,
     transparent: true,
-    width: width,
-    height: height,
-    //useContentSize: true,
+    titleBarStyle: 'hidden',
+    //width: width,
+    //height: height,
+    useContentSize: true,
     webPreferences: {
       nodeIntegration: true
     }
@@ -67,13 +68,14 @@ module.exports = function (shortcutsDirPath, callback) {
   }
   let win = new BrowserWindow(optionBrowserWindow)
   //win.maximize()
+  win.center()
   
+  win.setMenu(null)
   if (mode === 'production') {
-    win.setMenu(null)
     win.setMenuBarVisibility(false)
   }
   
-  win.setResizable(false)
+  //win.setResizable(false)
   
   win.loadURL(url.format({
     pathname: path.join(__dirname, '../app', 'index.html'),

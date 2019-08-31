@@ -33,12 +33,14 @@
 <!-- ------------------------------------- -->
 
   </head>
-  <body>
+  <body style="-webkit-app-region: drag" ondblclick="return false;">
 
 <!-- tables inside this DIV could contain drag-able content  -->
 <div id="app" 
-     ref="main">
-  測試    
+     ref="APP">
+  <textarea class="disable-drag">
+    測試    
+  </textarea>
 </div>
   
   <script src="./VueController.js"></script>

@@ -8,9 +8,6 @@ const path = require('path')
 const CreateWindow = require('./CreateWindow')
 
 module.exports = function (mainWindow) {
-  ipc.on('resize', function (e, x, y) {
-    mainWindow.setSize(x, y);
-  });
   
   ipc.on('open-another-win', function (event, filepath) {
     console.log(filepath)
