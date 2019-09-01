@@ -13,9 +13,10 @@
 </script>
 <script src="vendors/jquery/jquery-3.4.1-electron.js"></script>
 
+<!--
 <link href="vendors/semantic-ui/semantic.min.css" rel="stylesheet" type="text/css">
 <script src="vendors/semantic-ui/semantic.min.js"></script>
-
+-->
 <link href="./styles/main.less" rel="stylesheet/less" type="text/css" />
 <script>
   less = {
@@ -31,7 +32,10 @@
 <script src="helpers/electron/ElectronHelper.js"></script>
 
 <!-- ------------------------------------- -->
+<!-- 其他元件 -->
 
+
+<!-- ------------------------------------- -->
   </head>
   <body style="-webkit-app-region: drag" ondblclick="return false;">
 
@@ -43,9 +47,28 @@
   </textarea>
 </div>
   
-  <script src="./VueController.js"></script>
+<div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
+<script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>
+<script type="text/javascript">
+var viewer = OpenSeadragon({
+    id: "openseadragon1",
+    prefixUrl: "vendors/openseadragon-bin-2.4.1/images/",
+    visibilityRatio: 1,
+    showNavigator:  true,
+    tileSources: {
+        type: 'image',
+        url:  '../demo/pets-4415649.jpg',
+        buildPyramid: false
+      }
+    });
+</script>
+
+<!-- ------------------------------------------- --> 
+<!-- 最後的基礎元件 -->
+
+<script src="./VueController.js"></script>
   
- <!-- ------------------------------------------- --> 
+<!-- ------------------------------------------- --> 
  
   </body>
 </html>

@@ -37,9 +37,12 @@ https://openseadragon.github.io/examples/ui-viewport-navigator/
 
 - http://www.iconarchive.com/show/papirus-apps-icons-by-papirus-team/pspp-icon.html
 
+- Semantic UI ICON: https://semantic-ui.com/elements/icon.html
+
+# Photo Resources
+
 - https://pixabay.com/photos/pets-dog-corgi-cute-4415649/#_=_
 
-- Semantic UI ICON: https://semantic-ui.com/elements/icon.html
 
 ----
 

@@ -47,7 +47,7 @@ let VueControllerConfig = {
   methods: {
     _afterMounted: function () {
       //this.lib.ipc.send('resize', 100, 200);
-      this.resizeToFit()
+      //this.resizeToFit()
       
       //this.lib.win.setAlwaysOnTop(true)
       
