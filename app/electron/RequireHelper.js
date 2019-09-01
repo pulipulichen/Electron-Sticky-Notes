@@ -1,3 +1,7 @@
+if (typeof(require) !== 'function') {
+  require = () => {}
+}
+
 let RequireHelper = {
   requireJQuery: function () {
     window.$ = window.jQuery = require('jquery')
