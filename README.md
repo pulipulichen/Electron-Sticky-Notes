@@ -3,8 +3,8 @@ A sticky nodes app based on Electron.
 
 - Project: https://github.com/pulipulichen/Electron-Sticky-Notes
 - Issues: https://github.com/pulipulichen/Electron-Sticky-Notes/issues
-- Download: https://github.com/pulipulichen/Electron-Sticky-Notes/releases
 - Commits: https://github.com/pulipulichen/Electron-Sticky-Notes/commits/master
+- Download: https://github.com/pulipulichen/Electron-Sticky-Notes/releases
 
 ----
 

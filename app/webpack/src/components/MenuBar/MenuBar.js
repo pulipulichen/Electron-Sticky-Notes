@@ -4,9 +4,10 @@ module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
     this.$i18n.locale = this.config.locale
-    console.log(this.$parent.a())
+    //console.log(this.$parent.a())
     return {
-      header: '這是一個預設標題',
+      header: '',
+      beforeMaximizeIsPinTop: this.status.isPinTop,
     }
   },
   methods: {
@@ -26,14 +27,17 @@ module.exports = {
       return this
     },
     maximize: function () {
-      this.lib.win.setFullScreen(true)
+      this.lib.win.maximize()
       this.status.isMaximized = true
+      this.beforeMaximizeIsPinTop = this.status.isPinTop
+      this.status.isPinTop = false
       return this
     },
     unmaximize: function () {
       // 這個我們可能要自己做resize
-      this.lib.win.setFullScreen(false)
+      this.lib.win.restore()
       this.status.isMaximized = false
+      this.status.isPinTop = this.beforeMaximizeIsPinTop
       return this
     },
     close: function () {

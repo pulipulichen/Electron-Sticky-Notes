@@ -1,7 +1,8 @@
 <div class="ui borderless menu">
   <a class="item top-toggle"
     v-on:click="toggleAlwaysOnTop"
-    v-bind:class="{active: status.isPinTop}">
+    v-bind:class="{active: status.isPinTop}"
+    v-if="status.isMaximized === false">
      <i class="map pin icon"></i>  
   </a>
 

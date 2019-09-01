@@ -1,6 +1,18 @@
 @menu-bar-height: 40px;
 
-textarea {
+.content-text {
   width: 100vw;
   height: calc(100vh - @menu-bar-height);
+  resize: none;
+  font-size: 1.5rem;
+  background-color: rgba(255,255,255,0.7);
+  padding: 0.5rem;
+  border-width: 0;
+  -webkit-app-region: no-drag;
+  font-family: Noto Sans CJK TC;
+  
+  &:focus {
+    outline: none;
+    outline-width: 0;
+  }
 }

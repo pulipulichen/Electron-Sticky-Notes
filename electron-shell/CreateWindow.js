@@ -51,7 +51,7 @@ module.exports = function (filePath, callback) {
     x: offsetX,
     y: offsetY,
     //fullscreen: true,
-    //frame: false,
+    frame: false,
     icon: iconPath,
     //transparent: true,
     titleBarStyle: 'hidden',

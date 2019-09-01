@@ -465,9 +465,10 @@ module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
     this.$i18n.locale = this.config.locale
-    console.log(this.$parent.a())
+    //console.log(this.$parent.a())
     return {
-      header: '這是一個預設標題',
+      header: '',
+      beforeMaximizeIsPinTop: this.status.isPinTop,
     }
   },
   methods: {
@@ -487,14 +488,17 @@ module.exports = {
       return this
     },
     maximize: function () {
-      this.lib.win.setFullScreen(true)
+      this.lib.win.maximize()
       this.status.isMaximized = true
+      this.beforeMaximizeIsPinTop = this.status.isPinTop
+      this.status.isPinTop = false
       return this
     },
     unmaximize: function () {
       // 這個我們可能要自己做resize
-      this.lib.win.setFullScreen(false)
+      this.lib.win.restore()
       this.status.isMaximized = false
+      this.status.isPinTop = this.beforeMaximizeIsPinTop
       return this
     },
     close: function () {
@@ -885,7 +889,7 @@ exports.push([module.i, " /*\r\n * # Semantic UI - 2.2.12\r\n * https://github.c
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/styles/global.less","global.less"],"names":[],"mappings":"AAAA;EACE,YAAA;EACA,aAAA;ACCF;ADCE;EACE,yBAAA;ACCJ","file":"global.less","sourcesContent":["body #app {\n  width: 100vw;\n  height: 100vh;\n  \n  &[data-theme=\"yellow\"] {\n    background-color: #f1c40f;\n  }\n}","body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n"]}]);
+exports.push([module.i, "body {\n  overflow: hidden;\n  -webkit-app-region: drag;\n}\nbody #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/styles/global.less","global.less"],"names":[],"mappings":"AAAA;EACE,gBAAA;EACA,wBAAA;ACCF;ADCA;EACE,YAAA;EACA,aAAA;ACCF;ADCE;EACE,yBAAA;ACCJ","file":"global.less","sourcesContent":["body {\n  overflow: hidden;\n  -webkit-app-region: drag;\n}\nbody #app {\n  width: 100vw;\n  height: 100vh;\n  \n  &[data-theme=\"yellow\"] {\n    background-color: #f1c40f;\n  }\n}","body {\n  overflow: hidden;\n  -webkit-app-region: drag;\n}\nbody #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n"]}]);
 
 
 /***/ }),
@@ -899,7 +903,7 @@ exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "textarea[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;ACDF","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\ntextarea {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n}","textarea {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n"]}]);
+exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EACA,iBAAA;EACA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;ACDF;ADGE;EACE,aAAA;EACA,gBAAA;ACDJ","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n"]}]);
 
 
 /***/ }),
@@ -943,6 +947,7 @@ var render = function() {
           expression: "status.contentText"
         }
       ],
+      staticClass: "content-text",
       domProps: { value: _vm.status.contentText },
       on: {
         input: function($event) {
@@ -952,8 +957,7 @@ var render = function() {
           _vm.$set(_vm.status, "contentText", $event.target.value)
         }
       }
-    }),
-    _vm._v("\n  " + _vm._s(_vm.$t("OK")) + "\n")
+    })
   ])
 }
 var staticRenderFns = []
@@ -979,15 +983,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "ui borderless menu" }, [
-    _c(
-      "a",
-      {
-        staticClass: "item top-toggle",
-        class: { active: _vm.status.isPinTop },
-        on: { click: _vm.toggleAlwaysOnTop }
-      },
-      [_c("i", { staticClass: "map pin icon" })]
-    ),
+    _vm.status.isMaximized === false
+      ? _c(
+          "a",
+          {
+            staticClass: "item top-toggle",
+            class: { active: _vm.status.isPinTop },
+            on: { click: _vm.toggleAlwaysOnTop }
+          },
+          [_c("i", { staticClass: "map pin icon" })]
+        )
+      : _vm._e(),
     _vm._v(" "),
     _c("a", { staticClass: "item note-header disabled" }, [
       _vm._v("\n    " + _vm._s(_vm.header) + "\n  ")
