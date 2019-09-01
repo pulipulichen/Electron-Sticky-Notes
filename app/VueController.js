@@ -1,3 +1,17 @@
+/* global httpVueLoader */
+
+httpVueLoader.langProcessor.less = function (lessText) {
+  return new Promise (function (resolve, reject) {
+    less.render(lessText, {}, function (err, css) {
+      console.log(err)
+      console.log(css)
+      if (err) reject (err);
+      resolve(css.css);
+      //return css
+    });
+  })
+}
+
 let VueControllerConfig = {
   el: '#app',
   components: {
