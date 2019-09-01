@@ -1,0 +1,33 @@
+<div class="ui borderless menu">
+  <a class="item top-toggle"
+    v-on:click="toggleAlwaysOnTop"
+    v-bind:class="{active: status.isPinTop}">
+     <i class="map pin icon"></i>  
+  </a>
+
+  <a class="item note-header disabled">
+    {{ header }}
+  </a>
+
+
+  <div class="right menu">
+    <a class="item"
+      v-on:click="minimize()">
+      <i class="window minimize icon"></i>
+    </a>
+    <a class="item"
+       v-on:click="maximize()"
+       v-if="(status.isMaximized === false)">
+       <i class="window maximize icon"></i>
+    </a>
+    <a class="item"
+      v-on:click="unmaximize()"
+       v-if="(status.isMaximized === true)">
+       <i class="window restore icon"></i>
+    </a>
+    <a class="item"
+      v-on:click="close()"> 
+       <i class="window close icon"></i>
+    </a>
+  </div>
+</div>

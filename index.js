@@ -13,16 +13,8 @@ const {
 
 const ProcessArgvHelper = require('./electron-shell/ProcessArgvHelper.js')
 
-let dirPath = ProcessArgvHelper.getDirPaths()
-//console.log(ProcessArgvHelper.getDirPaths())
-//console.log(dirPath)
-if (Array.isArray(dirPath) && dirPath.length > 0) {
-  dirPath = dirPath[0]
-}
-else {
-  dirPath = undefined
-}
-//console.log(dirPath)
+let filePathList = ProcessArgvHelper.getFilePaths()
+console.log(filePathList)
 
 // ------------
 
@@ -39,7 +31,14 @@ app.commandLine.appendSwitch('disable-site-isolation-trials');
 
 //app.on('activate', () => {
 app.on('ready', () => {
-  createWindow(dirPath)
+  if (filePathList.length > 0) {
+    filePathList.forEach(filePath => {
+      createWindow(filePath)
+    })
+  }
+  else {
+    createWindow()
+  }
 })
 
 const createWindow = require('./electron-shell/CreateWindow')

@@ -16,6 +16,12 @@ compression = normal “store” | “normal” | “maximum”
 
 ----
 
+# Colors
+
+- https://flatuicolors.com/palette/defo
+
+----
+
 # Image Viewer
 
 https://openseadragon.github.io/examples/ui-viewport-navigator/
@@ -36,10 +42,14 @@ https://openseadragon.github.io/examples/ui-viewport-navigator/
 - http://www.iconarchive.com/show/flatwoken-icons-by-alecive/Apps-Libreoffice-Calc-B-icon.html
 
 - http://www.iconarchive.com/show/papirus-apps-icons-by-papirus-team/pspp-icon.html
+- https://findicons.com/icon/587095/sticky_notes
+
+- Semantic UI ICON: https://semantic-ui.com/elements/icon.html
+
+# Photo Resources
 
 - https://pixabay.com/photos/pets-dog-corgi-cute-4415649/#_=_
 
-- Semantic UI ICON: https://semantic-ui.com/elements/icon.html
 
 ----
 
@@ -54,3 +64,7 @@ npm install @pulipuli.chen/npm-link-better -g
 
 You must install Python *2*
 https://www.python.org/downloads/
+
+## Associate *.vue into "HTML files (text/html)"
+
+https://stackoverflow.com/a/53271901/6645399

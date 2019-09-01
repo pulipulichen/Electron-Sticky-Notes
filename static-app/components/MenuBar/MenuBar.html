@@ -1,0 +1,16 @@
+<template>
+  <div class="ui menu">
+    <a class="item top-toggle"
+       v-on:click="toggleAlwaysOnTop"></a>
+    <div class="right menu">
+      <a class="item"
+         v-on:click="minimize()">_</a>
+      <a class="item"
+         v-on:click="maximize()">口</a>
+      <a class="item"
+         v-on:click="unmaximize()">回</a>
+      <a class="item"
+         v-on:click="close()">X</a>
+    </div>
+  </div>
+</template>
