@@ -44,6 +44,9 @@ let VueController = {
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
+    },
+    a: function () {
+      return 'AAA'
     }
   } // methods: {
 }

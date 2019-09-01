@@ -3,7 +3,8 @@ const DateHelper = require('../../helpers/DateHelper')
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
-    this.$i18n.locale = this.config.locale;
+    this.$i18n.locale = this.config.locale
+    console.log(this.$parent.a())
     return {
       header: '這是一個預設標題',
     }

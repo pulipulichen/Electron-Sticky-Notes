@@ -212,6 +212,9 @@ let VueController = {
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
+    },
+    a: function () {
+      return 'AAA'
     }
   } // methods: {
 }
@@ -311,7 +314,8 @@ const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/we
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
-    this.$i18n.locale = this.config.locale;
+    this.$i18n.locale = this.config.locale
+    console.log(this.$parent.a())
     return {
       header: '這是一個預設標題',
     }
