@@ -9,7 +9,7 @@ let VueController = {
   data: {
     config: config,
     status: {
-      'test': '不ok'
+      isMaximize: false
     },
     lib: {
       

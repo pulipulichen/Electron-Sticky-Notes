@@ -76,7 +76,7 @@ module.exports = (env, argv) => {
               options: {
                 name: '[name].[ext]',
                 outputPath: 'asset',
-                publicPath: 'dist/asset'
+                publicPath: 'webpack/dist/asset'
               }
             }
           ]

@@ -177,7 +177,7 @@ let VueController = {
   data: {
     config: config,
     status: {
-      'test': '不ok'
+      isMaximize: false
     },
     lib: {
       
@@ -511,7 +511,7 @@ v.silent||(g.error=Function.prototype.bind.call(console.error,console,v.name+":"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/icons.eot";
+module.exports = "webpack/dist/asset/icons.eot";
 
 /***/ }),
 
@@ -522,7 +522,7 @@ module.exports = "dist/asset/icons.eot";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/icons.svg";
+module.exports = "webpack/dist/asset/icons.svg";
 
 /***/ }),
 
@@ -533,7 +533,7 @@ module.exports = "dist/asset/icons.svg";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/icons.ttf";
+module.exports = "webpack/dist/asset/icons.ttf";
 
 /***/ }),
 
@@ -544,7 +544,7 @@ module.exports = "dist/asset/icons.ttf";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/icons.woff";
+module.exports = "webpack/dist/asset/icons.woff";
 
 /***/ }),
 
@@ -555,7 +555,7 @@ module.exports = "dist/asset/icons.woff";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/icons.woff2";
+module.exports = "webpack/dist/asset/icons.woff2";
 
 /***/ }),
 
@@ -566,7 +566,7 @@ module.exports = "dist/asset/icons.woff2";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "dist/asset/flags.png";
+module.exports = "webpack/dist/asset/flags.png";
 
 /***/ }),
 
@@ -660,7 +660,7 @@ var render = function() {
     }),
     _vm._v(" "),
     _c("div", { staticClass: "header" }, [
-      _vm._v("\n      " + _vm._s(_vm.header) + "\n    ")
+      _vm._v("\n    " + _vm._s(_vm.header) + "\n  ")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "right menu" }, [
@@ -674,34 +674,38 @@ var render = function() {
             }
           }
         },
-        [_vm._v("_")]
+        [_c("i", { staticClass: "window minimize icon" })]
       ),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "item",
-          on: {
-            click: function($event) {
-              return _vm.maximize()
-            }
-          }
-        },
-        [_vm._v("口")]
-      ),
+      _vm.status.isMaximize === false
+        ? _c(
+            "a",
+            {
+              staticClass: "item",
+              on: {
+                click: function($event) {
+                  return _vm.maximize()
+                }
+              }
+            },
+            [_c("i", { staticClass: "window maximize icon" })]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "item",
-          on: {
-            click: function($event) {
-              return _vm.unmaximize()
-            }
-          }
-        },
-        [_vm._v("回")]
-      ),
+      _vm.status.isMaximize === true
+        ? _c(
+            "a",
+            {
+              staticClass: "item",
+              on: {
+                click: function($event) {
+                  return _vm.unmaximize()
+                }
+              }
+            },
+            [_c("i", { staticClass: "window restore icon" })]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "a",
@@ -713,7 +717,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("X")]
+        [_c("i", { staticClass: "window close icon" })]
       )
     ])
   ])

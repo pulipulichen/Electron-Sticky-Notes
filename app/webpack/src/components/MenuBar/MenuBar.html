@@ -1,20 +1,30 @@
-  <div class="ui menu">
-    <a class="item top-toggle"
-       v-on:click="toggleAlwaysOnTop"></a>
-    
-    <div class="header">
-      {{ header }}
-    </div>
-    
-    
-    <div class="right menu">
-      <a class="item"
-         v-on:click="minimize()">_</a>
-      <a class="item"
-         v-on:click="maximize()">口</a>
-      <a class="item"
-         v-on:click="unmaximize()">回</a>
-      <a class="item"
-         v-on:click="close()">X</a>
-    </div>
+<div class="ui menu">
+  <a class="item top-toggle"
+     v-on:click="toggleAlwaysOnTop"></a>
+
+  <div class="header">
+    {{ header }}
   </div>
+
+
+  <div class="right menu">
+    <a class="item"
+      v-on:click="minimize()">
+      <i class="window minimize icon"></i>
+    </a>
+    <a class="item"
+       v-on:click="maximize()"
+       v-if="(status.isMaximize === false)">
+       <i class="window maximize icon"></i>
+    </a>
+    <a class="item"
+      v-on:click="unmaximize()"
+       v-if="status.isMaximize === true">
+       <i class="window restore icon"></i>
+    </a>
+    <a class="item"
+      v-on:click="close()"> 
+       <i class="window close icon"></i>
+    </a>
+  </div>
+</div>
