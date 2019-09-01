@@ -6,6 +6,7 @@ let VueControllerConfig = {
     },
     status: {
       mode: null,
+      filePath: null,
       isAlwaysOnTop: true,
     },
     cache: {
@@ -36,8 +37,10 @@ let VueControllerConfig = {
     this.lib.electron = RequireHelper.require('electron')
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
-    this.status.mode = this.lib.win.mode
     this.lib.ipc = this.lib.electron.ipcRenderer
+    
+    this.status.mode = this.lib.win.mode
+    this.status.filePath = this.lib.win.filePath
     
     // 其他
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {
