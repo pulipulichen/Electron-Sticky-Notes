@@ -37,7 +37,7 @@
 
 				var sheet = styleElt.sheet;
 				var rules = sheet.cssRules;
-
+        
 				for ( var i = 0; i < rules.length; ++i ) {
 
 					var rule = rules[i];
@@ -56,14 +56,16 @@
 					var scopedRule = scopedSelectors.join(',') + rule.cssText.substr(rule.selectorText.length);
 					sheet.deleteRule(i);
 					sheet.insertRule(scopedRule, i);
+          //console.log(scopedRule)
 				}
+        //console.log(sheet)
 			}
 
 			try {
 				// firefox may fail sheet.cssRules with InvalidAccessError
 				process();
 			} catch (ex) {
-
+        //conosle.log(ex)
 				if ( ex instanceof DOMException && ex.code === DOMException.INVALID_ACCESS_ERR ) {
 
 					styleElt.sheet.disabled = true;
@@ -76,7 +78,7 @@
 
 							process();
 							styleElt.sheet.disabled = false;
-						});
+						}, 0);
 					});
 					return;
 				}
@@ -106,8 +108,10 @@
 				this.component.getHead().appendChild(this.elt);
 			});
 
-			if ( scoped )
-				this.scopeStyles(this.elt, '['+this.component.getScopeId()+']');
+			if ( scoped ) {
+        console.log(this.elt)
+        this.scopeStyles(this.elt, '['+this.component.getScopeId()+']');
+      }
 
 			return Promise.resolve();
 		},
@@ -145,9 +149,9 @@
 			this.elt.textContent = content;
 		},
 
-		compile: function(module) {
+		compile: function (module) {
 
-			var childModuleRequire = function(childURL) {
+			var childModuleRequire = function (childURL) {
 
 				return httpVueLoader.require(resolveURL(this.component.baseURI, childURL));
 			}.bind(this);

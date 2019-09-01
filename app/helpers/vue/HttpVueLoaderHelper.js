@@ -3,6 +3,7 @@
 let HttpVueLoaderHelper = {
   init: function () {
     httpVueLoader.langProcessor.less = function (lessText) {
+      //console.log(lessText)
       return new Promise (function (resolve, reject) {
         less.render(lessText, {}, function (err, css) {
           //console.log(err)
