@@ -3,7 +3,8 @@ let i18nConfig = {
     "Title": "Example Title"
   },
   "zh-TW": {
-    "Title": "範例標題"
+    "Title": "範例標題",
+    "OK": "確認"
   }
 }
 

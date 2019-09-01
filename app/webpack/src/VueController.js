@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
+import ContentText from './components/ContentText/ContentText.vue'
 const config = require('./config.js')
 
 require('./styles/global.less')
@@ -11,14 +12,16 @@ let VueController = {
     status: {
       isMaximized: false,
       isPinTop: false,
-      isReady: false
+      isReady: false,
+      contentText: ''
     },
     lib: {
       
     },
   },
   components: { 
-    'menu-bar': MenuBar
+    'menu-bar': MenuBar,
+    'content-text': ContentText
   },
   mounted: function () {
     // 基本
@@ -31,6 +34,9 @@ let VueController = {
     
     this.status.mode = this.lib.win.mode
     this.status.filePath = this.lib.win.filePath
+    this.status.contentText = this.lib.win.contentText
+    
+    console.log(this.status.contentText)
     
     // 其他
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {

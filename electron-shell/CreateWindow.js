@@ -94,6 +94,7 @@ module.exports = function (filePath, callback) {
   //win.rendererSideName.mode = mode
   win.mode = mode
   win.filePath = filePath
+  win.contentText = 'Hello world'
   
   //return win
   win.webContents.once('dom-ready', () => {

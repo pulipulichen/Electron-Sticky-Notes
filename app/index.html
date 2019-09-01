@@ -5,60 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-<!-- ------------------------------------ -->
-<!-- 基本要載入的元件 -->
-<script src="helpers/hyper-app/RequireHelper.js"></script>
-<script>
-  RequireHelper.requireJQuery()
-</script>
-<script src="vendors/jquery/jquery-3.4.1-electron.js"></script>
-
-<link href="./styles/main.less" rel="stylesheet/less" type="text/css" />
-<script>
-  less = {
-    logLevel: 0,
-  }
-</script>
-<script src="vendors/less/less.min.js" ></script>
-
-<script src="helpers/VueHelper.js"></script>
-<script src="vendors/vue/vue.min.js"></script>
-
-<script src="helpers/electron/ElectronFileHelper.js"></script>
-<script src="helpers/electron/ElectronHelper.js"></script>
+    <script src="electron/RequireHelper.js"></script>
+    <script src="electron/ElectronFileHelper.js"></script>
+    <script src="electron/ElectronHelper.js"></script>
 
 <!-- ------------------------------------- -->
 
   </head>
-  <body style="-webkit-app-region: drag">
-
-<!-- tables inside this DIV could contain drag-able content  -->
-<div id="app" 
-     ref="APP">
-  <textarea class="disable-drag">
-    測試    
-  </textarea>
-</div>
-  <!-- <img src="pets-4415649_1280.jpg" /> -->
-<div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
-<script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>
-<script type="text/javascript">
-    var viewer = OpenSeadragon({
-        id: "openseadragon1",
-        prefixUrl: "vendors/openseadragon-bin-2.4.1/images/",
-        tileSources: {
-            type: 'image',
-            url:  'pets-4415649_1280.jpg'
-        },
-        //constrainDuringPan: true,
-        visibilityRatio: 1,
-        showNavigator:  true,
-    });
-</script>
-  
-  <script src="./VueController.js"></script>
-  
- <!-- ------------------------------------------- --> 
- 
+  <body>
+    
+  <div id="app"
+       v-bind:data-theme="config.theme">
+    <menu-bar v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="MenuBar"></menu-bar>
+    <content-text v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="ContentText"></content-text>
+  </div>
+    
+    <script src="webpack/dist/vendors.js"></script>
+    <script src="webpack/dist/bundle.js"></script>
   </body>
 </html>

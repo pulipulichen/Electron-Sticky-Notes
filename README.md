@@ -53,7 +53,7 @@ https://openseadragon.github.io/examples/ui-viewport-navigator/
 
 ----
 
-# IDE
+# IDE: npm, NetBeans
 
 ## nls
 ````
