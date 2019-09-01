@@ -1,7 +1,7 @@
 const $ = require('jquery')
 console.log('hello world')
 $(() => {
-  alert(ElectronHelper.getBasePath())
+  console.log(ElectronHelper.getBasePath())
 })
 
 import Vue from 'vue'

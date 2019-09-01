@@ -166,7 +166,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_vue_vue_type_template_id_5aa67539_lang_html___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.vue?vue&type=template&id=5aa67539&lang=html& */ "./test-app/webpack/src/app.vue?vue&type=template&id=5aa67539&lang=html&");
 /* harmony import */ var _app_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.vue?vue&type=script&lang=js& */ "./test-app/webpack/src/app.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */!(function webpackMissingModule() { var e = new Error("Cannot find module './app.vue?vue&type=style&index=0&lang=css&'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* empty/unused harmony star reexport *//* harmony import */ var _app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.vue?vue&type=style&index=0&lang=css& */ "./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
 
 
@@ -208,6 +208,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************!*\
+  !*** ./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib??vue-loader-options!./app.vue?vue&type=style&index=0&lang=css& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\index.js?!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_index_js_vue_loader_options_app_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./test-app/webpack/src/app.vue?vue&type=template&id=5aa67539&lang=html&":
 /*!*******************************************************************************!*\
   !*** ./test-app/webpack/src/app.vue?vue&type=template&id=5aa67539&lang=html& ***!
@@ -240,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
 const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
 console.log('hello world')
 $(() => {
-  alert(ElectronHelper.getBasePath())
+  console.log(ElectronHelper.getBasePath())
 })
 
 
@@ -251,6 +267,20 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   components: { App: _app_vue__WEBPACK_IMPORTED_MODULE_1__["default"] }
 })
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\index.js?!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib??vue-loader-options!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, "\n.message {\n  color: pink;\n  font-size: 1.4em;\n}\n", "",{"version":3,"sources":["test-app/webpack/src/app.vue"],"names":[],"mappings":";AAmBA;EACA,WAAA;EACA,gBAAA;AACA","file":"app.vue?vue&type=style&index=0&lang=css&","sourcesContent":["<template lang=\"html\">\n  <div>\n    <div class=\"message\">\n      {{ message }}\n    </div>\n  </div>\n</template>\n\n<script>\nexport default {\n  data () {\n    return {\n      message: 'Helo, Vue.js 2.0'\n    }\n  }\n}\n</script>\n\n<style lang=\"css\">\n.message {\n  color: pink;\n  font-size: 1.4em;\n}\n</style>"]}]);
+
 
 /***/ }),
 
@@ -308,6 +338,27 @@ var staticRenderFns = []
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\index.js?!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib??vue-loader-options!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib??vue-loader-options!./app.vue?vue&type=style&index=0&lang=css& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\index.js?!./test-app/webpack/src/app.vue?vue&type=style&index=0&lang=css&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("071bc449", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ })
 
