@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const config = __webpack_require__(/*! ./config.js */ "./app/webpack/src/config.js")
 
-console.log(config)
+__webpack_require__(/*! ./styles/global.less */ "./app/webpack/src/styles/global.less")
 
 let VueController = {
   el: '#app',
@@ -185,7 +185,29 @@ let VueController = {
   },
   components: { 
     'menu-bar': _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
+  },
+  mounted: function () {
+    // 基本
+    this.lib.ElectronHelper = ElectronHelper
+    this.lib.ElectronFileHelper = ElectronFileHelper
+    this.lib.electron = RequireHelper.require('electron')
+    this.lib.remote = this.lib.electron.remote
+    this.lib.win = this.lib.remote.getCurrentWindow()
+    this.lib.ipc = this.lib.electron.ipcRenderer
+    
+    this.status.mode = this.lib.win.mode
+    this.status.filePath = this.lib.win.filePath
+    
+    // 其他
+    this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {
+      this._afterMounted()
+    })
+  },  // mounted: function () {
+  methods: {
+    _afterMounted: function () {
+      console.log('OK')
+    }
+  } // methods: {
 }
 
 new vue__WEBPACK_IMPORTED_MODULE_0__["default"](VueController)
@@ -206,16 +228,11 @@ window.VueController = VueController
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-i18n */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-i18n\\dist\\vue-i18n.esm.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue\\dist\\vue.esm.js");
-/* harmony import */ var _i18n_i18n_global_conf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./i18n/i18n-global.conf.js */ "./app/webpack/src/i18n/i18n-global.conf.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"])
 
-
-
 const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  locale: 'zh-tw', // set locale
-  messages: _i18n_i18n_global_conf_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   silentTranslationWarn: true,
 })
 
@@ -288,7 +305,7 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale;
     return {
-      
+      header: ''
     }
   },
   methods: {
@@ -416,25 +433,24 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./app/webpack/src/i18n/i18n-global.conf.js":
-/*!**************************************************!*\
-  !*** ./app/webpack/src/i18n/i18n-global.conf.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./app/webpack/src/styles/global.less":
+/*!********************************************!*\
+  !*** ./app/webpack/src/styles/global.less ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-let i18nConfig = {
-  "en": {
-    "Title": "Example Title"
-  },
-  "zh-TW": {
-    "Title": "範例標題"
-  }
-}
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-/* harmony default export */ __webpack_exports__["default"] = (i18nConfig);
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./global.less */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/styles/global.less");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("14ce7d56", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 
@@ -594,6 +610,20 @@ exports.push([module.i, " /*\r\n * # Semantic UI - 2.2.12\r\n * https://github.c
 
 /***/ }),
 
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/styles/global.less":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/styles/global.less ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: yellow;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/styles/global.less","global.less"],"names":[],"mappings":"AAAA;EACE,YAAA;EACA,aAAA;ACCF;ADEE;EACE,wBAAA;ACAJ","file":"global.less","sourcesContent":["body #app {\n  width: 100vw;\n  height: 100vh;\n  \n  \n  &[data-theme=\"yellow\"] {\n    background-color: yellow;\n  }\n}","body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: yellow;\n}\n"]}]);
+
+
+/***/ }),
+
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true& ***!
@@ -628,13 +658,11 @@ var render = function() {
       staticClass: "item top-toggle",
       on: { click: _vm.toggleAlwaysOnTop }
     }),
-    _vm._v(
-      "\n    \n    " +
-        _vm._s(_vm.status.test) +
-        "\n    " +
-        _vm._s(_vm.$t("Title")) +
-        "\n    \n    "
-    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "header" }, [
+      _vm._v("\n      " + _vm._s(_vm.header) + "\n    ")
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "right menu" }, [
       _c(
         "a",

@@ -2,8 +2,10 @@
     <a class="item top-toggle"
        v-on:click="toggleAlwaysOnTop"></a>
     
-    {{ status.test }}
-    {{ $t('Title') }}
+    <div class="header">
+      {{ header }}
+    </div>
+    
     
     <div class="right menu">
       <a class="item"

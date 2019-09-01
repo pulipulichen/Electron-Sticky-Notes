@@ -3,7 +3,7 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale;
     return {
-      
+      header: ''
     }
   },
   methods: {
