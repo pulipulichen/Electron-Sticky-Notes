@@ -51,9 +51,9 @@ module.exports = function (filePath, callback) {
     x: offsetX,
     y: offsetY,
     //fullscreen: true,
-    frame: false,
+    //frame: false,
     icon: iconPath,
-    transparent: true,
+    //transparent: true,
     titleBarStyle: 'hidden',
     maximizable: false,
     //width: width,
@@ -79,7 +79,7 @@ module.exports = function (filePath, callback) {
   //win.setResizable(false)
   
   win.loadURL(url.format({
-    pathname: path.join(__dirname, '../app', 'index.html'),
+    pathname: path.join(__dirname, '../test-app', 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
