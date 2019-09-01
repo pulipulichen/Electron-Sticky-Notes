@@ -9,6 +9,17 @@ import MenuBar from './MenuBar/MenuBar.vue'
 
 new Vue({
   el: '#app',
+  data: {
+    config: {
+      
+    },
+    status: {
+      'test': 'ok嗎？'
+    },
+    lib: {
+      
+    },
+  },
   components: { 
     'menu-bar': MenuBar
   }
