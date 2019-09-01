@@ -16,6 +16,12 @@ compression = normal “store” | “normal” | “maximum”
 
 ----
 
+# Colors
+
+- https://flatuicolors.com/palette/defo
+
+----
+
 # Image Viewer
 
 https://openseadragon.github.io/examples/ui-viewport-navigator/

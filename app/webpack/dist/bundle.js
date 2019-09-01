@@ -177,7 +177,8 @@ let VueController = {
   data: {
     config: config,
     status: {
-      isMaximize: false
+      isMaximized: false,
+      isReady: false
     },
     lib: {
       
@@ -205,7 +206,9 @@ let VueController = {
   },  // mounted: function () {
   methods: {
     _afterMounted: function () {
-      console.log('OK')
+      
+      //console.log('OK')
+      this.status.isReady = true
     }
   } // methods: {
 }
@@ -305,7 +308,7 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale;
     return {
-      header: ''
+      header: '',
     }
   },
   methods: {
@@ -325,12 +328,14 @@ module.exports = {
       return this
     },
     maximize: function () {
-      this.lib.win.maximize()
+      this.lib.win.setFullScreen(true)
+      this.status.isMaximized = true
       return this
     },
     unmaximize: function () {
       // 這個我們可能要自己做resize
-      this.lib.win.unmaximize()
+      this.lib.win.setFullScreen(false)
+      this.status.isMaximized = false
       return this
     },
     close: function () {
@@ -677,7 +682,7 @@ var render = function() {
         [_c("i", { staticClass: "window minimize icon" })]
       ),
       _vm._v(" "),
-      _vm.status.isMaximize === false
+      _vm.status.isMaximized === false
         ? _c(
             "a",
             {
@@ -692,7 +697,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.status.isMaximize === true
+      _vm.status.isMaximized === true
         ? _c(
             "a",
             {

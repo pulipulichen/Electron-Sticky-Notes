@@ -9,7 +9,8 @@ let VueController = {
   data: {
     config: config,
     status: {
-      isMaximize: false
+      isMaximized: false,
+      isReady: false
     },
     lib: {
       
@@ -37,7 +38,9 @@ let VueController = {
   },  // mounted: function () {
   methods: {
     _afterMounted: function () {
-      console.log('OK')
+      
+      //console.log('OK')
+      this.status.isReady = true
     }
   } // methods: {
 }
