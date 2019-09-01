@@ -166,19 +166,11 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue\\dist\\vue.esm.js");
 /* harmony import */ var _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MenuBar/MenuBar.vue */ "./app/webpack/src/components/MenuBar/MenuBar.vue");
-/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-i18n */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-i18n\\dist\\vue-i18n.esm.js");
 
 
 
 __webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
 __webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
-
-
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_i18n__WEBPACK_IMPORTED_MODULE_2__["default"])
-
-const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  locale: 'zh-tw', // set locale
-})
 
 new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
@@ -187,7 +179,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
       
     },
     status: {
-      'test': '很ok'
+      'test': '不ok'
     },
     lib: {
       
@@ -197,6 +189,33 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     'menu-bar': _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 })
+
+/***/ }),
+
+/***/ "./app/webpack/src/VueI18n.js":
+/*!************************************!*\
+  !*** ./app/webpack/src/VueI18n.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-i18n */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-i18n\\dist\\vue-i18n.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue\\dist\\vue.esm.js");
+/* harmony import */ var _i18n_i18n_global_conf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./i18n/i18n-global.conf.js */ "./app/webpack/src/i18n/i18n-global.conf.js");
+
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"])
+
+
+
+const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
+  locale: 'zh-tw', // set locale
+  messages: _i18n_i18n_global_conf_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  silentTranslationWarn: true,
+})
+
 
 /***/ }),
 
@@ -212,6 +231,7 @@ window.jQuery = $
 
 // ----------------------------------------
 
+__webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js")
 __webpack_require__(/*! ./VueController */ "./app/webpack/src/VueController.js")
 
 /***/ }),
@@ -371,6 +391,28 @@ if (typeof _MenuBar_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_
 if (false) { var api; }
 component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./app/webpack/src/i18n/i18n-global.conf.js":
+/*!**************************************************!*\
+  !*** ./app/webpack/src/i18n/i18n-global.conf.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+let i18nConfig = {
+  "en": {
+    "Title": "Example Title"
+  },
+  "zh-TW": {
+    "Title": "範例標題"
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (i18nConfig);
 
 /***/ }),
 

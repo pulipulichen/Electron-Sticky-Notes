@@ -134,7 +134,7 @@ module.exports = (env, argv) => {
           });
         } // apply: (compiler) => {
       }
-    ]
+    ],  // plugins: [
   } // let webpackConfig = {
 
   //console.log(argv.mode)
