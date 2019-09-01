@@ -32,10 +32,10 @@ module.exports = (env, argv) => {
     //devtool: false,
     entry: {
       //'test': './[tmp/test.js',
-      'bundle': './test-app/webpack/src/bundle.js'
+      'bundle': './app/webpack/src/bundle.js'
     },
     output: {
-      path: path.resolve('./test-app/webpack/dist/'),
+      path: path.resolve('./app/webpack/dist/'),
       filename: '[name].js'
     },
     resolve: {

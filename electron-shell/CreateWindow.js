@@ -79,7 +79,7 @@ module.exports = function (filePath, callback) {
   //win.setResizable(false)
   
   win.loadURL(url.format({
-    pathname: path.join(__dirname, '../test-app', 'index.html'),
+    pathname: path.join(__dirname, '../app', 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
