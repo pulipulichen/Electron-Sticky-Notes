@@ -55,6 +55,7 @@ module.exports = function (filePath, callback) {
     icon: iconPath,
     transparent: true,
     titleBarStyle: 'hidden',
+    maximizable: false,
     //width: width,
     //height: height,
     useContentSize: true,

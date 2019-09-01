@@ -53,6 +53,11 @@ let VueControllerConfig = {
       this.resizeToFit()
       this.toggleAlwaysOnTop(true)
       
+      $(this.$refs.APP).dblclick((event) => {
+        event.preventDefault()
+        event.stopPropagation()
+      })
+      
       //this.lib.win.setAlwaysOnTop(true)
       
     },
@@ -84,6 +89,7 @@ let VueControllerConfig = {
       return this
     },
     unmaximize: function () {
+      // 這個我們可能要自己做resize
       this.lib.win.unmaximize()
       return this
     },
