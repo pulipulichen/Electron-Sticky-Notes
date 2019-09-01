@@ -58,3 +58,7 @@ npm install @pulipuli.chen/npm-link-better -g
 
 You must install Python *2*
 https://www.python.org/downloads/
+
+## Associate *.vue into "HTML files (text/html)"
+
+https://stackoverflow.com/a/53271901/6645399

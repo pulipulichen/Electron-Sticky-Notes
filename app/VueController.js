@@ -1,8 +1,12 @@
 let VueControllerConfig = {
   el: '#app',
+  components: {
+    'menu-bar': httpVueLoader('./components/MenuBar/MenuBar.vue')
+  },
   data: {
     
     config: {
+      defaultTop: false,
     },
     status: {
       mode: null,
@@ -51,13 +55,17 @@ let VueControllerConfig = {
     _afterMounted: function () {
       //this.lib.ipc.send('resize', 100, 200);
       this.resizeToFit()
-      this.toggleAlwaysOnTop(true)
       
+      if (this.config.defaultTop === true) {
+        this.toggleAlwaysOnTop(true)
+      }
+      
+      /*
       $(this.$refs.APP).dblclick((event) => {
         event.preventDefault()
         event.stopPropagation()
       })
-      
+      */
       //this.lib.win.setAlwaysOnTop(true)
       
     },
