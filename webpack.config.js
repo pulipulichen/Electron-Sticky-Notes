@@ -38,6 +38,11 @@ module.exports = (env, argv) => {
       path: path.resolve('./test-app/webpack/dist/'),
       filename: '[name].js'
     },
+    resolve: {
+      alias: {
+        vue: 'vue/dist/vue.esm.js'
+      }
+    },
     module: {
       rules: [
         {

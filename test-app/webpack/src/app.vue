@@ -1,8 +1,6 @@
-<template lang="html">
-  <div>
-    <div class="message">
-      {{ message }}
-    </div>
+<template>
+  <div class="message">
+    {{ message }}
   </div>
 </template>
 

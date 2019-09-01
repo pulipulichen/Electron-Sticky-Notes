@@ -38,6 +38,7 @@
     "iconv-lite": "^0.5.0",
     "image-size": "^0.7.4",
     "jquery": "^3.4.1",
+    "less-loader": "^5.0.0",
     "read-chunk": "^3.2.0",
     "terminal-exec": "^0.0.8",
     "uglifyjs-webpack-plugin": "^2.2.0",
