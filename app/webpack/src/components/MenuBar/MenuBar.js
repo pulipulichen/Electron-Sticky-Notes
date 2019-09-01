@@ -1,3 +1,5 @@
+const DateHelper = require('../../helpers/DateHelper')
+
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
@@ -36,6 +38,22 @@ module.exports = {
     close: function () {
       this.lib.win.close()
       return this
+    },
+    setNoteHeader: function (header) {
+      if (typeof(header) === 'string' 
+              && header.trim() !== '') {
+        header = header.trim()
+        this.header = header
+        document.title = header
+      }
+      else {
+        this.resetNoteHeader()
+      }
+      return this
+    },
+    resetNoteHeader: function () {
+      let header = DateHelper.getMMDDHHmm()
+      return this.setNoteHeader(header)
     }
   }
 }

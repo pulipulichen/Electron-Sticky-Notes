@@ -39,7 +39,9 @@ let VueController = {
   },  // mounted: function () {
   methods: {
     _afterMounted: function () {
-      
+      //console.log(this.components)
+      //this.components['menu-bar'].methods.resetNoteHeader()
+      this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
     }

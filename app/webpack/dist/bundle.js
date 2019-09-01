@@ -207,7 +207,9 @@ let VueController = {
   },  // mounted: function () {
   methods: {
     _afterMounted: function () {
-      
+      //console.log(this.components)
+      //this.components['menu-bar'].methods.resetNoteHeader()
+      this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
     }
@@ -302,7 +304,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./app/webpack/src/components/MenuBar/MenuBar.js?vue&type=script&lang=js& ***!
   \********************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -342,6 +346,22 @@ module.exports = {
     close: function () {
       this.lib.win.close()
       return this
+    },
+    setNoteHeader: function (header) {
+      if (typeof(header) === 'string' 
+              && header.trim() !== '') {
+        header = header.trim()
+        this.header = header
+        document.title = header
+      }
+      else {
+        this.resetNoteHeader()
+      }
+      return this
+    },
+    resetNoteHeader: function () {
+      let header = DateHelper.getMMDDHHmm()
+      return this.setNoteHeader(header)
     }
   }
 }
@@ -435,6 +455,53 @@ component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
 module.exports = {
   locale: 'zh-TW',
   theme: 'yellow'
+}
+
+/***/ }),
+
+/***/ "./app/webpack/src/helpers/DateHelper.js":
+/*!***********************************************!*\
+  !*** ./app/webpack/src/helpers/DateHelper.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+let DateHelper = {
+  _pad2: function (n) {
+    return n < 10 ? '0' + n : n
+  },
+  getCurrentTimeString: function () {
+    let date = new Date();
+    return date.getFullYear().toString() 
+            + this._pad2(date.getMonth() + 1) 
+            + this._pad2( date.getDate()) 
+            + '-'
+            + this._pad2( date.getHours() ) 
+            + this._pad2( date.getMinutes() ) 
+            + this._pad2( date.getSeconds() )
+  },
+  getMMDDHHmm: function (seperator) {
+    if (seperator === undefined) {
+      seperator = '-'
+    }
+    
+    let date = new Date();
+    return this._pad2(date.getMonth() + 1) 
+            + this._pad2( date.getDate()) 
+            + seperator
+            + this._pad2( date.getHours() ) 
+            + this._pad2( date.getMinutes() ) 
+  }
+}
+
+if (typeof(window) !== 'undefined') {
+  window.DateHelper = DateHelper
+}
+if (true) {
+  exports.default = DateHelper
+}
+if (true) {
+  module.exports = DateHelper
 }
 
 /***/ }),
