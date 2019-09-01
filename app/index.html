@@ -41,12 +41,27 @@
 <!-- tables inside this DIV could contain drag-able content  -->
 <div id="app" 
      ref="APP">
+  <div class="ui menu">
+    <a class="item top-toggle"
+       v-on:click="toggleAlwaysOnTop"></a>
+    <div class="right menu">
+      <a class="item"
+         v-on:click="minimize()">_</a>
+      <a class="item"
+         v-on:click="maximize()">口</a>
+      <a class="item"
+         v-on:click="unmaximize()">回</a>
+      <a class="item"
+         v-on:click="close()">X</a>
+    </div>
+  </div>
+  
   <textarea class="disable-drag">
     測試    
   </textarea>
 </div>
 
-
+<!--
 <div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
 <script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>
 <script type="text/javascript">
@@ -62,6 +77,7 @@ var viewer = OpenSeadragon({
       }
     });
 </script>
+-->
 
 <!-- ------------------------------------------- --> 
 <!-- 最後的基礎元件 -->

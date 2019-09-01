@@ -50,20 +50,47 @@ let VueControllerConfig = {
   methods: {
     _afterMounted: function () {
       //this.lib.ipc.send('resize', 100, 200);
-      //this.resizeToFit()
+      this.resizeToFit()
+      this.toggleAlwaysOnTop(true)
       
       //this.lib.win.setAlwaysOnTop(true)
       
     },
     resizeToFit: function () {
-      let $app = $(this.$refs.APP)
-      window.resizeTo($app.width() + 10,$app.height())
+      //let $app = $(this.$refs.APP)
+      //window.resizeTo($app.width() + 10,$app.height())
+      
+      window.resizeTo(400, 200) // width, height
+      console.warn('#5 not completed')
       return this
     },
-    toggleAlwaysOnTop: function () {
-      this.lib.win.setAlwaysOnTop((this.status.isAlwaysOnTop === false))
+    toggleAlwaysOnTop: function (isAlwaysOnTop) {
+      if (typeof(isAlwaysOnTop) !== 'boolean') {
+        this.status.isAlwaysOnTop = (this.status.isAlwaysOnTop === false)
+        isAlwaysOnTop = this.status.isAlwaysOnTop
+      }
+      else {
+        this.status.isAlwaysOnTop = isAlwaysOnTop
+      }
+      this.lib.win.setAlwaysOnTop(isAlwaysOnTop)
       return this
     },
+    minimize: function () {
+      this.lib.win.minimize()
+      return this
+    },
+    maximize: function () {
+      this.lib.win.maximize()
+      return this
+    },
+    unmaximize: function () {
+      this.lib.win.unmaximize()
+      return this
+    },
+    close: function () {
+      this.lib.win.close()
+      return this
+    }
   } // methods
 }
 
