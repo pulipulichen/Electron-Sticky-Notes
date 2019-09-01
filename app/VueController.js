@@ -1,14 +1,15 @@
-/* global httpVueLoader */
+/* global httpVueLoader, i18n */
 
+// If using a module system (e.g. via vue-cli), import Vue and VueI18n and then call Vue.use(VueI18n).
 let VueControllerConfig = {
   el: '#app',
   components: {
     'menu-bar': httpVueLoader('./components/MenuBar/MenuBar.vue')
   },
   data: {
-    
     config: {
       defaultTop: false,
+      lang: 'zh-tw'
     },
     status: {
       mode: null,
@@ -27,6 +28,7 @@ let VueControllerConfig = {
       remote: null,
       win: null,
       ipc: null,
+      i18n: null,
       // 其他
     },
   },  // data: {
@@ -44,9 +46,11 @@ let VueControllerConfig = {
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
     this.lib.ipc = this.lib.electron.ipcRenderer
+    this.lib.i18n = RequireHelper.require('./vendors/i18n/i18nHelper')
     
     this.status.mode = this.lib.win.mode
     this.status.filePath = this.lib.win.filePath
+    this.lib.i18n.init(this.config.lang)
     
     // 其他
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {

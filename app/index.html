@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-<!-- ------------------------------------ -->
+<!-- ============================= -->
 <!-- 基本要載入的元件 -->
 <script src="helpers/hyper-app/RequireHelper.js"></script>
 <script>
@@ -28,16 +28,19 @@
 <script src="helpers/vue/VueHelper.js"></script>
 
 <script src="vendors/http-vue-loader/http-vue-loader.js"></script>
-<script src="helpers/vue/HttpVueLoaderHelper.js"></script>
+<script src="vendors/http-vue-loader/HttpVueLoaderHelper.js"></script>
 
 <script src="helpers/electron/ElectronFileHelper.js"></script>
 <script src="helpers/electron/ElectronHelper.js"></script>
 
-<!-- ------------------------------------- -->
+<script src="vendors/i18n/i18n.min.js"></script>
+<script src="vendors/i18n/i18nHelper.js"></script>
+
+<!-- ============================= -->
 <!-- 其他元件 -->
 
 
-<!-- ------------------------------------- -->
+<!-- ============================= -->
   </head>
   <body style="-webkit-app-region: drag">
 
@@ -66,7 +69,7 @@
   
   
   <menu-bar></menu-bar>
-  
+  <p>{{ i18n.t('Hello World') }}</p>
 </div>
 
 <!--
