@@ -169,14 +169,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
-__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
-
 new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   data: {
     config: {
-      
     },
     status: {
       'test': '不ok'
@@ -229,6 +225,9 @@ const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
 const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
 window.jQuery = $
 
+__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
+__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
+
 // ----------------------------------------
 
 __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js")
@@ -275,11 +274,14 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./app/webpack/src/components/MenuBar/MenuBar.js?vue&type=script&lang=js& ***!
   \********************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+const config = __webpack_require__(/*! ../../config.js */ "./app/webpack/src/config.js")
 
 module.exports = {
   props: ['lib', 'status'],
-  data() {
+  data() {    
+    this.$i18n.locale = config.locale;
     return {
     }
   },
@@ -391,6 +393,19 @@ if (typeof _MenuBar_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_
 if (false) { var api; }
 component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./app/webpack/src/config.js":
+/*!***********************************!*\
+  !*** ./app/webpack/src/config.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  locale: 'zh-TW'
+}
 
 /***/ }),
 
