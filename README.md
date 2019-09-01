@@ -36,6 +36,7 @@ https://openseadragon.github.io/examples/ui-viewport-navigator/
 - http://www.iconarchive.com/show/flatwoken-icons-by-alecive/Apps-Libreoffice-Calc-B-icon.html
 
 - http://www.iconarchive.com/show/papirus-apps-icons-by-papirus-team/pspp-icon.html
+- https://findicons.com/icon/587095/sticky_notes
 
 - Semantic UI ICON: https://semantic-ui.com/elements/icon.html
 

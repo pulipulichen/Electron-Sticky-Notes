@@ -22,7 +22,7 @@ if (process.argv.indexOf('--mode') - process.argv.indexOf('development') === -1)
 
 module.exports = function (shortcutsDirPath, callback) {
   
-  let iconPath = path.join(__dirname, '../app/imgs/icon256.ico')
+  let iconPath = path.join(__dirname, '../app/imgs/icon.ico')
   if (process.platform === 'linux') {
     iconPath = path.join(__dirname, '../app/imgs/icon256.png')
   }
