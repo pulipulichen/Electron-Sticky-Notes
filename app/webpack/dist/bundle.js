@@ -178,6 +178,7 @@ let VueController = {
     config: config,
     status: {
       isMaximized: false,
+      isPinTop: false,
       isReady: false
     },
     lib: {
@@ -308,19 +309,19 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale;
     return {
-      header: '',
+      header: '這是一個預設標題',
     }
   },
   methods: {
-    toggleAlwaysOnTop: function (isAlwaysOnTop) {
-      if (typeof(isAlwaysOnTop) !== 'boolean') {
-        this.status.isAlwaysOnTop = (this.status.isAlwaysOnTop === false)
-        isAlwaysOnTop = this.status.isAlwaysOnTop
+    toggleAlwaysOnTop: function (isPinTop) {
+      if (typeof(isPinTop) !== 'boolean') {
+        this.status.isPinTop = (this.status.isPinTop === false)
+        isPinTop = this.status.isPinTop
       }
       else {
-        this.status.isAlwaysOnTop = isAlwaysOnTop
+        this.status.isPinTop = isPinTop
       }
-      this.lib.win.setAlwaysOnTop(isAlwaysOnTop)
+      this.lib.win.setAlwaysOnTop(isPinTop)
       return this
     },
     minimize: function () {
@@ -624,7 +625,7 @@ exports.push([module.i, " /*\r\n * # Semantic UI - 2.2.12\r\n * https://github.c
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: yellow;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/styles/global.less","global.less"],"names":[],"mappings":"AAAA;EACE,YAAA;EACA,aAAA;ACCF;ADEE;EACE,wBAAA;ACAJ","file":"global.less","sourcesContent":["body #app {\n  width: 100vw;\n  height: 100vh;\n  \n  \n  &[data-theme=\"yellow\"] {\n    background-color: yellow;\n  }\n}","body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: yellow;\n}\n"]}]);
+exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/styles/global.less","global.less"],"names":[],"mappings":"AAAA;EACE,YAAA;EACA,aAAA;ACCF;ADCE;EACE,yBAAA;ACCJ","file":"global.less","sourcesContent":["body #app {\n  width: 100vw;\n  height: 100vh;\n  \n  &[data-theme=\"yellow\"] {\n    background-color: #f1c40f;\n  }\n}","body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody #app[data-theme=\"yellow\"] {\n  background-color: #f1c40f;\n}\n"]}]);
 
 
 /***/ }),
@@ -638,7 +639,7 @@ exports.push([module.i, "body #app {\n  width: 100vw;\n  height: 100vh;\n}\nbody
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".hello[data-v-0c5ef76e] {\n  font-size: 3rem;\n  text-align: center;\n  color: green;\n}\n.hello .world[data-v-0c5ef76e] {\n  font-size: 6rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAAA;EACE,eAAA;EACA,kBAAA;EACA,YAAA;ACCF;ADJA;EAMI,eAAA;ACCJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":[".hello {\n  font-size: 3rem;\n  text-align: center;\n  color: green;\n  \n  .world {\n    font-size: 6rem;\n  }\n}",".hello {\n  font-size: 3rem;\n  text-align: center;\n  color: green;\n}\n.hello .world {\n  font-size: 6rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAAA;EAEI,uBAAA;ACAJ;ADIE;EAIE,kCAAA;ACLJ;ADCE;EAEI,uBAAA;ACAN;ADMA;EACE,6BAAA;ACJF;ADOA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;ACLF;ADQA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACPF","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":[".top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n"]}]);
 
 
 /***/ }),
@@ -658,13 +659,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "ui menu" }, [
-    _c("a", {
-      staticClass: "item top-toggle",
-      on: { click: _vm.toggleAlwaysOnTop }
-    }),
+  return _c("div", { staticClass: "ui borderless menu" }, [
+    _c(
+      "a",
+      {
+        staticClass: "item top-toggle",
+        class: { active: _vm.status.isPinTop },
+        on: { click: _vm.toggleAlwaysOnTop }
+      },
+      [_c("i", { staticClass: "map pin icon" })]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "header" }, [
+    _c("a", { staticClass: "item note-header disabled" }, [
       _vm._v("\n    " + _vm._s(_vm.header) + "\n  ")
     ]),
     _vm._v(" "),

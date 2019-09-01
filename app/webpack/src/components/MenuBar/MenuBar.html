@@ -1,10 +1,13 @@
-<div class="ui menu">
+<div class="ui borderless menu">
   <a class="item top-toggle"
-     v-on:click="toggleAlwaysOnTop"></a>
+    v-on:click="toggleAlwaysOnTop"
+    v-bind:class="{active: status.isPinTop}">
+     <i class="map pin icon"></i>  
+  </a>
 
-  <div class="header">
+  <a class="item note-header disabled">
     {{ header }}
-  </div>
+  </a>
 
 
   <div class="right menu">

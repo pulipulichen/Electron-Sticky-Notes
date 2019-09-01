@@ -10,6 +10,7 @@ let VueController = {
     config: config,
     status: {
       isMaximized: false,
+      isPinTop: false,
       isReady: false
     },
     lib: {

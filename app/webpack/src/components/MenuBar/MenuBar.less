@@ -1,9 +1,30 @@
-.hello {
-  font-size: 3rem;
-  text-align: center;
-  color: green;
-  
-  .world {
-    font-size: 6rem;
+.top-toggle {
+  i {
+    opacity: 0.3 !important;
   }
+  
+  
+  &.active {
+    i {
+      opacity: 0.9 !important;
+    }
+    background: transparent !important;
+  }
+}
+
+.item.note-header {
+  font-family: Noto Sans CJK TC;
+}
+
+.ui.menu {
+  background-color: transparent;
+  box-shadow: none;
+  border-width: 0;
+}
+
+.item {
+  border-width: 0;
+  background: none;
+  
+  -webkit-app-region: no-drag;
 }

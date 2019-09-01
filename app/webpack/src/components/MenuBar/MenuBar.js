@@ -3,19 +3,19 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale;
     return {
-      header: '',
+      header: '這是一個預設標題',
     }
   },
   methods: {
-    toggleAlwaysOnTop: function (isAlwaysOnTop) {
-      if (typeof(isAlwaysOnTop) !== 'boolean') {
-        this.status.isAlwaysOnTop = (this.status.isAlwaysOnTop === false)
-        isAlwaysOnTop = this.status.isAlwaysOnTop
+    toggleAlwaysOnTop: function (isPinTop) {
+      if (typeof(isPinTop) !== 'boolean') {
+        this.status.isPinTop = (this.status.isPinTop === false)
+        isPinTop = this.status.isPinTop
       }
       else {
-        this.status.isAlwaysOnTop = isAlwaysOnTop
+        this.status.isPinTop = isPinTop
       }
-      this.lib.win.setAlwaysOnTop(isAlwaysOnTop)
+      this.lib.win.setAlwaysOnTop(isPinTop)
       return this
     },
     minimize: function () {
