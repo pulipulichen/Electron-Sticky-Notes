@@ -12,7 +12,8 @@
   </head>
   <body>
     
-  <div id="app">
+  <div id="app"
+       v-bind:data-theme="config.theme">
     <menu-bar v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"></menu-bar>

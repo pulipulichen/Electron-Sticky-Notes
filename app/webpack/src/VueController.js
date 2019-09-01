@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
+const config = require('./config.js')
 
-new Vue({
+console.log(config)
+
+let VueController = {
   el: '#app',
   data: {
-    config: {
-    },
+    config: config,
     status: {
       'test': '不ok'
     },
@@ -16,4 +18,8 @@ new Vue({
   components: { 
     'menu-bar': MenuBar
   }
-})
+}
+
+new Vue(VueController)
+
+window.VueController = VueController

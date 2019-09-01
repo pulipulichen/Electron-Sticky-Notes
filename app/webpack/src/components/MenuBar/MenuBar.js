@@ -1,10 +1,9 @@
-const config = require('../../config.js')
-
 module.exports = {
-  props: ['lib', 'status'],
+  props: ['lib', 'status', 'config'],
   data() {    
-    this.$i18n.locale = config.locale;
+    this.$i18n.locale = this.config.locale;
     return {
+      
     }
   },
   methods: {

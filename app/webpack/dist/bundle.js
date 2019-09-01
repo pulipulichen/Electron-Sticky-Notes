@@ -168,12 +168,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MenuBar/MenuBar.vue */ "./app/webpack/src/components/MenuBar/MenuBar.vue");
 
 
+const config = __webpack_require__(/*! ./config.js */ "./app/webpack/src/config.js")
 
-new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+console.log(config)
+
+let VueController = {
   el: '#app',
   data: {
-    config: {
-    },
+    config: config,
     status: {
       'test': '不ok'
     },
@@ -184,7 +186,12 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   components: { 
     'menu-bar': _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
-})
+}
+
+new vue__WEBPACK_IMPORTED_MODULE_0__["default"](VueController)
+
+window.VueController = VueController
+
 
 /***/ }),
 
@@ -274,15 +281,14 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./app/webpack/src/components/MenuBar/MenuBar.js?vue&type=script&lang=js& ***!
   \********************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-const config = __webpack_require__(/*! ../../config.js */ "./app/webpack/src/config.js")
+/***/ (function(module, exports) {
 
 module.exports = {
-  props: ['lib', 'status'],
+  props: ['lib', 'status', 'config'],
   data() {    
-    this.$i18n.locale = config.locale;
+    this.$i18n.locale = this.config.locale;
     return {
+      
     }
   },
   methods: {
@@ -404,7 +410,8 @@ component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
 /***/ (function(module, exports) {
 
 module.exports = {
-  locale: 'zh-TW'
+  locale: 'zh-TW',
+  theme: 'yellow'
 }
 
 /***/ }),

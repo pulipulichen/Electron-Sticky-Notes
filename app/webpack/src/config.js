@@ -1,3 +1,4 @@
 module.exports = {
-  locale: 'zh-TW'
+  locale: 'zh-TW',
+  theme: 'yellow'
 }
