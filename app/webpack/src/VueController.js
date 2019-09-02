@@ -16,7 +16,8 @@ let VueController = {
       isMaximized: false,
       isPinTop: false,
       isReady: false,
-      contentText: ''
+      contentText: '',
+      filePath: null,
     },
     lib: {
       

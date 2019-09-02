@@ -40,6 +40,10 @@ module.exports = {
       this.status.isPinTop = this.beforeMaximizeIsPinTop
       return this
     },
+    resizeToFitContent: function () {
+      this.$parent.$refs.ContentText.resizeToFitContent()
+      return
+    },
     close: function () {
       this.lib.win.close()
       return this
@@ -67,6 +71,12 @@ module.exports = {
       }
       
       return this.setNoteHeader(header)
+    },
+    openFolder: function () {
+      console.error('openFolder')
+    },
+    openEdtior: function () {
+      console.error('openEdtior')
     }
   }
 }

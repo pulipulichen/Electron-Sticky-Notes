@@ -26,18 +26,18 @@ module.exports = {
       })
     }, 0)
     */
-    this.initResize()
+    this.resizeToFitContent()
   },
   methods: {
     getMaxHeight: function () {
       let height = screen.availHeight * this.config.maxHeight
-      console.log(height)
+      //console.log(height)
       return height
     },
     getMaxWidth: function () {
       return screen.availWidth * this.config.maxWidth
     },
-    initResize: function () {
+    resizeToFitContent: function () {
       setTimeout(() => {
         let detector = $(this.$refs.ResizeDetector)
         let width = detector.width()
@@ -45,7 +45,7 @@ module.exports = {
         width = width + padding
         let height = detector.height()
         height = height + 40 + padding
-        console.log(width, height)
+        //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
     }

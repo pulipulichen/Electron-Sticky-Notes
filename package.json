@@ -4,14 +4,14 @@
   "description": "A sticky nodes app based on Electron.",
   "main": "index.js",
   "scripts": {
-    "0.run-development": "electron index.js --mode development",
-    "1.run-production": "electron index.js --mode production",
+    "e0.run-development": "electron index.js --mode development",
+    "e1.run-production": "electron index.js --mode production",
     "pack & open": "electron-builder index.js && node open-dist.js",
-    "w1-webpack-build-development": "webpack --mode development",
-    "w2-webpack-watch-development": "webpack --watch --mode development --display errors-only",
-    "w3 webpack-watch-build-production": "webpack --watch --mode production --display errors-only",
-    "w4 webpack-build-production": "webpack --mode production",
-    "start": "concurrently --kill-others --names \"electron,webpack\" \"npm run 0.run-development\" \"npm run w2-webpack-watch-development\""
+    "w1.webpack-build-development": "webpack --mode development",
+    "w2.webpack-watch-development": "webpack --watch --mode development --display errors-only",
+    "w3.webpack-watch-build-production": "webpack --watch --mode production --display errors-only",
+    "w4.webpack-build-production": "webpack --mode production",
+    "0.dev-start": "concurrently --kill-others --names \"electron,webpack\" \"npm run e0.run-development\" \"npm run w2.webpack-watch-development\""
   },
   "repository": {
     "type": "git",
