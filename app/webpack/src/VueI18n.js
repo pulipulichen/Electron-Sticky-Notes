@@ -3,9 +3,12 @@ import Vue from 'vue'
 Vue.use(VueI18n)
 
 import i18nGlobal from './i18n/i18n-global.conf.js'
+//console.log(i18nGlobal)
 
 const i18n = new VueI18n({
   locale: 'zh-TW', // set locale
   messages: i18nGlobal,
   silentTranslationWarn: true,
 })
+
+export default i18n

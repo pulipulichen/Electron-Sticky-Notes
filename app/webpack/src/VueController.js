@@ -2,11 +2,14 @@ import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
 import ContentText from './components/ContentText/ContentText.vue'
 const config = require('./config.js')
-
 require('./styles/global.less')
+
+
+import i18n from './VueI18n'
 
 let VueController = {
   el: '#app',
+  i18n: i18n,
   data: {
     config: config,
     status: {

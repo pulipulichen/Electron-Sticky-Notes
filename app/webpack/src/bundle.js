@@ -6,5 +6,5 @@ require('./vendors/semantic-ui/semantic.min.js')
 
 // ----------------------------------------
 
-require('./VueI18n')
+//require('./VueI18n')
 require('./VueController')
