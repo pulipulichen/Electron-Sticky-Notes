@@ -41,8 +41,10 @@ module.exports = {
       setTimeout(() => {
         let detector = $(this.$refs.ResizeDetector)
         let width = detector.width()
+        let padding = 15
+        width = width + padding
         let height = detector.height()
-        height = height + 90
+        height = height + 40 + padding
         console.log(width, height)
         window.resizeTo(width, height)
       }, 0)

@@ -11,6 +11,7 @@
   -webkit-app-region: no-drag;
   font-family: Noto Sans CJK TC;
   line-height: 2.3rem;
+  white-space: pre;
   
   &:focus {
     outline: none;
@@ -23,13 +24,16 @@
 }
 
 .resize-detector {
-  opacity: 0;z-index:-1;
+  z-index: 999;
+  opacity: 0.5;
+  color: green;
+  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行
   position: absolute;
-  //z-index: 999;
+  
   overflow-y: auto;
   overflow-x: hidden;
   display: inline;
-  background-color: red;
+  background-color: rgba(255,0,0,0.5);
   width: auto !important;
   height: auto !important;
   white-space: pre;

@@ -221,20 +221,6 @@ let VueController = {
   var editor = CodeMirror.fromTextArea(myTextarea, {
     lineNumbers: true
   });
-</script><!-- Create a simple CodeMirror instance -->
-<link rel="stylesheet" href="lib/codemirror.css">
-<script src="lib/codemirror.js"></script>
-<script>
-  var editor = CodeMirror.fromTextArea(myTextarea, {
-    lineNumbers: true
-  });
-</script><!-- Create a simple CodeMirror instance -->
-<link rel="stylesheet" href="lib/codemirror.css">
-<script src="lib/codemirror.js"></script>
-<script>
-  var editor = CodeMirror.fromTextArea(myTextarea, {
-    lineNumbers: true
-  });
 </script>`
     }
     
@@ -399,8 +385,10 @@ module.exports = {
       setTimeout(() => {
         let detector = $(this.$refs.ResizeDetector)
         let width = detector.width()
+        let padding = 15
+        width = width + padding
         let height = detector.height()
-        height = height + 90
+        height = height + 40 + padding
         console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
@@ -10795,7 +10783,7 @@ exports.push([module.i, "body {\n  overflow: hidden;\n  -webkit-app-region: drag
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror[data-v-313a1aed] {\n  -webkit-app-region: no-drag;\n}\n.resize-detector[data-v-313a1aed] {\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: red;\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EACA,iBAAA;EACA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,mBAAA;ACDF;ADGE;EACE,aAAA;EACA,gBAAA;ACDJ;ADKA;EACA,2BAAA;ACHA;ADMA;EACE,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,qBAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACJF","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n}\n\n.CodeMirror {\n-webkit-app-region: no-drag;\n}\n\n.resize-detector {\n  opacity: 0;z-index:-1;\n  position: absolute;\n  //z-index: 999;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: red;\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror {\n  -webkit-app-region: no-drag;\n}\n.resize-detector {\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: red;\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n"]}]);
+exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n  white-space: pre;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror[data-v-313a1aed] {\n  -webkit-app-region: no-drag;\n}\n.resize-detector[data-v-313a1aed] {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EACA,iBAAA;EACA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,mBAAA;EACA,gBAAA;ACDF;ADGE;EACE,aAAA;EACA,gBAAA;ACDJ;ADKA;EACA,2BAAA;ACHA;ADMA;EACE,YAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACJF","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n  white-space: pre;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n}\n\n.CodeMirror {\n-webkit-app-region: no-drag;\n}\n\n.resize-detector {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 2.3rem;\n  white-space: pre;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror {\n  -webkit-app-region: no-drag;\n}\n.resize-detector {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n"]}]);
 
 
 /***/ }),
