@@ -36,10 +36,14 @@ let VueController = {
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     this.status.mode = this.lib.win.mode
-    this.status.filePath = this.lib.win.filePath
-    this.status.contentText = this.lib.win.contentText
+    if (typeof(this.lib.win.filePath) === 'string') {
+      this.status.filePath = this.lib.win.filePath
+    }
+    if (typeof(this.lib.win.contentText) === 'string') {
+      this.status.contentText = this.lib.win.contentText
+    }
     
-    console.log(this.status.contentText)
+    //console.log(this.status.contentText)
     
     // 其他
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {

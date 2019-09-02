@@ -2,6 +2,7 @@ const debug = {
   useMousePositionDisplay: true
 }
 const IPCEventManager = require('./IpcEventManager')
+const ClipboardHelper = require('./ClipboardHelper')
 
 const electron = require('electron')
 const {
@@ -93,8 +94,16 @@ module.exports = function (filePath, callback) {
   //win.rendererSideName.filepath = filepath
   //win.rendererSideName.mode = mode
   win.mode = mode
-  win.filePath = filePath
-  win.contentText = 'Hello world'
+  
+  if (filePath !== undefined) {
+    win.filePath = filePath
+  }
+  else {
+    let clipboardText = ClipboardHelper.getText()
+    if (typeof(clipboardText) === 'string' && clipboardText !== '') {
+      win.contentText = clipboardText
+    }
+  }
   
   //return win
   win.webContents.once('dom-ready', () => {

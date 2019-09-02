@@ -58,6 +58,14 @@ module.exports = {
     },
     resetNoteHeader: function () {
       let header = DateHelper.getMMDDHHmm()
+      let contenxtText = this.status.contentText
+      if (typeof(contenxtText) === 'string') {
+        if (contenxtText.length > 100) {
+          contenxtText = contenxtText.slice(0, 100) + '...'
+        }
+        header = header + ' ' + contenxtText
+      }
+      
       return this.setNoteHeader(header)
     }
   }

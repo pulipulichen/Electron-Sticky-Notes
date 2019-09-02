@@ -19,6 +19,9 @@ let ClipboardHelper = {
     }
     
     return filepaths
+  },
+  getText: function () {
+    return clipboard.readText('clipboard')
   }
 }
 

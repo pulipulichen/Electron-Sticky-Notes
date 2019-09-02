@@ -14,7 +14,7 @@ const {
 const ProcessArgvHelper = require('./electron-shell/ProcessArgvHelper.js')
 
 let filePathList = ProcessArgvHelper.getFilePaths()
-console.log(filePathList)
+//console.log(filePathList)
 
 // ------------
 
