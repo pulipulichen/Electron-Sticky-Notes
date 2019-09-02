@@ -1,5 +1,13 @@
 <div>
+  <div class="content-text resize-detector"
+       v-bind:style="{
+          'maxWidth': getMaxWidth() + 'px',
+          'maxHeight': getMaxHeight() + 'px'
+       }"
+       ref="ResizeDetector">{{status.contentText}}</div>
   <textarea 
     class="content-text"
-    v-model="status.contentText"></textarea>
+    v-model="status.contentText"
+    ref="Textarea"
+    id="Textarea"></textarea>
 </div>
