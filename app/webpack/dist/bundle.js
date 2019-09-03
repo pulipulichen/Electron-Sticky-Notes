@@ -456,6 +456,18 @@ module.exports = {
     return data
   },
   watch: {
+    styleFontSize: function () {
+      return `calc(1em * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
     'config.fontSizeRatio': function () {
       //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
       //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
@@ -477,6 +489,13 @@ module.exports = {
     }
   },
   computed: {
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    }
   },
   mounted: function () {
    
@@ -2116,7 +2135,7 @@ exports.push([module.i, "#ContentCodeContainer {\n  position: absolute;\n  width
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","ContentCode.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACCF","file":"ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","ContentCode.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EAEA,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;EACA,sBAAA;ACDF","file":"ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n}\n"]}]);
 
 
 /***/ }),
@@ -2200,10 +2219,13 @@ var render = function() {
         staticClass: "content-text resize-detector",
         style: {
           maxWidth: _vm.config.maxWidth + "px",
-          maxHeight: _vm.config.maxHeight + "px"
+          maxHeight: _vm.config.maxHeight + "px",
+          top: _vm.config.menuBarHeight + "px",
+          fontSize: _vm.styleFontSize,
+          lineHeight: _vm.styleLineHeight
         }
       },
-      [_vm._v(_vm._s(_vm.contentText))]
+      [_vm._v(_vm._s(_vm.detectorText))]
     )
   ])
 }

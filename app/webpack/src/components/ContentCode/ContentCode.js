@@ -24,6 +24,18 @@ module.exports = {
     return data
   },
   watch: {
+    styleFontSize: function () {
+      return `calc(1em * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
     'config.fontSizeRatio': function () {
       //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
       //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
@@ -45,6 +57,13 @@ module.exports = {
     }
   },
   computed: {
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    }
   },
   mounted: function () {
    

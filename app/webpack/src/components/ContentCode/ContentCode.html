@@ -2,7 +2,10 @@
   <div class="content-text resize-detector"
        v-bind:style="{
           'maxWidth': config.maxWidth + 'px',
-          'maxHeight': config.maxHeight + 'px'
+          'maxHeight': config.maxHeight + 'px',
+          'top': config.menuBarHeight + 'px',
+          'fontSize': styleFontSize,
+          'lineHeight': styleLineHeight,
        }"
-       ref="ResizeDetector">{{ contentText }}</div>
+       ref="ResizeDetector">{{ detectorText }}</div>
 </div>
