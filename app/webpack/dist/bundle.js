@@ -234,6 +234,9 @@ let VueController = {
       this.status.isReady = true
     },
     setupFile: function () {
+      // -------------------------------------
+      // For test
+      
       if (this.config.debug.useTestContentText === true) {
         this.status.contentText = `<!-- Create a simple CodeMirror instance -->
   <link rel="stylesheet" href="lib/codemirror.css">
@@ -244,12 +247,20 @@ let VueController = {
     });
   </script>`
       }
-      if (this.config.debug.useTestImage === true) {
+      if (this.config.debug.useTestImageFile === true) {
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
-
+      if (this.config.debug.useTestPlainTextFile === true) {
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/測試 中文檔案.txt')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+      
+      // -------------------------------------
+      // For test
+      
       if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
         this.status.fileType = 'image'
         this.status.contentText = null
@@ -259,6 +270,7 @@ let VueController = {
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'plain-text'
+        this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
       }
       
       return this
@@ -406,6 +418,13 @@ module.exports = {
       
       return lineHeight
     },
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    }
   },
   mounted: function () {
     /*
@@ -440,6 +459,15 @@ module.exports = {
     resizeToFitContent: function () {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        
+        if (width < this.config.minWidthPx) {
+          width = this.config.minWidthPx
+        }
+        if (height < this.config.minHeightPx) {
+          height = this.config.minHeightPx
+        }
+        
+        
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
@@ -792,13 +820,16 @@ module.exports = {
   locale: 'zh-TW',
   theme: 'yellow',
   maxHeightRatio: 0.7,
+  minHeightPx: 250,
   maxWidthRatio: 0.5,
+  minWidthPx: 200,
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
   debug: {
-    useTestContentText: true,
-    useTestImage: false,
+    useTestContentText: false,
+    useTestImageFile: false,
+    useTestPlainTextFile: true,
   }
 }
 
@@ -10914,7 +10945,7 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder[data-v-0c5ef76e] {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADQE;EACE,8BAAA;ACNJ;ADUA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACRF;ADWA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACVF;ADaA;EACE,4BAAA;ACXF;ADcA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACZF;ADeA;EAOI,kBAAA;EACA,mBAAA;ACnBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n  \n  &.has-open-folder {\n    max-width: calc(100vw - 18rem);\n  }\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADSA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACPF;ADUA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACTF;ADYA;EACE,4BAAA;ACVF;ADaA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACXF;ADcA;EAOI,kBAAA;EACA,mBAAA;AClBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
 
 
 /***/ }),
@@ -10947,7 +10978,7 @@ var render = function() {
           lineHeight: _vm.styleLineHeight
         }
       },
-      [_vm._v(_vm._s(_vm.contentText))]
+      [_vm._v(_vm._s(_vm.detectorText))]
     ),
     _vm._v(" "),
     _c("textarea", {
@@ -11019,14 +11050,9 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "fitted item note-header disabled",
-          class: { "has-open-folder": typeof _vm.status.filePath === "string" }
-        },
-        [_vm._v("\n    " + _vm._s(_vm.header) + "\n  ")]
-      ),
+      _c("a", { staticClass: "fitted item note-header disabled" }, [
+        _vm._v("\n    " + _vm._s(_vm.header) + "\n  ")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "right menu" }, [
         _c(

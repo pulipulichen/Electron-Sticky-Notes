@@ -64,6 +64,9 @@ let VueController = {
       this.status.isReady = true
     },
     setupFile: function () {
+      // -------------------------------------
+      // For test
+      
       if (this.config.debug.useTestContentText === true) {
         this.status.contentText = `<!-- Create a simple CodeMirror instance -->
   <link rel="stylesheet" href="lib/codemirror.css">
@@ -74,12 +77,20 @@ let VueController = {
     });
   </script>`
       }
-      if (this.config.debug.useTestImage === true) {
+      if (this.config.debug.useTestImageFile === true) {
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
-
+      if (this.config.debug.useTestPlainTextFile === true) {
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/測試 中文檔案.txt')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+      
+      // -------------------------------------
+      // For test
+      
       if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
         this.status.fileType = 'image'
         this.status.contentText = null
@@ -89,6 +100,7 @@ let VueController = {
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'plain-text'
+        this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
       }
       
       return this

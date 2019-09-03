@@ -31,6 +31,13 @@ module.exports = {
       
       return lineHeight
     },
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    }
   },
   mounted: function () {
     /*
@@ -65,6 +72,15 @@ module.exports = {
     resizeToFitContent: function () {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        
+        if (width < this.config.minWidthPx) {
+          width = this.config.minWidthPx
+        }
+        if (height < this.config.minHeightPx) {
+          height = this.config.minHeightPx
+        }
+        
+        
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)

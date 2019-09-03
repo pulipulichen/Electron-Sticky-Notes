@@ -71,13 +71,18 @@ let ElectronTextFileHelper = {
     return true
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
-            || (fileTypeResult === undefined && ext === 'arff') ) {
+            || (fileTypeResult === undefined && ext === 'arff'
+            || (fileTypeResult === undefined && ext === 'txt') ) {
       return true
     }
     else {
       return false
     }
     */
+  },
+  readFileSync: function (filepath) {
+    this.init()
+    return this.lib.ElectronFileHelper.readFileSync(filepath)
   },
 }
 
