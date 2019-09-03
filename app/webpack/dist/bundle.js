@@ -708,11 +708,18 @@ module.exports = {
       return this.setNoteHeader(header)
     },
     openFolder: function () {
-      console.error('openFolder')
+      //console.error('openFolder')
+      this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
       return this
     },
     openEdtior: function () {
       console.error('openEdtior')
+      if (typeof(this.status.filePath) === 'string') {
+        
+      }
+      else {
+        
+      }
       return this
     },
     fontSizePlus: function () {
