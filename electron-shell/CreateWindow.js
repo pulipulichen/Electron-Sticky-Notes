@@ -80,7 +80,8 @@ module.exports = function (filePath, callback) {
   //win.setResizable(false)
   
   win.loadURL(url.format({
-    pathname: path.join(__dirname, '../app', 'index.html'),
+    //pathname: path.join(__dirname, '../app', 'index.html'),
+    pathname: path.join(__dirname, '../app', 'codemirror.html'),
     //pathname: path.join(__dirname, '../app/webpack/src/vendors/codemirror-5.48.4', 'index.html'),
     protocol: 'file:',
     slashes: true

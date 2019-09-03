@@ -16,6 +16,20 @@
   </head>
   <body>
     
+    <div>
+      <script src="webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js"></script>
+      <link href="webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css" rel="stylesheet" type="text/css">
+      <textarea id="t"><!-- Create a simple CodeMirror instance -->
+<b>aaa</b></textarea>
+      <script>
+        CodeMirror.fromTextArea(document.getElementById('t'), {
+      lineNumbers: true,
+      mode: "text/html",
+      matchBrackets: true
+    })
+      </script>
+    </div>
+    
   <div id="app"
        v-bind:data-theme="config.theme">
     <menu-bar v-bind:lib="lib" 

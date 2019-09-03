@@ -1,5 +1,5 @@
-const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
-require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
+//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
+//require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
 const DateHelper = require('../../helpers/DateHelper')
 
 module.exports = {
@@ -40,6 +40,30 @@ module.exports = {
     }
   },
   mounted: function () {
+    /*
+    let c = $('<div></div>')
+            .css({
+              position: 'absolute',
+              top: '40px'
+            }).appendTo('body')
+    
+    let t = $('<textarea></textarea>')
+            .val(`<!-- Create a simple CodeMirror instance -->
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <script src="lib/codemirror.js"></script>
+  <script>
+    var editor = CodeMirror.fromTextArea(myTextarea, {
+      lineNumbers: true
+    });
+  </script>`)
+            .appendTo(c)
+    
+    CodeMirror.fromTextArea(t[0], {
+      lineNumbers: true,
+      mode: "text/html",
+      matchBrackets: true
+    })
+    */
     /*
     setTimeout(() => {
       CodeMirror.fromTextArea(document.getElementById('Textarea'), {
