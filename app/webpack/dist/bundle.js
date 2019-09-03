@@ -928,7 +928,9 @@ module.exports = {
     return {
       header: '',
       beforeMaximizeIsPinTop: this.status.isPinTop,
-      maxIntervalMS: null
+      maxIntervalMS: null,
+      $NoteHeader: null,
+      draggableTimer: false
     }
   },
   mounted: function () {
@@ -963,6 +965,14 @@ module.exports = {
       this.status.isMaximized = false
       this.status.isPinTop = this.beforeMaximizeIsPinTop
       return this
+    },
+    toggleMaximize: function () {
+      if (this.status.isMaximized) {
+        return this.unmaximize()
+      }
+      else {
+        return this.maximize()
+      }
     },
     resizeToFitContent: function () {
       this.$parent.$refs.ContentText.resizeToFitContent()
@@ -1037,6 +1047,39 @@ module.exports = {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
       //console.log(this.config.fontSizeRatio)
+      return this
+    },
+    enableDraggable: function (e) {
+      // Movable after 700MS
+      let mouseX = e.clientX;  
+      let mouseY = e.clientY;
+      let animationId
+      
+      let onMouseUp = () => {
+        e.srcElement.removeEventListener('mouseup', onMouseUp)
+        cancelAnimationFrame(animationId)
+        //console.log('onMouseUp canceld')
+        this.draggableTimer = false
+      }
+      
+      let moveWindow = () => {
+        this.lib.ipc.send('windowMoving', { mouseX, mouseY });
+        animationId = requestAnimationFrame(moveWindow);
+      }
+
+      //console.log(e)
+      
+      this.draggableTimer = setTimeout(() => {
+        e.srcElement.addEventListener('mouseup', onMouseUp)
+        requestAnimationFrame(moveWindow);
+      }, 500)
+      return this
+    },
+    disableDraggable: function () {
+      if (this.draggableTimer !== false) {
+        clearTimeout(this.draggableTimer)
+        this.draggableTimer = false
+      }
       return this
     }
   }
@@ -1142,8 +1185,8 @@ module.exports = {
   cacheAliveDay: 1,
   
   debug: {
-    useTestContentText: false,
-    useTestImageFile: true,
+    useTestContentText: true,
+    useTestImageFile: false,
     useTestPlainTextFile: false,
   }
 }
@@ -11329,7 +11372,7 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADSA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACPF;ADUA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACTF;ADYA;EACE,4BAAA;ACVF;ADaA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACXF;ADcA;EAOI,kBAAA;EACA,mBAAA;AClBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ACRF;ADaA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACXF;ADcA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACbF;ADgBA;EACE,4BAAA;ACdF;ADiBA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACfF;ADkBA;EAOI,kBAAA;EACA,mBAAA;ACtBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  //-webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
 
 
 /***/ }),
@@ -11469,9 +11512,19 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("a", { staticClass: "fitted item note-header disabled" }, [
-        _vm._v("\n    " + _vm._s(_vm.header) + "\n  ")
-      ]),
+      _c(
+        "a",
+        {
+          ref: "NoteHeader",
+          staticClass: "fitted item note-header disabled",
+          on: {
+            mousedown: _vm.enableDraggable,
+            mouseup: _vm.disableDraggable,
+            dblclick: _vm.toggleMaximize
+          }
+        },
+        [_vm._v("\n    " + _vm._s(_vm.header) + "\n  ")]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "right menu" }, [
         _c(

@@ -8,7 +8,9 @@ module.exports = {
     return {
       header: '',
       beforeMaximizeIsPinTop: this.status.isPinTop,
-      maxIntervalMS: null
+      maxIntervalMS: null,
+      $NoteHeader: null,
+      draggableTimer: false
     }
   },
   mounted: function () {
@@ -43,6 +45,14 @@ module.exports = {
       this.status.isMaximized = false
       this.status.isPinTop = this.beforeMaximizeIsPinTop
       return this
+    },
+    toggleMaximize: function () {
+      if (this.status.isMaximized) {
+        return this.unmaximize()
+      }
+      else {
+        return this.maximize()
+      }
     },
     resizeToFitContent: function () {
       this.$parent.$refs.ContentText.resizeToFitContent()
@@ -117,6 +127,39 @@ module.exports = {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
       //console.log(this.config.fontSizeRatio)
+      return this
+    },
+    enableDraggable: function (e) {
+      // Movable after 700MS
+      let mouseX = e.clientX;  
+      let mouseY = e.clientY;
+      let animationId
+      
+      let onMouseUp = () => {
+        e.srcElement.removeEventListener('mouseup', onMouseUp)
+        cancelAnimationFrame(animationId)
+        //console.log('onMouseUp canceld')
+        this.draggableTimer = false
+      }
+      
+      let moveWindow = () => {
+        this.lib.ipc.send('windowMoving', { mouseX, mouseY });
+        animationId = requestAnimationFrame(moveWindow);
+      }
+
+      //console.log(e)
+      
+      this.draggableTimer = setTimeout(() => {
+        e.srcElement.addEventListener('mouseup', onMouseUp)
+        requestAnimationFrame(moveWindow);
+      }, 500)
+      return this
+    },
+    disableDraggable: function () {
+      if (this.draggableTimer !== false) {
+        clearTimeout(this.draggableTimer)
+        this.draggableTimer = false
+      }
       return this
     }
   }

@@ -122,5 +122,15 @@ module.exports = function (mainWindow) {
         event.sender.send('change-folder-callback', dirpath[0])
       }
     })
+    
+    // -----------------------
+    
   })
-}
+  
+  // --------------------
+  
+  ipc.on('windowMoving', (e, {mouseX, mouseY}) => {
+    const { x, y } = electron.screen.getCursorScreenPoint()
+    mainWindow.setPosition(x - mouseX, y - mouseY)
+  });
+} // module.exports = function (mainWindow) {

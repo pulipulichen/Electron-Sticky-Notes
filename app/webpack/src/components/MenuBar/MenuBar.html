@@ -6,7 +6,11 @@
      <i class="map pin icon"></i>  
   </a>
 
-  <a class="fitted item note-header disabled">
+  <a class="fitted item note-header disabled"
+     ref="NoteHeader"
+     v-on:mousedown="enableDraggable"
+     v-on:mouseup="disableDraggable"
+     v-on:dblclick="toggleMaximize">
     {{ header }}
   </a>
 

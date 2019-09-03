@@ -14,14 +14,19 @@
   }
 }
 
-.item.note-header {
+#app .item.note-header {
   font-family: Noto Sans CJK TC;
+  width: 100% !important;
+  //background-color: red !important; // for test
   max-width: calc(100vw - 13rem);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  -webkit-app-region: drag;
+  //-webkit-app-region: drag;
+  pointer-events: all;
+  //-webkit-app-region: drag;
 }
+
 
 .ui.menu {
   background-color: transparent;
