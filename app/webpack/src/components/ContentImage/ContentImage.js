@@ -1,3 +1,5 @@
+const OpenSeadragon = require('../../vendors/openseadragon-bin-2.4.1/openseadragon.min.js')
+
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
@@ -6,6 +8,8 @@ module.exports = {
       padding: 0,
       detector: null,
       imagePath: '',
+      viewerElement: null,
+      viewer: null,
     }
   },
   computed: {
@@ -27,8 +31,8 @@ module.exports = {
           this.detector = window.$(this.$refs.ResizeDetector)
         }
         this.detector.bind('load', () => {
-          console.log('A')
           this.resizeToFitContent()
+          this.initViewer()
         })
         
         this.imagePath = this.status.filePath
@@ -50,10 +54,9 @@ module.exports = {
       }
     },
     resizeToFitContent: function () {
-      console.trace('ok aaa')
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
-        console.log(width, height)
+        //console.log(width, height)
         if (width < this.config.minWidthPx) {
           width = this.config.minWidthPx
         }
@@ -64,6 +67,51 @@ module.exports = {
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
+    },
+    initViewer: function () {
+      //let {width, height} = this.getSizeOfDetector()
+      let id = 'OpenSeadragonContainer'
+      this.viewerElement = $('<div class="viewer"></div>')
+              .attr('id', id)
+              //.width(this.detector.width())
+              //.height(this.detector.height())
+              .css('top', this.config.menuBarHeight + 'px')
+              .appendTo('body')
+      
+      // configs
+      // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
+      this.viewer = OpenSeadragon({
+        id: id,
+        prefixUrl: "webpack/src/vendors/openseadragon-bin-2.4.1/images/",
+        visibilityRatio: 1,
+        //defaultZoomLevel: 1,
+        minZoomLevel: 1,
+        showNavigator:  true,
+        navigatorPosition: 'BOTTOM_RIGHT',
+        tileSources: {
+            type: 'image',
+            url:  this.imagePath,
+            buildPyramid: false
+          },
+        animationTime: 0.5
+      })
+/*
+<div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
+<script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>
+<script type="text/javascript">
+var viewer = OpenSeadragon({
+    id: "openseadragon1",
+    prefixUrl: "vendors/openseadragon-bin-2.4.1/images/",
+    visibilityRatio: 1,
+    showNavigator:  true,
+    tileSources: {
+        type: 'image',
+        url:  '../demo/pets-4415649.jpg',
+        buildPyramid: false
+      }
+    });
+</script>
+ */
     }
-  }
+  } // methods
 }

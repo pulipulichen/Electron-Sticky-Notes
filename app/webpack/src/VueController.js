@@ -60,6 +60,7 @@ let VueController = {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
       this.$refs.MenuBar.resetNoteHeader()
+      this.setupWindowSizeConfig()
       this.setupFile()
       //console.log('OK')
       this.status.isReady = true
