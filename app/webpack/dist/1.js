@@ -1,19 +1,21 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+
+/***/ "./app/webpack/src/vendors/codemirror-5.48.4/mode/htmlmixed/htmlmixed.js":
+/*!*******************************************************************************!*\
+  !*** ./app/webpack/src/vendors/codemirror-5.48.4/mode/htmlmixed/htmlmixed.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 (function(mod) {
-  if (typeof exports == "object" && typeof module == "object") {// CommonJS 
-    //console.log(1);
-    mod(require("../../lib/codemirror")); 
+  if (true) {// CommonJS 
+    console.log(1);
+    mod(__webpack_require__(/*! ../../lib/codemirror */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js")); 
   }
-  else if (typeof define == "function" && define.amd) { // AMD
-    //console.log(2);
-    define(["../../lib/codemirror"], mod); 
-  }
-  else { // Plain browser env
-    //console.log(3);
-    mod(window.CodeMirror); 
-  }
+  else {}
   
   /*
   mod(window.CodeMirror);
@@ -160,4 +162,11 @@
   }, "xml", "javascript", "css");
 
   CodeMirror.defineMIME("text/html", "htmlmixed");
+  console.log('OK')
 });
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=1.js.map

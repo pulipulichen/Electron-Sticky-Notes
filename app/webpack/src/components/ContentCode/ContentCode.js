@@ -1,4 +1,5 @@
-const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
+//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
+//window.CodeMirror = CodeMirror
 require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
 const DateHelper = require('../../helpers/DateHelper')
 
@@ -125,6 +126,7 @@ module.exports = {
               .val(this.contentText)
               .appendTo(this.$container)
       
+      /*
       this.modePathList.forEach(path => {
         let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
         console.log(modeFilePath)
@@ -134,6 +136,39 @@ module.exports = {
       CodeMirror.fromTextArea(this.$editor[0], {
         lineNumbers: true,
         mode: this.modePath,
+        matchBrackets: true
+      })
+      */
+     
+      /*
+      let loop = (i) => {
+        if (i < this.modePathList.length) {
+          let modePath = this.modePathList[i]
+          modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
+          console.log(modePath)
+          $(`<script src="${modePath}"></script>`).appendTo('head')
+          //window.$.getScript(modePath, () => {
+            i++
+            loop(i)
+          //})
+        }
+        else {
+          console.log(this.mode)
+          setTimeout(() => {
+            window.CodeMirror.fromTextArea(this.$editor[0], {
+              lineNumbers: true,
+              mode: this.mode,
+              matchBrackets: true
+            })
+          }, 3000)
+        }
+      }
+      
+      loop(0)
+      */
+      CodeMirror.fromTextArea(this.$editor[0], {
+        lineNumbers: true,
+        mode: 'text/javascript',
         matchBrackets: true
       })
       
