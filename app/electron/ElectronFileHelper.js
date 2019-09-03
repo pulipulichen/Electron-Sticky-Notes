@@ -243,6 +243,38 @@ let ElectronFileHelper = {
       */
     }
   },
+  openItem: function (path) {
+    if (typeof(path) !== 'string') {
+      return this
+    }
+    
+    if (process.platform === 'win32') {
+      let tmpFolderPath = path
+      if (tmpFolderPath.startsWith('"') && tmpFolderPath.endsWith('"')) {
+        tmpFolderPath = tmpFolderPath.slice(1, -1)
+      }
+      //console.log([tmpFolderPath, this.isDirSync(tmpFolderPath)])
+      if (this.isDirSync(tmpFolderPath)) {
+        this.lib.shell.openItem(tmpFolderPath)
+      }
+      else {
+        if (path.startsWith('"') === false 
+                || path.endsWith('"') === false) {
+          path = `"${path}"`
+        }
+        path = '"' + this.resolve('win32-helpers/open-item/open-item.exe') + '" ' + path
+        //console.log(execCommand)
+
+        //const exec = require('child_process').exec
+        this.lib.exec(path, () => {
+          
+        })
+      }
+    }
+    else if (process.platform === 'linux') {
+      console.error('How to open in Linux? ', path)
+    }
+  },
   showInFolder: function (path) {
     if (this.existsSync(path)) {
       if (this.isDirSync(path)) {

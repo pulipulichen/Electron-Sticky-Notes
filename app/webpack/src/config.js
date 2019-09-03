@@ -9,8 +9,8 @@ module.exports = {
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
   debug: {
-    useTestContentText: false,
+    useTestContentText: true,
     useTestImageFile: false,
-    useTestPlainTextFile: true,
+    useTestPlainTextFile: false,
   }
 }

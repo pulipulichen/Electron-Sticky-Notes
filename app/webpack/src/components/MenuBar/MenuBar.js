@@ -80,15 +80,23 @@ module.exports = {
       this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
       return this
     },
-    openEdtior: function () {
-      console.error('openEdtior')
+    openEditor: function () {
+      //console.error('openEdtior')
       if (typeof(this.status.filePath) === 'string') {
-        
+        this.lib.ElectronFileHelper.openItem(this.status.filePath)
       }
       else {
+        // 建立暫存檔案
+        let tmpFilePath = this.status.mainComponent.createTempFile()
+        // 開啟暫存檔案
+        this.lib.ElectronFileHelper.openItem(tmpFilePath)
         
+        this.cleanTempFile()
       }
       return this
+    },
+    cleanTempFile: function () {
+      console.error('cleanTempFile')
     },
     fontSizePlus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval

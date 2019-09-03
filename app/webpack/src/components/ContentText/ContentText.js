@@ -1,6 +1,6 @@
 const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
 require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
-const $ = require('jquery')
+const DateHelper = require('../../helpers/DateHelper')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -88,7 +88,7 @@ module.exports = {
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
-        this.detector = $(this.$refs.ResizeDetector)
+        this.detector = window.$(this.$refs.ResizeDetector)
       }
       let width = this.detector.width()
       width = width + this.padding
@@ -119,6 +119,16 @@ module.exports = {
       }
       
       return this
+    },
+    createTempFile: function () {
+      let content = this.contentText
+      
+      // 我需要一個檔案名稱
+      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
+      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
+      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
+      
+      return filepath
     }
   }
 }

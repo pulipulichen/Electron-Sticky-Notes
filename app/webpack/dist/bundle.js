@@ -189,6 +189,7 @@ let VueController = {
       filePath: null,
       fileType: 'plain-text', // default
       fontSizeAdjustIsEnlarge: null,
+      mainComponent: null,
     },
     lib: {},
   },
@@ -214,8 +215,6 @@ let VueController = {
     if (typeof(this.lib.win.contentText) === 'string') {
       this.status.contentText = this.lib.win.contentText
     }
-    
-    
     
     //console.log(this.status.contentText)
     
@@ -264,13 +263,19 @@ let VueController = {
       if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
         this.status.fileType = 'image'
         this.status.contentText = null
+        //this.status.mainComponent = this.$refs.ContentText
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'code'
+        //this.status.mainComponent = this.$refs.ContentText
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'plain-text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        this.status.mainComponent = this.$refs.ContentText
+      }
+      else {
+        this.status.mainComponent = this.$refs.ContentText
       }
       
       return this
@@ -387,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const CodeMirror = __webpack_require__(/*! ../../vendors/codemirror-5.48.4/lib/codemirror.js */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js")
 __webpack_require__(/*! ../../vendors/codemirror-5.48.4/lib/codemirror.css */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css")
-const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
+const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -475,7 +480,7 @@ module.exports = {
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
-        this.detector = $(this.$refs.ResizeDetector)
+        this.detector = window.$(this.$refs.ResizeDetector)
       }
       let width = this.detector.width()
       width = width + this.padding
@@ -506,6 +511,16 @@ module.exports = {
       }
       
       return this
+    },
+    createTempFile: function () {
+      let content = this.contentText
+      
+      // 我需要一個檔案名稱
+      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
+      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
+      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
+      
+      return filepath
     }
   }
 }
@@ -712,15 +727,23 @@ module.exports = {
       this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
       return this
     },
-    openEdtior: function () {
-      console.error('openEdtior')
+    openEditor: function () {
+      //console.error('openEdtior')
       if (typeof(this.status.filePath) === 'string') {
-        
+        this.lib.ElectronFileHelper.openItem(this.status.filePath)
       }
       else {
+        // 建立暫存檔案
+        let tmpFilePath = this.status.mainComponent.createTempFile()
+        // 開啟暫存檔案
+        this.lib.ElectronFileHelper.openItem(tmpFilePath)
         
+        this.cleanTempFile()
       }
       return this
+    },
+    cleanTempFile: function () {
+      console.error('cleanTempFile')
     },
     fontSizePlus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
@@ -834,9 +857,9 @@ module.exports = {
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
   debug: {
-    useTestContentText: false,
+    useTestContentText: true,
     useTestImageFile: false,
-    useTestPlainTextFile: true,
+    useTestPlainTextFile: false,
   }
 }
 

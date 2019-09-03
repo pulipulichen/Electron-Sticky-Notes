@@ -1,0 +1,1 @@
+open-item.exe "D:\xampp\htdocs\projects-electron\Electron-Sticky-Notes\demo\test english.txt"
