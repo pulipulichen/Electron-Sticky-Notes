@@ -164,6 +164,8 @@ module.exports = {
             mode: this.mode,
             matchBrackets: true
           })
+          
+          this.resizeToFitContent()
         }
       }
       
@@ -189,6 +191,9 @@ module.exports = {
       return this
     },
     resizeToFitContent: function () {
+      window.resizeTo(800,800)
+      return console.error('resizeToFitContent')
+      
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         
