@@ -85,10 +85,14 @@ module.exports = {
     },
     fontSizePlus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = true
+      console.log(this.config.fontSizeRatio)
       return this
     },
     fontSizeMinus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = false
+      console.log(this.config.fontSizeRatio)
       return this
     }
   }

@@ -2,12 +2,18 @@
   <div class="content-text resize-detector"
        v-bind:style="{
           'maxWidth': config.maxWidth + 'px',
-          'maxHeight': config.maxHeight + 'px'
+          'maxHeight': config.maxHeight + 'px',
+          'fontSize': styleFontSize,
+          'lineHeight': styleLineHeight,
        }"
        ref="ResizeDetector">{{ contentText }}</div>
   <textarea 
     class="content-text"
     v-model="contentText"
     ref="Textarea"
+    v-bind:style="{
+      'fontSize': styleFontSize,
+      'lineHeight': styleLineHeight,
+    }"
     id="Textarea"></textarea>
 </div>

@@ -4,13 +4,13 @@
   width: 100vw;
   height: calc(100vh - @menu-bar-height);
   resize: none;
-  font-size: 1rem;
+  //font-size: 1rem;
+  //line-height: 1.5rem;
   background-color: rgba(255,255,255,0.7);
   padding: 0.5rem;
   border-width: 0;
   -webkit-app-region: no-drag;
   font-family: Noto Sans CJK TC;
-  line-height: 1.5rem;
   white-space: pre;
   
   &:focus {
@@ -24,7 +24,7 @@
 }
 
 .resize-detector {
-  z-index: 999;
+  z-index: 10;
   opacity: 0.5;
   color: green;
   opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行

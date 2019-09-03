@@ -18,6 +18,7 @@ let VueController = {
       contentText: '',
       filePath: null,
       fileType: 'plain-text', // default
+      fontSizeAdjustIsEnlarge: null,
     },
     lib: {},
   },

@@ -18,7 +18,19 @@ module.exports = {
     displayContentText: function () {
       let contentText = this.contentText
       return contentText
-    }
+    },
+    styleFontSize: function () {
+      return `calc(1rem * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1.5rem * ${this.config.fontSizeRatio})`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
   },
   mounted: function () {
     /*
@@ -38,30 +50,59 @@ module.exports = {
   },
   methods: {
     setupText: function () {
-      console.log(this.status)
-      console.log([this.status.fileType === 'plain-text'
-              , typeof(this.status.contentText) === 'string' 
-              , this.status.contentText !== ''])
+      //console.log(this.status)
+      //console.log([this.status.fileType === 'plain-text'
+      //        , typeof(this.status.contentText) === 'string' 
+      //        , this.status.contentText !== ''])
       if (this.status.fileType === 'plain-text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
-        console.log(this.contentText)
+        //console.log(this.contentText)
       }
       return this
     },
     resizeToFitContent: function () {
       setTimeout(() => {
-        if (this.detector === null) {
-          this.detector = $(this.$refs.ResizeDetector)
-        }
-        let width = this.detector.width()
-        width = width + this.padding
-        let height = this.detector.height()
-        height = height + this.config.menuBarHeight + this.padding
+        let {width, height} = this.getSizeOfDetector()
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
+      return this
+    },
+    getSizeOfDetector: function () {
+      if (this.detector === null) {
+        this.detector = $(this.$refs.ResizeDetector)
+      }
+      let width = this.detector.width()
+      width = width + this.padding
+      
+      let height = this.detector.height()
+      height = height + this.config.menuBarHeight + this.padding
+      return {
+        width: width,
+        height: height
+      }
+    },
+    resizeIfOverflow: function () {
+      if (this.status.isReady === false) {
+        return this
+      }
+      
+      let {width, height} = this.getSizeOfDetector()
+      
+      let windowWidth = window.innerWidth
+      let windowHeight = window.innerHeight
+      
+      //console.log([width, windowWidth])
+      //console.log([height, windowHeight])
+      
+      if (width > windowWidth 
+              || height > windowHeight) {
+        return this.resizeToFitContent()
+      }
+      
+      return this
     }
   }
 }

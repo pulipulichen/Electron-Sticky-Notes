@@ -188,6 +188,7 @@ let VueController = {
       contentText: '',
       filePath: null,
       fileType: 'plain-text', // default
+      fontSizeAdjustIsEnlarge: null,
     },
     lib: {},
   },
@@ -392,7 +393,19 @@ module.exports = {
     displayContentText: function () {
       let contentText = this.contentText
       return contentText
-    }
+    },
+    styleFontSize: function () {
+      return `calc(1rem * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1.5rem * ${this.config.fontSizeRatio})`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
   },
   mounted: function () {
     /*
@@ -412,30 +425,59 @@ module.exports = {
   },
   methods: {
     setupText: function () {
-      console.log(this.status)
-      console.log([this.status.fileType === 'plain-text'
-              , typeof(this.status.contentText) === 'string' 
-              , this.status.contentText !== ''])
+      //console.log(this.status)
+      //console.log([this.status.fileType === 'plain-text'
+      //        , typeof(this.status.contentText) === 'string' 
+      //        , this.status.contentText !== ''])
       if (this.status.fileType === 'plain-text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
-        console.log(this.contentText)
+        //console.log(this.contentText)
       }
       return this
     },
     resizeToFitContent: function () {
       setTimeout(() => {
-        if (this.detector === null) {
-          this.detector = $(this.$refs.ResizeDetector)
-        }
-        let width = this.detector.width()
-        width = width + this.padding
-        let height = this.detector.height()
-        height = height + this.config.menuBarHeight + this.padding
+        let {width, height} = this.getSizeOfDetector()
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
+      return this
+    },
+    getSizeOfDetector: function () {
+      if (this.detector === null) {
+        this.detector = $(this.$refs.ResizeDetector)
+      }
+      let width = this.detector.width()
+      width = width + this.padding
+      
+      let height = this.detector.height()
+      height = height + this.config.menuBarHeight + this.padding
+      return {
+        width: width,
+        height: height
+      }
+    },
+    resizeIfOverflow: function () {
+      if (this.status.isReady === false) {
+        return this
+      }
+      
+      let {width, height} = this.getSizeOfDetector()
+      
+      let windowWidth = window.innerWidth
+      let windowHeight = window.innerHeight
+      
+      //console.log([width, windowWidth])
+      //console.log([height, windowHeight])
+      
+      if (width > windowWidth 
+              || height > windowHeight) {
+        return this.resizeToFitContent()
+      }
+      
+      return this
     }
   }
 }
@@ -647,10 +689,14 @@ module.exports = {
     },
     fontSizePlus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = true
+      console.log(this.config.fontSizeRatio)
       return this
     },
     fontSizeMinus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = false
+      console.log(this.config.fontSizeRatio)
       return this
     }
   }
@@ -10854,7 +10900,7 @@ exports.push([module.i, "body {\n  overflow: hidden;\n  -webkit-app-region: drag
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 1.5rem;\n  white-space: pre;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror[data-v-313a1aed] {\n  -webkit-app-region: no-drag;\n}\n.resize-detector[data-v-313a1aed] {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EACA,eAAA;EACA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,mBAAA;EACA,gBAAA;ACDF;ADGE;EACE,aAAA;EACA,gBAAA;ACDJ;ADKA;EACA,2BAAA;ACHA;ADMA;EACE,YAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACJF","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  font-size: 1rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 1.5rem;\n  white-space: pre;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n}\n\n.CodeMirror {\n-webkit-app-region: no-drag;\n}\n\n.resize-detector {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  font-size: 1rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  line-height: 1.5rem;\n  white-space: pre;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror {\n  -webkit-app-region: no-drag;\n}\n.resize-detector {\n  z-index: 999;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n"]}]);
+exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror[data-v-313a1aed] {\n  -webkit-app-region: no-drag;\n}\n.resize-detector[data-v-313a1aed] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EAGA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,gBAAA;ACHF;ADKE;EACE,aAAA;EACA,gBAAA;ACHJ;ADOA;EACA,2BAAA;ACLA;ADQA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACNF","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  //font-size: 1rem;\n  //line-height: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n}\n\n.CodeMirror {\n-webkit-app-region: no-drag;\n}\n\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.CodeMirror {\n  -webkit-app-region: no-drag;\n}\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n"]}]);
 
 
 /***/ }),
@@ -10896,7 +10942,9 @@ var render = function() {
         staticClass: "content-text resize-detector",
         style: {
           maxWidth: _vm.config.maxWidth + "px",
-          maxHeight: _vm.config.maxHeight + "px"
+          maxHeight: _vm.config.maxHeight + "px",
+          fontSize: _vm.styleFontSize,
+          lineHeight: _vm.styleLineHeight
         }
       },
       [_vm._v(_vm._s(_vm.contentText))]
@@ -10913,6 +10961,10 @@ var render = function() {
       ],
       ref: "Textarea",
       staticClass: "content-text",
+      style: {
+        fontSize: _vm.styleFontSize,
+        lineHeight: _vm.styleLineHeight
+      },
       attrs: { id: "Textarea" },
       domProps: { value: _vm.contentText },
       on: {
