@@ -1,0 +1,10 @@
+<div data-component="ContentCode">
+  <div class="content-text resize-detector"
+       v-bind:style="{
+          'maxWidth': config.maxWidth + 'px',
+          'maxHeight': config.maxHeight + 'px',
+          'fontSize': styleFontSize,
+          'lineHeight': styleLineHeight,
+       }"
+       ref="ResizeDetector">{{ detectorText }}</div>
+</div>

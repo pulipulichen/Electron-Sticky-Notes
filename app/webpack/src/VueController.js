@@ -90,6 +90,12 @@ let VueController = {
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
+      if (this.config.debug.useTestCodeFile === true) {
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/postcss.config.js')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
       if (this.config.debug.useTestPlainTextFile === true) {
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/測試 中文檔案.txt')
         //console.log(this.status.filePath)

@@ -12,7 +12,8 @@ module.exports = {
   cacheAliveDay: 1,
   
   debug: {
-    useTestContentText: true,
+    useTestContentText: false,
+    useTestCodeFile: true,
     useTestImageFile: false,
     useTestPlainTextFile: false,
   }

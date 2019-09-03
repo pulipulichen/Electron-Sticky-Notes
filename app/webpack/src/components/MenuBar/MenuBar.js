@@ -13,6 +13,11 @@ module.exports = {
       draggableTimer: false
     }
   },
+  computed: {
+    enableFontSizeControl: function () {
+      return (['code', 'plain-text'].indexOf(this.status.fileType) > -1)
+    }
+  },
   mounted: function () {
     window.$(this.$refs.Submenu).dropdown()
   },
