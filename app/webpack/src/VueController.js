@@ -17,6 +17,7 @@ let VueController = {
       isReady: false,
       contentText: '',
       filePath: null,
+      fileType: 'plain-text', // default
     },
     lib: {},
   },
@@ -88,10 +89,14 @@ let VueController = {
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'plain-text'
       }
+      
+      return this
     },
     setupWindowSizeConfig: function () {
       this.config.maxHeight = Math.floor(screen.availHeight * this.config.maxHeightRatio)
       this.config.maxWidth = Math.floor(screen.availWidth * this.config.maxWidthRatio)
+      
+      return this
     },
     a: function () {
       // for test

@@ -5,15 +5,18 @@ const $ = require('jquery')
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
-    this.$i18n.locale = this.config.locale
-    return {
+    let data = {
       padding: 15,
-      detector: null
+      detector: null,
+      contentText: ''
     }
+    
+    this.$i18n.locale = this.config.locale
+    return data
   },
   computed: {
     displayContentText: function () {
-      let contentText = this.status.contentText
+      let contentText = this.contentText
       return contentText
     }
   },
@@ -27,9 +30,26 @@ module.exports = {
       })
     }, 0)
     */
-    this.resizeToFitContent()
+   
+    setTimeout(() => {
+      this.setupText()
+      this.resizeToFitContent()
+    }, 0)
   },
   methods: {
+    setupText: function () {
+      console.log(this.status)
+      console.log([this.status.fileType === 'plain-text'
+              , typeof(this.status.contentText) === 'string' 
+              , this.status.contentText !== ''])
+      if (this.status.fileType === 'plain-text'
+              && typeof(this.status.contentText) === 'string' 
+              && this.status.contentText !== '') {
+        this.contentText = this.status.contentText
+        console.log(this.contentText)
+      }
+      return this
+    },
     resizeToFitContent: function () {
       setTimeout(() => {
         if (this.detector === null) {
