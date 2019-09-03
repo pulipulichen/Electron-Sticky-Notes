@@ -17,6 +17,7 @@ let VueController = {
       isPinTop: false,
       isReady: false,
       contentText: '',
+      imageDataURL: null,
       filePath: null,
       fileType: 'plain-text', // default
       fontSizeAdjustIsEnlarge: null,
@@ -46,6 +47,9 @@ let VueController = {
     }
     if (typeof(this.lib.win.contentText) === 'string') {
       this.status.contentText = this.lib.win.contentText
+    }
+    if (typeof(this.lib.win.imageDataURL) === 'string') {
+      this.status.imageDataURL = this.lib.win.imageDataURL
     }
     
     //console.log(this.status.contentText)
@@ -108,6 +112,11 @@ let VueController = {
         this.status.fileType = 'plain-text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         this.status.mainComponent = this.$refs.ContentText
+      }
+      else if (typeof(this.status.imageDataURL) === 'string') {
+        this.status.fileType = 'image'
+        this.status.contentText = null
+        this.status.mainComponent = this.$refs.ContentImage
       }
       else {
         this.status.mainComponent = this.$refs.ContentText

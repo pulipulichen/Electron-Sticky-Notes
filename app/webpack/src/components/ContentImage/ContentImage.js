@@ -7,36 +7,53 @@ module.exports = {
     return {
       padding: 0,
       detector: null,
-      imagePath: '',
+      imagePath: null,
+      imageDataURL: null,
       viewerElement: null,
       viewer: null,
     }
   },
   computed: {
+    attrSrc: function () {
+      if (typeof(this.imagePath) === 'string') {
+        return this.imagePath
+      }
+      else if (typeof(this.imageDataURL) === 'string') {
+        return this.imageDataURL
+      }
+    }
   },
   mounted: function () {
     setTimeout(() => {
+      this.initDetector()
       this.setupImage()
       //this.resizeToFitContent()
     }, 0)
   },
   methods: {
     setupImage: function () {
+      
       if (this.status.fileType === 'image'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
-        
-        //console.log(this.imagePath)
-        if (this.detector === null) {
-          this.detector = window.$(this.$refs.ResizeDetector)
-        }
-        this.detector.bind('load', () => {
-          this.resizeToFitContent()
-          this.initViewer()
-        })
-        
         this.imagePath = this.status.filePath
       }
+      else if (this.status.fileType === 'image'
+              && typeof(this.status.imageDataURL) === 'string' 
+              && this.status.imageDataURL.startsWith('data:image/png;base64,')) {
+        this.imageDataURL = this.status.imageDataURL
+      }
+      return this
+    },
+    initDetector: function () {
+      //console.log(this.imagePath)
+      if (this.detector === null) {
+        this.detector = window.$(this.$refs.ResizeDetector)
+      }
+      this.detector.bind('load', () => {
+        this.resizeToFitContent()
+        this.initViewer()
+      })
       return this
     },
     getSizeOfDetector: function () {
@@ -90,7 +107,7 @@ module.exports = {
         navigatorPosition: 'BOTTOM_RIGHT',
         tileSources: {
             type: 'image',
-            url:  this.imagePath,
+            url:  this.attrSrc,
             buildPyramid: false
           },
         animationTime: 0.5,

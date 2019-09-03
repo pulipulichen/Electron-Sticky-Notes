@@ -100,9 +100,15 @@ module.exports = function (filePath, callback) {
     win.filePath = filePath
   }
   else {
-    let clipboardText = ClipboardHelper.getText()
-    if (typeof(clipboardText) === 'string' && clipboardText !== '') {
-      win.contentText = clipboardText
+    let clipboardImage = ClipboardHelper.getImageDataURL()
+    if (clipboardImage !== undefined) {
+      win.imageDataURL = clipboardImage
+    }
+    else {
+      let clipboardText = ClipboardHelper.getText()
+      if (typeof(clipboardText) === 'string' && clipboardText !== '') {
+        win.contentText = clipboardText
+      }
     }
   }
   

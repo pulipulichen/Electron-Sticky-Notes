@@ -33,6 +33,16 @@ let ClipboardHelper = {
   },
   getText: function () {
     return clipboard.readText('clipboard')
+  },
+  getImageDataURL: function () {
+    let dataURL = clipboard.readImage('clipboard').toDataURL()
+    if (dataURL !== 'data:image/png;base64,') {
+      return dataURL
+    }
+    else {
+      return undefined
+    }
+    // data:image/png;base64,
   }
 }
 
