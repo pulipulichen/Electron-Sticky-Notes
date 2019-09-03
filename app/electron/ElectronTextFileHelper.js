@@ -32,7 +32,7 @@ let ElectronTextFileHelper = {
       return false
     }
 
-    let fileTypeResult = this.lib.ElectronFileHelper.getFileType(filepath)
+    let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
     console.error(['Please check file type: ', fileTypeResult, ext])
     return true
     /*
@@ -66,8 +66,8 @@ let ElectronTextFileHelper = {
       return false
     }
 
-    let fileTypeResult = this.lib.ElectronFileHelper.getFileType(filepath)
-    console.error(['Please check file type: ', fileTypeResult, ext])
+    let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
+    console.error(['Please check file type: ', ext, fileTypeResult])
     return true
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')

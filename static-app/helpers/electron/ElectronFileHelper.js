@@ -44,6 +44,10 @@ let ElectronFileHelper = {
     
     const buffer = this.lib.readChunk.sync(filepath, 0, this.lib.fileType.minimumBytes);
     let fileTypeResult = this.lib.fileType(buffer)
+    console.log(fileTypeResult)
+    if (typeof(fileTypeResult.mime) === 'string') {
+      fileTypeResult = fileTypeResult.mime
+    }
     return fileTypeResult
   },
   basename: function (filepath) {

@@ -32,9 +32,9 @@ let ElectronImageFileHelper = {
       return false
     }
 
-    let fileTypeResult = this.lib.ElectronFileHelper.getFileType(filepath)
-    console.error(['Please check file type: ', fileTypeResult, ext])
-    
+    let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
+    //console.error(['Please check file type: ', ext, fileTypeResult])
+    //console.log((ext === 'jpg' && fileTypeResult === 'image/jpeg'))
     // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
     if ( (ext === 'jpg' && fileTypeResult === 'image/jpeg')
             || (ext === 'jpeg' && fileTypeResult === 'image/jpeg')

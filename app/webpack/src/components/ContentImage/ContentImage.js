@@ -5,14 +5,36 @@ module.exports = {
     return {
       padding: 0,
       detector: null,
+      imagePath: '',
     }
   },
   computed: {
   },
   mounted: function () {
-    this.resizeToFitContent()
+    setTimeout(() => {
+      this.setupImage()
+      //this.resizeToFitContent()
+    }, 0)
   },
   methods: {
+    setupImage: function () {
+      if (this.status.fileType === 'image'
+              && typeof(this.status.filePath) === 'string' 
+              && this.status.filePath !== '') {
+        
+        //console.log(this.imagePath)
+        if (this.detector === null) {
+          this.detector = window.$(this.$refs.ResizeDetector)
+        }
+        this.detector.bind('load', () => {
+          console.log('A')
+          this.resizeToFitContent()
+        })
+        
+        this.imagePath = this.status.filePath
+      }
+      return this
+    },
     getSizeOfDetector: function () {
       if (this.detector === null) {
         this.detector = window.$(this.$refs.ResizeDetector)
@@ -28,13 +50,17 @@ module.exports = {
       }
     },
     resizeToFitContent: function () {
+      console.trace('ok aaa')
       setTimeout(() => {
-        let detector = $(this.$refs.ResizeDetector)
-        let width = detector.width()
-        let padding = 15
-        width = width + padding
-        let height = detector.height()
-        height = height + 40 + padding
+        let {width, height} = this.getSizeOfDetector()
+        console.log(width, height)
+        if (width < this.config.minWidthPx) {
+          width = this.config.minWidthPx
+        }
+        if (height < this.config.minHeightPx) {
+          height = this.config.minHeightPx
+        }
+        
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
 import ContentText from './components/ContentText/ContentText.vue'
+import ContentImage from './components/ContentImage/ContentImage.vue'
 const config = require('./config.js')
 require('./styles/global.less')
 
@@ -25,7 +26,8 @@ let VueController = {
   },
   components: { 
     'menu-bar': MenuBar,
-    'content-text': ContentText
+    'content-text': ContentText,
+    'content-image': ContentImage,
   },
   mounted: function () {
     // 基本
@@ -93,7 +95,7 @@ let VueController = {
       if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
         this.status.fileType = 'image'
         this.status.contentText = null
-        //this.status.mainComponent = this.$refs.ContentText
+        this.status.mainComponent = this.$refs.ContentImage
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'code'
