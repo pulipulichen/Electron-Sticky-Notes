@@ -8,36 +8,17 @@ module.exports = {
     let data = {
       padding: 15,
       detector: null,
-      contentText: ''
+      mode: '',
+      modePathList: [],
+      contentText: '',
+      $container: null,
+      $editor: null
     }
     
     this.$i18n.locale = this.config.locale
     return data
   },
   computed: {
-    displayContentText: function () {
-      let contentText = this.contentText
-      return contentText
-    },
-    styleFontSize: function () {
-      return `calc(1rem * ${this.config.fontSizeRatio})`
-    },
-    styleLineHeight: function () {
-      let lineHeight = `calc(1.5rem * ${this.config.fontSizeRatio})`
-      
-      if (this.status.fontSizeAdjustIsEnlarge) {
-        this.resizeIfOverflow()
-      }
-      
-      return lineHeight
-    },
-    detectorText: function () {
-      let detectorText = this.contentText
-      if (detectorText.endsWith('\n')) {
-        detectorText = detectorText + '|'
-      }
-      return detectorText
-    }
   },
   mounted: function () {
     /*
@@ -75,22 +56,87 @@ module.exports = {
     */
    
     setTimeout(() => {
-      this.setupText()
-      this.resizeToFitContent()
+      this.setupCode()
+      //this.resizeToFitContent()
     }, 0)
   },
   methods: {
-    setupText: function () {
+    setupCode: function () {
       //console.log(this.status)
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
-      if (this.status.fileType === 'plain-text'
-              && typeof(this.status.contentText) === 'string' 
-              && this.status.contentText !== '') {
-        this.contentText = this.status.contentText
+      if (this.status.fileType === 'code'
+              && typeof(this.status.filePath) === 'string' 
+              && this.status.filePath !== '') {
+        this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        
+        this.setupMode()
+        this.setupEditor()
+        
+        
         //console.log(this.contentText)
       }
+      return this
+    },
+    setupMode: function () {
+      // https://codemirror.net/mode/
+      let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
+      if (ext === 'css') {
+        this.mode = 'text/css'
+        this.modePathList = ['css/css.js']
+      }
+      else if (ext === 'jsp') {
+        this.mode = 'application/x-jsp'
+        this.modePathList = ['htmlembedded/htmlembedded.js']
+      }
+      else if (ext === 'asp' || ext === 'aspx') {
+        this.mode = 'application/x-jsp'
+        this.modePathList = ['application/x-aspx']
+      }
+      else if (ext === 'html' || ext === 'htm') {
+        this.mode = 'text/html'
+        this.modePathList = ['htmlmixed/htmlmixed.js']
+      }
+      else if (ext === 'java') {
+        this.mode = 'text/x-java'
+        this.modePathList = ['clike/clike.js']
+      }
+      else if (ext === 'js') {
+        this.mode = 'text/javascript'
+        this.modePathList = ['javascript/javascript.js']
+      }
+      else if (ext === 'json') {
+        this.mode = 'text/json'
+        this.modePathList = ['javascript/javascript.js']
+      }
+      else {
+        console.error('尚未設定完成: ' + ext)
+      }
+
+      return this
+    },
+    setupEditor: function () {
+      this.$container = window.$('<div id="ContentCodeContainer"></div>')
+              .css('top', this.config.menuBarHeight + 'px')
+              .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+              .appendTo('body')
+      this.$editor = window.$('<textarea></textarea>')
+              .val(this.contentText)
+              .appendTo(this.$container)
+      
+      this.modePathList.forEach(path => {
+        let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
+        console.log(modeFilePath)
+        //require(modeFilePath)
+      })
+      
+      CodeMirror.fromTextArea(this.$editor[0], {
+        lineNumbers: true,
+        mode: this.modePath,
+        matchBrackets: true
+      })
+      
       return this
     },
     resizeToFitContent: function () {

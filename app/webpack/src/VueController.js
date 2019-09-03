@@ -2,6 +2,7 @@ import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
 import ContentText from './components/ContentText/ContentText.vue'
 import ContentImage from './components/ContentImage/ContentImage.vue'
+import ContentCode from './components/ContentCode/ContentCode.vue'
 const config = require('./config.js')
 require('./styles/global.less')
 
@@ -29,6 +30,7 @@ let VueController = {
     'menu-bar': MenuBar,
     'content-text': ContentText,
     'content-image': ContentImage,
+    'content-code': ContentCode,
   },
   mounted: function () {
     // 基本
@@ -112,7 +114,7 @@ let VueController = {
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'code'
-        //this.status.mainComponent = this.$refs.ContentText
+        this.status.mainComponent = this.$refs.ContentCode
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'plain-text'

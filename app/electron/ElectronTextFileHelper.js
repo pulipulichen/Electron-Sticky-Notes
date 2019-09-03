@@ -57,7 +57,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['css', 'html', 'htm', 'java', 'js', 'json', 'less', 'perl', 'php', 'py', 'r', 'ruby', 'sass', 'scss', 'sql', 'sh', 'vb', 'xml', 'yaml'].indexOf(ext) === -1) {
+    if (['css', 'jsp', 'asp', 'html', 'htm', 'java', 'js', 'json', 'less', 'perl', 'php', 'py', 'r', 'ruby', 'sass', 'scss', 'sql', 'sh', 'vb', 'xml', 'yaml'].indexOf(ext) === -1) {
       return false
     }
 
