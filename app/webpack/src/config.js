@@ -8,6 +8,9 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
+  
+  cacheAliveDay: 1,
+  
   debug: {
     useTestContentText: true,
     useTestImageFile: false,

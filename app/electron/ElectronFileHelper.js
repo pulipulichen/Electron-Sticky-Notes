@@ -378,6 +378,39 @@ let ElectronFileHelper = {
       this.lib.fs.unlinkSync(path)
     }
     return this
+  },
+  getCreateUnixMS: function (path) {
+    if (this.existsSync(path)) {
+      let unixMS = this.lib.fs.statSync(path).birthtime
+      console.log(unixMS)
+      return unixMS
+    }
+    return false
+  },
+  isExpire: function (filePath, aliveDays) {
+    let currentMSTime = (new Date()).getTime()
+    let maxIntervalMS = aliveDays * 1000 * 60 * 60 * 24
+    maxIntervalMS = 1000  // for test
+    let interval = currentMSTime - this.getCreateUnixMS(filePath)
+    //console.log(interval)
+    return (interval > maxIntervalMS)
+  },
+  removeIfExpire: function (filePath, aliveDays) {
+    if (this.isDirSync(filePath)) {
+      this.readDirectory(filePath, (list) => {
+        list.file.forEach(filePath => {
+          if (filePath.endsWith('.gitignore')) {
+            return false
+          }
+          this.removeIfExpire(filePath, aliveDays)
+        })
+      })
+    }
+    else {
+      if (this.isExpire(filePath, aliveDays)) {
+        this.remove(filePath)
+      }
+    }
   }
 }
 

@@ -23,6 +23,9 @@ let DateHelper = {
             + seperator
             + this._pad2( date.getHours() ) 
             + this._pad2( date.getMinutes() ) 
+  },
+  unixMS: function () {
+    return (new Date()).getTime()
   }
 }
 

@@ -655,6 +655,7 @@ module.exports = {
     return {
       header: '',
       beforeMaximizeIsPinTop: this.status.isPinTop,
+      maxIntervalMS: null
     }
   },
   mounted: function () {
@@ -743,18 +744,21 @@ module.exports = {
       return this
     },
     cleanTempFile: function () {
-      console.error('cleanTempFile')
+      //console.error('cleanTempFile')
+      let cacheDirPath = this.lib.ElectronFileHelper.resolve('cache')
+      this.lib.ElectronFileHelper.removeIfExpire(cacheDirPath)
+      return this
     },
     fontSizePlus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = true
-      console.log(this.config.fontSizeRatio)
+      //console.log(this.config.fontSizeRatio)
       return this
     },
     fontSizeMinus: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
-      console.log(this.config.fontSizeRatio)
+      //console.log(this.config.fontSizeRatio)
       return this
     }
   }
@@ -856,6 +860,9 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
+  
+  cacheAliveDay: 1,
+  
   debug: {
     useTestContentText: true,
     useTestImageFile: false,
@@ -897,6 +904,9 @@ let DateHelper = {
             + seperator
             + this._pad2( date.getHours() ) 
             + this._pad2( date.getMinutes() ) 
+  },
+  unixMS: function () {
+    return (new Date()).getTime()
   }
 }
 
