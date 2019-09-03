@@ -4,6 +4,7 @@ module.exports = {
   maxHeight: 0.5,
   maxWidth: 0.5,
   debug: {
-    useTestContentText: true
+    useTestContentText: false,
+    useTestImage: true,
   }
 }

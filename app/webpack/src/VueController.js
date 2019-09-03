@@ -4,7 +4,6 @@ import ContentText from './components/ContentText/ContentText.vue'
 const config = require('./config.js')
 require('./styles/global.less')
 
-
 import i18n from './VueI18n'
 
 let VueController = {
@@ -19,9 +18,7 @@ let VueController = {
       contentText: '',
       filePath: null,
     },
-    lib: {
-      
-    },
+    lib: {},
   },
   components: { 
     'menu-bar': MenuBar,
@@ -29,9 +26,11 @@ let VueController = {
   },
   mounted: function () {
     // 基本
-    this.lib.ElectronHelper = ElectronHelper
-    this.lib.ElectronFileHelper = ElectronFileHelper
-    this.lib.electron = RequireHelper.require('electron')
+    this.lib.ElectronHelper = RequireHelper.require('ElectronHelper')
+    this.lib.ElectronFileHelper = RequireHelper.require('ElectronFileHelper')
+    this.lib.ElectronImageFileHelper = RequireHelper.require('ElectronImageFileHelper')
+    this.lib.ElectronTextFileHelper = RequireHelper.require('ElectronTextFileHelper')
+    this.lib.electron = this.lib.ElectronHelper.getElectron()
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
     this.lib.ipc = this.lib.electron.ipcRenderer
@@ -53,6 +52,11 @@ let VueController = {
     lineNumbers: true
   });
 </script>`
+    }
+    if (this.config.debug.useTestImage === true) {
+      this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+      console.log(this.status.filePath)
+      console.log()
     }
     
     //console.log(this.status.contentText)

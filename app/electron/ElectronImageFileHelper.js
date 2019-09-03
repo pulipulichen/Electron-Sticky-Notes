@@ -1,4 +1,4 @@
-let ElectronTextFileHelper = {
+let ElectronImageFileHelper = {
   inited: false,
   lib: {
     ElectronFileHelper: null,
@@ -13,7 +13,7 @@ let ElectronTextFileHelper = {
     this.inited = true
     return this
   },
-  isTextFile: function (filepath) {
+  isImageFile: function (filepath) {
     this.init()
     
     if (filepath.lastIndexOf('.') === -1) {
@@ -22,7 +22,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['csv', 'txt', 'js', 'css', 'html', 'arff', 'htm', 'md', 'gitignore', 'json'].indexOf(ext) === -1) {
+    if (['png', 'jpg', 'jpeg', 'gif', 'tiff', 'tif', 'svg', 'ico'].indexOf(ext) === -1) {
       return false
     }
 
@@ -41,14 +41,14 @@ let ElectronTextFileHelper = {
     else {
       return false
     }
-    */
+     */
   },
 }
 
 
 if (typeof(window) === 'object') {
-  window.ElectronTextFileHelper = ElectronTextFileHelper
+  window.ElectronImageFileHelper = ElectronImageFileHelper
 }
 if (typeof(module) === 'object') {
-  module.exports = ElectronTextFileHelper
+  module.exports = ElectronImageFileHelper
 }
