@@ -59,9 +59,10 @@ let VueController = {
     _afterMounted: function () {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
-      this.$refs.MenuBar.resetNoteHeader()
       this.setupWindowSizeConfig()
       this.setupFile()
+      
+      this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
     },
@@ -80,7 +81,8 @@ let VueController = {
   </script>`
       }
       if (this.config.debug.useTestImageFile === true) {
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }

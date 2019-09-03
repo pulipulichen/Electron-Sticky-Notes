@@ -67,6 +67,11 @@ module.exports = {
     resetNoteHeader: function () {
       let header = DateHelper.getMMDDHHmm()
       let contenxtText = this.status.contentText
+      if (typeof(this.status.filePath) === 'string') {
+        contenxtText = this.lib.ElectronFileHelper.basename(this.status.filePath)
+      }
+      //console.log(contenxtText)
+      //console.log(this.status.filePath)
       if (typeof(contenxtText) === 'string') {
         if (contenxtText.length > 100) {
           contenxtText = contenxtText.slice(0, 100) + '...'

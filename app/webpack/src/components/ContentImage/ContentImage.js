@@ -73,8 +73,8 @@ module.exports = {
       let id = 'OpenSeadragonContainer'
       this.viewerElement = $('<div class="viewer"></div>')
               .attr('id', id)
-              //.width(this.detector.width())
-              //.height(this.detector.height())
+              .width(this.detector.width())
+              .height(this.detector.height())
               .css('top', this.config.menuBarHeight + 'px')
               .appendTo('body')
       
@@ -93,8 +93,19 @@ module.exports = {
             url:  this.imagePath,
             buildPyramid: false
           },
-        animationTime: 0.5
+        animationTime: 0.5,
       })
+      VIEWER = this.viewer
+      
+      this.viewer.addHandler('tile-loaded', () => {
+        //console.log('ready')
+        this.viewerElement.css('width', '').css('height', '')
+      })
+      
+      //setTimeout(() => {
+      //  this.viewerElement.css('width', undefined).css('height', undefined)
+      //}, 0)
+      
 /*
 <div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
 <script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>

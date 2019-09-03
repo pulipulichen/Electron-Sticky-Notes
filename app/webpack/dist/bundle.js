@@ -230,9 +230,10 @@ let VueController = {
     _afterMounted: function () {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
-      this.$refs.MenuBar.resetNoteHeader()
       this.setupWindowSizeConfig()
       this.setupFile()
+      
+      this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       this.status.isReady = true
     },
@@ -251,7 +252,8 @@ let VueController = {
   </script>`
       }
       if (this.config.debug.useTestImageFile === true) {
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
@@ -485,8 +487,8 @@ module.exports = {
       let id = 'OpenSeadragonContainer'
       this.viewerElement = $('<div class="viewer"></div>')
               .attr('id', id)
-              //.width(this.detector.width())
-              //.height(this.detector.height())
+              .width(this.detector.width())
+              .height(this.detector.height())
               .css('top', this.config.menuBarHeight + 'px')
               .appendTo('body')
       
@@ -505,8 +507,19 @@ module.exports = {
             url:  this.imagePath,
             buildPyramid: false
           },
-        animationTime: 0.5
+        animationTime: 0.5,
       })
+      VIEWER = this.viewer
+      
+      this.viewer.addHandler('tile-loaded', () => {
+        //console.log('ready')
+        this.viewerElement.css('width', '').css('height', '')
+      })
+      
+      //setTimeout(() => {
+      //  this.viewerElement.css('width', undefined).css('height', undefined)
+      //}, 0)
+      
 /*
 <div id="openseadragon1" class="disable-drag" style="width: 800px; height: 600px;"></div>
 <script src="vendors/openseadragon-bin-2.4.1/openseadragon.min.js"></script>
@@ -974,6 +987,11 @@ module.exports = {
     resetNoteHeader: function () {
       let header = DateHelper.getMMDDHHmm()
       let contenxtText = this.status.contentText
+      if (typeof(this.status.filePath) === 'string') {
+        contenxtText = this.lib.ElectronFileHelper.basename(this.status.filePath)
+      }
+      //console.log(contenxtText)
+      //console.log(this.status.filePath)
       if (typeof(contenxtText) === 'string') {
         if (contenxtText.length > 100) {
           contenxtText = contenxtText.slice(0, 100) + '...'
@@ -11269,7 +11287,7 @@ exports.push([module.i, "body {\n  overflow: hidden;\n  -webkit-app-region: drag
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImage/ContentImage.global.less?vue&type=style&index=1&lang=less&","ContentImage.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;EACA,YAAA;EACA,0BAAA;EACA,uBAAA;ACCF","file":"ContentImage.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n"]}]);
+exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImage/ContentImage.global.less?vue&type=style&index=1&lang=less&","ContentImage.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;EACA,YAAA;EACA,0BAAA;EACA,uBAAA;ACCF;ADNA;EAQI,YAAA;EACA,0BAAA;ACCJ","file":"ContentImage.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n  \n  .openseadragon-container {\n    width: 100vw;\n    height: calc(100vh - 40px);\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n"]}]);
 
 
 /***/ }),
