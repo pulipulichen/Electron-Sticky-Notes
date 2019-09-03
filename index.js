@@ -12,9 +12,10 @@ const {
 } = electron
 
 const ProcessArgvHelper = require('./electron-shell/ProcessArgvHelper.js')
+const ClipboardHelper = require('./electron-shell/ClipboardHelper.js')
 
-let filePathList = ProcessArgvHelper.getFilePaths()
-//console.log(filePathList)
+let filePathList = ProcessArgvHelper.getFilePaths().concat(ClipboardHelper.getFilePaths())
+console.log(filePathList)
 
 // ------------
 

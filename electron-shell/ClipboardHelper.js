@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const {clipboard} = require('electron')
+const iconv = require('iconv-lite')
 
 let ClipboardHelper = {
   getFilePaths: function () {
@@ -11,9 +12,19 @@ let ClipboardHelper = {
       filepaths.push(clipboardText)
     }
 
-    let clipboardRawFilePath = clipboard.read('FileNameW');
-    //console.log(clipboardRawFilePath)
+    /*
+    let clipboardRawFilePath = clipboard.read('FileNameW')
+    clipboardRawFilePath = iconv.decode(clipboardRawFilePath, 'Big5')
+    console.log(clipboardRawFilePath)
     let clipboardFilePath = clipboardRawFilePath.replace(new RegExp(String.fromCharCode(0), 'g'), '')
+    clipboardFilePath = iconv.decode(clipboardFilePath, 'Big5')
+    console.log(clipboardFilePath)
+     */
+    
+    // https://www.jianshu.com/p/03884484023f
+    const rawFilePath = clipboard.readBuffer('FileNameW').toString('ucs2')
+    let clipboardFilePath = rawFilePath.replace(new RegExp(String.fromCharCode(0), 'g'), '')
+    
     if (fs.existsSync(clipboardFilePath)) {
       filepaths.push(path.resolve(clipboardFilePath))
     }
