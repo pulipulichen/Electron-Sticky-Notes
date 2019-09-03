@@ -1,3 +1,5 @@
+@menu-height: 40px;
+
 .top-toggle {
   i {
     opacity: 0.3 !important;
@@ -41,4 +43,9 @@
 
 .item.fitted {
   padding: 0 0.5rem !important;
+}
+
+.menu.visible {
+  max-height: calc(100vh - @menu-height);
+  overflow-y: auto;
 }

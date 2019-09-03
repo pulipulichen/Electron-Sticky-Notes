@@ -13,6 +13,7 @@
 
 
   <div class="right menu">
+    <!--
     <a class="fitted item"
       v-on:click="openFolder()"
       v-if="typeof(status.filePath) === 'string'">
@@ -22,14 +23,62 @@
       v-on:click="openEditor()">
       <i class="edit icon"></i>
     </a>
+    -->
+    <a class="fitted ui dropdown icon item" ref="Submenu">
+      <i class="bars icon"></i>
+      <div class="menu">
+        <div class="item">
+          <!--
+          <i class="text height icon"></i>
+          Font size
+          -->
+          <div class="ui grid">
+            <div class="five wide column"
+                 v-on:click="fontSizeMinus()">
+              <i class="minus square icon"></i>
+            </div>
+            <div class="six wide column">
+              <i class="text height icon"></i>
+              Font size
+            </div>
+            <div class="five wide column"
+                 v-on:click="fontSizePlus()">
+              <i class="plus square icon"></i> 
+            </div>
+          </div>
+        </div>
+        <div class="item"
+             v-on:click="resizeToFitContent()">
+          <i class="compress icon"></i>
+          Resize to fit content
+        </div>
+        
+        <!-- ====================== -->
+        <div class="divider"></div>
+        
+        <div class="item"
+             v-on:click="openFolder()"
+             v-if="typeof(status.filePath) === 'string'">
+          <i class="folder open outline icon icon"></i>
+          Open folder...
+        </div>
+        <div class="item"
+             v-on:click="openEditor()">
+          <i class="edit icon"></i>
+          Open in editor...
+        </div>
+      </div>
+    </a>
     <a class="fitted item"
       v-on:click="minimize()">
       <i class="window minimize icon"></i>
     </a>
+    <!--
     <a class="fitted item"
        v-on:click="resizeToFitContent()">
        <i class="compress icon"></i>
     </a>
+    -->
     <a class="fitted item"
        v-on:click="maximize()"
        v-if="(status.isMaximized === false)">

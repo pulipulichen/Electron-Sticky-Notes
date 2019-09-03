@@ -43,32 +43,7 @@ let VueController = {
       this.status.contentText = this.lib.win.contentText
     }
     
-    if (this.config.debug.useTestContentText === true) {
-      this.status.contentText = `<!-- Create a simple CodeMirror instance -->
-<link rel="stylesheet" href="lib/codemirror.css">
-<script src="lib/codemirror.js"></script>
-<script>
-  var editor = CodeMirror.fromTextArea(myTextarea, {
-    lineNumbers: true
-  });
-</script>`
-    }
-    if (this.config.debug.useTestImage === true) {
-      this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
-      //console.log(this.status.filePath)
-      //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
-    }
     
-    if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
-      this.status.fileType = 'image'
-      this.status.contentText = null
-    }
-    else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
-      this.status.fileType = 'code'
-    }
-    else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
-      this.status.fileType = 'plain-text'
-    }
     
     //console.log(this.status.contentText)
     
@@ -82,8 +57,41 @@ let VueController = {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
       this.$refs.MenuBar.resetNoteHeader()
+      this.setupFile()
       //console.log('OK')
       this.status.isReady = true
+    },
+    setupFile: function () {
+      if (this.config.debug.useTestContentText === true) {
+        this.status.contentText = `<!-- Create a simple CodeMirror instance -->
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <script src="lib/codemirror.js"></script>
+  <script>
+    var editor = CodeMirror.fromTextArea(myTextarea, {
+      lineNumbers: true
+    });
+  </script>`
+      }
+      if (this.config.debug.useTestImage === true) {
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+
+      if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
+        this.status.fileType = 'image'
+        this.status.contentText = null
+      }
+      else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
+        this.status.fileType = 'code'
+      }
+      else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
+        this.status.fileType = 'plain-text'
+      }
+    },
+    setupWindowSizeConfig: function () {
+      this.config.maxHeight = Math.floor(screen.availHeight * this.config.maxHeightRatio)
+      this.config.maxWidth = Math.floor(screen.availWidth * this.config.maxWidthRatio)
     },
     a: function () {
       // for test

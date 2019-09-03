@@ -10,6 +10,9 @@ module.exports = {
       beforeMaximizeIsPinTop: this.status.isPinTop,
     }
   },
+  mounted: function () {
+    window.$(this.$refs.Submenu).dropdown()
+  },
   methods: {
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {
@@ -42,7 +45,7 @@ module.exports = {
     },
     resizeToFitContent: function () {
       this.$parent.$refs.ContentText.resizeToFitContent()
-      return
+      return this
     },
     close: function () {
       this.lib.win.close()
@@ -74,9 +77,19 @@ module.exports = {
     },
     openFolder: function () {
       console.error('openFolder')
+      return this
     },
     openEdtior: function () {
       console.error('openEdtior')
+      return this
+    },
+    fontSizePlus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
+      return this
+    },
+    fontSizeMinus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
+      return this
     }
   }
 }

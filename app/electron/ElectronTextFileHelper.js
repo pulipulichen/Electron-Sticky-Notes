@@ -16,7 +16,8 @@ let ElectronTextFileHelper = {
   isTextFile: function (filepath) {
     this.init()
     
-    if (filepath.lastIndexOf('.') === -1) {
+    if (typeof(filepath) !== 'string' 
+            || filepath.lastIndexOf('.') === -1) {
       return false
     }
 
@@ -49,7 +50,8 @@ let ElectronTextFileHelper = {
     // https://www.cs.princeton.edu/~dp6/CodeMirror/mode/index.html
     this.init()
     
-    if (filepath.lastIndexOf('.') === -1) {
+    if (typeof(filepath) !== 'string' 
+            || filepath.lastIndexOf('.') === -1) {
       return false
     }
 

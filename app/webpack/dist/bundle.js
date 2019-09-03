@@ -213,32 +213,7 @@ let VueController = {
       this.status.contentText = this.lib.win.contentText
     }
     
-    if (this.config.debug.useTestContentText === true) {
-      this.status.contentText = `<!-- Create a simple CodeMirror instance -->
-<link rel="stylesheet" href="lib/codemirror.css">
-<script src="lib/codemirror.js"></script>
-<script>
-  var editor = CodeMirror.fromTextArea(myTextarea, {
-    lineNumbers: true
-  });
-</script>`
-    }
-    if (this.config.debug.useTestImage === true) {
-      this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
-      //console.log(this.status.filePath)
-      //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
-    }
     
-    if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
-      this.status.fileType = 'image'
-      this.status.contentText = null
-    }
-    else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
-      this.status.fileType = 'code'
-    }
-    else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
-      this.status.fileType = 'plain-text'
-    }
     
     //console.log(this.status.contentText)
     
@@ -252,8 +227,41 @@ let VueController = {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
       this.$refs.MenuBar.resetNoteHeader()
+      this.setupFile()
       //console.log('OK')
       this.status.isReady = true
+    },
+    setupFile: function () {
+      if (this.config.debug.useTestContentText === true) {
+        this.status.contentText = `<!-- Create a simple CodeMirror instance -->
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <script src="lib/codemirror.js"></script>
+  <script>
+    var editor = CodeMirror.fromTextArea(myTextarea, {
+      lineNumbers: true
+    });
+  </script>`
+      }
+      if (this.config.debug.useTestImage === true) {
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+
+      if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
+        this.status.fileType = 'image'
+        this.status.contentText = null
+      }
+      else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
+        this.status.fileType = 'code'
+      }
+      else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
+        this.status.fileType = 'plain-text'
+      }
+    },
+    setupWindowSizeConfig: function () {
+      this.config.maxHeight = Math.floor(screen.availHeight * this.config.maxHeightRatio)
+      this.config.maxWidth = Math.floor(screen.availWidth * this.config.maxWidthRatio)
     },
     a: function () {
       // for test
@@ -306,7 +314,7 @@ const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /***/ (function(module, exports, __webpack_require__) {
 
 const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
-window.jQuery = $
+window.jQuery = window.$ = $
 
 __webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
 __webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
@@ -368,7 +376,8 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale
     return {
-      
+      padding: 15,
+      detector: null
     }
   },
   computed: {
@@ -390,22 +399,15 @@ module.exports = {
     this.resizeToFitContent()
   },
   methods: {
-    getMaxHeight: function () {
-      let height = screen.availHeight * this.config.maxHeight
-      //console.log(height)
-      return height
-    },
-    getMaxWidth: function () {
-      return screen.availWidth * this.config.maxWidth
-    },
     resizeToFitContent: function () {
       setTimeout(() => {
-        let detector = $(this.$refs.ResizeDetector)
-        let width = detector.width()
-        let padding = 15
-        width = width + padding
-        let height = detector.height()
-        height = height + 40 + padding
+        if (this.detector === null) {
+          this.detector = $(this.$refs.ResizeDetector)
+        }
+        let width = this.detector.width()
+        width = width + this.padding
+        let height = this.detector.height()
+        height = height + this.config.menuBarHeight + this.padding
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
@@ -545,6 +547,9 @@ module.exports = {
       beforeMaximizeIsPinTop: this.status.isPinTop,
     }
   },
+  mounted: function () {
+    window.$(this.$refs.Submenu).dropdown()
+  },
   methods: {
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {
@@ -577,7 +582,7 @@ module.exports = {
     },
     resizeToFitContent: function () {
       this.$parent.$refs.ContentText.resizeToFitContent()
-      return
+      return this
     },
     close: function () {
       this.lib.win.close()
@@ -609,9 +614,19 @@ module.exports = {
     },
     openFolder: function () {
       console.error('openFolder')
+      return this
     },
     openEdtior: function () {
       console.error('openEdtior')
+      return this
+    },
+    fontSizePlus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
+      return this
+    },
+    fontSizeMinus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
+      return this
     }
   }
 }
@@ -705,11 +720,14 @@ component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
 module.exports = {
   locale: 'zh-TW',
   theme: 'yellow',
-  maxHeight: 0.5,
-  maxWidth: 0.5,
+  maxHeightRatio: 0.7,
+  maxWidthRatio: 0.5,
+  menuBarHeight: 40,
+  fontSizeRatio: 1,
+  fontSizeAdjustInterval: 0.2,
   debug: {
-    useTestContentText: false,
-    useTestImage: true,
+    useTestContentText: true,
+    useTestImage: false,
   }
 }
 
@@ -10825,7 +10843,7 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder[data-v-0c5ef76e] {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAAA;EAEI,uBAAA;ACAJ;ADIE;EAIE,kCAAA;ACLJ;ADCE;EAEI,uBAAA;ACAN;ADMA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACJF;ADME;EACE,8BAAA;ACJJ;ADQA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACNF;ADSA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACRF;ADWA;EACE,4BAAA;ACTF","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":[".top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n  \n  &.has-open-folder {\n    max-width: calc(100vw - 18rem);\n  }\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder[data-v-0c5ef76e] {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADQE;EACE,8BAAA;ACNJ;ADUA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACRF;ADWA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACVF;ADaA;EACE,4BAAA;ACXF;ADcA;EACE,8BAAA;EACA,gBAAA;ACZF","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n  \n  &.has-open-folder {\n    max-width: calc(100vw - 18rem);\n  }\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n}\n"]}]);
 
 
 /***/ }),
@@ -10852,8 +10870,8 @@ var render = function() {
         ref: "ResizeDetector",
         staticClass: "content-text resize-detector",
         style: {
-          maxWidth: _vm.getMaxWidth() + "px",
-          maxHeight: _vm.getMaxHeight() + "px"
+          maxWidth: _vm.config.maxWidth + "px",
+          maxHeight: _vm.config.maxHeight + "px"
         }
       },
       [_vm._v(_vm._s(_vm.status.contentText))]
@@ -10928,33 +10946,95 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "right menu" }, [
-      typeof _vm.status.filePath === "string"
-        ? _c(
-            "a",
+      _c("a", { ref: "Submenu", staticClass: "fitted ui dropdown icon item" }, [
+        _c("i", { staticClass: "bars icon" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "menu" }, [
+          _c("div", { staticClass: "item" }, [
+            _c("div", { staticClass: "ui grid" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "five wide column",
+                  on: {
+                    click: function($event) {
+                      return _vm.fontSizeMinus()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "minus square icon" })]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "five wide column",
+                  on: {
+                    click: function($event) {
+                      return _vm.fontSizePlus()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "plus square icon" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
             {
-              staticClass: "fitted item",
+              staticClass: "item",
               on: {
                 click: function($event) {
-                  return _vm.openFolder()
+                  return _vm.resizeToFitContent()
                 }
               }
             },
-            [_c("i", { staticClass: "folder open outline icon" })]
+            [
+              _c("i", { staticClass: "compress icon" }),
+              _vm._v("\n          Resize to fit content\n        ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "divider" }),
+          _vm._v(" "),
+          typeof _vm.status.filePath === "string"
+            ? _c(
+                "div",
+                {
+                  staticClass: "item",
+                  on: {
+                    click: function($event) {
+                      return _vm.openFolder()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "folder open outline icon icon" }),
+                  _vm._v("\n          Open folder...\n        ")
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "item",
+              on: {
+                click: function($event) {
+                  return _vm.openEditor()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "edit icon" }),
+              _vm._v("\n          Open in editor...\n        ")
+            ]
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "fitted item",
-          on: {
-            click: function($event) {
-              return _vm.openEditor()
-            }
-          }
-        },
-        [_c("i", { staticClass: "edit icon" })]
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "a",
@@ -10967,19 +11047,6 @@ var render = function() {
           }
         },
         [_c("i", { staticClass: "window minimize icon" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "fitted item",
-          on: {
-            click: function($event) {
-              return _vm.resizeToFitContent()
-            }
-          }
-        },
-        [_c("i", { staticClass: "compress icon" })]
       ),
       _vm._v(" "),
       _vm.status.isMaximized === false
@@ -11027,7 +11094,17 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "six wide column" }, [
+      _c("i", { staticClass: "text height icon" }),
+      _vm._v("\n              Font size\n            ")
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -16,7 +16,8 @@ let ElectronImageFileHelper = {
   isImageFile: function (filepath) {
     this.init()
     
-    if (filepath.lastIndexOf('.') === -1) {
+    if (typeof(filepath) !== 'string' 
+            || filepath.lastIndexOf('.') === -1) {
       return false
     }
 

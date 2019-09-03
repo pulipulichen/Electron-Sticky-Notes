@@ -1,10 +1,13 @@
 module.exports = {
   locale: 'zh-TW',
   theme: 'yellow',
-  maxHeight: 0.5,
-  maxWidth: 0.5,
+  maxHeightRatio: 0.7,
+  maxWidthRatio: 0.5,
+  menuBarHeight: 40,
+  fontSizeRatio: 1,
+  fontSizeAdjustInterval: 0.2,
   debug: {
-    useTestContentText: false,
-    useTestImage: true,
+    useTestContentText: true,
+    useTestImage: false,
   }
 }
