@@ -1,6 +1,7 @@
 //const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
 //window.CodeMirror = CodeMirror
 require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
+const createCSSSelector = require('../../vendors/css-rule-builder/css-rule-builder.js')
 const DateHelper = require('../../helpers/DateHelper')
 
 module.exports = {
@@ -13,50 +14,42 @@ module.exports = {
       modePathList: [],
       contentText: '',
       $container: null,
-      $editor: null
+      $editor: null,
+      codeMirrorEditor: null,
+      $CodeMirror: null,
+      styleSheet: null
     }
     
     this.$i18n.locale = this.config.locale
     return data
   },
+  watch: {
+    'config.fontSizeRatio': function () {
+      //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
+      //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
+      if (this.$CodeMirror === null || this.$CodeMirror === undefined) {
+        this.$CodeMirror = window.$('.CodeMirror:first')
+        //console.log(this.$CodeMirror.length)
+        if (this.$CodeMirror.length === 1) {
+        }
+        else {
+          this.$CodeMirror = null
+        }
+      }
+      
+      if (this.$CodeMirror !== null) {
+        this.$CodeMirror.css('font-size', `calc(1rem * ${this.config.fontSizeRatio})`)
+                  .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
+        this.codeMirrorEditor.refresh()
+      }
+    }
+  },
   computed: {
   },
   mounted: function () {
-    /*
-    let c = $('<div></div>')
-            .css({
-              position: 'absolute',
-              top: '40px'
-            }).appendTo('body')
-    
-    let t = $('<textarea></textarea>')
-            .val(`<!-- Create a simple CodeMirror instance -->
-  <link rel="stylesheet" href="lib/codemirror.css">
-  <script src="lib/codemirror.js"></script>
-  <script>
-    var editor = CodeMirror.fromTextArea(myTextarea, {
-      lineNumbers: true
-    });
-  </script>`)
-            .appendTo(c)
-    
-    CodeMirror.fromTextArea(t[0], {
-      lineNumbers: true,
-      mode: "text/html",
-      matchBrackets: true
-    })
-    */
-    /*
-    setTimeout(() => {
-      CodeMirror.fromTextArea(document.getElementById('Textarea'), {
-        lineNumbers: true,
-        mode: "text/html",
-        matchBrackets: true
-      })
-    }, 0)
-    */
    
     setTimeout(() => {
+      //this.setupStyle()
       this.setupCode()
       //this.resizeToFitContent()
     }, 0)
@@ -159,11 +152,14 @@ module.exports = {
           })
         }
         else {
-          CodeMirror.fromTextArea(this.$editor[0], {
-            lineNumbers: true,
+          this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: false,
             mode: this.mode,
             matchBrackets: true
           })
+          
+          //window.$('.CodeMirror-scroll').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+          window.$('.CodeMirror:first').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
           
           this.resizeToFitContent()
         }

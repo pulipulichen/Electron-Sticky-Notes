@@ -15,7 +15,10 @@ module.exports = {
   },
   computed: {
     enableFontSizeControl: function () {
-      return (['code', 'plain-text'].indexOf(this.status.fileType) > -1)
+      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+    },
+    enableSaveFile: function () {
+      return this.enableFontSizeControl
     }
   },
   mounted: function () {
@@ -165,6 +168,14 @@ module.exports = {
         clearTimeout(this.draggableTimer)
         this.draggableTimer = false
       }
+      return this
+    },
+    saveFile: function () {
+      console.log('saveFile')
+      return this
+    },
+    saveFileAs: function () {
+      console.log('saveFileAs')
       return this
     }
   }
