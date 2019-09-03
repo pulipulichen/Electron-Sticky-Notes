@@ -10868,7 +10868,7 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder[data-v-0c5ef76e] {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-minus[data-v-0c5ef76e] {\n  text-align: left;\n  padding-left: 0 !important;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n}\n.font-size-controll-panel .font-size-plus[data-v-0c5ef76e] {\n  text-align: right;\n  padding-right: 0 !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADQE;EACE,8BAAA;ACNJ;ADUA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACRF;ADWA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACVF;ADaA;EACE,4BAAA;ACXF;ADcA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACZF;ADeA;EAEI,gBAAA;EACA,0BAAA;ACdJ;ADWA;EAOI,kBAAA;ACfJ;ADQA;EAWI,iBAAA;EACA,2BAAA;AChBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n  \n  &.has-open-folder {\n    max-width: calc(100vw - 18rem);\n  }\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    text-align: left;\n    padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n  }\n  \n  .font-size-plus {\n    text-align: right;\n    padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-minus {\n  text-align: left;\n  padding-left: 0 !important;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n}\n.font-size-controll-panel .font-size-plus {\n  text-align: right;\n  padding-right: 0 !important;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n.item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder[data-v-0c5ef76e] {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wBAAA;ACNF;ADQE;EACE,8BAAA;ACNJ;ADUA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACRF;ADWA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACVF;ADaA;EACE,4BAAA;ACXF;ADcA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACZF;ADeA;EAOI,kBAAA;EACA,mBAAA;ACnBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n  \n  &.has-open-folder {\n    max-width: calc(100vw - 18rem);\n  }\n}\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-controll-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n.item.note-header {\n  font-family: Noto Sans CJK TC;\n  max-width: calc(100vw - 16rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  -webkit-app-region: drag;\n}\n.item.note-header.has-open-folder {\n  max-width: calc(100vw - 18rem);\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-controll-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
 
 
 /***/ }),
@@ -10984,7 +10984,7 @@ var render = function() {
             _c("i", { staticClass: "ellipsis vertical icon" }),
             _vm._v(" "),
             _c("div", { staticClass: "menu" }, [
-              _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "header" }, [
                 _c("div", { staticClass: "ui grid font-size-controll-panel" }, [
                   _c(
                     "div",
@@ -10996,10 +10996,10 @@ var render = function() {
                         }
                       }
                     },
-                    [_c("i", { staticClass: "minus square icon" })]
+                    [_vm._m(0)]
                   ),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -11011,7 +11011,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_c("i", { staticClass: "plus square icon" })]
+                    [_vm._m(2)]
                   )
                 ])
               ]),
@@ -11135,10 +11135,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "ui icon mini compact left floated button",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "minus icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "ten wide column font-size-label" }, [
       _c("i", { staticClass: "text height icon" }),
       _vm._v("\n              Font size\n            ")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "ui icon mini compact right floated  button",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "plus icon" })]
+    )
   }
 ]
 render._withStripped = true

@@ -27,7 +27,7 @@
     <a class="fitted ui dropdown icon item" ref="Submenu">
       <i class="ellipsis vertical icon"></i>
       <div class="menu">
-        <div class="item">
+        <div class="header">
           <!--
           <i class="text height icon"></i>
           Font size
@@ -35,7 +35,9 @@
           <div class="ui grid font-size-controll-panel">
             <div class="three wide column font-size-minus"
                  v-on:click="fontSizeMinus()">
-              <i class="minus square icon"></i>
+              <button type="button" class="ui icon mini compact left floated button">
+                <i class="minus icon"></i>
+              </button>
             </div>
             <div class="ten wide column font-size-label">
               <i class="text height icon"></i>
@@ -43,7 +45,9 @@
             </div>
             <div class="three wide column font-size-plus"
                  v-on:click="fontSizePlus()">
-              <i class="plus square icon"></i> 
+              <button type="button" class="ui icon mini compact right floated  button">
+                <i class="plus icon"></i>
+              </button>
             </div>
           </div>
         </div>
