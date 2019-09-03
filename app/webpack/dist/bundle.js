@@ -265,8 +265,8 @@ let VueController = {
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
       if (this.config.debug.useTestCodeFile === true) {
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/postcss.config.js')
-        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/newhtml.html')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/postcss.config.js')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/newhtml.html')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
@@ -529,7 +529,12 @@ module.exports = {
       }
       else if (ext === 'html' || ext === 'htm') {
         this.mode = 'text/html'
-        this.modePathList = ['htmlmixed/htmlmixed.js']
+        this.modePathList = [
+          'css/css.js',
+          'xml/xml.js',
+          'javascript/javascript.js',
+          'htmlmixed/htmlmixed.js'
+        ]
       }
       else if (ext === 'java') {
         this.mode = 'text/x-java'
@@ -572,37 +577,46 @@ module.exports = {
       })
       */
      
-      /*
+      let $ = window.$
       let loop = (i) => {
         if (i < this.modePathList.length) {
           let modePath = this.modePathList[i]
           modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
-          console.log(modePath)
-          $(`<script src="${modePath}"></script>`).appendTo('head')
+          //console.log(modePath)
+          //$(`<script src="${modePath}"></script>`).appendTo('head')
           //window.$.getScript(modePath, () => {
+          $.getScript(modePath, () => {
             i++
             loop(i)
-          //})
+          })
         }
         else {
-          console.log(this.mode)
-          setTimeout(() => {
-            window.CodeMirror.fromTextArea(this.$editor[0], {
-              lineNumbers: true,
-              mode: this.mode,
-              matchBrackets: true
-            })
-          }, 3000)
+          CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: true,
+            mode: this.mode,
+            matchBrackets: true
+          })
         }
       }
       
-      loop(0)
-      */
-      CodeMirror.fromTextArea(this.$editor[0], {
-        lineNumbers: true,
-        mode: 'text/javascript',
-        matchBrackets: true
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        loop(0)
       })
+      
+      /*
+      let $ = window.$
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        $.getScript('webpack/src/vendors/codemirror-5.48.4/mode/javascript/javascript.js', () => {
+          CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: true,
+            mode: 'text/javascript',
+            matchBrackets: true
+          })
+        })
+      })
+       */
+     
+          
       
       return this
     },

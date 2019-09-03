@@ -12,7 +12,7 @@
   */
   
   mod(window.CodeMirror);
-  console.log('ok')
+  //console.log('ok')
   
 })(function(CodeMirror) {
 "use strict";

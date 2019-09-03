@@ -2,6 +2,7 @@
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 (function(mod) {
+  /*
   if (typeof exports == "object" && typeof module == "object") {// CommonJS 
     //console.log(1);
     mod(require("../../lib/codemirror")); 
@@ -14,11 +15,11 @@
     //console.log(3);
     mod(window.CodeMirror); 
   }
-  
-  /*
-  mod(window.CodeMirror);
-  console.log('ok')
   */
+  
+  
+  mod(window.CodeMirror);
+  //console.log('ok')
 })(function(CodeMirror) {
   "use strict";
 
