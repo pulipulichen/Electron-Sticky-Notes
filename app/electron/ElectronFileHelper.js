@@ -35,7 +35,7 @@ let ElectronFileHelper = {
     
     let ext
     if (typeof(filepath) === 'string') {
-      ext = filepath.slice(filepath.lastIndexOf('.') + 1)
+      ext = filepath.slice(filepath.lastIndexOf('.') + 1).toLowerCase()
     }
     return ext
   },

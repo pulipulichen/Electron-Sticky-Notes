@@ -22,7 +22,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['csv', 'txt', 'js', 'css', 'html', 'arff', 'htm', 'md', 'gitignore', 'json'].indexOf(ext) === -1) {
+    if (['csv', 'txt', 'arff', 'md', 'gitignore'].indexOf(ext) === -1) {
       return false
     }
 
@@ -33,6 +33,40 @@ let ElectronTextFileHelper = {
 
     let fileTypeResult = this.lib.ElectronFileHelper.getFileType(filepath)
     console.error(['Please check file type: ', fileTypeResult, ext])
+    return true
+    /*
+    if ( (fileTypeResult === undefined && ext === 'csv')
+            || (fileTypeResult === undefined && ext === 'arff') ) {
+      return true
+    }
+    else {
+      return false
+    }
+    */
+  },
+  isCodeFile: function (filepath) {
+    // CodeMirror support list
+    // https://www.cs.princeton.edu/~dp6/CodeMirror/mode/index.html
+    this.init()
+    
+    if (filepath.lastIndexOf('.') === -1) {
+      return false
+    }
+
+    //console.log(filepath)
+    let ext = this.lib.ElectronFileHelper.getExt(filepath)
+    if (['css', 'html', 'htm', 'java', 'js', 'json', 'less', 'perl', 'php', 'py', 'r', 'ruby', 'sass', 'scss', 'sql', 'sh', 'vb', 'xml', 'yaml'].indexOf(ext) === -1) {
+      return false
+    }
+
+    //console.log(filepath)
+    if (this.lib.ElectronFileHelper.existsSync(filepath) === false) {
+      return false
+    }
+
+    let fileTypeResult = this.lib.ElectronFileHelper.getFileType(filepath)
+    console.error(['Please check file type: ', fileTypeResult, ext])
+    return true
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff') ) {

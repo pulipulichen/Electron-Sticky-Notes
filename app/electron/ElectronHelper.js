@@ -227,10 +227,10 @@ let ElectronHelper = {
   },
   openURL: function (url) {
     this.init()
-    
     this.lib.shell.openExternal(url);
   },
   getElectron: function () {
+    this.init()
     return this.lib.electron
   }
 }

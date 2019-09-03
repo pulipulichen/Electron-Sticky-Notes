@@ -55,8 +55,19 @@ let VueController = {
     }
     if (this.config.debug.useTestImage === true) {
       this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
-      console.log(this.status.filePath)
-      console.log()
+      //console.log(this.status.filePath)
+      //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+    }
+    
+    if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
+      this.status.fileType = 'image'
+      this.status.contentText = null
+    }
+    else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
+      this.status.fileType = 'code'
+    }
+    else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
+      this.status.fileType = 'plain-text'
     }
     
     //console.log(this.status.contentText)
@@ -75,6 +86,7 @@ let VueController = {
       this.status.isReady = true
     },
     a: function () {
+      // for test
       return 'AAA'
     }
   } // methods: {
