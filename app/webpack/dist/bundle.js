@@ -169,7 +169,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ContentText_ContentText_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ContentText/ContentText.vue */ "./app/webpack/src/components/ContentText/ContentText.vue");
 /* harmony import */ var _components_ContentImage_ContentImage_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ContentImage/ContentImage.vue */ "./app/webpack/src/components/ContentImage/ContentImage.vue");
 /* harmony import */ var _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ContentCode/ContentCode.vue */ "./app/webpack/src/components/ContentCode/ContentCode.vue");
-/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
+/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-fragment */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-fragment\\dist\\vue-fragment.esm.js");
+/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
 
 
 
@@ -179,10 +180,13 @@ const config = __webpack_require__(/*! ./config.js */ "./app/webpack/src/config.
 __webpack_require__(/*! ./styles/global.less */ "./app/webpack/src/styles/global.less")
 
 
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_MODULE_5__["default"].Plugin)
+
+
 
 let VueController = {
   el: '#app',
-  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_5__["default"],
+  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_6__["default"],
   data: {
     config: config,
     status: {
@@ -703,6 +707,12 @@ module.exports = {
       this.lib.ElectronFileHelper.writeFileSync(filepath, content)
       
       return filepath
+    },
+    getContent: function () {
+      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
+        return ''
+      }
+      return this.codeMirrorEditor.getValue()
     }
   }
 }
@@ -1232,6 +1242,9 @@ module.exports = {
       this.lib.ElectronFileHelper.writeFileSync(filepath, content)
       
       return filepath
+    },
+    getContent: function () {
+      return this.contentText
     }
   }
 }
@@ -1357,6 +1370,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
+const SubmenuSize = __webpack_require__(/*! ./SubmenuSize/SubmenuSize.vue */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue")
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -1370,6 +1384,9 @@ module.exports = {
       $NoteHeader: null,
       draggableTimer: false
     }
+  },
+  components: { 
+    'submenu-size': SubmenuSize
   },
   computed: {
     enableFontSizeControl: function () {
@@ -1615,6 +1632,163 @@ if (typeof _MenuBar_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "app/webpack/src/components/MenuBar/MenuBar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true&":
+/*!********************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js&?23d2":
+/*!************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+module.exports = {
+  props: ['lib', 'status', 'config'],
+  data() {    
+    this.$i18n.locale = this.config.locale
+    //console.log(this.$parent.a())
+    return {
+    }
+  },
+  computed: {
+    enableFontSizeControl: function () {
+      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+    },
+  },
+  //mounted: function () {
+  //},
+  methods: {
+    resizeToFitContent: function () {
+      //this.$parent.$refs.ContentText.resizeToFitContent()
+      this.status.mainComponent.resizeToFitContent()
+      return this
+    },
+    fontSizePlus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = true
+      //console.log(this.config.fontSizeRatio)
+      return this
+    },
+    fontSizeMinus: function () {
+      this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
+      this.status.fontSizeAdjustIsEnlarge = false
+      //console.log(this.config.fontSizeRatio)
+      return this
+    },
+  }
+}
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js&?5c20":
+/*!************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./SubmenuSize.js?vue&type=script&lang=js& */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js&?23d2");
+/* harmony import */ var _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue":
+/*!************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true& */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true&");
+/* harmony import */ var _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubmenuSize.js?vue&type=script&lang=js& */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.js?vue&type=script&lang=js&?5c20");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _SubmenuSize_less_vue_type_style_index_0_id_5d413a66_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
+/* harmony import */ var _SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _SubmenuSize_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SubmenuSize_html_vue_type_template_id_5d413a66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5d413a66",
+  null
+  
+)
+
+/* custom blocks */
+
+if (typeof _SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_4__["default"] === 'function') Object(_SubmenuSize_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuSize_5CSubmenuSize_vue__WEBPACK_IMPORTED_MODULE_4__["default"])(component)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
@@ -2064,6 +2238,22 @@ module.exports = function (Component) {
 
 /***/ }),
 
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuSize%5CSubmenuSize.vue ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push('{"en":{"Title":"Example Title"},"zh-TW":{"Title":"範例標題"}}')
+  delete Component.options._Ctor
+}
+
+
+/***/ }),
+
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css":
 /*!*********************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css ***!
@@ -2195,7 +2385,21 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ACRF;ADaA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACXF;ADcA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACbF;ADgBA;EACE,4BAAA;ACdF;ADiBA;EACE,8BAAA;EACA,gBAAA;EACA,kBAAA;ACfF;ADkBA;EAOI,kBAAA;EACA,mBAAA;ACtBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  //-webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  max-height: calc(100vh - 40px);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ACRF;ADaA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACXF;ADcA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACbF;ADgBA;EACE,4BAAA;ACdF;ADiBA;EAEE,gBAAA;EACA,kBAAA;AChBF;ADmBA;EAOI,kBAAA;EACA,mBAAA;ACvBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["//@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  //-webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  //max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a66] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","SubmenuSize.less"],"names":[],"mappings":"AAAA;EAOI,kBAAA;EACA,mBAAA;ACLJ","file":"SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","sourcesContent":[".font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
 
 
 /***/ }),
@@ -2389,202 +2593,209 @@ var render = function() {
         [_vm._v("\n    " + _vm._s(_vm.header) + "\n  ")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "right menu" }, [
-        _c(
-          "a",
-          {
-            ref: "Submenu",
-            staticClass: "ui dropdown icon item menu-bar-submenu"
-          },
-          [
-            _c("i", { staticClass: "ellipsis vertical icon" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "menu" }, [
-              _vm.enableFontSizeControl
-                ? _c("div", { staticClass: "header" }, [
-                    _c(
+      _c(
+        "div",
+        {
+          staticClass: "right menu",
+          style: { maxHeight: "calc(100vh - " + _vm.config.menuBarHeight + ")" }
+        },
+        [
+          _c(
+            "a",
+            {
+              ref: "Submenu",
+              staticClass: "ui dropdown icon item menu-bar-submenu"
+            },
+            [
+              _c("i", { staticClass: "ellipsis vertical icon" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "menu" }, [
+                _vm.enableFontSizeControl
+                  ? _c("div", { staticClass: "header" }, [
+                      _c(
+                        "div",
+                        { staticClass: "ui grid font-size-control-panel" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "three wide column font-size-minus",
+                              on: {
+                                click: function($event) {
+                                  return _vm.fontSizeMinus()
+                                }
+                              }
+                            },
+                            [_vm._m(0)]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "three wide column font-size-plus",
+                              on: {
+                                click: function($event) {
+                                  return _vm.fontSizePlus()
+                                }
+                              }
+                            },
+                            [_vm._m(2)]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "item",
+                    on: {
+                      click: function($event) {
+                        return _vm.resizeToFitContent()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "compress icon" }),
+                    _vm._v("\n          Resize to fit content\n        ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "divider" }),
+                _vm._v(" "),
+                _vm.enableSaveFile
+                  ? _c(
                       "div",
-                      { staticClass: "ui grid font-size-control-panel" },
+                      {
+                        staticClass: "item",
+                        on: {
+                          click: function($event) {
+                            return _vm.saveFile()
+                          }
+                        }
+                      },
                       [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "three wide column font-size-minus",
-                            on: {
-                              click: function($event) {
-                                return _vm.fontSizeMinus()
-                              }
-                            }
-                          },
-                          [_vm._m(0)]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "three wide column font-size-plus",
-                            on: {
-                              click: function($event) {
-                                return _vm.fontSizePlus()
-                              }
-                            }
-                          },
-                          [_vm._m(2)]
-                        )
+                        _c("i", { staticClass: "save icon" }),
+                        _vm._v("\n          Save\n        ")
                       ]
                     )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.enableSaveFile
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "item",
+                        on: {
+                          click: function($event) {
+                            return _vm.saveFileAs()
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "save outline icon" }),
+                        _vm._v("\n          Save as...\n        ")
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                typeof _vm.status.filePath === "string"
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "item",
+                        on: {
+                          click: function($event) {
+                            return _vm.openFolder()
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "folder open outline icon" }),
+                        _vm._v("\n          Open folder...\n        ")
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "item",
+                    on: {
+                      click: function($event) {
+                        return _vm.openEditor()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "edit icon" }),
+                    _vm._v("\n          Open in editor...\n        ")
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "fitted item",
+              on: {
+                click: function($event) {
+                  return _vm.minimize()
+                }
+              }
+            },
+            [_c("i", { staticClass: "window minimize icon" })]
+          ),
+          _vm._v(" "),
+          _vm.status.isMaximized === false
+            ? _c(
+                "a",
                 {
-                  staticClass: "item",
+                  staticClass: "fitted item",
                   on: {
                     click: function($event) {
-                      return _vm.resizeToFitContent()
+                      return _vm.maximize()
                     }
                   }
                 },
-                [
-                  _c("i", { staticClass: "compress icon" }),
-                  _vm._v("\n          Resize to fit content\n        ")
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "divider" }),
-              _vm._v(" "),
-              _vm.enableSaveFile
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "item",
-                      on: {
-                        click: function($event) {
-                          return _vm.saveFile()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "save icon" }),
-                      _vm._v("\n          Save\n        ")
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.enableSaveFile
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "item",
-                      on: {
-                        click: function($event) {
-                          return _vm.saveFileAs()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "save outline icon" }),
-                      _vm._v("\n          Save as...\n        ")
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              typeof _vm.status.filePath === "string"
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "item",
-                      on: {
-                        click: function($event) {
-                          return _vm.openFolder()
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "folder open outline icon" }),
-                      _vm._v("\n          Open folder...\n        ")
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "item",
-                  on: {
-                    click: function($event) {
-                      return _vm.openEditor()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "edit icon" }),
-                  _vm._v("\n          Open in editor...\n        ")
-                ]
+                [_c("i", { staticClass: "window maximize icon" })]
               )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "fitted item",
-            on: {
-              click: function($event) {
-                return _vm.minimize()
-              }
-            }
-          },
-          [_c("i", { staticClass: "window minimize icon" })]
-        ),
-        _vm._v(" "),
-        _vm.status.isMaximized === false
-          ? _c(
-              "a",
-              {
-                staticClass: "fitted item",
-                on: {
-                  click: function($event) {
-                    return _vm.maximize()
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.status.isMaximized === true
+            ? _c(
+                "a",
+                {
+                  staticClass: "fitted item",
+                  on: {
+                    click: function($event) {
+                      return _vm.unmaximize()
+                    }
                   }
+                },
+                [_c("i", { staticClass: "window restore icon" })]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "fitted item",
+              on: {
+                click: function($event) {
+                  return _vm.close()
                 }
-              },
-              [_c("i", { staticClass: "window maximize icon" })]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.status.isMaximized === true
-          ? _c(
-              "a",
-              {
-                staticClass: "fitted item",
-                on: {
-                  click: function($event) {
-                    return _vm.unmaximize()
-                  }
-                }
-              },
-              [_c("i", { staticClass: "window restore icon" })]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "fitted item",
-            on: {
-              click: function($event) {
-                return _vm.close()
               }
-            }
-          },
-          [_c("i", { staticClass: "window close icon" })]
-        )
-      ])
+            },
+            [_c("i", { staticClass: "window close icon" })]
+          )
+        ]
+      )
     ]
   )
 }
@@ -2618,13 +2829,108 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "ui icon mini compact right floated  button",
+        staticClass: "ui icon mini compact right floated button",
         attrs: { type: "button" }
       },
       [_c("i", { staticClass: "plus icon" })]
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.html?vue&type=template&id=5d413a66&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("fragment", [
+    _vm.enableFontSizeControl
+      ? _c("div", { staticClass: "header" }, [
+          _c("div", { staticClass: "ui grid font-size-control-panel" }, [
+            _c(
+              "div",
+              {
+                staticClass: "three wide column font-size-minus",
+                on: {
+                  click: function($event) {
+                    return _vm.fontSizeMinus()
+                  }
+                }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "ui icon mini compact left floated button",
+                    attrs: { type: "button" }
+                  },
+                  [_c("i", { staticClass: "minus icon" })]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "ten wide column font-size-label" }, [
+              _c("i", { staticClass: "text height icon" }),
+              _vm._v("\n        Font size\n      ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "three wide column font-size-plus",
+                on: {
+                  click: function($event) {
+                    return _vm.fontSizePlus()
+                  }
+                }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "ui icon mini compact right floated button",
+                    attrs: { type: "button" }
+                  },
+                  [_c("i", { staticClass: "plus icon" })]
+                )
+              ]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "item",
+        on: {
+          click: function($event) {
+            return _vm.resizeToFitContent()
+          }
+        }
+      },
+      [
+        _c("i", { staticClass: "compress icon" }),
+        _vm._v("\n    Resize to fit content\n  ")
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -2752,6 +3058,27 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
 var update = add("016adc3f", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("3a4ffa7f", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

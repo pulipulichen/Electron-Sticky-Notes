@@ -15,7 +15,8 @@
   </a>
 
 
-  <div class="right menu">
+  <div class="right menu"
+       v-bind:style="{'maxHeight': 'calc(100vh - ' + config.menuBarHeight + ')'}">
     <!--
     <a class="fitted item"
       v-on:click="openFolder()"
@@ -49,7 +50,7 @@
             </div>
             <div class="three wide column font-size-plus"
                  v-on:click="fontSizePlus()">
-              <button type="button" class="ui icon mini compact right floated  button">
+              <button type="button" class="ui icon mini compact right floated button">
                 <i class="plus icon"></i>
               </button>
             </div>

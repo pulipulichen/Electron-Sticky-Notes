@@ -271,6 +271,12 @@ module.exports = {
       this.lib.ElectronFileHelper.writeFileSync(filepath, content)
       
       return filepath
+    },
+    getContent: function () {
+      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
+        return ''
+      }
+      return this.codeMirrorEditor.getValue()
     }
   }
 }

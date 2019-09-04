@@ -1,4 +1,5 @@
 const DateHelper = require('../../helpers/DateHelper')
+const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -12,6 +13,9 @@ module.exports = {
       $NoteHeader: null,
       draggableTimer: false
     }
+  },
+  components: { 
+    'submenu-size': SubmenuSize
   },
   computed: {
     enableFontSizeControl: function () {

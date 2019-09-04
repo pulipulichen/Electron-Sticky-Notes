@@ -117,6 +117,9 @@ module.exports = {
       this.lib.ElectronFileHelper.writeFileSync(filepath, content)
       
       return filepath
+    },
+    getContent: function () {
+      return this.contentText
     }
   }
 }
