@@ -2,6 +2,7 @@ const DateHelper = require('../../helpers/DateHelper')
 
 // https://stackoverflow.com/a/48459596
 const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue').default
+const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -17,16 +18,11 @@ module.exports = {
     }
   },
   components: { 
-    'submenu-size': SubmenuSize
+    'submenu-size': SubmenuSize,
+    'submenu-file': SubmenuFile,
   },
-  computed: {
-    enableFontSizeControl: function () {
-      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
-    },
-    enableSaveFile: function () {
-      return this.enableFontSizeControl
-    }
-  },
+  //computed: {
+  //},  // computed: {
   mounted: function () {
     window.$(this.$refs.Submenu).dropdown()
   },
@@ -68,11 +64,6 @@ module.exports = {
         return this.maximize()
       }
     },
-    resizeToFitContent: function () {
-      //this.$parent.$refs.ContentText.resizeToFitContent()
-      this.status.mainComponent.resizeToFitContent()
-      return this
-    },
     close: function () {
       this.lib.win.close()
       return this
@@ -105,44 +96,6 @@ module.exports = {
       }
       
       return this.setNoteHeader(header)
-    },
-    openFolder: function () {
-      //console.error('openFolder')
-      this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
-      return this
-    },
-    openEditor: function () {
-      //console.error('openEdtior')
-      if (typeof(this.status.filePath) === 'string') {
-        this.lib.ElectronFileHelper.openItem(this.status.filePath)
-      }
-      else {
-        // 建立暫存檔案
-        let tmpFilePath = this.status.mainComponent.createTempFile()
-        // 開啟暫存檔案
-        this.lib.ElectronFileHelper.openItem(tmpFilePath)
-        
-        this.cleanTempFile()
-      }
-      return this
-    },
-    cleanTempFile: function () {
-      //console.error('cleanTempFile')
-      let cacheDirPath = this.lib.ElectronFileHelper.resolve('cache')
-      this.lib.ElectronFileHelper.removeIfExpire(cacheDirPath)
-      return this
-    },
-    fontSizePlus: function () {
-      this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
-      this.status.fontSizeAdjustIsEnlarge = true
-      //console.log(this.config.fontSizeRatio)
-      return this
-    },
-    fontSizeMinus: function () {
-      this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
-      this.status.fontSizeAdjustIsEnlarge = false
-      //console.log(this.config.fontSizeRatio)
-      return this
     },
     enableDraggable: function (e) {
       // Movable after 700MS
@@ -177,13 +130,5 @@ module.exports = {
       }
       return this
     },
-    saveFile: function () {
-      console.log('saveFile')
-      return this
-    },
-    saveFileAs: function () {
-      console.log('saveFileAs')
-      return this
-    }
   }
 }

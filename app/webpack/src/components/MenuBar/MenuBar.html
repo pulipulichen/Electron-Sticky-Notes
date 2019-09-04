@@ -40,29 +40,11 @@
         <!-- ====================== -->
         <div class="divider"></div>
         
-        <div class="item"
-             v-on:click="saveFile()"
-             v-if="enableSaveFile">
-          <i class="save icon"></i>
-          Save
-        </div>
-        <div class="item"
-             v-on:click="saveFileAs()"
-             v-if="enableSaveFile">
-          <i class="save outline icon"></i>
-          Save as...
-        </div>
-        <div class="item"
-             v-on:click="openFolder()"
-             v-if="typeof(status.filePath) === 'string'">
-          <i class="folder open outline icon"></i>
-          Open folder...
-        </div>
-        <div class="item"
-             v-on:click="openEditor()">
-          <i class="edit icon"></i>
-          Open in editor...
-        </div>
+        <submenu-file v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="SubmenuSize"></submenu-file>
+        
       </div>
     </a>
     <a class="fitted item"
