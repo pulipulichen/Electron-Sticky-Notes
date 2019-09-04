@@ -63,7 +63,8 @@ module.exports = {
       }
     },
     resizeToFitContent: function () {
-      this.$parent.$refs.ContentText.resizeToFitContent()
+      //this.$parent.$refs.ContentText.resizeToFitContent()
+      this.status.mainComponent.resizeToFitContent()
       return this
     },
     close: function () {

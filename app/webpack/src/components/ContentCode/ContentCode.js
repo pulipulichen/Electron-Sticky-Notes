@@ -8,7 +8,7 @@ module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
     let data = {
-      padding: 15,
+      padding: 17,
       detector: null,
       mode: '',
       modePathList: [],
@@ -24,18 +24,6 @@ module.exports = {
     return data
   },
   watch: {
-    styleFontSize: function () {
-      return `calc(1em * ${this.config.fontSizeRatio})`
-    },
-    styleLineHeight: function () {
-      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
-      
-      if (this.status.fontSizeAdjustIsEnlarge) {
-        this.resizeIfOverflow()
-      }
-      
-      return lineHeight
-    },
     'config.fontSizeRatio': function () {
       //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
       //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
@@ -63,7 +51,20 @@ module.exports = {
         detectorText = detectorText + '|'
       }
       return detectorText
-    }
+    },
+    
+    styleFontSize: function () {
+      return `calc(1em * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
   },
   mounted: function () {
    
@@ -206,8 +207,8 @@ module.exports = {
       return this
     },
     resizeToFitContent: function () {
-      window.resizeTo(800,800)
-      return console.error('resizeToFitContent')
+      //window.resizeTo(800,800)
+      //return console.error('resizeToFitContent')
       
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
@@ -218,7 +219,6 @@ module.exports = {
         if (height < this.config.minHeightPx) {
           height = this.config.minHeightPx
         }
-        
         
         //console.log(width, height)
         window.resizeTo(width, height)
@@ -231,9 +231,12 @@ module.exports = {
       }
       let width = this.detector.width()
       width = width + this.padding
+      //width = Math.ceil(width)
       
       let height = this.detector.height()
       height = height + this.config.menuBarHeight + this.padding
+      //height = Math.ceil(height)
+      
       return {
         width: width,
         height: height
