@@ -713,6 +713,10 @@ module.exports = {
         return ''
       }
       return this.codeMirrorEditor.getValue()
+    },
+    saveFile: function (filePath) {
+      console.error('saveFile: ' + filePath)
+      return this
     }
   }
 }
@@ -1245,6 +1249,10 @@ module.exports = {
     },
     getContent: function () {
       return this.contentText
+    },
+    saveFile: function (filePath) {
+      console.error('saveFile: ' + filePath)
+      return this
     }
   }
 }
@@ -1634,13 +1642,25 @@ module.exports = {
     }
   },
   computed: {
-    enableSaveFile: function () {
-      return this.enableFontSizeControl
+    enableFileSave: function () {
+      let typeMatched = this.enableFileSaveAs
+      return (typeMatched && typeof(this.status.filePath) === 'string')
+    },
+    enableFileSaveAs: function () {
+      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
     }
   },
-  //mounted: function () {
-  //},
+  mounted: function () {
+    this.initIPC()
+  },
   methods: {
+    initIPC: function () {
+      this.lib.ipc.on('file-selected-callback', (filePath) => {
+        if (typeof(filePath) === 'string') {
+          this.status.mainComponent.saveFile(filePath)
+        }
+      })
+    },
     openFolder: function () {
       //console.error('openFolder')
       this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
@@ -1668,11 +1688,17 @@ module.exports = {
       return this
     },
     saveFile: function () {
-      console.log('saveFile')
+      //console.log('saveFile')
+      this.status.mainComponent.saveFile(this.status.filePath)
       return this
     },
     saveFileAs: function () {
       console.log('saveFileAs')
+      // select a path
+      let dir = this.lib.ElectronFileHelper.dirname(this.status.filePath)
+      let filters = this.status.mainComponent.getFilters(this.status.filePath)
+      
+      this.lib.ipc.send('open-file-select-dialog', null, dir, filters)
       return this
     }
   }
@@ -1933,6 +1959,12 @@ module.exports = {
   fontSizeAdjustInterval: 0.2,
   
   cacheAliveDay: 1,
+  
+  // https://flatuicolors.com/palette/de
+  themes: [
+    '#fed330', '#26de81', '#2bcbba', '#fd9644', '#fc5c65',
+    '#45aaf2', '#4b7bec', '#a55eea', '#d1d8e0', '#778ca3'
+  ],
   
   debug: {
     useTestContentText: false,
@@ -2872,7 +2904,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _vm.enableSaveFile
+    _vm.enableFileSave
       ? _c(
           "div",
           {
@@ -2890,7 +2922,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.enableSaveFile
+    _vm.enableFileSaveAs
       ? _c(
           "div",
           {

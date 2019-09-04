@@ -120,6 +120,10 @@ module.exports = {
     },
     getContent: function () {
       return this.contentText
+    },
+    saveFile: function (filePath) {
+      console.error('saveFile: ' + filePath)
+      return this
     }
   }
 }

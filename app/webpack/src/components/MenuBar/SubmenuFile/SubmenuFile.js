@@ -8,13 +8,25 @@ module.exports = {
     }
   },
   computed: {
-    enableSaveFile: function () {
-      return this.enableFontSizeControl
+    enableFileSave: function () {
+      let typeMatched = this.enableFileSaveAs
+      return (typeMatched && typeof(this.status.filePath) === 'string')
+    },
+    enableFileSaveAs: function () {
+      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
     }
   },
-  //mounted: function () {
-  //},
+  mounted: function () {
+    this.initIPC()
+  },
   methods: {
+    initIPC: function () {
+      this.lib.ipc.on('file-selected-callback', (filePath) => {
+        if (typeof(filePath) === 'string') {
+          this.status.mainComponent.saveFile(filePath)
+        }
+      })
+    },
     openFolder: function () {
       //console.error('openFolder')
       this.lib.ElectronFileHelper.showInFolder(this.status.filePath)
@@ -42,11 +54,17 @@ module.exports = {
       return this
     },
     saveFile: function () {
-      console.log('saveFile')
+      //console.log('saveFile')
+      this.status.mainComponent.saveFile(this.status.filePath)
       return this
     },
     saveFileAs: function () {
       console.log('saveFileAs')
+      // select a path
+      let dir = this.lib.ElectronFileHelper.dirname(this.status.filePath)
+      let filters = this.status.mainComponent.getFilters(this.status.filePath)
+      
+      this.lib.ipc.send('open-file-select-dialog', null, dir, filters)
       return this
     }
   }

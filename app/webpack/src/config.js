@@ -11,6 +11,12 @@ module.exports = {
   
   cacheAliveDay: 1,
   
+  // https://flatuicolors.com/palette/de
+  themes: [
+    '#fed330', '#26de81', '#2bcbba', '#fd9644', '#fc5c65',
+    '#45aaf2', '#4b7bec', '#a55eea', '#d1d8e0', '#778ca3'
+  ],
+  
   debug: {
     useTestContentText: false,
     useTestCodeFile: true,

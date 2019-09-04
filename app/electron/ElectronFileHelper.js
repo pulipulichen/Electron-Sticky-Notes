@@ -53,6 +53,10 @@ let ElectronFileHelper = {
     this.init()
     return this.lib.path.basename(filepath)
   },
+  dirname: function (filepath) {
+    this.init()
+    return this.lib.path.dirname(filepath)
+  },
   existsSync: function (filepath) {
     this.init()
     if (typeof(filepath) !== 'string') {

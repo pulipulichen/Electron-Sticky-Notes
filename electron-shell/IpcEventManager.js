@@ -14,7 +14,7 @@ module.exports = function (mainWindow) {
     CreateWindow(filepath)
   })
 
-  ipc.on('open-file-dialog', function (event, win, dir) {
+  ipc.on('open-file-select-dialog', function (event, win, dir, filters) {
     //console.log(process.platform)
 
     let options = {
@@ -27,6 +27,7 @@ module.exports = function (mainWindow) {
     }
 
     //if (process.platform === 'win32') {
+    /*
       options.filters = [
         { name: 'Spread sheets', extensions: ['ods', 'csv', 'xlsx', 'xls', 'arff', 'sav'] },
         { name: 'OpenDocument Format', extensions: ['ods'] },
@@ -36,13 +37,15 @@ module.exports = function (mainWindow) {
         { name: 'Attribute-Relation File Format', extensions: ['arff'] },
         { name: 'SPSS System Data File Format Family', extensions: ['sav'] }
       ]
+    */
+    options.filters = filters
     //}
 
     dialog.showOpenDialog(null, options, function (files) {
       if (files && typeof(files[0]) === 'string') {
 
         let filepath = files[0]
-        event.sender.send('selected-file', filepath)
+        event.sender.send('file-selected-callback', filepath)
       }
     })
   })

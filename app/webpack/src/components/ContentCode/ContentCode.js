@@ -277,6 +277,10 @@ module.exports = {
         return ''
       }
       return this.codeMirrorEditor.getValue()
+    },
+    saveFile: function (filePath) {
+      console.error('saveFile: ' + filePath)
+      return this
     }
   }
 }
