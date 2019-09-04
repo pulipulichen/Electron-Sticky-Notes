@@ -1,5 +1,7 @@
 const DateHelper = require('../../helpers/DateHelper')
-const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue')
+
+// https://stackoverflow.com/a/48459596
+const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue').default
 
 module.exports = {
   props: ['lib', 'status', 'config'],
