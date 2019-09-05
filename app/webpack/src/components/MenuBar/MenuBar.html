@@ -10,9 +10,8 @@
      ref="NoteHeader"
      v-on:mousedown="enableDraggable"
      v-on:mouseup="disableDraggable"
-     v-on:dblclick="toggleMaximize">
-    {{ header }}
-  </a>
+     v-on:dblclick="toggleMaximize"
+     v-html="htmlHeaderWithIcon"></a>
 
 
   <div class="right menu"

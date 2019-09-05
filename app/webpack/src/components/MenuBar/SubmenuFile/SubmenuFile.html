@@ -1,13 +1,13 @@
 <fragment>
   <div class="item"
           v-on:click="saveFile()"
-          v-if="enableFileSave">
+          v-if="enableSaveFile">
        <i class="save icon"></i>
        Save
      </div>
      <div class="item"
           v-on:click="saveFileAs()"
-          v-if="enableFileSaveAs">
+          v-if="enableSaveFileAs">
        <i class="save outline icon"></i>
        Save as...
      </div>

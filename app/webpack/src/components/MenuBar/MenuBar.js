@@ -21,8 +21,24 @@ module.exports = {
     'submenu-size': SubmenuSize,
     'submenu-file': SubmenuFile,
   },
-  //computed: {
-  //},  // computed: {
+  computed: {
+    htmlHeaderWithIcon: function () {
+      let header = this.header
+      switch (this.status.fileType) {
+        case 'code':
+          header = '<i class="file code icon"></i>' + header
+          break
+        case 'image':
+          header = '<i class="file image icon"></i>' + header
+          break
+        case 'rich-format':
+          header = '<i class="file alternate icon"></i>' + header
+          break
+      }
+      
+      return header
+    }
+  },  // computed: {
   mounted: function () {
     window.$(this.$refs.Submenu).dropdown()
   },

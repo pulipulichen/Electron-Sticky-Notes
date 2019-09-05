@@ -8,12 +8,12 @@ module.exports = {
     }
   },
   computed: {
-    enableFileSave: function () {
-      let typeMatched = this.enableFileSaveAs
+    enableSaveFile: function () {
+      let typeMatched = (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
       return (typeMatched && typeof(this.status.filePath) === 'string')
     },
-    enableFileSaveAs: function () {
-      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+    enableSaveFileAs: function () {
+      return (['plain-text', 'code', 'rich-format', 'image'].indexOf(this.status.fileType) > -1)
     }
   },
   mounted: function () {
@@ -22,9 +22,7 @@ module.exports = {
   methods: {
     initIPC: function () {
       this.lib.ipc.on('file-selected-callback', (filePath) => {
-        if (typeof(filePath) === 'string') {
-          this.status.mainComponent.saveFile(filePath)
-        }
+        this.saveFileAsCallback(filePath)
       })
     },
     openFolder: function () {
@@ -59,13 +57,23 @@ module.exports = {
       return this
     },
     saveFileAs: function () {
-      console.log('saveFileAs')
+      //console.log('saveFileAs')
       // select a path
       let dir = this.lib.ElectronFileHelper.dirname(this.status.filePath)
       let filters = this.status.mainComponent.getFilters(this.status.filePath)
       
       this.lib.ipc.send('open-file-select-dialog', null, dir, filters)
+      
       return this
+    },
+    saveFileAsCallback: function (filePath) {
+      if (typeof(filePath) === 'string') {
+        this.status.mainComponent.saveFile(filePath)
+        
+        // 更換標題
+        this.status.filePath = filePath
+        this.$parent.resetNoteHeader()
+      }
     }
   }
 }
