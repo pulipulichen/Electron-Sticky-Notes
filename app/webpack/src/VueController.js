@@ -96,7 +96,14 @@ let VueController = {
     });
   </script>`
       }
-      if (this.config.debug.useTestImageFile === true) {
+      if (this.config.debug.useTestImageStaticFile === true) {
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+      if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')

@@ -20,7 +20,9 @@ let ImageMagickHelper = {
     this.lib.exec = require('child_process').exec
     
     this.lib.imageSize = require('image-size')
-    this.lib.icoToPng = require('ico-to-png')
+    if (process.platform !== 'win32') {
+      this.lib.icoToPng = require('ico-to-png')
+    }
     this.imagemagickPath = this.lib.path.resolve(__dirname, '../win32-helpers/imagemagick/convert.exe')
     //this.lib.imagemagick = require('imagemagick')
     //this.lib.gm = require('gm').subClass({imageMagick: false})

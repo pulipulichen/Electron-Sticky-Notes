@@ -55,7 +55,7 @@ module.exports = function (mainWindow) {
   // -------------------------------------------------
 
   ipc.on('save-file-dialog', function (event, filePath, filters) {
-    let defaultFilter = filePath.slice(filePath.lastIndexOf('.') + 1)
+    //let defaultFilter = filePath.slice(filePath.lastIndexOf('.') + 1)
 
     //console.log(defaultFilter)
     //console.log(filtersSelect.concat(filtersOthers))

@@ -18,9 +18,10 @@ module.exports = {
   ],
   
   debug: {
-    useTestContentText: false,
-    useTestCodeFile: true,
-    useTestImageFile: false,
+    useTestContentText: true,
+    useTestCodeFile: false,
+    useTestImageStaticFile: false,
+    useTestImageViewerFile: false,
     useTestPlainTextFile: false,
   }
 }

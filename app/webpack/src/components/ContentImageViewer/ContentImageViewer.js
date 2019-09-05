@@ -13,16 +13,15 @@ module.exports = {
       viewer: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'bmp': '',
-        'gif': '',
-        'png': '',
-        'ico': '',
-        'jpg': '',
-        'jpeg': '',
-        'svg': '',
-        'tiff': '',
-        'tif': '',
-        'webp': ''
+        'bmp': 'Bitmap Image File',
+        'gif': 'Graphical Interchange Format File',
+        'png': 'Portable Network Graphic',
+        'ico': 'Icon File',
+        'jpg': 'JPEG Image',
+        'jpeg': 'JPEG Image',
+        'tiff': 'Tagged Image File Format',
+        'tif': 'Tagged Image File',
+        'webp': 'WebP Image'
       }
     }
   },
@@ -170,6 +169,14 @@ var viewer = OpenSeadragon({
     });
 </script>
  */
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.copy(this.status.filePath, filePath)
+      return this
+    },
+    getFilters: function (filePath) {
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
     }
   } // methods
 }

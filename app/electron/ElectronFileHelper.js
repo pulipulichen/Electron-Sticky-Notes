@@ -390,6 +390,14 @@ let ElectronFileHelper = {
     }
     return this
   },
+  copy: function (srcFilePath, distFilePath) {
+    //console.log([this.existsSync(srcFilePath), srcFilePath])
+    if (this.existsSync(srcFilePath)) {
+      //console.log(srcFilePath, distFilePath)
+      this.lib.fs.copyFileSync(srcFilePath, distFilePath)
+    }
+    return this
+  },
   getCreateUnixMS: function (path) {
     if (this.existsSync(path)) {
       let unixMS = this.lib.fs.statSync(path).birthtime

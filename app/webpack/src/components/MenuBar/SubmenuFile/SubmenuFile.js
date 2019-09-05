@@ -71,6 +71,7 @@ module.exports = {
       this.initIPC()
       
       let filters = this.status.mainComponent.getFilters(this.status.filePath)
+      //console.log([this.status.filePath, filters])
       this.ipc.send('save-file-dialog', this.status.filePath, filters)
       
       return this

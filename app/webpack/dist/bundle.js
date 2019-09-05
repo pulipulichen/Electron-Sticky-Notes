@@ -272,7 +272,14 @@ let VueController = {
     });
   </script>`
       }
-      if (this.config.debug.useTestImageFile === true) {
+      if (this.config.debug.useTestImageStaticFile === true) {
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
+      if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
@@ -897,7 +904,6 @@ module.exports = {
       imagePath: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'ico': 'Icon File',
         'svg': 'Scalable Vector Graphics File',
       },
       basicRatio: null
@@ -1024,22 +1030,30 @@ module.exports = {
 
       let windowRatio = windowWidth / windowHeight
       windowRatio = Math.ceil(windowRatio * 1000) / 1000
-      console.log([windowRatio, basicRatio])
+      //console.log([windowRatio, basicRatio])
       
       if (windowRatio > basicRatio) {
         // 太寬
         windowWidth = windowHeight / basicRatio
         windowHeight = windowHeight + this.config.menuBarHeight
-        console.log([windowWidth, windowHeight])
+        //console.log([windowWidth, windowHeight])
         window.resizeTo(windowWidth, windowHeight)
       }
       else if (windowRatio < basicRatio) {
         // 太高
         windowHeight = windowWidth * basicRatio
         windowHeight = windowHeight + this.config.menuBarHeight
-        console.log([windowWidth, windowHeight])
+        //console.log([windowWidth, windowHeight])
         window.resizeTo(windowWidth, windowHeight)
       }
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.copy(this.status.filePath, filePath)
+      return this
+    },
+    getFilters: function (filePath) {
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
     }
   } // methods
 }
@@ -1195,16 +1209,15 @@ module.exports = {
       viewer: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'bmp': '',
-        'gif': '',
-        'png': '',
-        'ico': '',
-        'jpg': '',
-        'jpeg': '',
-        'svg': '',
-        'tiff': '',
-        'tif': '',
-        'webp': ''
+        'bmp': 'Bitmap Image File',
+        'gif': 'Graphical Interchange Format File',
+        'png': 'Portable Network Graphic',
+        'ico': 'Icon File',
+        'jpg': 'JPEG Image',
+        'jpeg': 'JPEG Image',
+        'tiff': 'Tagged Image File Format',
+        'tif': 'Tagged Image File',
+        'webp': 'WebP Image'
       }
     }
   },
@@ -1352,6 +1365,14 @@ var viewer = OpenSeadragon({
     });
 </script>
  */
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.copy(this.status.filePath, filePath)
+      return this
+    },
+    getFilters: function (filePath) {
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
     }
   } // methods
 }
@@ -2080,6 +2101,7 @@ module.exports = {
       this.initIPC()
       
       let filters = this.status.mainComponent.getFilters(this.status.filePath)
+      //console.log([this.status.filePath, filters])
       this.ipc.send('save-file-dialog', this.status.filePath, filters)
       
       return this
@@ -2361,9 +2383,10 @@ module.exports = {
   ],
   
   debug: {
-    useTestContentText: false,
-    useTestCodeFile: true,
-    useTestImageFile: false,
+    useTestContentText: true,
+    useTestCodeFile: false,
+    useTestImageStaticFile: false,
+    useTestImageViewerFile: false,
     useTestPlainTextFile: false,
   }
 }

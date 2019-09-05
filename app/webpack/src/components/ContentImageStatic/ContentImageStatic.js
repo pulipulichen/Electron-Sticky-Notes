@@ -8,7 +8,6 @@ module.exports = {
       imagePath: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'ico': 'Icon File',
         'svg': 'Scalable Vector Graphics File',
       },
       basicRatio: null
@@ -135,22 +134,30 @@ module.exports = {
 
       let windowRatio = windowWidth / windowHeight
       windowRatio = Math.ceil(windowRatio * 1000) / 1000
-      console.log([windowRatio, basicRatio])
+      //console.log([windowRatio, basicRatio])
       
       if (windowRatio > basicRatio) {
         // 太寬
         windowWidth = windowHeight / basicRatio
         windowHeight = windowHeight + this.config.menuBarHeight
-        console.log([windowWidth, windowHeight])
+        //console.log([windowWidth, windowHeight])
         window.resizeTo(windowWidth, windowHeight)
       }
       else if (windowRatio < basicRatio) {
         // 太高
         windowHeight = windowWidth * basicRatio
         windowHeight = windowHeight + this.config.menuBarHeight
-        console.log([windowWidth, windowHeight])
+        //console.log([windowWidth, windowHeight])
         window.resizeTo(windowWidth, windowHeight)
       }
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.copy(this.status.filePath, filePath)
+      return this
+    },
+    getFilters: function (filePath) {
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
     }
   } // methods
 }
