@@ -35,7 +35,7 @@ let WindowHelper = {
     if (right > maxRight) {
       leftChanged = maxRight - window.outerWidth
       
-      if (this.lib.ElectronHelper.getPlatform() === 'linux') {
+      if (ElectronHelper.getPlatform() === 'linux') {
         leftChanged = leftChanged + 50
       }
     }
