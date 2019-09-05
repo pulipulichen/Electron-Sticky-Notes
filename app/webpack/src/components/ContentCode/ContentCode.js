@@ -17,7 +17,34 @@ module.exports = {
       $editor: null,
       codeMirrorEditor: null,
       $CodeMirror: null,
-      styleSheet: null
+      styleSheet: null,
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'asp': 'Active Server Page',
+        'aspx': 'Active Server Page Extended File',
+        'c': 'C/C++ Source Code File',
+        'css': 'Cascading Style Sheet',
+        'jsp': 'Java Server Page',
+        'html': 'Hypertext Markup Language File',
+        'htm': 'Hypertext Markup Language File',
+        'java': 'Java Source Code File',
+        'less': 'LESS Style Sheet',
+        'js': 'JavaScript File',
+        'json': 'JavaScript Object Notation File',
+        'pl': 'Perl Script',
+        'php': 'PHP Source Code File',
+        'py': 'Python Script',
+        'r': 'R Script File',
+        'rb': 'Ruby Source Code',
+        'sass': 'Syntactically Awesome StyleSheets File',
+        'scss': 'Sass Cascading Style Sheet',
+        'sh': 'Bash Shell Script',
+        'sql': 'Structured Query Language Data File',
+        'vb': 'Visual Basic Project Item File',
+        'xhtml': 'Extensible Hypertext Markup Language ',
+        'xml': 'XML File',
+        'yaml': 'YAML Document'
+      }
     }
     
     this.$i18n.locale = this.config.locale
@@ -274,8 +301,13 @@ module.exports = {
       return this.codeMirrorEditor.getValue()
     },
     saveFile: function (filePath) {
-      console.error('saveFile: ' + filePath)
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this
+    },
+    getFilters: function (filePath) {
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
     }
   }
 }

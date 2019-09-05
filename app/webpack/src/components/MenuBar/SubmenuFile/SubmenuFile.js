@@ -26,7 +26,8 @@ module.exports = {
         return this
       }
       
-      this.ipc.on('file-selected-callback', (filePath) => {
+      this.ipc = this.lib.ipc
+      this.ipc.on('save-file-dialog-callback', (event, filePath) => {
         this.saveFileAsCallback(filePath)
       })
       
@@ -69,14 +70,13 @@ module.exports = {
       // select a path
       this.initIPC()
       
-      let dir = this.lib.ElectronFileHelper.dirname(this.status.filePath)
       let filters = this.status.mainComponent.getFilters(this.status.filePath)
-      
-      this.ipc.send('open-file-select-dialog', null, dir, filters)
+      this.ipc.send('save-file-dialog', this.status.filePath, filters)
       
       return this
     },
     saveFileAsCallback: function (filePath) {
+      //console.log(filePath)
       if (typeof(filePath) === 'string') {
         this.status.mainComponent.saveFile(filePath)
         

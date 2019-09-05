@@ -14,13 +14,15 @@ module.exports = function (mainWindow) {
     CreateWindow(filepath)
   })
 
-  ipc.on('open-file-select-dialog', function (event, win, dir, filters) {
+  ipc.on('open-file-dialog', function (event, filePath, filters) {
     //console.log(process.platform)
 
     let options = {
-      title: 'Please select a spread sheet file',
+      title: 'Please select a file',
       properties: ['openFile']
     }
+    
+    let dir = path.dirname(filePath)
 
     if (typeof(dir) === 'string' && dir !== '' && fs.existsSync(dir)) {
       options.defaultPath = dir
@@ -52,41 +54,47 @@ module.exports = function (mainWindow) {
 
   // -------------------------------------------------
 
-  let predefinedFilters = [,
-    { name: 'OpenDocument Format', extensions: ['ods'] },
-    { name: 'Comma-Separated Values', extensions: ['csv'] },
-    { name: 'Microsoft Excel 2007–2019', extensions: ['xlsx'] },
-    { name: 'MicrosoftExcel 97–2003', extensions: ['xls'] },
-    { name: 'Attribute Relation File Format', extensions: ['arff'] },
-    { name: 'SPSS System Data File Format Family', extensions: ['sav'] }
-  ]
-
-  ipc.on('open-file-dialog-save', function (event, win, filePath) {
+  ipc.on('save-file-dialog', function (event, filePath, filters) {
     let defaultFilter = filePath.slice(filePath.lastIndexOf('.') + 1)
-
-    let filtersSelect = []
-    let filtersOthers = []
-    predefinedFilters.forEach(config => {
-      if (config.extensions.indexOf(defaultFilter) > -1) {
-        filtersSelect.push(config)
-      }
-      else {
-        filtersOthers.push(config)
-      }
-    })
 
     //console.log(defaultFilter)
     //console.log(filtersSelect.concat(filtersOthers))
 
     let options = {
-      title: 'Save spread sheet to...',
-      filters: filtersSelect.concat(filtersOthers)
+      title: 'Save file to...',
+      filters: filters
     }
     if (typeof(filePath) === 'string' && filePath !== '') {
-      //if (process.platform === 'win32') {
-        //filePath = filePath.split('/').join('\\')
-        //filePath = filePath.split('\\').join('/')
-      //}
+      
+      if (fs.existsSync(filePath) === true) {
+        let fileCopyCount = 1
+        let dirname = path.dirname(filePath)
+        let filename = path.basename(filePath)
+        let ext = '' 
+        if (filename.lastIndexOf('.') > - 1) { 
+          ext = filename.slice(filename.lastIndexOf('.'))
+          filename = filename.slice(0, filename.lastIndexOf('.'))
+        }
+        
+        if (filename.indexOf(' (') > -1 && filename.endsWith(')')) {
+          let isFileCopyCount = filename.slice(filename.lastIndexOf(' (') + 2, -1)
+          if (isNaN(isFileCopyCount) === false 
+                  && typeof(parseInt(isFileCopyCount, 10)) === 'number') {
+            filename = filename.slice(0, filename.lastIndexOf(' ('))
+            fileCopyCount = parseInt(isFileCopyCount, 10)
+            fileCopyCount++
+          }
+        }
+        
+        let tmpFilename = `${filename} (${fileCopyCount})${ext}`
+        while (fs.existsSync(path.join(dirname, tmpFilename))) {
+          fileCopyCount++
+          tmpFilename = `${filename} (${fileCopyCount})${ext}`
+        }
+        
+        filePath = path.join(dirname, tmpFilename)
+      }
+      
       options.defaultPath = filePath
     }
     //console.log(options)
@@ -94,7 +102,7 @@ module.exports = function (mainWindow) {
     dialog.showSaveDialog(null, options, function (file) {
       if (file) {
         //console.log(file)
-        event.sender.send('selected-file-save', file)
+        event.sender.send('save-file-dialog-callback', file)
       }
     })
     

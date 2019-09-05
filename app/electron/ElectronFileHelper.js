@@ -418,6 +418,50 @@ let ElectronFileHelper = {
         this.remove(filePath)
       }
     }
+  },
+  /**
+   * 
+   * @param {type} filterObject = {'html': 'html': 'Hypertext Markup Language File'}
+   * @param {type} ext
+   * @returns {undefined}
+   */
+  getFilters: function (filterConfigJSON, ext) {
+    let filterArray = []
+    
+    if (typeof(ext) === 'string') {
+      for (let key in filterConfigJSON) {
+        if (key === ext) {
+          filterArray.push({
+            name: filterConfigJSON[key],
+            extensions: [key]
+          })
+        }
+      }
+    }
+    
+    for (let key in filterConfigJSON) {
+      let name = filterConfigJSON[key]
+      
+      // 搜尋之前的資料裡面有沒有相同的key
+      let isNameRepeated = false
+      for (let i = 0; i < filterArray.length; i++) {
+        if (filterArray[i].name === name) {
+          filterArray[i].extensions.push(key)
+          isNameRepeated = true
+        }
+      } 
+      
+      if (isNameRepeated === true) {
+        continue
+      } 
+      
+      filterArray.push({
+        name: name,
+        extensions: [key]
+      })
+    }
+    
+    return filterArray
   }
 }
 
