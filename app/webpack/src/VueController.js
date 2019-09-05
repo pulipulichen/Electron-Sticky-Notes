@@ -28,6 +28,7 @@ let VueController = {
       fileType: 'plain-text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
+      theme: null
     },
     lib: {},
   },
@@ -79,8 +80,10 @@ let VueController = {
       this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
+      this.initTheme()
       //console.log('OK')
       this.status.isReady = true
+      this.lib.win.show()
     },
     setupFile: function () {
       // -------------------------------------
@@ -105,7 +108,8 @@ let VueController = {
       }
       if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
@@ -161,9 +165,10 @@ let VueController = {
       
       return this
     },
-    a: function () {
-      // for test
-      return 'AAA'
+    initTheme: function () {
+      console.log('initTheme')
+      this.status.theme = this.config.themes[0]
+      return this
     }
   } // methods: {
 }

@@ -124,6 +124,8 @@ module.exports = function (filePath, callback) {
     }
   })
   
+  win.hide()
+  
   IPCEventManager(win)
   return win
 }

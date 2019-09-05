@@ -22,7 +22,7 @@
   <body>
     
   <div id="app"
-       v-bind:data-theme="config.theme">
+       v-bind:style="{'backgroundColor': status.theme }">
     <menu-bar v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"

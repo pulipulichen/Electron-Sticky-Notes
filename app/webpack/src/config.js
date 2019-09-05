@@ -1,6 +1,5 @@
 module.exports = {
   locale: 'zh-TW',
-  theme: 'yellow',
   maxHeightRatio: 0.7,
   minHeightPx: 250,
   maxWidthRatio: 0.5,
@@ -18,10 +17,10 @@ module.exports = {
   ],
   
   debug: {
-    useTestContentText: true,
+    useTestContentText: false,
     useTestCodeFile: false,
     useTestImageStaticFile: false,
-    useTestImageViewerFile: false,
+    useTestImageViewerFile: true,
     useTestPlainTextFile: false,
   }
 }

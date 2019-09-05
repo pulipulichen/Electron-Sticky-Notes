@@ -204,6 +204,7 @@ let VueController = {
       fileType: 'plain-text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
+      theme: null
     },
     lib: {},
   },
@@ -255,8 +256,10 @@ let VueController = {
       this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
+      this.initTheme()
       //console.log('OK')
       this.status.isReady = true
+      this.lib.win.show()
     },
     setupFile: function () {
       // -------------------------------------
@@ -281,7 +284,8 @@ let VueController = {
       }
       if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
@@ -337,9 +341,10 @@ let VueController = {
       
       return this
     },
-    a: function () {
-      // for test
-      return 'AAA'
+    initTheme: function () {
+      console.log('initTheme')
+      this.status.theme = this.config.themes[0]
+      return this
     }
   } // methods: {
 }
@@ -2365,7 +2370,6 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuSize/Subme
 
 module.exports = {
   locale: 'zh-TW',
-  theme: 'yellow',
   maxHeightRatio: 0.7,
   minHeightPx: 250,
   maxWidthRatio: 0.5,
@@ -2383,10 +2387,10 @@ module.exports = {
   ],
   
   debug: {
-    useTestContentText: true,
+    useTestContentText: false,
     useTestCodeFile: false,
     useTestImageStaticFile: false,
-    useTestImageViewerFile: false,
+    useTestImageViewerFile: true,
     useTestPlainTextFile: false,
   }
 }
@@ -3050,7 +3054,7 @@ exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;EACA,YAAA;EACA,0BAAA;EACA,uBAAA;ACCF;ADNA;EAQI,YAAA;EACA,0BAAA;ACCJ","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n  \n  .openseadragon-container {\n    width: 100vw;\n    height: calc(100vh - 40px);\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  background-color: black;\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n"]}]);
+exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;EACA,YAAA;EACA,0BAAA;ACCF;ADLA;EAQI,YAAA;EACA,0BAAA;ACAJ;ADTA;EAYM,+CAAA;ACAN","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  //background-color: black;\n  \n  .openseadragon-container {\n    width: 100vw;\n    height: calc(100vh - 40px);\n    \n    .navigator {\n      background-color: rgba(0,0,0,0.5) !important;\n    }\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n"]}]);
 
 
 /***/ }),
