@@ -31,6 +31,11 @@
       <i class="ellipsis vertical icon"></i>
       <div class="menu">
         
+        <submenu-theme v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="SubmenuTheme"></submenu-theme>
+        
         <submenu-size v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"
