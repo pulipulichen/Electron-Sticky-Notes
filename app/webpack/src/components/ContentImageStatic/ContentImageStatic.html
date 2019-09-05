@@ -1,0 +1,12 @@
+<div data-component="ContentImage">
+  <img class="resize-detector"
+       v-bind:src="attrSrc"
+       v-bind:style="{
+          'maxWidth': config.maxWidth + 'px',
+          'maxHeight': config.maxHeight + 'px',
+          'top': config.menuBarHeight + 'px'
+       }"
+       ref="ResizeDetector"
+       v-bind:load="resizeToFitContent" />
+  <img v-bind:src="attrSrc" />
+</div>

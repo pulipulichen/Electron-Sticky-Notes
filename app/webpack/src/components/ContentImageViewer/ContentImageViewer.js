@@ -46,12 +46,12 @@ module.exports = {
   methods: {
     setupImage: function () {
       
-      if (this.status.fileType === 'image'
+      if (this.status.fileType === 'image-viewer'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.imagePath = this.status.filePath
       }
-      else if (this.status.fileType === 'image'
+      else if (this.status.fileType === 'image-viewer'
               && typeof(this.status.imageDataURL) === 'string' 
               && this.status.imageDataURL.startsWith('data:image/png;base64,')) {
         this.imageDataURL = this.status.imageDataURL

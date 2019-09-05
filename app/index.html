@@ -29,10 +29,14 @@
               v-bind:status="status"
               v-bind:config="config"
               ref="ContentText"></content-text>
-    <content-image v-bind:lib="lib" 
+    <content-image-static v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"
-              ref="ContentImage"></content-image>
+              ref="ContentImage"></content-image-static>
+    <content-image-viewer v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="ContentImage"></content-image-viewer>
     <content-code v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"

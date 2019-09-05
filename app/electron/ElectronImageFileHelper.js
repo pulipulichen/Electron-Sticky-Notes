@@ -13,7 +13,7 @@ let ElectronImageFileHelper = {
     this.inited = true
     return this
   },
-  isOpenSeadragonSupportedImageFile: function (filepath) {
+  isViewerSupportedImageFile: function (filepath) {
     this.init()
     
     if (typeof(filepath) !== 'string' 
@@ -50,7 +50,7 @@ let ElectronImageFileHelper = {
       return false
     }
   },
-  isNormalImageFile: function (filepath) {
+  isStaticImageFile: function (filepath) {
     this.init()
     
     if (typeof(filepath) !== 'string' 
@@ -82,9 +82,6 @@ let ElectronImageFileHelper = {
       return false
     }
   },
-  isImageFile: function (filepath) {
-    return (this.isOpenSeadragonSupportedImageFile(filepath) || this.isNormalImageFile(filepath))
-  }
 }
 
 

@@ -425,7 +425,7 @@ let ElectronFileHelper = {
    * @param {type} ext
    * @returns {undefined}
    */
-  getFilters: function (filterConfigJSON, ext) {
+  getFilters: function (filterConfigJSON, ext, isOnlyExt) {
     let filterArray = []
     
     if (typeof(ext) === 'string') {
@@ -440,6 +440,10 @@ let ElectronFileHelper = {
             extensions: [key]
           })
         }
+      }
+      
+      if (isOnlyExt === true) {
+        return filterArray
       }
     }
     

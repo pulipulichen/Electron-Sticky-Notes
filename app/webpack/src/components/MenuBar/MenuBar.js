@@ -28,7 +28,8 @@ module.exports = {
         case 'code':
           header = '<i class="code icon"></i>' + header
           break
-        case 'image':
+        case 'image-static':
+        case 'image-viewer':
           header = '<i class="file image icon"></i>' + header
           break
         case 'rich-format':

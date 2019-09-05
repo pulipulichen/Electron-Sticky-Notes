@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import MenuBar from './components/MenuBar/MenuBar.vue'
 import ContentText from './components/ContentText/ContentText.vue'
-import ContentImage from './components/ContentImage/ContentImage.vue'
+import ContentImageViewer from './components/ContentImageViewer/ContentImageViewer.vue'
+import ContentImageStatic from './components/ContentImageStatic/ContentImageStatic.vue'
 import ContentCode from './components/ContentCode/ContentCode.vue'
 const config = require('./config.js')
 require('./styles/global.less')
@@ -33,7 +34,8 @@ let VueController = {
   components: { 
     'menu-bar': MenuBar,
     'content-text': ContentText,
-    'content-image': ContentImage,
+    'content-image-viewer': ContentImageViewer,
+    'content-image-static': ContentImageStatic,
     'content-code': ContentCode,
   },
   mounted: function () {
@@ -114,10 +116,15 @@ let VueController = {
       // -------------------------------------
       // For test
       
-      if (this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath)) {
-        this.status.fileType = 'image'
+      if (this.lib.ElectronImageFileHelper.isStaticImageFile(this.status.filePath)) {
+        this.status.fileType = 'image-static'
         this.status.contentText = null
-        this.status.mainComponent = this.$refs.ContentImage
+        this.status.mainComponent = this.$refs.ContentImageStatic
+      }
+      else if (this.lib.ElectronImageFileHelper.isViewerSupportedImageFile(this.status.filePath)) {
+        this.status.fileType = 'image-viewer'
+        this.status.contentText = null
+        this.status.mainComponent = this.$refs.ContentImageViewer
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'code'

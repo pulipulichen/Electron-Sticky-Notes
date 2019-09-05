@@ -14,7 +14,7 @@ module.exports = {
       return (typeMatched && typeof(this.status.filePath) === 'string')
     },
     enableSaveFileAs: function () {
-      return (['plain-text', 'code', 'rich-format', 'image'].indexOf(this.status.fileType) > -1)
+      return (['plain-text', 'code', 'rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
     }
   },
   //mounted: function () {
