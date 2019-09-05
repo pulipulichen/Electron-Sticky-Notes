@@ -18,9 +18,30 @@ module.exports = {
     }
   },
   //mounted: function () {
-  //  this.initIPC()
+    //this.initHotkeys()
   //},
   methods: {
+    /*
+    initHotkeys: function () {
+      this.lib.hotkeys('ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+        //console.log(handler.key)
+        switch (handler.key) {
+          case 'ctrl+s':
+            this.saveFile()
+            break
+          case 'ctrl+shift+s':
+            this.saveFileAs()
+            break
+          case 'ctrl+o':
+            this.openFolder()
+            break
+          case 'ctrl+e':
+            this.openEditor()
+            break
+        }
+      })
+    },
+     */
     initIPC: function () {
       if (this.IPCinited === true) {
         return this
@@ -61,6 +82,9 @@ module.exports = {
       return this
     },
     saveFile: function () {
+      if (this.enableSaveFile === false) {
+        return this.saveFileAs
+      }
       //console.log('saveFile')
       this.status.mainComponent.saveFile(this.status.filePath)
       return this

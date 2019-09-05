@@ -1764,11 +1764,13 @@ const SubmenuTheme = __webpack_require__(/*! ./SubmenuTheme/SubmenuTheme.vue */ 
 const SubmenuSize = __webpack_require__(/*! ./SubmenuSize/SubmenuSize.vue */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue").default
 const SubmenuFile = __webpack_require__(/*! ./SubmenuFile/SubmenuFile.vue */ "./app/webpack/src/components/MenuBar/SubmenuFile/SubmenuFile.vue").default
 
+const hotkeys = __webpack_require__(/*! ../../vendors/hotkeys/hotkeys.min */ "./app/webpack/src/vendors/hotkeys/hotkeys.min.js")
 
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
     this.$i18n.locale = this.config.locale
+    this.lib.hotkeys = hotkeys
     //console.log(this.$parent.a())
     return {
       header: '',
@@ -1804,8 +1806,45 @@ module.exports = {
   },  // computed: {
   mounted: function () {
     window.$(this.$refs.Submenu).dropdown()
+    this.initHotkeys()
   },
   methods: {
+    initHotkeys: function () {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+        //console.log(handler.key)
+        switch (handler.key) {
+          case 'ctrl+`':
+            this.toggleAlwaysOnTop()
+            break
+          case 'ctrl+m':
+            this.toggleMaximize()
+            break
+            
+          case 'alt+`':
+            this.$refs.SubmenuSize.resizeToFitContent()
+            break
+          case 'ctrl+pageup':
+            this.$refs.SubmenuSize.fontSizeLarger()
+            break
+          case 'ctrl+pagedown':
+            this.$refs.SubmenuSize.fontSizeSmaller()
+            break
+            
+          case 'ctrl+s':
+            this.$refs.SubmenuFile.saveFile()
+            break
+          case 'ctrl+shift+s':
+            this.$refs.SubmenuFile.saveFileAs()
+            break
+          case 'ctrl+o':
+            this.$refs.SubmenuFile.openFolder()
+            break
+          case 'ctrl+e':
+            this.$refs.SubmenuFile.openEditor()
+            break
+        }
+      })
+    },
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {
         this.status.isPinTop = (this.status.isPinTop === false)
@@ -2052,9 +2091,30 @@ module.exports = {
     }
   },
   //mounted: function () {
-  //  this.initIPC()
+    //this.initHotkeys()
   //},
   methods: {
+    /*
+    initHotkeys: function () {
+      this.lib.hotkeys('ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+        //console.log(handler.key)
+        switch (handler.key) {
+          case 'ctrl+s':
+            this.saveFile()
+            break
+          case 'ctrl+shift+s':
+            this.saveFileAs()
+            break
+          case 'ctrl+o':
+            this.openFolder()
+            break
+          case 'ctrl+e':
+            this.openEditor()
+            break
+        }
+      })
+    },
+     */
     initIPC: function () {
       if (this.IPCinited === true) {
         return this
@@ -2095,6 +2155,9 @@ module.exports = {
       return this
     },
     saveFile: function () {
+      if (this.enableSaveFile === false) {
+        return this.saveFileAs
+      }
       //console.log('saveFile')
       this.status.mainComponent.saveFile(this.status.filePath)
       return this
@@ -2228,6 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//const hotkeys = require('../../../vendors/hotkeys/hotkeys.min')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -2243,20 +2307,40 @@ module.exports = {
     },
   },
   //mounted: function () {
+    //this.initHotkeys()
   //},
   methods: {
+    /*
+    initHotkeys: function () {
+      console.log('aaa')
+      hotkeys('alt+`,ctrl+pageup,ctrl+pagedown', (event, handler) => {
+        console.log(handler.key)
+        switch (handler.key) {
+          case 'alt+`':
+            this.resizeToFitContent()
+            break
+          case 'ctrl+pageup':
+            this.fontSizeLarger()
+            break
+          case 'ctrl+pagedown':
+            this.fontSizeSmaller()
+            break
+        }
+      })
+    },
+     */
     resizeToFitContent: function () {
       //this.$parent.$refs.ContentText.resizeToFitContent()
       this.status.mainComponent.resizeToFitContent()
       return this
     },
-    fontSizePlus: function () {
+    fontSizeLarger: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = true
       //console.log(this.config.fontSizeRatio)
       return this
     },
-    fontSizeMinus: function () {
+    fontSizeSmaller: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
       //console.log(this.config.fontSizeRatio)
@@ -2556,9 +2640,9 @@ module.exports = {
   
   debug: {
     useTestContentText: false,
-    useTestCodeFile: false,
+    useTestCodeFile: true,
     useTestImageStaticFile: false,
-    useTestImageViewerFile: true,
+    useTestImageViewerFile: false,
     useTestPlainTextFile: false,
   }
 }
@@ -2866,6 +2950,18 @@ if (true) {
 if (true) {
   module.exports = createCSSSelector
 }
+
+/***/ }),
+
+/***/ "./app/webpack/src/vendors/hotkeys/hotkeys.min.js":
+/*!********************************************************!*\
+  !*** ./app/webpack/src/vendors/hotkeys/hotkeys.min.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*! hotkeys-js v3.6.14 | MIT (c) 2019 kenny wong <wowohoo@qq.com> | http://jaywcjlove.github.io/hotkeys */
+!function(e,t){ true?module.exports=t():undefined}(this,function(){"use strict";var e="undefined"!=typeof navigator&&0<navigator.userAgent.toLowerCase().indexOf("firefox");function s(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on".concat(t),function(){n(window.event)})}function p(e,t){for(var n=t.slice(0,t.length-1),o=0;o<n.length;o++)n[o]=e[n[o].toLowerCase()];return n}function d(e){e||(e="");for(var t=(e=e.replace(/\s/g,"")).split(","),n=t.lastIndexOf("");0<=n;)t[n-1]+=",",t.splice(n,1),n=t.lastIndexOf("");return t}function l(e,t){for(var n=e.length<t.length?t:e,o=e.length<t.length?e:t,r=!0,i=0;i<n.length;i++)~o.indexOf(n[i])||(r=!1);return r}for(var t={backspace:8,tab:9,clear:12,enter:13,return:13,esc:27,escape:27,space:32,left:37,up:38,right:39,down:40,del:46,delete:46,ins:45,insert:45,home:36,end:35,pageup:33,pagedown:34,capslock:20,"\u21ea":20,",":188,".":190,"/":191,"`":192,"-":e?173:189,"=":e?61:187,";":e?59:186,"'":222,"[":219,"]":221,"\\":220},u={"\u21e7":16,shift:16,"\u2325":18,alt:18,option:18,"\u2303":17,ctrl:17,control:17,"\u2318":e?224:91,cmd:e?224:91,command:e?224:91},y={16:"shiftKey",18:"altKey",17:"ctrlKey"},h={16:!1,18:!1,17:!1},v={},n=1;n<20;n++)t["f".concat(n)]=111+n;h[e?224:91]=!(y[e?224:91]="metaKey");var g=[],o="all",w=[],k=function(e){return t[e.toLowerCase()]||u[e.toLowerCase()]||e.toUpperCase().charCodeAt(0)};function i(e){o=e||"all"}function m(){return o||"all"}function O(e,t,n){var o;if(t.scope===n||"all"===t.scope){for(var r in o=0<t.mods.length,h)Object.prototype.hasOwnProperty.call(h,r)&&(!h[r]&&-1<t.mods.indexOf(+r)||h[r]&&!~t.mods.indexOf(+r))&&(o=!1);(0!==t.mods.length||h[16]||h[18]||h[17]||h[91])&&!o&&"*"!==t.shortcut||!1===t.method(e,t)&&(e.preventDefault?e.preventDefault():e.returnValue=!1,e.stopPropagation&&e.stopPropagation(),e.cancelBubble&&(e.cancelBubble=!0))}}function b(e){var t=v["*"],n=e.keyCode||e.which||e.charCode;if(C.filter.call(this,e)){if(93!==n&&224!==n||(n=91),~g.indexOf(n)||229===n||g.push(n),n in h){for(var o in h[n]=!0,u)u[o]===n&&(C[o]=!0);if(!t)return}for(var r in h)Object.prototype.hasOwnProperty.call(h,r)&&(h[r]=e[y[r]]);var i=m();if(t)for(var a=0;a<t.length;a++)t[a].scope===i&&("keydown"===e.type&&t[a].keydown||"keyup"===e.type&&t[a].keyup)&&O(e,t[a],i);if(n in v)for(var c=0;c<v[n].length;c++)if(("keydown"===e.type&&v[n][c].keydown||"keyup"===e.type&&v[n][c].keyup)&&v[n][c].key){for(var f=v[n][c].key.split("+"),l=[],s=0;s<f.length;s++)l.push(k(f[s]));(l=l.sort()).join("")===g.sort().join("")&&O(e,v[n][c],i)}}}function C(e,t,n){var o=d(e),r=[],i="all",a=document,c=0,f=!1,l=!0;for(void 0===n&&"function"==typeof t&&(n=t),"[object Object]"===Object.prototype.toString.call(t)&&(t.scope&&(i=t.scope),t.element&&(a=t.element),t.keyup&&(f=t.keyup),void 0!==t.keydown&&(l=t.keydown)),"string"==typeof t&&(i=t);c<o.length;c++)r=[],1<(e=o[c].split("+")).length&&(r=p(u,e)),(e="*"===(e=e[e.length-1])?"*":k(e))in v||(v[e]=[]),v[e].push({keyup:f,keydown:l,scope:i,mods:r,shortcut:o[c],method:n,key:o[c]});void 0!==a&&!function(e){return-1<w.indexOf(e)}(a)&&window&&(w.push(a),s(a,"keydown",function(e){b(e)}),s(window,"focus",function(){g=[]}),s(a,"keyup",function(e){b(e),function(e){var t=e.keyCode||e.which||e.charCode,n=g.indexOf(t);if(n<0||g.splice(n,1),e.key&&"meta"==e.key.toLowerCase()&&g.splice(0,g.length),93!==t&&224!==t||(t=91),t in h)for(var o in h[t]=!1,u)u[o]===t&&(C[o]=!1)}(e)}))}var r={setScope:i,getScope:m,deleteScope:function(e,t){var n,o;for(var r in e||(e=m()),v)if(Object.prototype.hasOwnProperty.call(v,r))for(n=v[r],o=0;o<n.length;)n[o].scope===e?n.splice(o,1):o++;m()===e&&i(t||"all")},getPressedKeyCodes:function(){return g.slice(0)},isPressed:function(e){return"string"==typeof e&&(e=k(e)),!!~g.indexOf(e)},filter:function(e){var t=e.target||e.srcElement,n=t.tagName,o=!0;return!t.isContentEditable&&"TEXTAREA"!==n&&("INPUT"!==n&&"TEXTAREA"!==n||t.readOnly)||(o=!1),o},unbind:function(e,t,n){var o,r,i=d(e),a=[];"function"==typeof t&&(n=t,t="all");for(var c=0;c<i.length;c++){if(a=1<(o=i[c].split("+")).length?p(u,o):[],e="*"===(e=o[o.length-1])?"*":k(e),t||(t=m()),!v[e])return;for(var f=0;f<v[e].length;f++)r=v[e][f],n&&r.method!==n||r.scope!==t||!l(r.mods,a)||(v[e][f]={})}}};for(var a in r)Object.prototype.hasOwnProperty.call(r,a)&&(C[a]=r[a]);if("undefined"!=typeof window){var c=window.hotkeys;C.noConflict=function(e){return e&&window.hotkeys===C&&(window.hotkeys=c),C},window.hotkeys=C}return C});
 
 /***/ }),
 
@@ -3542,6 +3638,7 @@ var render = function() {
             {
               staticClass: "fitted item top-toggle",
               class: { active: _vm.status.isPinTop },
+              attrs: { title: "Toggle always top (ctrl+`)" },
               on: { click: _vm.toggleAlwaysOnTop }
             },
             [_c("i", { staticClass: "map pin icon" })]
@@ -3600,7 +3697,7 @@ var render = function() {
                   _c("div", { staticClass: "divider" }),
                   _vm._v(" "),
                   _c("submenu-file", {
-                    ref: "SubmenuSize",
+                    ref: "SubmenuFile",
                     attrs: {
                       lib: _vm.lib,
                       status: _vm.status,
@@ -3709,7 +3806,8 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "save icon" }),
-            _vm._v("\n       Save\n     ")
+            _vm._v("\n       Save\n       "),
+            _c("div", { staticClass: "description" }, [_vm._v("ctrl+s")])
           ]
         )
       : _vm._e(),
@@ -3727,7 +3825,8 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "save outline icon" }),
-            _vm._v("\n       Save as...\n     ")
+            _vm._v("\n       Save as...\n       "),
+            _c("div", { staticClass: "description" }, [_vm._v("ctrl+shift+s")])
           ]
         )
       : _vm._e(),
@@ -3745,7 +3844,8 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "folder open outline icon" }),
-            _vm._v("\n       Open folder...\n     ")
+            _vm._v("\n       Open folder...\n       "),
+            _c("div", { staticClass: "description" }, [_vm._v("ctrl+o")])
           ]
         )
       : _vm._e(),
@@ -3762,7 +3862,8 @@ var render = function() {
       },
       [
         _c("i", { staticClass: "edit icon" }),
-        _vm._v("\n       Open in editor...\n     ")
+        _vm._v("\n       Open in editor...\n       "),
+        _c("div", { staticClass: "description" }, [_vm._v("ctrl+e")])
       ]
     )
   ])
@@ -3799,7 +3900,7 @@ var render = function() {
                 staticClass: "three wide column font-size-minus",
                 on: {
                   click: function($event) {
-                    return _vm.fontSizeMinus()
+                    return _vm.fontSizeSmaller()
                   }
                 }
               },
@@ -3826,7 +3927,7 @@ var render = function() {
                 staticClass: "three wide column font-size-plus",
                 on: {
                   click: function($event) {
-                    return _vm.fontSizePlus()
+                    return _vm.fontSizeLarger()
                   }
                 }
               },
@@ -3857,7 +3958,8 @@ var render = function() {
       },
       [
         _c("i", { staticClass: "compress icon" }),
-        _vm._v("\n    Resize to fit content\n  ")
+        _vm._v("\n    Resize to fit content\n    "),
+        _c("div", { staticClass: "description" }, [_vm._v("alt+`")])
       ]
     )
   ])

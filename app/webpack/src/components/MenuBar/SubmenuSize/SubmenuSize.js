@@ -1,3 +1,4 @@
+//const hotkeys = require('../../../vendors/hotkeys/hotkeys.min')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -13,20 +14,40 @@ module.exports = {
     },
   },
   //mounted: function () {
+    //this.initHotkeys()
   //},
   methods: {
+    /*
+    initHotkeys: function () {
+      console.log('aaa')
+      hotkeys('alt+`,ctrl+pageup,ctrl+pagedown', (event, handler) => {
+        console.log(handler.key)
+        switch (handler.key) {
+          case 'alt+`':
+            this.resizeToFitContent()
+            break
+          case 'ctrl+pageup':
+            this.fontSizeLarger()
+            break
+          case 'ctrl+pagedown':
+            this.fontSizeSmaller()
+            break
+        }
+      })
+    },
+     */
     resizeToFitContent: function () {
       //this.$parent.$refs.ContentText.resizeToFitContent()
       this.status.mainComponent.resizeToFitContent()
       return this
     },
-    fontSizePlus: function () {
+    fontSizeLarger: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = true
       //console.log(this.config.fontSizeRatio)
       return this
     },
-    fontSizeMinus: function () {
+    fontSizeSmaller: function () {
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
       //console.log(this.config.fontSizeRatio)

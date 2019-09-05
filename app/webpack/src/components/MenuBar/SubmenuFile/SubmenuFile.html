@@ -4,22 +4,26 @@
           v-if="enableSaveFile">
        <i class="save icon"></i>
        Save
+       <div class="description">ctrl+s</div>
      </div>
      <div class="item"
           v-on:click="saveFileAs()"
           v-if="enableSaveFileAs">
        <i class="save outline icon"></i>
        Save as...
+       <div class="description">ctrl+shift+s</div>
      </div>
      <div class="item"
           v-on:click="openFolder()"
           v-if="typeof(status.filePath) === 'string'">
        <i class="folder open outline icon"></i>
        Open folder...
+       <div class="description">ctrl+o</div>
      </div>
      <div class="item"
           v-on:click="openEditor()">
        <i class="edit icon"></i>
        Open in editor...
+       <div class="description">ctrl+e</div>
      </div>
 </fragment>

@@ -7,7 +7,7 @@
     -->
     <div class="ui grid font-size-control-panel">
       <div class="three wide column font-size-minus"
-           v-on:click="fontSizeMinus()">
+           v-on:click="fontSizeSmaller()">
         <button type="button" class="ui icon mini compact left floated button">
           <i class="minus icon"></i>
         </button>
@@ -17,7 +17,7 @@
         Font size
       </div>
       <div class="three wide column font-size-plus"
-           v-on:click="fontSizePlus()">
+           v-on:click="fontSizeLarger()">
         <button type="button" class="ui icon mini compact right floated button">
           <i class="plus icon"></i>
         </button>
@@ -28,5 +28,6 @@
        v-on:click="resizeToFitContent()">
     <i class="compress icon"></i>
     Resize to fit content
+    <div class="description">alt+`</div>
   </div>
 </fragment>

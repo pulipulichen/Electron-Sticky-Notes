@@ -5,11 +5,13 @@ const SubmenuTheme = require('./SubmenuTheme/SubmenuTheme.vue').default
 const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue').default
 const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
 
+const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
   data() {    
     this.$i18n.locale = this.config.locale
+    this.lib.hotkeys = hotkeys
     //console.log(this.$parent.a())
     return {
       header: '',
@@ -45,8 +47,45 @@ module.exports = {
   },  // computed: {
   mounted: function () {
     window.$(this.$refs.Submenu).dropdown()
+    this.initHotkeys()
   },
   methods: {
+    initHotkeys: function () {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+        //console.log(handler.key)
+        switch (handler.key) {
+          case 'ctrl+`':
+            this.toggleAlwaysOnTop()
+            break
+          case 'ctrl+m':
+            this.toggleMaximize()
+            break
+            
+          case 'alt+`':
+            this.$refs.SubmenuSize.resizeToFitContent()
+            break
+          case 'ctrl+pageup':
+            this.$refs.SubmenuSize.fontSizeLarger()
+            break
+          case 'ctrl+pagedown':
+            this.$refs.SubmenuSize.fontSizeSmaller()
+            break
+            
+          case 'ctrl+s':
+            this.$refs.SubmenuFile.saveFile()
+            break
+          case 'ctrl+shift+s':
+            this.$refs.SubmenuFile.saveFileAs()
+            break
+          case 'ctrl+o':
+            this.$refs.SubmenuFile.openFolder()
+            break
+          case 'ctrl+e':
+            this.$refs.SubmenuFile.openEditor()
+            break
+        }
+      })
+    },
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {
         this.status.isPinTop = (this.status.isPinTop === false)

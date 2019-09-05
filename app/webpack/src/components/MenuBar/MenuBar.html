@@ -2,7 +2,8 @@
   <a class="fitted item top-toggle"
     v-on:click="toggleAlwaysOnTop"
     v-bind:class="{active: status.isPinTop}"
-    v-if="status.isMaximized === false">
+    v-if="status.isMaximized === false"
+    title="Toggle always top (ctrl+`)">
      <i class="map pin icon"></i>  
   </a>
 
@@ -47,7 +48,7 @@
         <submenu-file v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"
-              ref="SubmenuSize"></submenu-file>
+              ref="SubmenuFile"></submenu-file>
         
       </div>
     </a>
