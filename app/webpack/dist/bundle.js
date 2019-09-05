@@ -897,7 +897,8 @@ module.exports = {
       filterConfigJSON: {
         'ico': 'Icon File',
         'svg': 'Scalable Vector Graphics File',
-      }
+      },
+      basicRatio: null
     }
   },
   computed: {
@@ -918,7 +919,7 @@ module.exports = {
       if (this.status.fileType === 'image-static'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
-        this.imagePath = this.status.filePath
+        this.imagePath = this.status.filePath.split('\\').join('/')
       }
       return this
     },
@@ -930,12 +931,59 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent(true, () => {
           this.detector.css('width', '100vw')
-          window.onresize = () => {
-            this.resizeToFitContent(false)
-          }
+          this.initWindowResizeRestictRation()
         })
       })
       return this
+    },
+    /**
+     * 廢棄不做
+     * @deprecated 20190906
+     * @returns {undefined}
+     */
+    initWindowResizeRestictRation: function () {
+
+      let basicWidth = this.detector.width()
+      let basicHeight = this.detector.height()
+      this.basicRatio = basicWidth / basicHeight
+      //this.basicRatio = Math.ceil(basicRatio * 1000) / 1000
+      /*
+      let resizeLock = false
+      
+
+      window.onresize = () => {
+        if (resizeLock === true) {
+          return this
+        }
+        
+        let windowWidth = window.outerWidth
+        let windowHeight = window.outerHeight
+        windowHeight = windowHeight - this.config.menuBarHeight
+        
+        let windowRatio = windowWidth / windowHeight
+        windowRatio = Math.ceil(windowRatio * 1000) / 1000
+        console.log([windowRatio, basicRatio])
+        
+        if (windowRatio > basicRatio) {
+          // 不夠高
+          windowWidth = windowHeight / basicRatio
+          windowHeight = windowHeight + this.config.menuBarHeight
+          resizeLock = true
+          console.log([windowWidth, windowHeight])
+          window.resizeTo(windowWidth, windowHeight)
+          resizeLock = false
+        }
+        else if (windowRatio < basicRatio) {
+          // 不夠寬
+          windowHeight = windowWidth * basicRatio
+          windowHeight = windowHeight + this.config.menuBarHeight
+          resizeLock = true
+          console.log([windowWidth, windowHeight])
+          window.resizeTo(windowWidth, windowHeight)
+          resizeLock = false
+        }
+      }
+       */
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
@@ -952,6 +1000,10 @@ module.exports = {
       }
     },
     resizeToFitContent: function (isRestrictSize, callback) {
+      if (typeof(this.basicRatio) === 'number') {
+        return this.resizeToRatio()
+      }
+      
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
@@ -961,6 +1013,32 @@ module.exports = {
         }
       }, 0)
     },
+    resizeToRatio: function () {
+      let basicRatio = this.basicRatio
+      
+      let windowWidth = window.outerWidth
+      let windowHeight = window.outerHeight
+      windowHeight = windowHeight - this.config.menuBarHeight
+
+      let windowRatio = windowWidth / windowHeight
+      windowRatio = Math.ceil(windowRatio * 1000) / 1000
+      console.log([windowRatio, basicRatio])
+      
+      if (windowRatio > basicRatio) {
+        // 太寬
+        windowWidth = windowHeight / basicRatio
+        windowHeight = windowHeight + this.config.menuBarHeight
+        console.log([windowWidth, windowHeight])
+        window.resizeTo(windowWidth, windowHeight)
+      }
+      else if (windowRatio < basicRatio) {
+        // 太高
+        windowHeight = windowWidth * basicRatio
+        windowHeight = windowHeight + this.config.menuBarHeight
+        console.log([windowWidth, windowHeight])
+        window.resizeTo(windowWidth, windowHeight)
+      }
+    }
   } // methods
 }
 
@@ -2907,7 +2985,7 @@ exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;EAEA,WAAA;EACA,uBAAA;ACDF;ADIA;EACE,YAAA;EACA,YAAA;EAEA,kBAAA;EACA,MAAA;EACA,OAAA;ACHF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto;\n  height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  height: auto;\n  \n  position: absolute;\n  top: 0;\n  left: 0;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;EAEA,WAAA;EACA,uBAAA;ACCF;ADEA;EACE,YAAA;EAEA,kBAAA;EACA,OAAA;EACA,4BAAA;EACA,2BAAA;EACA,wBAAA;ACDF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto;\n  height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  \n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n"]}]);
 
 
 /***/ }),
@@ -3062,12 +3140,13 @@ var render = function() {
           attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
         }),
         _vm._v(" "),
-        _c("img", {
+        _c("div", {
           staticClass: "content-image",
           style: {
-            top: _vm.config.menuBarHeight + "px"
-          },
-          attrs: { src: _vm.attrSrc }
+            top: _vm.config.menuBarHeight + "px",
+            height: "calc(100vh - " + _vm.config.menuBarHeight + "px)",
+            "background-image": "url(" + _vm.attrSrc + ")"
+          }
         })
       ])
     : _vm._e()

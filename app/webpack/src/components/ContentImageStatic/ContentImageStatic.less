@@ -1,7 +1,7 @@
 .resize-detector {
   z-index: 10;
   opacity: 0.5;
-  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行
+  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行
   position: absolute;
   left: 0;
   
@@ -11,9 +11,10 @@
 
 .content-image {
   width: 100vw;
-  height: auto;
   
   position: absolute;
-  top: 0;
   left: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }

@@ -8,9 +8,11 @@
        ref="ResizeDetector"
        v-bind:load="resizeToFitContent" />
   
-  <img v-bind:src="attrSrc" 
+  <div class="content-image"
        v-bind:style="{
-          'top': config.menuBarHeight + 'px'
-       }"
-       class="content-image" />
+          'top': config.menuBarHeight + 'px',
+          'height': 'calc(100vh - ' + config.menuBarHeight + 'px)',
+          'background-image': 'url(' + attrSrc + ')'
+       }">
+  </div>
 </div>

@@ -10,7 +10,8 @@ module.exports = {
       filterConfigJSON: {
         'ico': 'Icon File',
         'svg': 'Scalable Vector Graphics File',
-      }
+      },
+      basicRatio: null
     }
   },
   computed: {
@@ -31,7 +32,7 @@ module.exports = {
       if (this.status.fileType === 'image-static'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
-        this.imagePath = this.status.filePath
+        this.imagePath = this.status.filePath.split('\\').join('/')
       }
       return this
     },
@@ -43,12 +44,59 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent(true, () => {
           this.detector.css('width', '100vw')
-          window.onresize = () => {
-            this.resizeToFitContent(false)
-          }
+          this.initWindowResizeRestictRation()
         })
       })
       return this
+    },
+    /**
+     * 廢棄不做
+     * @deprecated 20190906
+     * @returns {undefined}
+     */
+    initWindowResizeRestictRation: function () {
+
+      let basicWidth = this.detector.width()
+      let basicHeight = this.detector.height()
+      this.basicRatio = basicWidth / basicHeight
+      //this.basicRatio = Math.ceil(basicRatio * 1000) / 1000
+      /*
+      let resizeLock = false
+      
+
+      window.onresize = () => {
+        if (resizeLock === true) {
+          return this
+        }
+        
+        let windowWidth = window.outerWidth
+        let windowHeight = window.outerHeight
+        windowHeight = windowHeight - this.config.menuBarHeight
+        
+        let windowRatio = windowWidth / windowHeight
+        windowRatio = Math.ceil(windowRatio * 1000) / 1000
+        console.log([windowRatio, basicRatio])
+        
+        if (windowRatio > basicRatio) {
+          // 不夠高
+          windowWidth = windowHeight / basicRatio
+          windowHeight = windowHeight + this.config.menuBarHeight
+          resizeLock = true
+          console.log([windowWidth, windowHeight])
+          window.resizeTo(windowWidth, windowHeight)
+          resizeLock = false
+        }
+        else if (windowRatio < basicRatio) {
+          // 不夠寬
+          windowHeight = windowWidth * basicRatio
+          windowHeight = windowHeight + this.config.menuBarHeight
+          resizeLock = true
+          console.log([windowWidth, windowHeight])
+          window.resizeTo(windowWidth, windowHeight)
+          resizeLock = false
+        }
+      }
+       */
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
@@ -65,6 +113,10 @@ module.exports = {
       }
     },
     resizeToFitContent: function (isRestrictSize, callback) {
+      if (typeof(this.basicRatio) === 'number') {
+        return this.resizeToRatio()
+      }
+      
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
@@ -74,5 +126,31 @@ module.exports = {
         }
       }, 0)
     },
+    resizeToRatio: function () {
+      let basicRatio = this.basicRatio
+      
+      let windowWidth = window.outerWidth
+      let windowHeight = window.outerHeight
+      windowHeight = windowHeight - this.config.menuBarHeight
+
+      let windowRatio = windowWidth / windowHeight
+      windowRatio = Math.ceil(windowRatio * 1000) / 1000
+      console.log([windowRatio, basicRatio])
+      
+      if (windowRatio > basicRatio) {
+        // 太寬
+        windowWidth = windowHeight / basicRatio
+        windowHeight = windowHeight + this.config.menuBarHeight
+        console.log([windowWidth, windowHeight])
+        window.resizeTo(windowWidth, windowHeight)
+      }
+      else if (windowRatio < basicRatio) {
+        // 太高
+        windowHeight = windowWidth * basicRatio
+        windowHeight = windowHeight + this.config.menuBarHeight
+        console.log([windowWidth, windowHeight])
+        window.resizeTo(windowWidth, windowHeight)
+      }
+    }
   } // methods
 }
