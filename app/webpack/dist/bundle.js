@@ -195,6 +195,7 @@ let VueController = {
   data: {
     config: config,
     status: {
+      winID: null,
       isMaximized: false,
       isPinTop: false,
       isReady: false,
@@ -230,6 +231,7 @@ let VueController = {
     
     this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6___default.a
     
+    
     this.status.mode = this.lib.win.mode
     if (typeof(this.lib.win.filePath) === 'string') {
       this.status.filePath = this.lib.win.filePath
@@ -256,7 +258,6 @@ let VueController = {
       this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
-      this.initTheme()
       //console.log('OK')
       this.status.isReady = true
       this.lib.win.show()
@@ -341,11 +342,6 @@ let VueController = {
       
       return this
     },
-    initTheme: function () {
-      console.log('initTheme')
-      this.status.theme = this.config.themes[0]
-      return this
-    }
   } // methods: {
 }
 
@@ -2416,8 +2412,7 @@ module.exports = {
   watch: {
     'themes': function () {
       if (Array.isArray(this.themes) && this.themes.length > 0) {
-        
-        console.log('a')
+        this.initTheme()
         this.initSelect()
       }
     },
@@ -2443,6 +2438,14 @@ module.exports = {
         })
       }, 0)
         
+    },
+    initTheme: function () {
+      //console.log('initTheme')
+      let min = 0
+      let max = this.config.themes.length - 1
+      let id = Math.floor(Math.random() * (max - min + 1)) + min;
+      this.status.theme = this.config.themes[id]
+      return this
     }
   }
 }

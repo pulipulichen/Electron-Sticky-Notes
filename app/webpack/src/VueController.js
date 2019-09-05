@@ -19,6 +19,7 @@ let VueController = {
   data: {
     config: config,
     status: {
+      winID: null,
       isMaximized: false,
       isPinTop: false,
       isReady: false,
@@ -54,6 +55,7 @@ let VueController = {
     
     this.lib.WindowHelper = WindowHelper
     
+    
     this.status.mode = this.lib.win.mode
     if (typeof(this.lib.win.filePath) === 'string') {
       this.status.filePath = this.lib.win.filePath
@@ -80,7 +82,6 @@ let VueController = {
       this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
-      this.initTheme()
       //console.log('OK')
       this.status.isReady = true
       this.lib.win.show()
@@ -165,11 +166,6 @@ let VueController = {
       
       return this
     },
-    initTheme: function () {
-      console.log('initTheme')
-      this.status.theme = this.config.themes[0]
-      return this
-    }
   } // methods: {
 }
 

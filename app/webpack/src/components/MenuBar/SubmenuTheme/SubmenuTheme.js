@@ -9,8 +9,7 @@ module.exports = {
   watch: {
     'themes': function () {
       if (Array.isArray(this.themes) && this.themes.length > 0) {
-        
-        console.log('a')
+        this.initTheme()
         this.initSelect()
       }
     },
@@ -36,6 +35,14 @@ module.exports = {
         })
       }, 0)
         
+    },
+    initTheme: function () {
+      //console.log('initTheme')
+      let min = 0
+      let max = this.config.themes.length - 1
+      let id = Math.floor(Math.random() * (max - min + 1)) + min;
+      this.status.theme = this.config.themes[id]
+      return this
     }
   }
 }
