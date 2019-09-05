@@ -2364,19 +2364,35 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuSize/Subme
 
 /***/ }),
 
-/***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true&":
-/*!**********************************************************************************************************************!*\
-  !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true& ***!
-  \**********************************************************************************************************************/
+/***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&":
+/*!********************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.global.less?vue&type=style&index=0&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&":
+/*!**********************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538& ***!
+  \**********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./SubmenuTheme.html?vue&type=template&id=cb1a8538& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -2394,16 +2410,41 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale
     return {
-      
+      themes: []
     }
   },
+  watch: {
+    'themes': function () {
+      if (Array.isArray(this.themes) && this.themes.length > 0) {
+        
+        console.log('a')
+        this.initSelect()
+      }
+    },
+    'status.theme': function () {
+      window.$(this.$refs.ThemeDropdownContainer).find('.ui.dropdown.selection').css('background-color', this.status.theme)
+    }
+  },  // watch: {
   //computed: {
   //},
   mounted: function () {
-    window.$(this.$refs.Submenu).dropdown()
+    //this.initSelect()
+    this.themes = this.config.themes
   },
-  //methods: {
-  //}
+  methods: {
+    initSelect: function () {
+      window.$(this.$refs.ThemeDropdown).dropdown()
+      
+      setTimeout(() => {
+        //console.log(window.$(this.$refs.ThemeDropdownContainer).find('.menu .item[data-value]').length)
+        window.$(this.$refs.ThemeDropdownContainer).find('.menu .item[data-value]').each((i, div) => {
+          div = window.$(div)
+          div.css('border-color', div.attr('data-value'))
+        })
+      }, 0)
+        
+    }
+  }
 }
 
 /***/ }),
@@ -2440,22 +2481,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&":
-/*!*************************************************************************************************************************************!*\
-  !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& ***!
-  \*************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
 /***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.vue":
 /*!**************************************************************************!*\
   !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.vue ***!
@@ -2465,10 +2490,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true&");
+/* harmony import */ var _SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SubmenuTheme.html?vue&type=template&id=cb1a8538& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&");
 /* harmony import */ var _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubmenuTheme.js?vue&type=script&lang=js& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.js?vue&type=script&lang=js&?3f96");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _SubmenuTheme_less_vue_type_style_index_0_id_cb1a8538_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&");
+/* harmony import */ var _SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SubmenuTheme.global.less?vue&type=style&index=0&lang=less& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&");
 /* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
 /* harmony import */ var _SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue");
 
@@ -2481,11 +2506,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SubmenuTheme_html_vue_type_template_id_cb1a8538_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "cb1a8538",
+  null,
   null
   
 )
@@ -3285,16 +3310,16 @@ exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"","file":"SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&"}]);
+exports.push([module.i, ".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","SubmenuTheme.global.less"],"names":[],"mappings":"AAAA;ECCE;;;;;;GAMC;AACH;ADRA;EAEI,8BAAA;ACSJ;ADPI;EACE,2BAAA;ACSN;ADdA;;EAWI,mCAAA;EACA,8BAAA;EACA,kCAAA;ACOJ","file":"SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","sourcesContent":[".theme-select {\n  i.dropdown.icon {\n    margin-top: -0.5rem !important;\n\n    &:before {\n      content: \"\\f0d7\" !important;\n    }\n  }\n  \n  .menu .item[data-value],\n  .menu .item.active[data-value] {\n    border-width: 0 0 0 1rem !important;\n    border-style: solid !important;\n    border-left-width: 1rem !important;\n\n  }\n  \n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n  \n\n",".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -3841,10 +3866,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.html?vue&type=template&id=cb1a8538& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3857,15 +3882,53 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c("div", { staticClass: "item" }, [
-      _c("i", { staticClass: "dropdown icon" }),
-      _vm._v(" "),
-      _c("span", { staticClass: "text" }, [_vm._v("Theme")]),
-      _vm._v(" "),
-      _c("div", { ref: "Submenu", staticClass: "menu" }, [
-        _c("div", { staticClass: "item" }, [_vm._v("\n        COLORS\n      ")])
-      ])
-    ])
+    _c(
+      "div",
+      { ref: "ThemeDropdownContainer", staticClass: "item theme-select" },
+      [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.status.theme,
+                expression: "status.theme"
+              }
+            ],
+            ref: "ThemeDropdown",
+            staticClass: "ui dropdown",
+            style: { backgroundColor: _vm.status.theme },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.status,
+                  "theme",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          _vm._l(_vm.themes, function(theme) {
+            return _c(
+              "option",
+              { style: { backgroundColor: theme }, domProps: { value: theme } },
+              [_vm._v("\n        " + _vm._s(theme.toUpperCase()) + "\n      ")]
+            )
+          }),
+          0
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -4064,22 +4127,22 @@ if(false) {}
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=0&id=cb1a8538&lang=less&scoped=true&");
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.global.less?vue&type=style&index=0&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
-var update = add("5b31621a", content, false, {});
+var update = add("48cfadb8", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

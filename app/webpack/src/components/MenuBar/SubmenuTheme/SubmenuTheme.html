@@ -1,11 +1,15 @@
 <fragment>
-  <div class="item">
-    <i class="dropdown icon"></i>
-    <span class="text">Theme</span>
-    <div class="menu" ref="Submenu">
-      <div class="item">
-        COLORS
-      </div>      
-    </div>
+  <div class="item theme-select"
+       ref="ThemeDropdownContainer">
+    <select class="ui dropdown" 
+            v-model="status.theme"
+            ref="ThemeDropdown"
+            v-bind:style="{'backgroundColor': status.theme}">
+      <option v-for="theme in themes"
+              v-bind:value="theme"
+              v-bind:style="{'backgroundColor': theme}">
+        {{ theme.toUpperCase() }}
+      </option>
+    </select>
   </div>
 </fragment>
