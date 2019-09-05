@@ -5,6 +5,7 @@ module.exports = {
     this.$i18n.locale = this.config.locale
     //console.log(this.$parent.a())
     return {
+      IPCinited: false
     }
   },
   computed: {
@@ -16,14 +17,21 @@ module.exports = {
       return (['plain-text', 'code', 'rich-format', 'image'].indexOf(this.status.fileType) > -1)
     }
   },
-  mounted: function () {
-    this.initIPC()
-  },
+  //mounted: function () {
+  //  this.initIPC()
+  //},
   methods: {
     initIPC: function () {
-      this.lib.ipc.on('file-selected-callback', (filePath) => {
+      if (this.IPCinited === true) {
+        return this
+      }
+      
+      this.ipc.on('file-selected-callback', (filePath) => {
         this.saveFileAsCallback(filePath)
       })
+      
+      this.IPCinited = true
+      return this
     },
     openFolder: function () {
       //console.error('openFolder')
@@ -59,10 +67,12 @@ module.exports = {
     saveFileAs: function () {
       //console.log('saveFileAs')
       // select a path
+      this.initIPC()
+      
       let dir = this.lib.ElectronFileHelper.dirname(this.status.filePath)
       let filters = this.status.mainComponent.getFilters(this.status.filePath)
       
-      this.lib.ipc.send('open-file-select-dialog', null, dir, filters)
+      this.ipc.send('open-file-select-dialog', null, dir, filters)
       
       return this
     },
@@ -74,6 +84,7 @@ module.exports = {
         this.status.filePath = filePath
         this.$parent.resetNoteHeader()
       }
+      return this
     }
   }
 }

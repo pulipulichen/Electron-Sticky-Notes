@@ -57,17 +57,25 @@ module.exports = {
       }
       return this
     },
-    resizeToFitContent: function () {
+    resizeToFitContent: function (isRestrictSize) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         
-        if (width < this.config.minWidthPx) {
-          width = this.config.minWidthPx
-        }
-        if (height < this.config.minHeightPx) {
-          height = this.config.minHeightPx
+        if (isRestrictSize !== false) {
+          if (width < this.config.minWidthPx) {
+            width = this.config.minWidthPx
+          }
+          if (height < this.config.minHeightPx) {
+            height = this.config.minHeightPx
+          }
         }
         
+        if (width > screen.availWidth) {
+          width = screen.availWidth
+        }
+        if (height > screen.availHeight) {
+          height = screen.availHeight
+        }
         
         //console.log(width, height)
         window.resizeTo(width, height)
@@ -103,7 +111,7 @@ module.exports = {
       
       if (width > windowWidth 
               || height > windowHeight) {
-        return this.resizeToFitContent()
+        return this.resizeToFitContent(false)
       }
       
       return this

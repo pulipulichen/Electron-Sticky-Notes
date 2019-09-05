@@ -5,6 +5,7 @@ import ContentImage from './components/ContentImage/ContentImage.vue'
 import ContentCode from './components/ContentCode/ContentCode.vue'
 const config = require('./config.js')
 require('./styles/global.less')
+import WindowHelper from './helpers/WindowHelper'
 
 import Fragment from 'vue-fragment'
 Vue.use(Fragment.Plugin)
@@ -45,6 +46,8 @@ let VueController = {
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
     this.lib.ipc = this.lib.electron.ipcRenderer
+    
+    this.lib.WindowHelper = WindowHelper
     
     this.status.mode = this.lib.win.mode
     if (typeof(this.lib.win.filePath) === 'string') {

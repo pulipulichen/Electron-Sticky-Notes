@@ -19,6 +19,7 @@ let ElectronHelper = {
     this.lib.electron = RequireHelper.require('electron')
     this.lib.clipboard = this.lib.electron.clipboard
     this.lib.shell = this.lib.electron.remote.shell
+    this.lib.ipc = this.lib.electron.ipcRenderer
     
     
     if (typeof(process) === 'object' && typeof(process.env) === 'object') {
@@ -232,7 +233,12 @@ let ElectronHelper = {
   getElectron: function () {
     this.init()
     return this.lib.electron
+  },
+  getIPC: function () {
+    this.init()
+    return this.lib.ipc
   }
+  
 }
 
 //EectronHelper.init()

@@ -81,6 +81,13 @@ module.exports = {
           height = this.config.minHeightPx
         }
         
+        if (width > screen.availWidth) {
+          width = screen.availWidth
+        }
+        if (height > screen.availHeight) {
+          height = screen.availHeight
+        }
+        
         //console.log(width, height)
         window.resizeTo(width, height)
       }, 0)
