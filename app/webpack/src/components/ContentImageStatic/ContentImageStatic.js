@@ -24,7 +24,6 @@ module.exports = {
     setTimeout(() => {
       this.initDetector()
       this.setupImage()
-      //this.resizeToFitContent()
     }, 0)
   },
   methods: {
@@ -42,7 +41,12 @@ module.exports = {
         this.detector = window.$(this.$refs.ResizeDetector)
       }
       this.detector.bind('load', () => {
-        this.resizeToFitContent()
+        this.resizeToFitContent(true, () => {
+          this.detector.css('width', '100vw')
+          window.onresize = () => {
+            this.resizeToFitContent(false)
+          }
+        })
       })
       return this
     },
@@ -60,10 +64,14 @@ module.exports = {
         height: height
       }
     },
-    resizeToFitContent: function (isRestrictSize) {
+    resizeToFitContent: function (isRestrictSize, callback) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
+        
+        if (typeof(callback) === 'function') {
+          callback()
+        }
       }, 0)
     },
   } // methods

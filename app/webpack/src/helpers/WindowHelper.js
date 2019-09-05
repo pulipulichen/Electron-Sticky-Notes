@@ -1,34 +1,31 @@
 let WindowHelper = {
   resizeToFitContent: function (width, maxWidth, height, maxHeight, isRestrictSize) {
-    setTimeout(() => {
-      
-      if (isRestrictSize !== false) {
-        if (width < maxWidth) {
-          width = maxWidth
-        }
-        if (height < maxHeight) {
-          height = maxHeight
-        }
+    if (isRestrictSize !== false) {
+      if (width < maxWidth) {
+        width = maxWidth
       }
+      if (height < maxHeight) {
+        height = maxHeight
+      }
+    }
 
-      if (width > screen.availWidth) {
-        width = screen.availWidth
-      }
-      if (height > screen.availHeight) {
-        height = screen.availHeight
-      }
+    if (width > screen.availWidth) {
+      width = screen.availWidth
+    }
+    if (height > screen.availHeight) {
+      height = screen.availHeight
+    }
 
-      //console.log(width, height)
-      window.resizeTo(width, height)
-      
-      this.moveToVisiable()
-    }, 0)
+    //console.log(width, height)
+    window.resizeTo(width, height)
+
+    this.moveToVisiable()
     
     return this
   },
   moveToVisiable: function () {
     let leftChanged
-    let left = window.screenX
+    let left = window.screenX - screen.availLeft
     let right = left + window.outerWidth
     let maxRight = screen.availWidth
     
@@ -43,7 +40,7 @@ let WindowHelper = {
     //console.log([left, right, maxRight, leftChanged])
     
     let topChanged
-    let top = window.screenY
+    let top = window.screenY - screen.availTop
     let bottom = top + window.outerHeight
     let maxBottom = screen.availHeight
     if (bottom > maxBottom) {
@@ -61,6 +58,9 @@ let WindowHelper = {
       if (topChanged === undefined) {
         topChanged = top
       }
+      
+      leftChanged = leftChanged + screen.availLeft
+      topChanged = topChanged + screen.availTop
       
       //console.log([leftChanged, topChanged])
       window.moveTo(leftChanged, topChanged)

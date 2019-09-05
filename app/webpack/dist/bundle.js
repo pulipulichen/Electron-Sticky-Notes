@@ -911,7 +911,6 @@ module.exports = {
     setTimeout(() => {
       this.initDetector()
       this.setupImage()
-      //this.resizeToFitContent()
     }, 0)
   },
   methods: {
@@ -929,7 +928,12 @@ module.exports = {
         this.detector = window.$(this.$refs.ResizeDetector)
       }
       this.detector.bind('load', () => {
-        this.resizeToFitContent()
+        this.resizeToFitContent(true, () => {
+          this.detector.css('width', '100vw')
+          window.onresize = () => {
+            this.resizeToFitContent(false)
+          }
+        })
       })
       return this
     },
@@ -947,10 +951,14 @@ module.exports = {
         height: height
       }
     },
-    resizeToFitContent: function (isRestrictSize) {
+    resizeToFitContent: function (isRestrictSize, callback) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
+        
+        if (typeof(callback) === 'function') {
+          callback()
+        }
       }, 0)
     },
   } // methods
@@ -2315,35 +2323,32 @@ if (true) {
 
 let WindowHelper = {
   resizeToFitContent: function (width, maxWidth, height, maxHeight, isRestrictSize) {
-    setTimeout(() => {
-      
-      if (isRestrictSize !== false) {
-        if (width < maxWidth) {
-          width = maxWidth
-        }
-        if (height < maxHeight) {
-          height = maxHeight
-        }
+    if (isRestrictSize !== false) {
+      if (width < maxWidth) {
+        width = maxWidth
       }
+      if (height < maxHeight) {
+        height = maxHeight
+      }
+    }
 
-      if (width > screen.availWidth) {
-        width = screen.availWidth
-      }
-      if (height > screen.availHeight) {
-        height = screen.availHeight
-      }
+    if (width > screen.availWidth) {
+      width = screen.availWidth
+    }
+    if (height > screen.availHeight) {
+      height = screen.availHeight
+    }
 
-      //console.log(width, height)
-      window.resizeTo(width, height)
-      
-      this.moveToVisiable()
-    }, 0)
+    //console.log(width, height)
+    window.resizeTo(width, height)
+
+    this.moveToVisiable()
     
     return this
   },
   moveToVisiable: function () {
     let leftChanged
-    let left = window.screenX
+    let left = window.screenX - screen.availLeft
     let right = left + window.outerWidth
     let maxRight = screen.availWidth
     
@@ -2358,7 +2363,7 @@ let WindowHelper = {
     //console.log([left, right, maxRight, leftChanged])
     
     let topChanged
-    let top = window.screenY
+    let top = window.screenY - screen.availTop
     let bottom = top + window.outerHeight
     let maxBottom = screen.availHeight
     if (bottom > maxBottom) {
@@ -2376,6 +2381,9 @@ let WindowHelper = {
       if (topChanged === undefined) {
         topChanged = top
       }
+      
+      leftChanged = leftChanged + screen.availLeft
+      topChanged = topChanged + screen.availTop
       
       //console.log([leftChanged, topChanged])
       window.moveTo(leftChanged, topChanged)
@@ -2899,7 +2907,7 @@ exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;EAEA,sBAAA;EACA,uBAAA;ACDF;ADIA;EACE,YAAA;EACA,YAAA;EAEA,kBAAA;EACA,MAAA;EACA,OAAA;ACHF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto !important;\n  height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  height: auto;\n  \n  position: absolute;\n  top: 0;\n  left: 0;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n.content-image {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;EAEA,WAAA;EACA,uBAAA;ACDF;ADIA;EACE,YAAA;EACA,YAAA;EAEA,kBAAA;EACA,MAAA;EACA,OAAA;ACHF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto;\n  height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  height: auto;\n  \n  position: absolute;\n  top: 0;\n  left: 0;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto;\n  height: auto !important;\n}\n.content-image {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n"]}]);
 
 
 /***/ }),
@@ -3049,8 +3057,6 @@ var render = function() {
           ref: "ResizeDetector",
           staticClass: "resize-detector",
           style: {
-            maxWidth: _vm.config.maxWidth + "px",
-            maxHeight: _vm.config.maxHeight + "px",
             top: _vm.config.menuBarHeight + "px"
           },
           attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
@@ -3062,8 +3068,7 @@ var render = function() {
             top: _vm.config.menuBarHeight + "px"
           },
           attrs: { src: _vm.attrSrc }
-        }),
-        _vm._v("\r\n  aaa\r\n")
+        })
       ])
     : _vm._e()
 }
