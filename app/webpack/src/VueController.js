@@ -93,8 +93,9 @@ let VueController = {
   </script>`
       }
       if (this.config.debug.useTestImageFile === true) {
-        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.jpg')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
