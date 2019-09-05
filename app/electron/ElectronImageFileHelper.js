@@ -82,6 +82,21 @@ let ElectronImageFileHelper = {
       return false
     }
   },
+  icoToDataURL: function (filePath, callback) {
+    if (typeof(callback) !== 'function') {
+      return this
+    }
+    
+    if (this.lib.ElectronFileHelper.existsSync(filePath) === false) {
+      callback()
+      return this
+    }
+    
+    let source = this.lib.ElectronFileHelper.readImageSync(filePath)
+    this.lib.icoToPng(source).then(png => {
+      callback(Buffer.from(png).toString('base64'))
+    })
+  }
 }
 
 

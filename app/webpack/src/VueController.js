@@ -44,6 +44,8 @@ let VueController = {
     this.lib.ElectronFileHelper = RequireHelper.require('ElectronFileHelper')
     this.lib.ElectronImageFileHelper = RequireHelper.require('ElectronImageFileHelper')
     this.lib.ElectronTextFileHelper = RequireHelper.require('ElectronTextFileHelper')
+    this.lib.ImageMagickHelper = RequireHelper.require('ImageMagickHelper')
+    
     this.lib.electron = this.lib.ElectronHelper.getElectron()
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
@@ -96,7 +98,7 @@ let VueController = {
       }
       if (this.config.debug.useTestImageFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))

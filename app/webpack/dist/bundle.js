@@ -220,6 +220,8 @@ let VueController = {
     this.lib.ElectronFileHelper = RequireHelper.require('ElectronFileHelper')
     this.lib.ElectronImageFileHelper = RequireHelper.require('ElectronImageFileHelper')
     this.lib.ElectronTextFileHelper = RequireHelper.require('ElectronTextFileHelper')
+    this.lib.ImageMagickHelper = RequireHelper.require('ImageMagickHelper')
+    
     this.lib.electron = this.lib.ElectronHelper.getElectron()
     this.lib.remote = this.lib.electron.remote
     this.lib.win = this.lib.remote.getCurrentWindow()
@@ -272,7 +274,7 @@ let VueController = {
       }
       if (this.config.debug.useTestImageFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
@@ -1208,11 +1210,35 @@ module.exports = {
   },
   computed: {
     attrSrc: function () {
-      if (typeof(this.imagePath) === 'string') {
-        return this.imagePath
+      if (this.isNeedConvert === true) {
+        if (typeof(this.imageDataURL) === 'string') {
+          return this.imageDataURL
+        }
+        else {
+          return ''
+        }
       }
-      else if (typeof(this.imageDataURL) === 'string') {
-        return this.imageDataURL
+      else {
+        if (typeof(this.imageDataURL) === 'string') {
+          return this.imageDataURL
+        }
+        else if (typeof(this.imagePath) === 'string') {
+          return this.imagePath
+        }
+      }
+    },
+    isNeedConvert: function () {
+      let ext = this.lib.ElectronFileHelper.getExt(this.imagePath)
+      //console.log(ext)
+      if (ext === 'ico') {
+        this.lib.ImageMagickHelper.icoToBase64(this.imagePath, (base64) => {
+          console.log(base64)
+          this.imageDataURL = base64
+        })
+        return true
+      }
+      else {
+        return false
       }
     }
   },
@@ -1224,18 +1250,20 @@ module.exports = {
     }, 0)
   },
   methods: {
-    setupImage: function () {
+    setupImage: function (callback) {
       
-      if (this.status.fileType === 'image-viewer'
-              && typeof(this.status.filePath) === 'string' 
-              && this.status.filePath !== '') {
-        this.imagePath = this.status.filePath
+      if (this.status.fileType === 'image-viewer') {
+        if (typeof(this.status.filePath) === 'string' 
+                && this.status.filePath !== '') {
+          this.imagePath = this.status.filePath
+          //console.log(this.imagePath)
+        }
+        else if (typeof(this.status.imageDataURL) === 'string' 
+                && this.status.imageDataURL.startsWith('data:image/png;base64,')) {
+          this.imageDataURL = this.status.imageDataURL
+        }
       }
-      else if (this.status.fileType === 'image-viewer'
-              && typeof(this.status.imageDataURL) === 'string' 
-              && this.status.imageDataURL.startsWith('data:image/png;base64,')) {
-        this.imageDataURL = this.status.imageDataURL
-      }
+        
       return this
     },
     initDetector: function () {
