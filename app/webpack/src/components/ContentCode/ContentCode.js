@@ -212,6 +212,7 @@ module.exports = {
       
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
       }, 0)
       return this
@@ -243,11 +244,12 @@ module.exports = {
       let windowWidth = window.innerWidth
       let windowHeight = window.innerHeight
       
+      /*
       console.log([width, windowWidth])
       console.log([height, windowHeight])
       console.log((width > windowWidth 
               || height > windowHeight))
-      
+      */
       if (width > windowWidth 
               || height > windowHeight) {
         return this.resizeToFitContent(false)

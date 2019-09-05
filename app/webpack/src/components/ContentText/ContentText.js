@@ -60,25 +60,7 @@ module.exports = {
     resizeToFitContent: function (isRestrictSize) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
-        
-        if (isRestrictSize !== false) {
-          if (width < this.config.minWidthPx) {
-            width = this.config.minWidthPx
-          }
-          if (height < this.config.minHeightPx) {
-            height = this.config.minHeightPx
-          }
-        }
-        
-        if (width > screen.availWidth) {
-          width = screen.availWidth
-        }
-        if (height > screen.availHeight) {
-          height = screen.availHeight
-        }
-        
-        //console.log(width, height)
-        window.resizeTo(width, height)
+        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
       }, 0)
       return this
     },

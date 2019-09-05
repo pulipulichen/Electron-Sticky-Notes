@@ -8,6 +8,9 @@ let ElectronHelper = {
     electron: null,
     ElectronFileHelper: null,
   },
+  cache: {
+    platform: null
+  },
   init: function () {
     if (this.inited === true) {
       return this
@@ -237,6 +240,27 @@ let ElectronHelper = {
   getIPC: function () {
     this.init()
     return this.lib.ipc
+  },
+  getPlatform: function () {
+    this.init()
+    if (typeof(this.cache.platform) === 'string') {
+      return this.cache.platform
+    }
+    
+    let platform
+    
+    if (typeof(window) === 'object' 
+            && typeof(window.process) === 'object'
+            && typeof(window.process.platform) === 'string') {
+      platform = window.process.platform
+    }
+    else if (typeof(process) === 'object'
+            && typeof(process.platform) === 'string') {
+      platform = process.platform
+    }
+    
+    this.cache.platform = platform
+    return platform
   }
   
 }

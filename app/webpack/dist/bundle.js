@@ -349,7 +349,7 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 exports = module.exports = __webpack_require__(/*! ../../../../../../../../../../usr/lib/node_modules/css-loader/dist/runtime/api.js */ "../../../../../usr/lib/node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["/home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;ACRF;ADaA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACXF;ADcA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACbF;ADgBA;EACE,4BAAA;ACdF;ADiBA;EAEE,gBAAA;EACA,kBAAA;AChBF;ADmBA;EAOI,kBAAA;EACA,mBAAA;ACvBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["//@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  //-webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  //max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["/home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;EACA,wBAAA;ACRF;ADYA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACVF;ADaA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACZF;ADeA;EACE,4BAAA;ACbF;ADgBA;EAEE,gBAAA;EACA,kBAAA;ACfF;ADkBA;EAOI,kBAAA;EACA,mBAAA;ACtBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["//@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  //max-height: calc(100vh - @menu-height);\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
 
 
 
@@ -1561,6 +1561,7 @@ module.exports = {
       
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
       }, 0)
       return this
@@ -1592,11 +1593,12 @@ module.exports = {
       let windowWidth = window.innerWidth
       let windowHeight = window.innerHeight
       
+      /*
       console.log([width, windowWidth])
       console.log([height, windowHeight])
       console.log((width > windowWidth 
               || height > windowHeight))
-      
+      */
       if (width > windowWidth 
               || height > windowHeight) {
         return this.resizeToFitContent(false)
@@ -1853,26 +1855,10 @@ module.exports = {
         height: height
       }
     },
-    resizeToFitContent: function () {
+    resizeToFitContent: function (isRestrictSize) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
-        //console.log(width, height)
-        if (width < this.config.minWidthPx) {
-          width = this.config.minWidthPx
-        }
-        if (height < this.config.minHeightPx) {
-          height = this.config.minHeightPx
-        }
-        
-        if (width > screen.availWidth) {
-          width = screen.availWidth
-        }
-        if (height > screen.availHeight) {
-          height = screen.availHeight
-        }
-        
-        //console.log(width, height)
-        window.resizeTo(width, height)
+        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
       }, 0)
     },
     initViewer: function () {
@@ -2118,25 +2104,7 @@ module.exports = {
     resizeToFitContent: function (isRestrictSize) {
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
-        
-        if (isRestrictSize !== false) {
-          if (width < this.config.minWidthPx) {
-            width = this.config.minWidthPx
-          }
-          if (height < this.config.minHeightPx) {
-            height = this.config.minHeightPx
-          }
-        }
-        
-        if (width > screen.availWidth) {
-          width = screen.availWidth
-        }
-        if (height > screen.availHeight) {
-          height = screen.availHeight
-        }
-        
-        //console.log(width, height)
-        window.resizeTo(width, height)
+        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
       }, 0)
       return this
     },
@@ -2342,7 +2310,7 @@ module.exports = {
       let header = this.header
       switch (this.status.fileType) {
         case 'code':
-          header = '<i class="file code icon"></i>' + header
+          header = '<i class="code icon"></i>' + header
           break
         case 'image':
           header = '<i class="file image icon"></i>' + header
@@ -3035,24 +3003,29 @@ let WindowHelper = {
   },
   moveToVisiable: function () {
     let leftChanged
-    let topChanged
-    
     let left = window.screenX
     let right = left + window.outerWidth
     let maxRight = screen.availWidth
     
+    if (right > maxRight) {
+      leftChanged = maxRight - window.outerWidth
+      
+      if (this.lib.ElectronHelper.getPlatform() === 'linux') {
+        leftChanged = leftChanged + 50
+      }
+    }
     
+    //console.log([left, right, maxRight, leftChanged])
+    
+    let topChanged
     let top = window.screenY
     let bottom = top + window.outerHeight
     let maxBottom = screen.availHeight
-    
-    if (right > maxRight) {
-      leftChanged = maxRight - window.outerWidth
-    }
-    
     if (bottom > maxBottom) {
       topChanged = maxBottom - window.outerHeight
     }
+    
+    //console.log([top, bottom, maxBottom, topChanged])
     
     if (leftChanged !== undefined
             || topChanged !== undefined) {
@@ -3064,7 +3037,7 @@ let WindowHelper = {
         topChanged = top
       }
       
-      console.log([leftChanged, topChanged])
+      //console.log([leftChanged, topChanged])
       window.moveTo(leftChanged, topChanged)
     }
     

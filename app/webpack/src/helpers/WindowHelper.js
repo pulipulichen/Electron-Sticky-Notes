@@ -28,24 +28,29 @@ let WindowHelper = {
   },
   moveToVisiable: function () {
     let leftChanged
-    let topChanged
-    
     let left = window.screenX
     let right = left + window.outerWidth
     let maxRight = screen.availWidth
     
+    if (right > maxRight) {
+      leftChanged = maxRight - window.outerWidth
+      
+      if (this.lib.ElectronHelper.getPlatform() === 'linux') {
+        leftChanged = leftChanged + 50
+      }
+    }
     
+    //console.log([left, right, maxRight, leftChanged])
+    
+    let topChanged
     let top = window.screenY
     let bottom = top + window.outerHeight
     let maxBottom = screen.availHeight
-    
-    if (right > maxRight) {
-      leftChanged = maxRight - window.outerWidth
-    }
-    
     if (bottom > maxBottom) {
       topChanged = maxBottom - window.outerHeight
     }
+    
+    //console.log([top, bottom, maxBottom, topChanged])
     
     if (leftChanged !== undefined
             || topChanged !== undefined) {
@@ -57,7 +62,7 @@ let WindowHelper = {
         topChanged = top
       }
       
-      console.log([leftChanged, topChanged])
+      //console.log([leftChanged, topChanged])
       window.moveTo(leftChanged, topChanged)
     }
     

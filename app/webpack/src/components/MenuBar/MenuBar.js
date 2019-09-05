@@ -26,7 +26,7 @@ module.exports = {
       let header = this.header
       switch (this.status.fileType) {
         case 'code':
-          header = '<i class="file code icon"></i>' + header
+          header = '<i class="code icon"></i>' + header
           break
         case 'image':
           header = '<i class="file image icon"></i>' + header
