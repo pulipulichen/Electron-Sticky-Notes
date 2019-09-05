@@ -1,4 +1,5 @@
-<div data-component="ContentCode">
+<div data-component="ContentCode"
+     v-if="status.fileType === 'code'">
   <div class="content-code resize-detector"
        v-bind:style="{
           'top': config.menuBarHeight + 'px',

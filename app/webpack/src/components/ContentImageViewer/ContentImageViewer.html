@@ -1,4 +1,5 @@
-<div data-component="ContentImage">
+<div data-component="ContentImageViewer"
+     v-if="status.fileType === 'image-viewer'">
   <img class="resize-detector"
        v-bind:src="attrSrc"
        v-bind:style="{

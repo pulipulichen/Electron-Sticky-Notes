@@ -18,7 +18,7 @@ module.exports = {
       if (typeof(this.imagePath) === 'string') {
         return this.imagePath
       }
-    }
+    },
   },
   mounted: function () {
     setTimeout(() => {

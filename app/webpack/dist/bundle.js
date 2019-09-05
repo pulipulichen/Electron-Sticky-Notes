@@ -167,13 +167,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue\\dist\\vue.esm.js");
 /* harmony import */ var _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MenuBar/MenuBar.vue */ "./app/webpack/src/components/MenuBar/MenuBar.vue");
 /* harmony import */ var _components_ContentText_ContentText_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ContentText/ContentText.vue */ "./app/webpack/src/components/ContentText/ContentText.vue");
-/* harmony import */ var _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ContentImageViewer/ContentImageViewer.vue */ "./app/webpack/src/components/ContentImageViewer/ContentImageViewer.vue");
-/* harmony import */ var _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ContentImageStatic/ContentImageStatic.vue */ "./app/webpack/src/components/ContentImageStatic/ContentImageStatic.vue");
-/* harmony import */ var _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ContentCode/ContentCode.vue */ "./app/webpack/src/components/ContentCode/ContentCode.vue");
-/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helpers/WindowHelper */ "./app/webpack/src/helpers/WindowHelper.js");
-/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-fragment */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-fragment\\dist\\vue-fragment.esm.js");
-/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
+/* harmony import */ var _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ContentImageViewer/ContentImageViewer.vue */ "./app/webpack/src/components/ContentImageViewer/ContentImageViewer.vue");
+/* harmony import */ var _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ContentImageStatic/ContentImageStatic.vue */ "./app/webpack/src/components/ContentImageStatic/ContentImageStatic.vue");
+/* harmony import */ var _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ContentCode/ContentCode.vue */ "./app/webpack/src/components/ContentCode/ContentCode.vue");
+/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/WindowHelper */ "./app/webpack/src/helpers/WindowHelper.js");
+/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-fragment */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-fragment\\dist\\vue-fragment.esm.js");
+/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
 
 
 
@@ -185,13 +185,13 @@ __webpack_require__(/*! ./styles/global.less */ "./app/webpack/src/styles/global
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_MODULE_6__["default"].Plugin)
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_MODULE_7__["default"].Plugin)
 
 
 
 let VueController = {
   el: '#app',
-  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_7__["default"],
+  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_8__["default"],
   data: {
     config: config,
     status: {
@@ -210,9 +210,9 @@ let VueController = {
   components: { 
     'menu-bar': _components_MenuBar_MenuBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     'content-text': _components_ContentText_ContentText_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    'content-image-viewer': _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'content-image-static': _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    'content-code': _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'content-image-viewer': _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    'content-image-static': _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'content-code': _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   },
   mounted: function () {
     // 基本
@@ -225,7 +225,7 @@ let VueController = {
     this.lib.win = this.lib.remote.getCurrentWindow()
     this.lib.ipc = this.lib.electron.ipcRenderer
     
-    this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_5___default.a
+    this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6___default.a
     
     this.status.mode = this.lib.win.mode
     if (typeof(this.lib.win.filePath) === 'string') {
@@ -905,7 +905,7 @@ module.exports = {
       if (typeof(this.imagePath) === 'string') {
         return this.imagePath
       }
-    }
+    },
   },
   mounted: function () {
     setTimeout(() => {
@@ -2899,7 +2899,7 @@ exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;EAEA,sBAAA;EACA,uBAAA;ACCF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto !important;\n  height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;EAEA,sBAAA;EACA,uBAAA;ACDF;ADIA;EACE,YAAA;EACA,YAAA;EAEA,kBAAA;EACA,MAAA;EACA,OAAA;ACHF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto !important;\n  height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  height: auto;\n  \n  position: absolute;\n  top: 0;\n  left: 0;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n.content-image {\n  width: 100vw;\n  height: auto;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n"]}]);
 
 
 /***/ }),
@@ -3003,21 +3003,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { "data-component": "ContentCode" } }, [
-    _c(
-      "div",
-      {
-        ref: "ResizeDetector",
-        staticClass: "content-code resize-detector",
-        style: {
-          top: _vm.config.menuBarHeight + "px",
-          fontSize: _vm.styleFontSize,
-          lineHeight: _vm.styleLineHeight
-        }
-      },
-      [_vm._v(_vm._s(_vm.detectorText))]
-    )
-  ])
+  return _vm.status.fileType === "code"
+    ? _c("div", { attrs: { "data-component": "ContentCode" } }, [
+        _c(
+          "div",
+          {
+            ref: "ResizeDetector",
+            staticClass: "content-code resize-detector",
+            style: {
+              top: _vm.config.menuBarHeight + "px",
+              fontSize: _vm.styleFontSize,
+              lineHeight: _vm.styleLineHeight
+            }
+          },
+          [_vm._v(_vm._s(_vm.detectorText))]
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3041,20 +3043,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { "data-component": "ContentImage" } }, [
-    _c("img", {
-      ref: "ResizeDetector",
-      staticClass: "resize-detector",
-      style: {
-        maxWidth: _vm.config.maxWidth + "px",
-        maxHeight: _vm.config.maxHeight + "px",
-        top: _vm.config.menuBarHeight + "px"
-      },
-      attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
-    }),
-    _vm._v(" "),
-    _c("img", { attrs: { src: _vm.attrSrc } })
-  ])
+  return _vm.status.fileType === "image-static"
+    ? _c("div", { attrs: { "data-component": "ContentImageStatic" } }, [
+        _c("img", {
+          ref: "ResizeDetector",
+          staticClass: "resize-detector",
+          style: {
+            maxWidth: _vm.config.maxWidth + "px",
+            maxHeight: _vm.config.maxHeight + "px",
+            top: _vm.config.menuBarHeight + "px"
+          },
+          attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "content-image",
+          style: {
+            top: _vm.config.menuBarHeight + "px"
+          },
+          attrs: { src: _vm.attrSrc }
+        }),
+        _vm._v("\r\n  aaa\r\n")
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3078,18 +3089,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { "data-component": "ContentImage" } }, [
-    _c("img", {
-      ref: "ResizeDetector",
-      staticClass: "resize-detector",
-      style: {
-        maxWidth: _vm.config.maxWidth + "px",
-        maxHeight: _vm.config.maxHeight + "px",
-        top: _vm.config.menuBarHeight + "px"
-      },
-      attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
-    })
-  ])
+  return _vm.status.fileType === "image-viewer"
+    ? _c("div", { attrs: { "data-component": "ContentImageViewer" } }, [
+        _c("img", {
+          ref: "ResizeDetector",
+          staticClass: "resize-detector",
+          style: {
+            maxWidth: _vm.config.maxWidth + "px",
+            maxHeight: _vm.config.maxHeight + "px",
+            top: _vm.config.menuBarHeight + "px"
+          },
+          attrs: { src: _vm.attrSrc, load: _vm.resizeToFitContent }
+        })
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
