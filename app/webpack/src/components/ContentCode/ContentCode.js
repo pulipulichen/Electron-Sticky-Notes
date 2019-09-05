@@ -41,6 +41,7 @@ module.exports = {
         'sh': 'Bash Shell Script',
         'sql': 'Structured Query Language Data File',
         'vb': 'Visual Basic Project Item File',
+        'vue': 'Vue.js Single-file components',
         'xhtml': 'Extensible Hypertext Markup Language ',
         'xml': 'XML File',
         'yaml': 'YAML Document'
@@ -135,7 +136,7 @@ module.exports = {
         this.mode = 'application/x-jsp'
         this.modePathList = ['application/x-aspx']
       }
-      else if (ext === 'html' || ext === 'htm') {
+      else if (ext === 'html' || ext === 'htm' || ext === 'vue') {
         this.mode = 'text/html'
         this.modePathList = [
           'css/css.js',

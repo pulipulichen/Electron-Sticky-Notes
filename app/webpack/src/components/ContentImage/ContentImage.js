@@ -11,6 +11,19 @@ module.exports = {
       imageDataURL: null,
       viewerElement: null,
       viewer: null,
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'bmp': '',
+        'gif': '',
+        'png': '',
+        'ico': '',
+        'jpg': '',
+        'jpeg': '',
+        'svg': '',
+        'tiff': '',
+        'tif': '',
+        'webp': ''
+      }
     }
   },
   computed: {

@@ -429,6 +429,10 @@ let ElectronFileHelper = {
     let filterArray = []
     
     if (typeof(ext) === 'string') {
+      if (ext.indexOf('.') > -1) {
+        ext = this.getExt(ext)
+      }
+      
       for (let key in filterConfigJSON) {
         if (key === ext) {
           filterArray.push({

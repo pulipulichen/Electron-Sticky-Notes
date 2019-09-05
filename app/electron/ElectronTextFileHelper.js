@@ -23,7 +23,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['csv', 'txt', 'arff', 'md', 'gitignore', 'au3', 'bat', 'reg', 'ini'].indexOf(ext) === -1) {
+    if (['csv', 'tsv', 'txt', 'arff', 'md', 'gitignore', 'au3', 'bat', 'reg', 'ini'].indexOf(ext) === -1) {
       return false
     }
 
@@ -57,7 +57,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['c', 'css', 'jsp', 'asp', 'aspx', 'html', 'htm', 'xhtml', 'java', 'js', 'json', 'less', 'pl', 'php', 'py', 'r', 'rb', 'sass', 'scss', 'sql', 'sh', 'vb', 'xml', 'yaml'].indexOf(ext) === -1) {
+    if (['c', 'css', 'jsp', 'asp', 'aspx', 'html', 'htm', 'xhtml', 'java', 'js', 'json', 'less', 'pl', 'php', 'py', 'r', 'rb', 'sass', 'scss', 'sql', 'sh', 'vb', 'vue', 'xml', 'yaml'].indexOf(ext) === -1) {
       return false
     }
 

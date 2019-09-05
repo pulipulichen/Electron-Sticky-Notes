@@ -482,6 +482,7 @@ module.exports = {
         'sh': 'Bash Shell Script',
         'sql': 'Structured Query Language Data File',
         'vb': 'Visual Basic Project Item File',
+        'vue': 'Vue.js Single-file components',
         'xhtml': 'Extensible Hypertext Markup Language ',
         'xml': 'XML File',
         'yaml': 'YAML Document'
@@ -576,7 +577,7 @@ module.exports = {
         this.mode = 'application/x-jsp'
         this.modePathList = ['application/x-aspx']
       }
-      else if (ext === 'html' || ext === 'htm') {
+      else if (ext === 'html' || ext === 'htm' || ext === 'vue') {
         this.mode = 'text/html'
         this.modePathList = [
           'css/css.js',
@@ -904,6 +905,19 @@ module.exports = {
       imageDataURL: null,
       viewerElement: null,
       viewer: null,
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'bmp': '',
+        'gif': '',
+        'png': '',
+        'ico': '',
+        'jpg': '',
+        'jpeg': '',
+        'svg': '',
+        'tiff': '',
+        'tif': '',
+        'webp': ''
+      }
     }
   },
   computed: {
@@ -1158,7 +1172,20 @@ module.exports = {
     let data = {
       padding: 15,
       detector: null,
-      contentText: ''
+      contentText: '',
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'txt': 'Plain Text File',
+        'au3': 'AutoIt v3 Script',
+        'arff': 'Attribute-Relation File Format',
+        'bat': 'DOS Batch File',
+        'csv': 'Comma Separated Values File',
+        'gitignore': 'Git Ignore File',
+        'ini': 'Windows Initialization File',
+        'md': 'Markdown Documentation File',
+        'reg': 'Registry File',
+        'tsv': 'Tab Separated Values File'
+      }
     }
     
     this.$i18n.locale = this.config.locale
@@ -1264,8 +1291,12 @@ module.exports = {
       return this.contentText
     },
     saveFile: function (filePath) {
-      console.error('saveFile: ' + filePath)
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this
+    },
+    getFilters: function (filePath) {
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath)
     }
   }
 }
@@ -2016,8 +2047,8 @@ module.exports = {
   
   debug: {
     useTestContentText: false,
-    useTestCodeFile: true,
-    useTestImageFile: false,
+    useTestCodeFile: false,
+    useTestImageFile: true,
     useTestPlainTextFile: false,
   }
 }
