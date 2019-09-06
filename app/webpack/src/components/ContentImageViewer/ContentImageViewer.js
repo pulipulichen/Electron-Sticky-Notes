@@ -90,7 +90,6 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent()
         this.initViewer()
-        this.initWindowResizeRestictRation()
       })
       return this
     },
@@ -116,12 +115,18 @@ module.exports = {
     },
     initViewer: function () {
       //let {width, height} = this.getSizeOfDetector()
+      let style = {
+        'width': '100vw',
+        'height': `calc(100vh - ${this.config.menuBarHeight}px)`
+      }
+      
       let id = 'OpenSeadragonContainer'
-      this.viewerElement = $('<div class="viewer"></div>')
+      this.viewerElement = $('<div class="viewer loading"></div>')
               .attr('id', id)
               .width(this.detector.width())
               .height(this.detector.height())
               .css('top', this.config.menuBarHeight + 'px')
+              .css(style)
               .appendTo('body')
       
       // configs
@@ -145,11 +150,16 @@ module.exports = {
       
       this.viewer.addHandler('tile-loaded', () => {
         //console.log('ready')
-        this.viewerElement.css('width', '').css('height', '')
-        this.viewElementOpenSeadragon = this.viewerElement.find('.openseadragon-container:first')
+        //this.viewerElement.css('width', '').css('height', '')
+        //this.viewerElement.removeClass('loading')
+        //this.viewElementOpenSeadragon = this.viewerElement.children('.openseadragon-container:first')
+        //this.viewElementOpenSeadragon.css(style)
+        //setTimeout(() => {
+          //this.viewerElement.removeClass('loading')
+          //this.initWindowResizeRestictRation()
+        //}, 0)
+        
       })
-      
-      
       //setTimeout(() => {
       //  this.viewerElement.css('width', undefined).css('height', undefined)
       //}, 0)
@@ -187,7 +197,7 @@ var viewer = OpenSeadragon({
         //windowRatio = Math.ceil(windowRatio * 1000) / 1000
         //console.log([windowRatio, this.basicRatio])
         
-        //console.log([(windowRatio < this.basicRatio)])
+        console.log([(windowRatio < this.basicRatio)])
         
         if (windowRatio < this.basicRatio) {
           // 太寬

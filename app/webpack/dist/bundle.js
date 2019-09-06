@@ -832,7 +832,6 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent()
         this.initViewer()
-        this.initWindowResizeRestictRation()
       })
       return this
     },
@@ -858,12 +857,18 @@ module.exports = {
     },
     initViewer: function () {
       //let {width, height} = this.getSizeOfDetector()
+      let style = {
+        'width': '100vw',
+        'height': `calc(100vh - ${this.config.menuBarHeight}px)`
+      }
+      
       let id = 'OpenSeadragonContainer'
-      this.viewerElement = $('<div class="viewer"></div>')
+      this.viewerElement = $('<div class="viewer loading"></div>')
               .attr('id', id)
               .width(this.detector.width())
               .height(this.detector.height())
               .css('top', this.config.menuBarHeight + 'px')
+              .css(style)
               .appendTo('body')
       
       // configs
@@ -887,11 +892,16 @@ module.exports = {
       
       this.viewer.addHandler('tile-loaded', () => {
         //console.log('ready')
-        this.viewerElement.css('width', '').css('height', '')
-        this.viewElementOpenSeadragon = this.viewerElement.find('.openseadragon-container:first')
+        //this.viewerElement.css('width', '').css('height', '')
+        //this.viewerElement.removeClass('loading')
+        //this.viewElementOpenSeadragon = this.viewerElement.children('.openseadragon-container:first')
+        //this.viewElementOpenSeadragon.css(style)
+        //setTimeout(() => {
+          //this.viewerElement.removeClass('loading')
+          //this.initWindowResizeRestictRation()
+        //}, 0)
+        
       })
-      
-      
       //setTimeout(() => {
       //  this.viewerElement.css('width', undefined).css('height', undefined)
       //}, 0)
@@ -929,7 +939,7 @@ var viewer = OpenSeadragon({
         //windowRatio = Math.ceil(windowRatio * 1000) / 1000
         //console.log([windowRatio, this.basicRatio])
         
-        //console.log([(windowRatio < this.basicRatio)])
+        console.log([(windowRatio < this.basicRatio)])
         
         if (windowRatio < this.basicRatio) {
           // 太寬
@@ -3967,7 +3977,7 @@ exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;ACCF;ADHA;EAaM,+CAAA;ACPN","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  //width: 100vw;\n  //height: calc(100vh - 40px);\n  \n  //background-color: black;\n  \n  .openseadragon-container {\n    //width: 100vw;\n    //height: calc(100vh - 40px);\n    \n    .navigator {\n      background-color: rgba(0,0,0,0.5) !important;\n    }\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n"]}]);
+exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;ACCF;ADHA;EAWM,+CAAA;ACLN","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  \n  //background-color: black;\n  \n  .openseadragon-container {\n    //width: 100vw;\n    //height: calc(100vh - 40px);\n    \n    .navigator {\n      background-color: rgba(0,0,0,0.5) !important;\n    }\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -3981,7 +3991,7 @@ exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  lef
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;ACAF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto !important;\n  //height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;ACEF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto !important;\n  //height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n"]}]);
 
 
 /***/ }),
