@@ -15,6 +15,7 @@ module.exports = {
     },
     'status.theme': function () {
       window.$(this.$refs.ThemeDropdownContainer).find('.ui.dropdown.selection').css('background-color', this.status.theme)
+      //window.$(this.$refs.ThemeDropdownContainer).find('.ui.dropdown.selection .menu').css('max-height', `calc(100vh - ${this.config.menuBarHeight}px - 40px)`)
     }
   },  // watch: {
   //computed: {
