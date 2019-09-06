@@ -63,6 +63,7 @@ module.exports = {
     openEditor: function () {
       //console.error('openEdtior')
       if (typeof(this.status.filePath) === 'string') {
+        this.saveFile() // 先儲存再開啟
         this.lib.ElectronFileHelper.openItem(this.status.filePath)
       }
       else {
