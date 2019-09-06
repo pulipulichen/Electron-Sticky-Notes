@@ -124,6 +124,104 @@ module.exports = {
     setupMode: function () {
       // https://codemirror.net/mode/
       let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
+      switch (ext) {
+        case 'asp':
+        case 'aspx':
+          this.mode = 'application/x-aspx'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
+          break
+        case 'c':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'css':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+          
+        // -----------------------------
+        // 0906 做到這裡
+        case 'jsp':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'html':
+        case 'htm':
+        case 'xhtml':
+        case 'vue':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'java':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'less':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'js':
+        case 'json':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'pl':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'php':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'py':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'r':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'rb':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'sass':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'scss':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'sh':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'sql':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'vb':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'xml':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+        case 'yaml':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike']
+          break
+      }
+      
+      // ------------------------------
+      
       if (ext === 'css') {
         this.mode = 'text/css'
         this.modePathList = ['css/css.js']
