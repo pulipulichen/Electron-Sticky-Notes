@@ -286,8 +286,9 @@ let VueController = {
       if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/red truck.png')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
@@ -504,11 +505,6 @@ module.exports = {
       
       return this
     },
-    /**
-     * 廢棄不做
-     * @deprecated 20190906
-     * @returns {undefined}
-     */
     initWindowResizeRestictRation: function () {
 
       let basicWidth = this.detector.width()
@@ -524,7 +520,7 @@ module.exports = {
         //windowRatio = Math.ceil(windowRatio * 1000) / 1000
         //console.log([windowRatio, this.basicRatio])
         
-        console.log([(windowRatio < this.basicRatio)])
+        //console.log([(windowRatio < this.basicRatio)])
         
         if (windowRatio < this.basicRatio) {
           // 太寬
@@ -541,45 +537,6 @@ module.exports = {
           })
         }
       }
-      
-      //this.basicRatio = Math.ceil(basicRatio * 1000) / 1000
-      /*
-      let resizeLock = false
-      
-
-      window.onresize = () => {
-        if (resizeLock === true) {
-          return this
-        }
-        
-        let windowWidth = window.outerWidth
-        let windowHeight = window.outerHeight
-        windowHeight = windowHeight - this.config.menuBarHeight
-        
-        let windowRatio = windowWidth / windowHeight
-        windowRatio = Math.ceil(windowRatio * 1000) / 1000
-        console.log([windowRatio, basicRatio])
-        
-        if (windowRatio > basicRatio) {
-          // 不夠高
-          windowWidth = windowHeight / basicRatio
-          windowHeight = windowHeight + this.config.menuBarHeight
-          resizeLock = true
-          console.log([windowWidth, windowHeight])
-          window.resizeTo(windowWidth, windowHeight)
-          resizeLock = false
-        }
-        else if (windowRatio < basicRatio) {
-          // 不夠寬
-          windowHeight = windowWidth * basicRatio
-          windowHeight = windowHeight + this.config.menuBarHeight
-          resizeLock = true
-          console.log([windowWidth, windowHeight])
-          window.resizeTo(windowWidth, windowHeight)
-          resizeLock = false
-        }
-      }
-       */
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
@@ -795,6 +752,7 @@ module.exports = {
       imagePath: null,
       imageDataURL: null,
       viewerElement: null,
+      viewElementOpenSeadragon: null,
       viewer: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
@@ -834,7 +792,7 @@ module.exports = {
       //console.log(ext)
       if (ext === 'ico') {
         this.lib.ImageMagickHelper.icoToBase64(this.imagePath, (base64) => {
-          console.log(base64)
+          //console.log(base64)
           this.imageDataURL = base64
         })
         return true
@@ -852,8 +810,7 @@ module.exports = {
     }, 0)
   },
   methods: {
-    setupImage: function (callback) {
-      
+    setupImage: function () {
       if (this.status.fileType === 'image-viewer') {
         if (typeof(this.status.filePath) === 'string' 
                 && this.status.filePath !== '') {
@@ -865,7 +822,6 @@ module.exports = {
           this.imageDataURL = this.status.imageDataURL
         }
       }
-        
       return this
     },
     initDetector: function () {
@@ -876,6 +832,7 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent()
         this.initViewer()
+        this.initWindowResizeRestictRation()
       })
       return this
     },
@@ -926,12 +883,14 @@ module.exports = {
           },
         animationTime: 0.5,
       })
-      VIEWER = this.viewer
+      //VIEWER = this.viewer
       
       this.viewer.addHandler('tile-loaded', () => {
         //console.log('ready')
         this.viewerElement.css('width', '').css('height', '')
+        this.viewElementOpenSeadragon = this.viewerElement.find('.openseadragon-container:first')
       })
+      
       
       //setTimeout(() => {
       //  this.viewerElement.css('width', undefined).css('height', undefined)
@@ -954,6 +913,49 @@ var viewer = OpenSeadragon({
     });
 </script>
  */
+    },
+    initWindowResizeRestictRation: function () {
+
+      let basicWidth = this.detector.width()
+      let basicHeight = this.detector.height()
+      this.basicRatio = basicWidth / basicHeight
+      
+      window.onresize = () => {
+        let windowWidth = window.outerWidth
+        let windowHeight = window.outerHeight
+        windowHeight = windowHeight - this.config.menuBarHeight
+        
+        let windowRatio = windowWidth / windowHeight
+        //windowRatio = Math.ceil(windowRatio * 1000) / 1000
+        //console.log([windowRatio, this.basicRatio])
+        
+        //console.log([(windowRatio < this.basicRatio)])
+        
+        if (windowRatio < this.basicRatio) {
+          // 太寬
+          let style = {
+            'height': `auto`,
+            'width': '100vw'
+          }
+          this.detector.css(style)
+          this.viewerElement.css(style)
+          if (this.viewElementOpenSeadragon !== null) {
+            this.viewElementOpenSeadragon.css(style)
+          }
+        }
+        else {
+          // 太高
+          let style = {
+            'height': `calc(100vh - ${this.config.menuBarHeight}px)`,
+            'width': 'auto'
+          }
+          this.detector.css(style)
+          this.viewerElement.css(style)
+          if (this.viewElementOpenSeadragon !== null) {
+            this.viewElementOpenSeadragon.css(style)
+          }
+        }
+      }
     },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)
@@ -3284,8 +3286,8 @@ module.exports = {
   debug: {
     useTestContentText: false,
     useTestCodeFile: false,
-    useTestImageStaticFile: true,
-    useTestImageViewerFile: false,
+    useTestImageStaticFile: false,
+    useTestImageViewerFile: true,
     useTestPlainTextFile: false,
   }
 }
@@ -3965,7 +3967,7 @@ exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;EACA,YAAA;EACA,0BAAA;ACCF;ADLA;EAQI,YAAA;EACA,0BAAA;ACAJ;ADTA;EAYM,+CAAA;ACAN","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n  //background-color: black;\n  \n  .openseadragon-container {\n    width: 100vw;\n    height: calc(100vh - 40px);\n    \n    .navigator {\n      background-color: rgba(0,0,0,0.5) !important;\n    }\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container {\n  width: 100vw;\n  height: calc(100vh - 40px);\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n"]}]);
+exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","ContentImageViewer.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,OAAA;ACCF;ADHA;EAaM,+CAAA;ACPN","file":"ContentImageViewer.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n  //width: 100vw;\n  //height: calc(100vh - 40px);\n  \n  //background-color: black;\n  \n  .openseadragon-container {\n    //width: 100vw;\n    //height: calc(100vh - 40px);\n    \n    .navigator {\n      background-color: rgba(0,0,0,0.5) !important;\n    }\n  }\n}","#OpenSeadragonContainer {\n  position: absolute;\n  left: 0;\n}\n#OpenSeadragonContainer .openseadragon-container .navigator {\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -3979,7 +3981,7 @@ exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  lef
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;EAEA,sBAAA;EACA,uBAAA;ACCF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  width: auto !important;\n  height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n  width: auto !important;\n  height: auto !important;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;ACAF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto !important;\n  //height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n"]}]);
 
 
 /***/ }),

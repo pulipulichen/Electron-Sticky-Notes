@@ -10,6 +10,7 @@ module.exports = {
       imagePath: null,
       imageDataURL: null,
       viewerElement: null,
+      viewElementOpenSeadragon: null,
       viewer: null,
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
@@ -49,7 +50,7 @@ module.exports = {
       //console.log(ext)
       if (ext === 'ico') {
         this.lib.ImageMagickHelper.icoToBase64(this.imagePath, (base64) => {
-          console.log(base64)
+          //console.log(base64)
           this.imageDataURL = base64
         })
         return true
@@ -67,8 +68,7 @@ module.exports = {
     }, 0)
   },
   methods: {
-    setupImage: function (callback) {
-      
+    setupImage: function () {
       if (this.status.fileType === 'image-viewer') {
         if (typeof(this.status.filePath) === 'string' 
                 && this.status.filePath !== '') {
@@ -80,7 +80,6 @@ module.exports = {
           this.imageDataURL = this.status.imageDataURL
         }
       }
-        
       return this
     },
     initDetector: function () {
@@ -91,6 +90,7 @@ module.exports = {
       this.detector.bind('load', () => {
         this.resizeToFitContent()
         this.initViewer()
+        this.initWindowResizeRestictRation()
       })
       return this
     },
@@ -141,12 +141,14 @@ module.exports = {
           },
         animationTime: 0.5,
       })
-      VIEWER = this.viewer
+      //VIEWER = this.viewer
       
       this.viewer.addHandler('tile-loaded', () => {
         //console.log('ready')
         this.viewerElement.css('width', '').css('height', '')
+        this.viewElementOpenSeadragon = this.viewerElement.find('.openseadragon-container:first')
       })
+      
       
       //setTimeout(() => {
       //  this.viewerElement.css('width', undefined).css('height', undefined)
@@ -169,6 +171,49 @@ var viewer = OpenSeadragon({
     });
 </script>
  */
+    },
+    initWindowResizeRestictRation: function () {
+
+      let basicWidth = this.detector.width()
+      let basicHeight = this.detector.height()
+      this.basicRatio = basicWidth / basicHeight
+      
+      window.onresize = () => {
+        let windowWidth = window.outerWidth
+        let windowHeight = window.outerHeight
+        windowHeight = windowHeight - this.config.menuBarHeight
+        
+        let windowRatio = windowWidth / windowHeight
+        //windowRatio = Math.ceil(windowRatio * 1000) / 1000
+        //console.log([windowRatio, this.basicRatio])
+        
+        //console.log([(windowRatio < this.basicRatio)])
+        
+        if (windowRatio < this.basicRatio) {
+          // 太寬
+          let style = {
+            'height': `auto`,
+            'width': '100vw'
+          }
+          this.detector.css(style)
+          this.viewerElement.css(style)
+          if (this.viewElementOpenSeadragon !== null) {
+            this.viewElementOpenSeadragon.css(style)
+          }
+        }
+        else {
+          // 太高
+          let style = {
+            'height': `calc(100vh - ${this.config.menuBarHeight}px)`,
+            'width': 'auto'
+          }
+          this.detector.css(style)
+          this.viewerElement.css(style)
+          if (this.viewElementOpenSeadragon !== null) {
+            this.viewElementOpenSeadragon.css(style)
+          }
+        }
+      }
     },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)

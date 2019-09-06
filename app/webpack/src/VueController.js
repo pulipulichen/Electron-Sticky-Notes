@@ -109,8 +109,9 @@ let VueController = {
       if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/rstudio-ball.ico')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/git.png')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/red truck.png')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }

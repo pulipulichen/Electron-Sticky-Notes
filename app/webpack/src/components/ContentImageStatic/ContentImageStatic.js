@@ -60,11 +60,6 @@ module.exports = {
       
       return this
     },
-    /**
-     * 廢棄不做
-     * @deprecated 20190906
-     * @returns {undefined}
-     */
     initWindowResizeRestictRation: function () {
 
       let basicWidth = this.detector.width()
@@ -80,7 +75,7 @@ module.exports = {
         //windowRatio = Math.ceil(windowRatio * 1000) / 1000
         //console.log([windowRatio, this.basicRatio])
         
-        console.log([(windowRatio < this.basicRatio)])
+        //console.log([(windowRatio < this.basicRatio)])
         
         if (windowRatio < this.basicRatio) {
           // 太寬
@@ -97,45 +92,6 @@ module.exports = {
           })
         }
       }
-      
-      //this.basicRatio = Math.ceil(basicRatio * 1000) / 1000
-      /*
-      let resizeLock = false
-      
-
-      window.onresize = () => {
-        if (resizeLock === true) {
-          return this
-        }
-        
-        let windowWidth = window.outerWidth
-        let windowHeight = window.outerHeight
-        windowHeight = windowHeight - this.config.menuBarHeight
-        
-        let windowRatio = windowWidth / windowHeight
-        windowRatio = Math.ceil(windowRatio * 1000) / 1000
-        console.log([windowRatio, basicRatio])
-        
-        if (windowRatio > basicRatio) {
-          // 不夠高
-          windowWidth = windowHeight / basicRatio
-          windowHeight = windowHeight + this.config.menuBarHeight
-          resizeLock = true
-          console.log([windowWidth, windowHeight])
-          window.resizeTo(windowWidth, windowHeight)
-          resizeLock = false
-        }
-        else if (windowRatio < basicRatio) {
-          // 不夠寬
-          windowHeight = windowWidth * basicRatio
-          windowHeight = windowHeight + this.config.menuBarHeight
-          resizeLock = true
-          console.log([windowWidth, windowHeight])
-          window.resizeTo(windowWidth, windowHeight)
-          resizeLock = false
-        }
-      }
-       */
     },
     getSizeOfDetector: function () {
       if (this.detector === null) {
