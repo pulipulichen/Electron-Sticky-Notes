@@ -1,5 +1,8 @@
-require('../../vendors/summernote/summernote-lite')
-const Summernote = require('../../vendors/summernote/summernote-lite')
+require('../../vendors/summernote/summernote-lite.less')
+const Summernote = require('../../vendors/summernote/summernote-lite.js')
+
+const showdown = require('../../vendors/showdown/showdown.min.js')
+const TurndownService = require('../../vendors/turndown/turndown.js')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -117,8 +120,24 @@ module.exports = {
     },
     convertToHTML: function (filePath) {
       console.log(`convertToHTML: ${filePath}`)
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
       
-      return `<h1>${filePath}</h1><p>Hello world</p>`
+      let contentHTML
+      
+      switch (ext) {
+        case 'md':
+          let contentText = this.lib.ElectronFileHelper.readFileSync(filePath)
+          contentHTML = new showdown.Converter().makeHtml(contentText)
+          
+          var turndownService = new TurndownService()
+          var markdown = turndownService.turndown(contentHTML)
+          console.log(markdown)
+            break
+        default:
+          contentHTML = `<h1>${filePath}</h1><p>Hello world</p>`
+      }
+      
+      return contentHTML
     },
     setupEditor: function () {
       this.$container = window.$('<div id="ContentRichTextContainer"></div>')
@@ -128,9 +147,13 @@ module.exports = {
       this.$editor = window.$('<textarea></textarea>')
               .val(this.contentHTML)
               .attr('id', 'summernote')
+              .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
               .appendTo(this.$container)
       
-      window.$('#summernote').summernote();
+      window.$('#summernote').summernote({
+        airMode: true,
+        disableDragAndDrop: true,
+      });
         
       return this
     },
