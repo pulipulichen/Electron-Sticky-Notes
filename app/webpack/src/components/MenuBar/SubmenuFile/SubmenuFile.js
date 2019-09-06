@@ -10,11 +10,11 @@ module.exports = {
   },
   computed: {
     enableSaveFile: function () {
-      let typeMatched = (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+      let typeMatched = (['text', 'text-code', 'text-rich-format'].indexOf(this.status.fileType) > -1)
       return (typeMatched && typeof(this.status.filePath) === 'string')
     },
     enableSaveFileAs: function () {
-      return (['plain-text', 'code', 'rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
+      return (['text', 'text-code', 'text-rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
     }
   },
   //mounted: function () {

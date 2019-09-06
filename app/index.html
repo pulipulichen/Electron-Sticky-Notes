@@ -39,10 +39,14 @@
               v-bind:status="status"
               v-bind:config="config"
               ref="ContentImageViewer"></content-image-viewer>
-    <content-code v-bind:lib="lib" 
+    <content-text-code v-bind:lib="lib" 
               v-bind:status="status"
               v-bind:config="config"
-              ref="ContentCode"></content-code>
+              ref="ContentTextCode"></content-text-code>
+    <content-text-rich-format v-bind:lib="lib" 
+              v-bind:status="status"
+              v-bind:config="config"
+              ref="ContentTextRichFormat"></content-text-rich-format>
   </div>
     
     <script src="webpack/dist/vendors.js"></script>

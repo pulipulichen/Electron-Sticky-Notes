@@ -10,7 +10,7 @@ module.exports = {
   },
   computed: {
     enableFontSizeControl: function () {
-      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+      return (['text', 'text-code', 'text-rich-format'].indexOf(this.status.fileType) > -1)
     },
   },
   //mounted: function () {

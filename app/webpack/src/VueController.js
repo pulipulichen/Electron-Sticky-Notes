@@ -3,7 +3,8 @@ import MenuBar from './components/MenuBar/MenuBar.vue'
 import ContentText from './components/ContentText/ContentText.vue'
 import ContentImageViewer from './components/ContentImageViewer/ContentImageViewer.vue'
 import ContentImageStatic from './components/ContentImageStatic/ContentImageStatic.vue'
-import ContentCode from './components/ContentCode/ContentCode.vue'
+import ContentTextCode from './components/ContentTextCode/ContentTextCode.vue'
+import ContentTextRichFormat from './components/ContentTextRichFormat/ContentTextRichFormat.vue'
 const config = require('./config.js')
 require('./styles/global.less')
 import WindowHelper from './helpers/WindowHelper'
@@ -26,7 +27,7 @@ let VueController = {
       contentText: '',
       imageDataURL: null,
       filePath: null,
-      fileType: 'plain-text', // default
+      fileType: 'text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
       theme: null
@@ -38,7 +39,8 @@ let VueController = {
     'content-text': ContentText,
     'content-image-viewer': ContentImageViewer,
     'content-image-static': ContentImageStatic,
-    'content-code': ContentCode,
+    'content-text-code': ContentTextCode,
+    'content-text-rich-format': ContentTextRichFormat,
   },
   mounted: function () {
     // 基本
@@ -141,11 +143,11 @@ let VueController = {
         this.status.mainComponent = this.$refs.ContentImageViewer
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
-        this.status.fileType = 'code'
-        this.status.mainComponent = this.$refs.ContentCode
+        this.status.fileType = 'text-code'
+        this.status.mainComponent = this.$refs.ContentTextCode
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
-        this.status.fileType = 'plain-text'
+        this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         this.status.mainComponent = this.$refs.ContentText
       }

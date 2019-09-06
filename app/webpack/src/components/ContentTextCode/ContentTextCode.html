@@ -1,0 +1,10 @@
+<div data-component="ContentTextCode"
+     v-if="status.fileType === 'code'">
+  <div class="content-text-code resize-detector"
+       v-bind:style="{
+          'top': config.menuBarHeight + 'px',
+          'fontSize': styleFontSize,
+          'lineHeight': styleLineHeight,
+       }"
+       ref="ResizeDetector">{{ detectorText }}</div>
+</div>

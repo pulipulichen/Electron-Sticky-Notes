@@ -169,11 +169,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ContentText_ContentText_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ContentText/ContentText.vue */ "./app/webpack/src/components/ContentText/ContentText.vue");
 /* harmony import */ var _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ContentImageViewer/ContentImageViewer.vue */ "./app/webpack/src/components/ContentImageViewer/ContentImageViewer.vue");
 /* harmony import */ var _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ContentImageStatic/ContentImageStatic.vue */ "./app/webpack/src/components/ContentImageStatic/ContentImageStatic.vue");
-/* harmony import */ var _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ContentCode/ContentCode.vue */ "./app/webpack/src/components/ContentCode/ContentCode.vue");
-/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/WindowHelper */ "./app/webpack/src/helpers/WindowHelper.js");
-/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-fragment */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-fragment\\dist\\vue-fragment.esm.js");
-/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
+/* harmony import */ var _components_ContentTextCode_ContentTextCode_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ContentTextCode/ContentTextCode.vue */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.vue");
+/* harmony import */ var _components_ContentTextRichFormat_ContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ContentTextRichFormat/ContentTextRichFormat.vue */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.vue");
+/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helpers/WindowHelper */ "./app/webpack/src/helpers/WindowHelper.js");
+/* harmony import */ var _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var vue_fragment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-fragment */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-fragment\\dist\\vue-fragment.esm.js");
+/* harmony import */ var _VueI18n__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./VueI18n */ "./app/webpack/src/VueI18n.js");
+
 
 
 
@@ -185,13 +187,13 @@ __webpack_require__(/*! ./styles/global.less */ "./app/webpack/src/styles/global
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_MODULE_7__["default"].Plugin)
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_MODULE_8__["default"].Plugin)
 
 
 
 let VueController = {
   el: '#app',
-  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_8__["default"],
+  i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_9__["default"],
   data: {
     config: config,
     status: {
@@ -202,7 +204,7 @@ let VueController = {
       contentText: '',
       imageDataURL: null,
       filePath: null,
-      fileType: 'plain-text', // default
+      fileType: 'text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
       theme: null
@@ -214,7 +216,8 @@ let VueController = {
     'content-text': _components_ContentText_ContentText_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     'content-image-viewer': _components_ContentImageViewer_ContentImageViewer_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     'content-image-static': _components_ContentImageStatic_ContentImageStatic_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    'content-code': _components_ContentCode_ContentCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    'content-text-code': _components_ContentTextCode_ContentTextCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    'content-text-rich-format': _components_ContentTextRichFormat_ContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
   },
   mounted: function () {
     // 基本
@@ -229,7 +232,7 @@ let VueController = {
     this.lib.win = this.lib.remote.getCurrentWindow()
     this.lib.ipc = this.lib.electron.ipcRenderer
     
-    this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_6___default.a
+    this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7___default.a
     
     
     this.status.mode = this.lib.win.mode
@@ -317,11 +320,11 @@ let VueController = {
         this.status.mainComponent = this.$refs.ContentImageViewer
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
-        this.status.fileType = 'code'
-        this.status.mainComponent = this.$refs.ContentCode
+        this.status.fileType = 'text-code'
+        this.status.mainComponent = this.$refs.ContentTextCode
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
-        this.status.fileType = 'plain-text'
+        this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         this.status.mainComponent = this.$refs.ContentText
       }
@@ -398,533 +401,6 @@ __webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/
 
 //require('./VueI18n')
 __webpack_require__(/*! ./VueController */ "./app/webpack/src/VueController.js")
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&":
-/*!**********************************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less& ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentCode.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true&":
-/*!************************************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true& ***!
-  \************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./ContentCode.html?vue&type=template&id=6a41e726&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js&?158c":
-/*!****************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./ContentCode.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js&?c759");
-/* harmony import */ var _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js&?c759":
-/*!****************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
-//window.CodeMirror = CodeMirror
-__webpack_require__(/*! ../../vendors/codemirror-5.48.4/lib/codemirror.css */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css")
-const createCSSSelector = __webpack_require__(/*! ../../vendors/css-rule-builder/css-rule-builder.js */ "./app/webpack/src/vendors/css-rule-builder/css-rule-builder.js")
-const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
-
-module.exports = {
-  props: ['lib', 'status', 'config'],
-  data() {    
-    let data = {
-      padding: 17,
-      detector: null,
-      mode: '',
-      modePathList: [],
-      contentText: '',
-      $container: null,
-      $editor: null,
-      codeMirrorEditor: null,
-      $CodeMirror: null,
-      styleSheet: null,
-      // https://fileinfo.com/extension/css
-      filterConfigJSON: {
-        'asp': 'Active Server Page',
-        'aspx': 'Active Server Page Extended File',
-        'c': 'C/C++ Source Code File',
-        'css': 'Cascading Style Sheet',
-        'jsp': 'Java Server Page',
-        'html': 'Hypertext Markup Language File',
-        'htm': 'Hypertext Markup Language File',
-        'java': 'Java Source Code File',
-        'less': 'LESS Style Sheet',
-        'js': 'JavaScript File',
-        'json': 'JavaScript Object Notation File',
-        'pl': 'Perl Script',
-        'php': 'PHP Source Code File',
-        'py': 'Python Script',
-        'r': 'R Script File',
-        'rb': 'Ruby Source Code',
-        'sass': 'Syntactically Awesome StyleSheets File',
-        'scss': 'Sass Cascading Style Sheet',
-        'sh': 'Bash Shell Script',
-        'sql': 'Structured Query Language Data File',
-        'vb': 'Visual Basic Project Item File',
-        'vue': 'Vue.js Single-file components',
-        'xhtml': 'Extensible Hypertext Markup Language ',
-        'xml': 'XML File',
-        'yaml': 'YAML Document'
-      }
-    }
-    
-    this.$i18n.locale = this.config.locale
-    return data
-  },
-  watch: {
-    'config.fontSizeRatio': function () {
-      //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
-      //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
-      if (this.$CodeMirror === null || this.$CodeMirror === undefined) {
-        this.$CodeMirror = window.$('.CodeMirror:first')
-        //console.log(this.$CodeMirror.length)
-        if (this.$CodeMirror.length === 1) {
-        }
-        else {
-          this.$CodeMirror = null
-        }
-      }
-      
-      if (this.$CodeMirror !== null) {
-        this.$CodeMirror.css('font-size', `calc(1rem * ${this.config.fontSizeRatio})`)
-                  .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
-        this.codeMirrorEditor.refresh()
-      }
-    }
-  },
-  computed: {
-    detectorText: function () {
-      let detectorText = this.contentText
-      if (detectorText.endsWith('\n')) {
-        detectorText = detectorText + '|'
-      }
-      return detectorText
-    },
-    
-    styleFontSize: function () {
-      return `calc(1em * ${this.config.fontSizeRatio})`
-    },
-    styleLineHeight: function () {
-      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
-      
-      if (this.status.fontSizeAdjustIsEnlarge) {
-        this.resizeIfOverflow()
-      }
-      
-      return lineHeight
-    },
-  },
-  mounted: function () {
-   
-    setTimeout(() => {
-      //this.setupStyle()
-      this.setupCode()
-      //this.resizeToFitContent()
-    }, 0)
-  },
-  methods: {
-    setupCode: function () {
-      //console.log(this.status)
-      //console.log([this.status.fileType === 'plain-text'
-      //        , typeof(this.status.contentText) === 'string' 
-      //        , this.status.contentText !== ''])
-      if (this.status.fileType === 'code'
-              && typeof(this.status.filePath) === 'string' 
-              && this.status.filePath !== '') {
-        this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
-        
-        this.setupMode()
-        this.setupEditor()
-        
-        
-        //console.log(this.contentText)
-      }
-      return this
-    },
-    setupMode: function () {
-      // https://codemirror.net/mode/
-      let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
-      switch (ext) {
-        case 'asp':
-        case 'aspx':
-          this.mode = 'application/x-aspx'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlembedded/htmlembedded.js'
-          ]
-          break
-        case 'c':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['css/css.js']
-          break
-        case 'css':
-        case 'less':
-        case 'scss':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike.js']
-          break
-        case 'jsp':
-          this.mode = 'application/x-jsp'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlembedded/htmlembedded.js'
-          ]
-          break
-        case 'html':
-        case 'htm':
-        case 'xhtml':
-          this.mode = 'text/html'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlmixed/htmlmixed.js'
-          ]
-          break
-        case 'java':
-          this.mode = 'text/x-java'
-          this.modePathList = ['clike/clike.js']
-          break
-        case 'js':
-          this.mode = 'text/javascript'
-          this.modePathList = ['javascript/javascript.js']
-          break
-        case 'json':
-          this.mode = 'text/json'
-          this.modePathList = ['javascript/javascript.js']
-          break
-        case 'pl':
-          this.mode = 'text/x-perl'
-          this.modePathList = ['perl/perl.js']
-          break
-        case 'php':
-          this.mode = 'application/x-httpd-php'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlmixed/htmlmixed.js',
-            'clike/clike.js'
-          ]
-          break
-        case 'py':
-          this.mode = 'text/x-python'
-          this.modePathList = ['python/python.js']
-          break
-        case 'r':
-          this.mode = 'text/x-rsrc'
-          this.modePathList = ['r/r.js']
-          break
-        case 'rb':
-          this.mode = 'text/x-ruby'
-          this.modePathList = ['ruby/ruby.js']
-          break
-        case 'sass':
-          this.mode = 'text/x-sass'
-          this.modePathList = ['sass/sass.js']
-          break
-        case 'sh':
-          this.mode = 'text/x-sh'
-          this.modePathList = ['shell/shell.js']
-          break
-        case 'sql':
-          this.mode = 'text/x-sql'
-          this.modePathList = ['sql/sql.js']
-          break
-        case 'vb':
-          this.mode = 'text/vbscript'
-          this.modePathList = ['vb/vb.js']
-          break
-        case 'vue':
-          this.mode = 'text/x-vue'
-          this.modePathList = ['vue/vue.js']
-          break
-        case 'xml':
-          this.mode = 'application/xml'
-          this.modePathList = ['xml/xml.js']
-          break
-        case 'yaml':
-          this.mode = 'text/x-yaml'
-          this.modePathList = ['yaml/yaml.js']
-          break
-        default:
-          console.error(`Not config: ${ext}`)
-      }
-      
-      return this
-    },
-    setupEditor: function () {
-      this.$container = window.$('<div id="ContentCodeContainer"></div>')
-              .css('top', this.config.menuBarHeight + 'px')
-              .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
-              .appendTo('body')
-      this.$editor = window.$('<textarea></textarea>')
-              .val(this.contentText)
-              .appendTo(this.$container)
-      
-      /*
-      this.modePathList.forEach(path => {
-        let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
-        console.log(modeFilePath)
-        //require(modeFilePath)
-      })
-      
-      CodeMirror.fromTextArea(this.$editor[0], {
-        lineNumbers: true,
-        mode: this.modePath,
-        matchBrackets: true
-      })
-      */
-     
-      let $ = window.$
-      let loop = (i) => {
-        if (i < this.modePathList.length) {
-          let modePath = this.modePathList[i]
-          modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
-          //console.log(modePath)
-          //$(`<script src="${modePath}"></script>`).appendTo('head')
-          //window.$.getScript(modePath, () => {
-          $.getScript(modePath, () => {
-            i++
-            loop(i)
-          })
-        }
-        else {
-          this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
-            lineNumbers: false,
-            mode: this.mode,
-            matchBrackets: true
-          })
-          
-          //window.$('.CodeMirror-scroll').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
-          window.$('.CodeMirror:first').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
-          
-          this.resizeToFitContent()
-        }
-      }
-      
-      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
-        loop(0)
-      })
-      
-      /*
-      let $ = window.$
-      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
-        $.getScript('webpack/src/vendors/codemirror-5.48.4/mode/javascript/javascript.js', () => {
-          CodeMirror.fromTextArea(this.$editor[0], {
-            lineNumbers: true,
-            mode: 'text/javascript',
-            matchBrackets: true
-          })
-        })
-      })
-       */
-     
-          
-      
-      return this
-    },
-    resizeToFitContent: function (isRestrictSize) {
-      //window.resizeTo(800,800)
-      //return console.error('resizeToFitContent')
-      
-      setTimeout(() => {
-        let {width, height} = this.getSizeOfDetector()
-        //console.log(width, height)
-        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
-      }, 0)
-      return this
-    },
-    getSizeOfDetector: function () {
-      if (this.detector === null) {
-        this.detector = window.$(this.$refs.ResizeDetector)
-      }
-      let width = this.detector.width()
-      width = width + this.padding
-      //width = Math.ceil(width)
-      
-      let height = this.detector.height()
-      height = height + this.config.menuBarHeight + this.padding
-      //height = Math.ceil(height)
-      
-      return {
-        width: width,
-        height: height
-      }
-    },
-    resizeIfOverflow: function () {
-      if (this.status.isReady === false) {
-        return this
-      }
-      
-      let {width, height} = this.getSizeOfDetector()
-      
-      let windowWidth = window.innerWidth
-      let windowHeight = window.innerHeight
-      
-      /*
-      console.log([width, windowWidth])
-      console.log([height, windowHeight])
-      console.log((width > windowWidth 
-              || height > windowHeight))
-      */
-      if (width > windowWidth 
-              || height > windowHeight) {
-        return this.resizeToFitContent(false)
-      }
-      
-      return this
-    },
-    createTempFile: function () {
-      let content = this.contentText
-      
-      // 我需要一個檔案名稱
-      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
-      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
-      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
-      
-      return filepath
-    },
-    getContent: function () {
-      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
-        return ''
-      }
-      return this.codeMirrorEditor.getValue()
-    },
-    saveFile: function (filePath) {
-      //console.error('saveFile: ' + filePath)
-      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
-      return this
-    },
-    getFilters: function (filePath) {
-      let ext = this.lib.ElectronFileHelper.getExt(filePath)
-      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
-    }
-  }
-}
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&":
-/*!***************************************************************************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& ***!
-  \***************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./app/webpack/src/components/ContentCode/ContentCode.vue":
-/*!****************************************************************!*\
-  !*** ./app/webpack/src/components/ContentCode/ContentCode.vue ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContentCode.html?vue&type=template&id=6a41e726&scoped=true& */ "./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true&");
-/* harmony import */ var _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContentCode.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentCode/ContentCode.js?vue&type=script&lang=js&?158c");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _ContentCode_less_vue_type_style_index_0_id_6a41e726_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& */ "./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&");
-/* harmony import */ var _ContentCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContentCode.global.less?vue&type=style&index=1&lang=less& */ "./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
-/* harmony import */ var _ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue */ "./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue");
-
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
-  _ContentCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ContentCode_html_vue_type_template_id_6a41e726_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "6a41e726",
-  null
-  
-)
-
-/* custom blocks */
-
-if (typeof _ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"] === 'function') Object(_ContentCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentCode_5CContentCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"])(component)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "app/webpack/src/components/ContentCode/ContentCode.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -1638,7 +1114,7 @@ module.exports = {
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
-      if (this.status.fileType === 'plain-text'
+      if (this.status.fileType === 'text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
@@ -1786,6 +1262,1060 @@ if (typeof _ContentText_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "app/webpack/src/components/ContentText/ContentText.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&":
+/*!******************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less& ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextCode.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true&":
+/*!********************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true& ***!
+  \********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js&?7308":
+/*!************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./ContentTextCode.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js&?cb5c");
+/* harmony import */ var _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js&?cb5c":
+/*!************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
+//window.CodeMirror = CodeMirror
+__webpack_require__(/*! ../../vendors/codemirror-5.48.4/lib/codemirror.css */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css")
+const createCSSSelector = __webpack_require__(/*! ../../vendors/css-rule-builder/css-rule-builder.js */ "./app/webpack/src/vendors/css-rule-builder/css-rule-builder.js")
+const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
+
+module.exports = {
+  props: ['lib', 'status', 'config'],
+  data() {    
+    let data = {
+      padding: 17,
+      detector: null,
+      mode: '',
+      modePathList: [],
+      contentText: '',
+      $container: null,
+      $editor: null,
+      codeMirrorEditor: null,
+      $CodeMirror: null,
+      styleSheet: null,
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'asp': 'Active Server Page',
+        'aspx': 'Active Server Page Extended File',
+        'c': 'C/C++ Source Code File',
+        'css': 'Cascading Style Sheet',
+        'jsp': 'Java Server Page',
+        'html': 'Hypertext Markup Language File',
+        'htm': 'Hypertext Markup Language File',
+        'java': 'Java Source Code File',
+        'less': 'LESS Style Sheet',
+        'js': 'JavaScript File',
+        'json': 'JavaScript Object Notation File',
+        'pl': 'Perl Script',
+        'php': 'PHP Source Code File',
+        'py': 'Python Script',
+        'r': 'R Script File',
+        'rb': 'Ruby Source Code',
+        'sass': 'Syntactically Awesome StyleSheets File',
+        'scss': 'Sass Cascading Style Sheet',
+        'sh': 'Bash Shell Script',
+        'sql': 'Structured Query Language Data File',
+        'vb': 'Visual Basic Project Item File',
+        'vue': 'Vue.js Single-file components',
+        'xhtml': 'Extensible Hypertext Markup Language ',
+        'xml': 'XML File',
+        'yaml': 'YAML Document'
+      }
+    }
+    
+    this.$i18n.locale = this.config.locale
+    return data
+  },
+  watch: {
+    'config.fontSizeRatio': function () {
+      //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
+      //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
+      if (this.$CodeMirror === null || this.$CodeMirror === undefined) {
+        this.$CodeMirror = window.$('.CodeMirror:first')
+        //console.log(this.$CodeMirror.length)
+        if (this.$CodeMirror.length === 1) {
+        }
+        else {
+          this.$CodeMirror = null
+        }
+      }
+      
+      if (this.$CodeMirror !== null) {
+        this.$CodeMirror.css('font-size', `calc(1rem * ${this.config.fontSizeRatio})`)
+                  .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
+        this.codeMirrorEditor.refresh()
+      }
+    }
+  },
+  computed: {
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    },
+    
+    styleFontSize: function () {
+      return `calc(1em * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
+  },
+  mounted: function () {
+   
+    setTimeout(() => {
+      //this.setupStyle()
+      this.setupCode()
+      //this.resizeToFitContent()
+    }, 0)
+  },
+  methods: {
+    setupCode: function () {
+      //console.log(this.status)
+      //console.log([this.status.fileType === 'plain-text'
+      //        , typeof(this.status.contentText) === 'string' 
+      //        , this.status.contentText !== ''])
+      if (this.status.fileType === 'text-code'
+              && typeof(this.status.filePath) === 'string' 
+              && this.status.filePath !== '') {
+        this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        
+        this.setupMode()
+        this.setupEditor()
+        
+        
+        //console.log(this.contentText)
+      }
+      return this
+    },
+    setupMode: function () {
+      // https://codemirror.net/mode/
+      let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
+      switch (ext) {
+        case 'asp':
+        case 'aspx':
+          this.mode = 'application/x-aspx'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
+          break
+        case 'c':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['css/css.js']
+          break
+        case 'css':
+        case 'less':
+        case 'scss':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike.js']
+          break
+        case 'jsp':
+          this.mode = 'application/x-jsp'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
+          break
+        case 'html':
+        case 'htm':
+        case 'xhtml':
+          this.mode = 'text/html'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js'
+          ]
+          break
+        case 'java':
+          this.mode = 'text/x-java'
+          this.modePathList = ['clike/clike.js']
+          break
+        case 'js':
+          this.mode = 'text/javascript'
+          this.modePathList = ['javascript/javascript.js']
+          break
+        case 'json':
+          this.mode = 'text/json'
+          this.modePathList = ['javascript/javascript.js']
+          break
+        case 'pl':
+          this.mode = 'text/x-perl'
+          this.modePathList = ['perl/perl.js']
+          break
+        case 'php':
+          this.mode = 'application/x-httpd-php'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js',
+            'clike/clike.js'
+          ]
+          break
+        case 'py':
+          this.mode = 'text/x-python'
+          this.modePathList = ['python/python.js']
+          break
+        case 'r':
+          this.mode = 'text/x-rsrc'
+          this.modePathList = ['r/r.js']
+          break
+        case 'rb':
+          this.mode = 'text/x-ruby'
+          this.modePathList = ['ruby/ruby.js']
+          break
+        case 'sass':
+          this.mode = 'text/x-sass'
+          this.modePathList = ['sass/sass.js']
+          break
+        case 'sh':
+          this.mode = 'text/x-sh'
+          this.modePathList = ['shell/shell.js']
+          break
+        case 'sql':
+          this.mode = 'text/x-sql'
+          this.modePathList = ['sql/sql.js']
+          break
+        case 'vb':
+          this.mode = 'text/vbscript'
+          this.modePathList = ['vb/vb.js']
+          break
+        case 'vue':
+          this.mode = 'text/x-vue'
+          this.modePathList = ['vue/vue.js']
+          break
+        case 'xml':
+          this.mode = 'application/xml'
+          this.modePathList = ['xml/xml.js']
+          break
+        case 'yaml':
+          this.mode = 'text/x-yaml'
+          this.modePathList = ['yaml/yaml.js']
+          break
+        default:
+          console.error(`Not config: ${ext}`)
+      }
+      
+      return this
+    },
+    setupEditor: function () {
+      this.$container = window.$('<div id="ContentCodeContainer"></div>')
+              .css('top', this.config.menuBarHeight + 'px')
+              .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+              .appendTo('body')
+      this.$editor = window.$('<textarea></textarea>')
+              .val(this.contentText)
+              .appendTo(this.$container)
+      
+      /*
+      this.modePathList.forEach(path => {
+        let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
+        console.log(modeFilePath)
+        //require(modeFilePath)
+      })
+      
+      CodeMirror.fromTextArea(this.$editor[0], {
+        lineNumbers: true,
+        mode: this.modePath,
+        matchBrackets: true
+      })
+      */
+     
+      let $ = window.$
+      let loop = (i) => {
+        if (i < this.modePathList.length) {
+          let modePath = this.modePathList[i]
+          modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
+          //console.log(modePath)
+          //$(`<script src="${modePath}"></script>`).appendTo('head')
+          //window.$.getScript(modePath, () => {
+          $.getScript(modePath, () => {
+            i++
+            loop(i)
+          })
+        }
+        else {
+          this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: false,
+            mode: this.mode,
+            matchBrackets: true
+          })
+          
+          //window.$('.CodeMirror-scroll').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+          window.$('.CodeMirror:first').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+          
+          this.resizeToFitContent()
+        }
+      }
+      
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        loop(0)
+      })
+      
+      /*
+      let $ = window.$
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        $.getScript('webpack/src/vendors/codemirror-5.48.4/mode/javascript/javascript.js', () => {
+          CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: true,
+            mode: 'text/javascript',
+            matchBrackets: true
+          })
+        })
+      })
+       */
+     
+          
+      
+      return this
+    },
+    resizeToFitContent: function (isRestrictSize) {
+      //window.resizeTo(800,800)
+      //return console.error('resizeToFitContent')
+      
+      setTimeout(() => {
+        let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
+        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
+      }, 0)
+      return this
+    },
+    getSizeOfDetector: function () {
+      if (this.detector === null) {
+        this.detector = window.$(this.$refs.ResizeDetector)
+      }
+      let width = this.detector.width()
+      width = width + this.padding
+      //width = Math.ceil(width)
+      
+      let height = this.detector.height()
+      height = height + this.config.menuBarHeight + this.padding
+      //height = Math.ceil(height)
+      
+      return {
+        width: width,
+        height: height
+      }
+    },
+    resizeIfOverflow: function () {
+      if (this.status.isReady === false) {
+        return this
+      }
+      
+      let {width, height} = this.getSizeOfDetector()
+      
+      let windowWidth = window.innerWidth
+      let windowHeight = window.innerHeight
+      
+      /*
+      console.log([width, windowWidth])
+      console.log([height, windowHeight])
+      console.log((width > windowWidth 
+              || height > windowHeight))
+      */
+      if (width > windowWidth 
+              || height > windowHeight) {
+        return this.resizeToFitContent(false)
+      }
+      
+      return this
+    },
+    createTempFile: function () {
+      let content = this.contentText
+      
+      // 我需要一個檔案名稱
+      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
+      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
+      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
+      
+      return filepath
+    },
+    getContent: function () {
+      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
+        return ''
+      }
+      return this.codeMirrorEditor.getValue()
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
+      return this
+    },
+    getFilters: function (filePath) {
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue":
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextCode/ContentTextCode.vue":
+/*!************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextCode/ContentTextCode.vue ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true& */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true&");
+/* harmony import */ var _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContentTextCode.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.js?vue&type=script&lang=js&?7308");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ContentTextCode_less_vue_type_style_index_0_id_3737f2f2_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&");
+/* harmony import */ var _ContentTextCode_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContentTextCode.global.less?vue&type=style&index=1&lang=less& */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
+/* harmony import */ var _ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue */ "./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue");
+
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
+  _ContentTextCode_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ContentTextCode_html_vue_type_template_id_3737f2f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "3737f2f2",
+  null
+  
+)
+
+/* custom blocks */
+
+if (typeof _ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"] === 'function') Object(_ContentTextCode_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextCode_5CContentTextCode_vue__WEBPACK_IMPORTED_MODULE_5__["default"])(component)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "app/webpack/src/components/ContentTextCode/ContentTextCode.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&":
+/*!******************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true&":
+/*!********************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true& ***!
+  \********************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js&?7343":
+/*!************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
+//window.CodeMirror = CodeMirror
+__webpack_require__(/*! ../../vendors/codemirror-5.48.4/lib/codemirror.css */ "./app/webpack/src/vendors/codemirror-5.48.4/lib/codemirror.css")
+const createCSSSelector = __webpack_require__(/*! ../../vendors/css-rule-builder/css-rule-builder.js */ "./app/webpack/src/vendors/css-rule-builder/css-rule-builder.js")
+const DateHelper = __webpack_require__(/*! ../../helpers/DateHelper */ "./app/webpack/src/helpers/DateHelper.js")
+
+module.exports = {
+  props: ['lib', 'status', 'config'],
+  data() {    
+    let data = {
+      padding: 17,
+      detector: null,
+      mode: '',
+      modePathList: [],
+      contentText: '',
+      $container: null,
+      $editor: null,
+      codeMirrorEditor: null,
+      $CodeMirror: null,
+      styleSheet: null,
+      // https://fileinfo.com/extension/css
+      filterConfigJSON: {
+        'asp': 'Active Server Page',
+        'aspx': 'Active Server Page Extended File',
+        'c': 'C/C++ Source Code File',
+        'css': 'Cascading Style Sheet',
+        'jsp': 'Java Server Page',
+        'html': 'Hypertext Markup Language File',
+        'htm': 'Hypertext Markup Language File',
+        'java': 'Java Source Code File',
+        'less': 'LESS Style Sheet',
+        'js': 'JavaScript File',
+        'json': 'JavaScript Object Notation File',
+        'pl': 'Perl Script',
+        'php': 'PHP Source Code File',
+        'py': 'Python Script',
+        'r': 'R Script File',
+        'rb': 'Ruby Source Code',
+        'sass': 'Syntactically Awesome StyleSheets File',
+        'scss': 'Sass Cascading Style Sheet',
+        'sh': 'Bash Shell Script',
+        'sql': 'Structured Query Language Data File',
+        'vb': 'Visual Basic Project Item File',
+        'vue': 'Vue.js Single-file components',
+        'xhtml': 'Extensible Hypertext Markup Language ',
+        'xml': 'XML File',
+        'yaml': 'YAML Document'
+      }
+    }
+    
+    this.$i18n.locale = this.config.locale
+    return data
+  },
+  watch: {
+    'config.fontSizeRatio': function () {
+      //console.log(`font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`)
+      //this.styleSheet = createCSSSelector('.CodeMirror', `font-size: calc(1rem * ${this.config.fontSizeRatio}) !important;`, this.styleSheet)
+      if (this.$CodeMirror === null || this.$CodeMirror === undefined) {
+        this.$CodeMirror = window.$('.CodeMirror:first')
+        //console.log(this.$CodeMirror.length)
+        if (this.$CodeMirror.length === 1) {
+        }
+        else {
+          this.$CodeMirror = null
+        }
+      }
+      
+      if (this.$CodeMirror !== null) {
+        this.$CodeMirror.css('font-size', `calc(1rem * ${this.config.fontSizeRatio})`)
+                  .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
+        this.codeMirrorEditor.refresh()
+      }
+    }
+  },
+  computed: {
+    detectorText: function () {
+      let detectorText = this.contentText
+      if (detectorText.endsWith('\n')) {
+        detectorText = detectorText + '|'
+      }
+      return detectorText
+    },
+    
+    styleFontSize: function () {
+      return `calc(1em * ${this.config.fontSizeRatio})`
+    },
+    styleLineHeight: function () {
+      let lineHeight = `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`
+      
+      if (this.status.fontSizeAdjustIsEnlarge) {
+        this.resizeIfOverflow()
+      }
+      
+      return lineHeight
+    },
+  },
+  mounted: function () {
+   
+    setTimeout(() => {
+      //this.setupStyle()
+      this.setupCode()
+      //this.resizeToFitContent()
+    }, 0)
+  },
+  methods: {
+    setupCode: function () {
+      //console.log(this.status)
+      //console.log([this.status.fileType === 'plain-text'
+      //        , typeof(this.status.contentText) === 'string' 
+      //        , this.status.contentText !== ''])
+      if (this.status.fileType === 'text-rich-format'
+              && typeof(this.status.filePath) === 'string' 
+              && this.status.filePath !== '') {
+        this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        
+        this.setupMode()
+        this.setupEditor()
+        
+        
+        //console.log(this.contentText)
+      }
+      return this
+    },
+    setupMode: function () {
+      // https://codemirror.net/mode/
+      let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
+      switch (ext) {
+        case 'asp':
+        case 'aspx':
+          this.mode = 'application/x-aspx'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
+          break
+        case 'c':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['css/css.js']
+          break
+        case 'css':
+        case 'less':
+        case 'scss':
+          this.mode = 'text/x-csrc'
+          this.modePathList = ['clike/clike.js']
+          break
+        case 'jsp':
+          this.mode = 'application/x-jsp'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
+          break
+        case 'html':
+        case 'htm':
+        case 'xhtml':
+          this.mode = 'text/html'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js'
+          ]
+          break
+        case 'java':
+          this.mode = 'text/x-java'
+          this.modePathList = ['clike/clike.js']
+          break
+        case 'js':
+          this.mode = 'text/javascript'
+          this.modePathList = ['javascript/javascript.js']
+          break
+        case 'json':
+          this.mode = 'text/json'
+          this.modePathList = ['javascript/javascript.js']
+          break
+        case 'pl':
+          this.mode = 'text/x-perl'
+          this.modePathList = ['perl/perl.js']
+          break
+        case 'php':
+          this.mode = 'application/x-httpd-php'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js',
+            'clike/clike.js'
+          ]
+          break
+        case 'py':
+          this.mode = 'text/x-python'
+          this.modePathList = ['python/python.js']
+          break
+        case 'r':
+          this.mode = 'text/x-rsrc'
+          this.modePathList = ['r/r.js']
+          break
+        case 'rb':
+          this.mode = 'text/x-ruby'
+          this.modePathList = ['ruby/ruby.js']
+          break
+        case 'sass':
+          this.mode = 'text/x-sass'
+          this.modePathList = ['sass/sass.js']
+          break
+        case 'sh':
+          this.mode = 'text/x-sh'
+          this.modePathList = ['shell/shell.js']
+          break
+        case 'sql':
+          this.mode = 'text/x-sql'
+          this.modePathList = ['sql/sql.js']
+          break
+        case 'vb':
+          this.mode = 'text/vbscript'
+          this.modePathList = ['vb/vb.js']
+          break
+        case 'vue':
+          this.mode = 'text/x-vue'
+          this.modePathList = ['vue/vue.js']
+          break
+        case 'xml':
+          this.mode = 'application/xml'
+          this.modePathList = ['xml/xml.js']
+          break
+        case 'yaml':
+          this.mode = 'text/x-yaml'
+          this.modePathList = ['yaml/yaml.js']
+          break
+        default:
+          console.error(`Not config: ${ext}`)
+      }
+      
+      return this
+    },
+    setupEditor: function () {
+      this.$container = window.$('<div id="ContentCodeContainer"></div>')
+              .css('top', this.config.menuBarHeight + 'px')
+              .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+              .appendTo('body')
+      this.$editor = window.$('<textarea></textarea>')
+              .val(this.contentText)
+              .appendTo(this.$container)
+      
+      /*
+      this.modePathList.forEach(path => {
+        let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
+        console.log(modeFilePath)
+        //require(modeFilePath)
+      })
+      
+      CodeMirror.fromTextArea(this.$editor[0], {
+        lineNumbers: true,
+        mode: this.modePath,
+        matchBrackets: true
+      })
+      */
+     
+      let $ = window.$
+      let loop = (i) => {
+        if (i < this.modePathList.length) {
+          let modePath = this.modePathList[i]
+          modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
+          //console.log(modePath)
+          //$(`<script src="${modePath}"></script>`).appendTo('head')
+          //window.$.getScript(modePath, () => {
+          $.getScript(modePath, () => {
+            i++
+            loop(i)
+          })
+        }
+        else {
+          this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: false,
+            mode: this.mode,
+            matchBrackets: true
+          })
+          
+          //window.$('.CodeMirror-scroll').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+          window.$('.CodeMirror:first').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+          
+          this.resizeToFitContent()
+        }
+      }
+      
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        loop(0)
+      })
+      
+      /*
+      let $ = window.$
+      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
+        $.getScript('webpack/src/vendors/codemirror-5.48.4/mode/javascript/javascript.js', () => {
+          CodeMirror.fromTextArea(this.$editor[0], {
+            lineNumbers: true,
+            mode: 'text/javascript',
+            matchBrackets: true
+          })
+        })
+      })
+       */
+     
+          
+      
+      return this
+    },
+    resizeToFitContent: function (isRestrictSize) {
+      //window.resizeTo(800,800)
+      //return console.error('resizeToFitContent')
+      
+      setTimeout(() => {
+        let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
+        this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
+      }, 0)
+      return this
+    },
+    getSizeOfDetector: function () {
+      if (this.detector === null) {
+        this.detector = window.$(this.$refs.ResizeDetector)
+      }
+      let width = this.detector.width()
+      width = width + this.padding
+      //width = Math.ceil(width)
+      
+      let height = this.detector.height()
+      height = height + this.config.menuBarHeight + this.padding
+      //height = Math.ceil(height)
+      
+      return {
+        width: width,
+        height: height
+      }
+    },
+    resizeIfOverflow: function () {
+      if (this.status.isReady === false) {
+        return this
+      }
+      
+      let {width, height} = this.getSizeOfDetector()
+      
+      let windowWidth = window.innerWidth
+      let windowHeight = window.innerHeight
+      
+      /*
+      console.log([width, windowWidth])
+      console.log([height, windowHeight])
+      console.log((width > windowWidth 
+              || height > windowHeight))
+      */
+      if (width > windowWidth 
+              || height > windowHeight) {
+        return this.resizeToFitContent(false)
+      }
+      
+      return this
+    },
+    createTempFile: function () {
+      let content = this.contentText
+      
+      // 我需要一個檔案名稱
+      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
+      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
+      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
+      
+      return filepath
+    },
+    getContent: function () {
+      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
+        return ''
+      }
+      return this.codeMirrorEditor.getValue()
+    },
+    saveFile: function (filePath) {
+      //console.error('saveFile: ' + filePath)
+      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
+      return this
+    },
+    getFilters: function (filePath) {
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
+      return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
+    }
+  }
+}
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js&?bb70":
+/*!************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./ContentTextRichFormat.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js&?7343");
+/* harmony import */ var _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_kazupon_vue_i18n_loader_lib_index_js_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.vue":
+/*!************************************************************************************!*\
+  !*** ./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.vue ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true& */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true&");
+/* harmony import */ var _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContentTextRichFormat.js?vue&type=script&lang=js& */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.js?vue&type=script&lang=js&?bb70");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ContentTextRichFormat_less_vue_type_style_index_0_id_af5d77da_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&");
+/* harmony import */ var _ContentTextRichFormat_global_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
+/* harmony import */ var _ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue */ "./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue");
+
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
+  _ContentTextRichFormat_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ContentTextRichFormat_html_vue_type_template_id_af5d77da_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "af5d77da",
+  null
+  
+)
+
+/* custom blocks */
+
+if (typeof _ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_5__["default"] === 'function') Object(_ContentTextRichFormat_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CContentTextRichFormat_5CContentTextRichFormat_vue__WEBPACK_IMPORTED_MODULE_5__["default"])(component)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
@@ -2157,11 +2687,11 @@ module.exports = {
   },
   computed: {
     enableSaveFile: function () {
-      let typeMatched = (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+      let typeMatched = (['text', 'text-code', 'text-rich-format'].indexOf(this.status.fileType) > -1)
       return (typeMatched && typeof(this.status.filePath) === 'string')
     },
     enableSaveFileAs: function () {
-      return (['plain-text', 'code', 'rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
+      return (['text', 'text-code', 'text-rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
     }
   },
   //mounted: function () {
@@ -2377,7 +2907,7 @@ module.exports = {
   },
   computed: {
     enableFontSizeControl: function () {
-      return (['plain-text', 'code', 'rich-format'].indexOf(this.status.fileType) > -1)
+      return (['text', 'text-code', 'text-rich-format'].indexOf(this.status.fileType) > -1)
     },
   },
   //mounted: function () {
@@ -3178,22 +3708,6 @@ module.exports = "webpack/dist/asset/flags.png";
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/ContentCode/ContentCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentCode%5CContentCode.vue ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function (Component) {
-  Component.options.__i18n = Component.options.__i18n || []
-  Component.options.__i18n.push('{"en":{"Title":"Example Title"},"zh-TW":{"Title":"範例標題"}}')
-  delete Component.options._Ctor
-}
-
-
-/***/ }),
-
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentImageStatic%5CContentImageStatic.vue":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentImageStatic%5CContentImageStatic.vue ***!
@@ -3230,6 +3744,38 @@ module.exports = function (Component) {
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/ContentText/ContentText.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentText%5CContentText.vue ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push('{"en":{"Title":"Example Title"},"zh-TW":{"Title":"範例標題"}}')
+  delete Component.options._Ctor
+}
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/ContentTextCode/ContentTextCode.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextCode%5CContentTextCode.vue ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push('{"en":{"Title":"Example Title"},"zh-TW":{"Title":"範例標題"}}')
+  delete Component.options._Ctor
+}
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\@kazupon\\vue-i18n-loader\\lib\\index.js!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/@kazupon/vue-i18n-loader/lib!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CContentTextRichFormat%5CContentTextRichFormat.vue ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3358,34 +3904,6 @@ exports.push([module.i, "body {\n  overflow: hidden;\n  -webkit-app-region: drag
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
-// Module
-exports.push([module.i, "#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&","ContentCode.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,YAAA;ACCF;ADHA;EAKI,UAAA;ACCJ;ADGA;;;EAGE,wCAAA;ACDF;ADIA;EACE,eAAA;ACFF","file":"ContentCode.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n  \n  textarea {\n    opacity: 0;\n  }\n}\n\n.CodeMirror-scrollbar-filler, \n.CodeMirror-gutter-filler, \n.CodeMirror {\n  background-color: transparent !important;\n}\n\n.CodeMirror {\n  font-size: 1rem;\n}","#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n"]}]);
-
-
-/***/ }),
-
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
-// Module
-exports.push([module.i, ".resize-detector[data-v-6a41e726] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","ContentCode.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAIA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;EACA,sBAAA;EACA,YAAA;ACDF","file":"ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  //overflow-y: auto;\n  //overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n  //margin-right: 20px;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n"]}]);
-
-
-/***/ }),
-
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true& ***!
@@ -3442,6 +3960,62 @@ exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  he
 
 /***/ }),
 
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, "#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&","ContentTextCode.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,YAAA;ACCF;ADHA;EAKI,UAAA;ACCJ;ADGA;;;EAGE,wCAAA;ACDF;ADIA;EACE,eAAA;ACFF","file":"ContentTextCode.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n  \n  textarea {\n    opacity: 0;\n  }\n}\n\n.CodeMirror-scrollbar-filler, \n.CodeMirror-gutter-filler, \n.CodeMirror {\n  background-color: transparent !important;\n}\n\n.CodeMirror {\n  font-size: 1rem;\n}","#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n"]}]);
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, ".resize-detector[data-v-3737f2f2] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&","ContentTextCode.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAIA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;EACA,sBAAA;EACA,YAAA;ACDF","file":"ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  //overflow-y: auto;\n  //overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n  //margin-right: 20px;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n"]}]);
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, "#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","ContentTextRichFormat.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,YAAA;ACCF;ADHA;EAKI,UAAA;ACCJ;ADGA;;;EAGE,wCAAA;ACDF;ADIA;EACE,eAAA;ACFF","file":"ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n  \n  textarea {\n    opacity: 0;\n  }\n}\n\n.CodeMirror-scrollbar-filler, \n.CodeMirror-gutter-filler, \n.CodeMirror {\n  background-color: transparent !important;\n}\n\n.CodeMirror {\n  font-size: 1rem;\n}","#ContentCodeContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentCodeContainer textarea {\n  opacity: 0;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n"]}]);
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, ".resize-detector[data-v-af5d77da] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","ContentTextRichFormat.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAIA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;EACA,sBAAA;EACA,YAAA;ACDF","file":"ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  //overflow-y: auto;\n  //overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n  //margin-right: 20px;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n"]}]);
+
+
+/***/ }),
+
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true& ***!
@@ -3494,46 +4068,6 @@ exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
 exports.push([module.i, ".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu {\n  max-height: 19rem !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","SubmenuTheme.global.less"],"names":[],"mappings":"AAAA;ECCE;;;;;;GAMC;AACH;ADRA;EAEI,8BAAA;ACSJ;ADPI;EACE,2BAAA;ACSN;ADdA;EAUI,4BAAA;ACOJ;ADjBA;;EAcM,mCAAA;EACA,8BAAA;EACA,kCAAA;ACON","file":"SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","sourcesContent":[".theme-select {\n  i.dropdown.icon {\n    margin-top: -0.5rem !important;\n\n    &:before {\n      content: \"\\f0d7\" !important;\n    }\n  }\n  \n  .menu {\n    max-height: 19rem !important;\n    \n    .item[data-value],\n    .item.active[data-value] {\n      border-width: 0 0 0 1rem !important;\n      border-style: solid !important;\n      border-left-width: 1rem !important;\n\n    }\n  }\n    \n  \n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n  \n\n",".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu {\n  max-height: 19rem !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n"]}]);
-
-
-/***/ }),
-
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/ContentCode/ContentCode.html?vue&type=template&id=6a41e726&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.status.fileType === "code"
-    ? _c("div", { attrs: { "data-component": "ContentCode" } }, [
-        _c(
-          "div",
-          {
-            ref: "ResizeDetector",
-            staticClass: "content-code resize-detector",
-            style: {
-              top: _vm.config.menuBarHeight + "px",
-              fontSize: _vm.styleFontSize,
-              lineHeight: _vm.styleLineHeight
-            }
-          },
-          [_vm._v(_vm._s(_vm.detectorText))]
-        )
-      ])
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-
 
 
 /***/ }),
@@ -3677,6 +4211,86 @@ var render = function() {
       }
     })
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/ContentTextCode/ContentTextCode.html?vue&type=template&id=3737f2f2&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.status.fileType === "code"
+    ? _c("div", { attrs: { "data-component": "ContentTextCode" } }, [
+        _c(
+          "div",
+          {
+            ref: "ResizeDetector",
+            staticClass: "content-text-code resize-detector",
+            style: {
+              top: _vm.config.menuBarHeight + "px",
+              fontSize: _vm.styleFontSize,
+              lineHeight: _vm.styleLineHeight
+            }
+          },
+          [_vm._v(_vm._s(_vm.detectorText))]
+        )
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\templateLoader.js?!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.html?vue&type=template&id=af5d77da&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.status.fileType === "code"
+    ? _c("div", { attrs: { "data-component": "ContentTextRichFormat" } }, [
+        _c(
+          "div",
+          {
+            ref: "ResizeDetector",
+            staticClass: "content-code resize-detector",
+            style: {
+              top: _vm.config.menuBarHeight + "px",
+              fontSize: _vm.styleFontSize,
+              lineHeight: _vm.styleLineHeight
+            }
+          },
+          [_vm._v(_vm._s(_vm.detectorText))]
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -4120,48 +4734,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentCode.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.global.less?vue&type=style&index=1&lang=less&");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
-var update = add("45992568", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentCode/ContentCode.less?vue&type=style&index=0&id=6a41e726&lang=less&scoped=true&");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
-var update = add("33a0c664", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
 /***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true& ***!
@@ -4241,6 +4813,90 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
 var update = add("76998af1", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextCode.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.global.less?vue&type=style&index=1&lang=less&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("b96cd48e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextCode/ContentTextCode.less?vue&type=style&index=0&id=3737f2f2&lang=less&scoped=true&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("bf7e5376", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("88544f82", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("9084e53c", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

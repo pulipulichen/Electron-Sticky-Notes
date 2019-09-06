@@ -62,7 +62,7 @@ module.exports = {
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
-      if (this.status.fileType === 'plain-text'
+      if (this.status.fileType === 'text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText

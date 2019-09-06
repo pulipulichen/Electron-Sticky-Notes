@@ -108,7 +108,7 @@ module.exports = {
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
-      if (this.status.fileType === 'code'
+      if (this.status.fileType === 'text-code'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
