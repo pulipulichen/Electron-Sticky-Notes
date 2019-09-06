@@ -1,7 +1,7 @@
 <div data-component="ContentImageStatic"
      v-if="status.fileType === 'image-static'">
   <img class="resize-detector"
-       v-bind:src="attrSrc"
+       v-bind:src="imagePath"
        v-bind:style="{
           'top': config.menuBarHeight + 'px'
        }"
@@ -9,10 +9,6 @@
        v-bind:load="resizeToFitContent" />
   
   <div class="content-image"
-       v-bind:style="{
-          'top': config.menuBarHeight + 'px',
-          'height': 'calc(100vh - ' + config.menuBarHeight + 'px)',
-          'background-image': 'url(' + attrSrc + ')'
-       }">
+       v-bind:style="attrContentImageStyle">
   </div>
 </div>

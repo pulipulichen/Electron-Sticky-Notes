@@ -103,11 +103,8 @@ let VueController = {
   </script>`
       }
       if (this.config.debug.useTestImageStaticFile === true) {
-        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
-        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog.jpg')
-        //console.log(this.status.filePath)
-        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/android-extension.svg')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/red truck.svg')
       }
       if (this.config.debug.useTestImageViewerFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/dog 1280.webp')

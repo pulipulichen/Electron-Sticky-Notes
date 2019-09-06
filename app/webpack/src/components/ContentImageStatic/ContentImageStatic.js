@@ -14,16 +14,26 @@ module.exports = {
     }
   },
   computed: {
+    /*
     attrSrc: function () {
-      if (typeof(this.imagePath) === 'string') {
+      //if (typeof(this.imagePath) === 'string') {
+        console.log(this.imagePath)
         return this.imagePath
-      }
+      //}
     },
+    */
+    attrContentImageStyle: function () {
+      return {
+          'top': this.config.menuBarHeight + 'px',
+          'height': 'calc(100vh - ' + this.config.menuBarHeight + 'px)',
+          'background-image': 'url("' + this.imagePath + '")'
+      }
+    }
   },
   mounted: function () {
     setTimeout(() => {
-      this.initDetector()
       this.setupImage()
+      this.initDetector()
     }, 0)
   },
   methods: {
@@ -32,6 +42,7 @@ module.exports = {
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.imagePath = this.status.filePath.split('\\').join('/')
+        //console.log([this.imagePath, this.status.filePath])
       }
       return this
     },
@@ -46,6 +57,7 @@ module.exports = {
           this.initWindowResizeRestictRation()
         })
       })
+      
       return this
     },
     /**
@@ -58,6 +70,34 @@ module.exports = {
       let basicWidth = this.detector.width()
       let basicHeight = this.detector.height()
       this.basicRatio = basicWidth / basicHeight
+      
+      window.onresize = () => {
+        let windowWidth = window.outerWidth
+        let windowHeight = window.outerHeight
+        windowHeight = windowHeight - this.config.menuBarHeight
+        
+        let windowRatio = windowWidth / windowHeight
+        //windowRatio = Math.ceil(windowRatio * 1000) / 1000
+        //console.log([windowRatio, this.basicRatio])
+        
+        console.log([(windowRatio < this.basicRatio)])
+        
+        if (windowRatio < this.basicRatio) {
+          // 太寬
+          this.detector.css({
+            'height': `auto`,
+            'width': '100vw'
+          })
+        }
+        else {
+          // 太高
+          this.detector.css({
+            'height': `calc(100vh - ${this.config.menuBarHeight}px)`,
+            'width': 'auto'
+          })
+        }
+      }
+      
       //this.basicRatio = Math.ceil(basicRatio * 1000) / 1000
       /*
       let resizeLock = false
@@ -112,10 +152,11 @@ module.exports = {
       }
     },
     resizeToFitContent: function (isRestrictSize, callback) {
+      /*
       if (typeof(this.basicRatio) === 'number') {
         return this.resizeToRatio()
       }
-      
+      */
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)

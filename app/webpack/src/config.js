@@ -19,7 +19,7 @@ module.exports = {
   debug: {
     useTestContentText: false,
     useTestCodeFile: false,
-    useTestImageStaticFile: false,
+    useTestImageStaticFile: true,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
   }
