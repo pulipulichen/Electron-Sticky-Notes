@@ -18,7 +18,7 @@ module.exports = {
   
   debug: {
     useTestContentText: false,
-    useTestCodeFile: true,
+    useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,

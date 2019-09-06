@@ -137,128 +137,104 @@ module.exports = {
           break
         case 'c':
           this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.modePathList = ['css/css.js']
           break
         case 'css':
+        case 'less':
+        case 'scss':
           this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.modePathList = ['clike/clike.js']
           break
-          
-        // -----------------------------
-        // 0906 做到這裡
         case 'jsp':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'application/x-jsp'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlembedded/htmlembedded.js'
+          ]
           break
         case 'html':
         case 'htm':
         case 'xhtml':
-        case 'vue':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/html'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js'
+          ]
           break
         case 'java':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
-          break
-        case 'less':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-java'
+          this.modePathList = ['clike/clike.js']
           break
         case 'js':
+          this.mode = 'text/javascript'
+          this.modePathList = ['javascript/javascript.js']
+          break
         case 'json':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/json'
+          this.modePathList = ['javascript/javascript.js']
           break
         case 'pl':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-perl'
+          this.modePathList = ['perl/perl.js']
           break
         case 'php':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'application/x-httpd-php'
+          this.modePathList = [
+            'css/css.js',
+            'xml/xml.js',
+            'javascript/javascript.js',
+            'htmlmixed/htmlmixed.js',
+            'clike/clike.js'
+          ]
           break
         case 'py':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-python'
+          this.modePathList = ['python/python.js']
           break
         case 'r':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-rsrc'
+          this.modePathList = ['r/r.js']
           break
         case 'rb':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-ruby'
+          this.modePathList = ['ruby/ruby.js']
           break
         case 'sass':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
-          break
-        case 'scss':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-sass'
+          this.modePathList = ['sass/sass.js']
           break
         case 'sh':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-sh'
+          this.modePathList = ['shell/shell.js']
           break
         case 'sql':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-sql'
+          this.modePathList = ['sql/sql.js']
           break
         case 'vb':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/vbscript'
+          this.modePathList = ['vb/vb.js']
+          break
+        case 'vue':
+          this.mode = 'text/x-vue'
+          this.modePathList = ['vue/vue.js']
           break
         case 'xml':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'application/xml'
+          this.modePathList = ['xml/xml.js']
           break
         case 'yaml':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike']
+          this.mode = 'text/x-yaml'
+          this.modePathList = ['yaml/yaml.js']
           break
+        default:
+          console.error(`Not config: ${ext}`)
       }
       
-      // ------------------------------
-      
-      if (ext === 'css') {
-        this.mode = 'text/css'
-        this.modePathList = ['css/css.js']
-      }
-      else if (ext === 'jsp') {
-        this.mode = 'application/x-jsp'
-        this.modePathList = ['htmlembedded/htmlembedded.js']
-      }
-      else if (ext === 'asp' || ext === 'aspx') {
-        this.mode = 'application/x-jsp'
-        this.modePathList = ['application/x-aspx']
-      }
-      else if (ext === 'html' || ext === 'htm' || ext === 'vue') {
-        this.mode = 'text/html'
-        this.modePathList = [
-          'css/css.js',
-          'xml/xml.js',
-          'javascript/javascript.js',
-          'htmlmixed/htmlmixed.js'
-        ]
-      }
-      else if (ext === 'java') {
-        this.mode = 'text/x-java'
-        this.modePathList = ['clike/clike.js']
-      }
-      else if (ext === 'js') {
-        this.mode = 'text/javascript'
-        this.modePathList = ['javascript/javascript.js']
-      }
-      else if (ext === 'json') {
-        this.mode = 'text/json'
-        this.modePathList = ['javascript/javascript.js']
-      }
-      else {
-        console.error('尚未設定完成: ' + ext)
-      }
-
       return this
     },
     setupEditor: function () {
