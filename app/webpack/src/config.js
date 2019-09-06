@@ -20,7 +20,8 @@ module.exports = {
     useTestContentText: false,
     useTestCodeFile: false,
     useTestImageStaticFile: false,
-    useTestImageViewerFile: true,
+    useTestImageViewerFile: false,
     useTestPlainTextFile: false,
+    useTestRichFormatTextFile: true,
   }
 }

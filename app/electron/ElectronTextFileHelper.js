@@ -23,7 +23,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['csv', 'tsv', 'txt', 'arff', 'md', 'gitignore', 'au3', 'bat', 'reg', 'ini'].indexOf(ext) === -1) {
+    if (['csv', 'tsv', 'txt', 'arff', 'gitignore', 'au3', 'bat', 'reg', 'ini'].indexOf(ext) === -1) {
       return false
     }
 
@@ -73,6 +73,38 @@ let ElectronTextFileHelper = {
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff'
             || (fileTypeResult === undefined && ext === 'txt') ) {
+      return true
+    }
+    else {
+      return false
+    }
+    */
+  },
+  isRichFormatFile: function (filepath) {
+    this.init()
+    
+    if (typeof(filepath) !== 'string' 
+            || filepath.lastIndexOf('.') === -1) {
+      return false
+    }
+
+    //console.log(filepath)
+    let ext = this.lib.ElectronFileHelper.getExt(filepath)
+    if (['md'].indexOf(ext) === -1) {
+      return false
+    }
+
+    //console.log(filepath)
+    if (this.lib.ElectronFileHelper.existsSync(filepath) === false) {
+      return false
+    }
+
+    let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
+    console.error(['Please check file type: ', fileTypeResult, ext])
+    return ((ext === 'md' && fileTypeResult === undefined))
+    /*
+    if ( (fileTypeResult === undefined && ext === 'csv')
+            || (fileTypeResult === undefined && ext === 'arff') ) {
       return true
     }
     else {

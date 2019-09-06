@@ -1,8 +1,5 @@
-//const CodeMirror = require('../../vendors/codemirror-5.48.4/lib/codemirror.js')
-//window.CodeMirror = CodeMirror
-require('../../vendors/codemirror-5.48.4/lib/codemirror.css')
-const createCSSSelector = require('../../vendors/css-rule-builder/css-rule-builder.js')
-const DateHelper = require('../../helpers/DateHelper')
+require('../../vendors/summernote/summernote-lite')
+const Summernote = require('../../vendors/summernote/summernote-lite')
 
 module.exports = {
   props: ['lib', 'status', 'config'],
@@ -12,7 +9,7 @@ module.exports = {
       detector: null,
       mode: '',
       modePathList: [],
-      contentText: '',
+      contentHTML: '',
       $container: null,
       $editor: null,
       codeMirrorEditor: null,
@@ -74,7 +71,7 @@ module.exports = {
   },
   computed: {
     detectorText: function () {
-      let detectorText = this.contentText
+      let detectorText = this.contentHTML
       if (detectorText.endsWith('\n')) {
         detectorText = detectorText + '|'
       }
@@ -98,12 +95,12 @@ module.exports = {
    
     setTimeout(() => {
       //this.setupStyle()
-      this.setupCode()
+      this.setupDocument()
       //this.resizeToFitContent()
     }, 0)
   },
   methods: {
-    setupCode: function () {
+    setupDocument: function () {
       //console.log(this.status)
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
@@ -111,201 +108,30 @@ module.exports = {
       if (this.status.fileType === 'text-rich-format'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
-        this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         
-        this.setupMode()
+        this.contentHTML = this.convertToHTML(this.status.filePath)
         this.setupEditor()
         
-        
-        //console.log(this.contentText)
       }
       return this
     },
-    setupMode: function () {
-      // https://codemirror.net/mode/
-      let ext = this.lib.ElectronFileHelper.getExt(this.status.filePath)
-      switch (ext) {
-        case 'asp':
-        case 'aspx':
-          this.mode = 'application/x-aspx'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlembedded/htmlembedded.js'
-          ]
-          break
-        case 'c':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['css/css.js']
-          break
-        case 'css':
-        case 'less':
-        case 'scss':
-          this.mode = 'text/x-csrc'
-          this.modePathList = ['clike/clike.js']
-          break
-        case 'jsp':
-          this.mode = 'application/x-jsp'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlembedded/htmlembedded.js'
-          ]
-          break
-        case 'html':
-        case 'htm':
-        case 'xhtml':
-          this.mode = 'text/html'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlmixed/htmlmixed.js'
-          ]
-          break
-        case 'java':
-          this.mode = 'text/x-java'
-          this.modePathList = ['clike/clike.js']
-          break
-        case 'js':
-          this.mode = 'text/javascript'
-          this.modePathList = ['javascript/javascript.js']
-          break
-        case 'json':
-          this.mode = 'text/json'
-          this.modePathList = ['javascript/javascript.js']
-          break
-        case 'pl':
-          this.mode = 'text/x-perl'
-          this.modePathList = ['perl/perl.js']
-          break
-        case 'php':
-          this.mode = 'application/x-httpd-php'
-          this.modePathList = [
-            'css/css.js',
-            'xml/xml.js',
-            'javascript/javascript.js',
-            'htmlmixed/htmlmixed.js',
-            'clike/clike.js'
-          ]
-          break
-        case 'py':
-          this.mode = 'text/x-python'
-          this.modePathList = ['python/python.js']
-          break
-        case 'r':
-          this.mode = 'text/x-rsrc'
-          this.modePathList = ['r/r.js']
-          break
-        case 'rb':
-          this.mode = 'text/x-ruby'
-          this.modePathList = ['ruby/ruby.js']
-          break
-        case 'sass':
-          this.mode = 'text/x-sass'
-          this.modePathList = ['sass/sass.js']
-          break
-        case 'sh':
-          this.mode = 'text/x-sh'
-          this.modePathList = ['shell/shell.js']
-          break
-        case 'sql':
-          this.mode = 'text/x-sql'
-          this.modePathList = ['sql/sql.js']
-          break
-        case 'vb':
-          this.mode = 'text/vbscript'
-          this.modePathList = ['vb/vb.js']
-          break
-        case 'vue':
-          this.mode = 'text/x-vue'
-          this.modePathList = ['vue/vue.js']
-          break
-        case 'xml':
-          this.mode = 'application/xml'
-          this.modePathList = ['xml/xml.js']
-          break
-        case 'yaml':
-          this.mode = 'text/x-yaml'
-          this.modePathList = ['yaml/yaml.js']
-          break
-        default:
-          console.error(`Not config: ${ext}`)
-      }
+    convertToHTML: function (filePath) {
+      console.log(`convertToHTML: ${filePath}`)
       
-      return this
+      return `<h1>${filePath}</h1><p>Hello world</p>`
     },
     setupEditor: function () {
-      this.$container = window.$('<div id="ContentCodeContainer"></div>')
+      this.$container = window.$('<div id="ContentRichTextContainer"></div>')
               .css('top', this.config.menuBarHeight + 'px')
               .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
               .appendTo('body')
       this.$editor = window.$('<textarea></textarea>')
-              .val(this.contentText)
+              .val(this.contentHTML)
+              .attr('id', 'summernote')
               .appendTo(this.$container)
       
-      /*
-      this.modePathList.forEach(path => {
-        let modeFilePath = '../../vendors/codemirror-5.48.4/mode/' + path
-        console.log(modeFilePath)
-        //require(modeFilePath)
-      })
-      
-      CodeMirror.fromTextArea(this.$editor[0], {
-        lineNumbers: true,
-        mode: this.modePath,
-        matchBrackets: true
-      })
-      */
-     
-      let $ = window.$
-      let loop = (i) => {
-        if (i < this.modePathList.length) {
-          let modePath = this.modePathList[i]
-          modePath = 'webpack/src/vendors/codemirror-5.48.4/mode/' + modePath
-          //console.log(modePath)
-          //$(`<script src="${modePath}"></script>`).appendTo('head')
-          //window.$.getScript(modePath, () => {
-          $.getScript(modePath, () => {
-            i++
-            loop(i)
-          })
-        }
-        else {
-          this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
-            lineNumbers: false,
-            mode: this.mode,
-            matchBrackets: true
-          })
-          
-          //window.$('.CodeMirror-scroll').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
-          window.$('.CodeMirror:first').css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
-          
-          this.resizeToFitContent()
-        }
-      }
-      
-      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
-        loop(0)
-      })
-      
-      /*
-      let $ = window.$
-      $.getScript('webpack/src/vendors/codemirror-5.48.4/lib/codemirror.js', () => {
-        $.getScript('webpack/src/vendors/codemirror-5.48.4/mode/javascript/javascript.js', () => {
-          CodeMirror.fromTextArea(this.$editor[0], {
-            lineNumbers: true,
-            mode: 'text/javascript',
-            matchBrackets: true
-          })
-        })
-      })
-       */
-     
-          
-      
+      window.$('#summernote').summernote();
+        
       return this
     },
     resizeToFitContent: function (isRestrictSize) {

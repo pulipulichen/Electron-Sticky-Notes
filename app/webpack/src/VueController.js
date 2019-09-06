@@ -126,6 +126,11 @@ let VueController = {
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
+      if (this.config.debug.useTestRichFormatTextFile === true) {
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/README.md')
+        //console.log(this.status.filePath)
+        //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
+      }
       
       // -------------------------------------
       // For test
@@ -148,6 +153,10 @@ let VueController = {
         this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         this.status.mainComponent = this.$refs.ContentText
+      }
+      else if (this.lib.ElectronTextFileHelper.isRichFormatFile(this.status.filePath)) {
+        this.status.fileType = 'text-rich-format'
+        this.status.mainComponent = this.$refs.ContentTextRichFormat
       }
       else if (typeof(this.status.imageDataURL) === 'string') {
         this.status.fileType = 'image'
