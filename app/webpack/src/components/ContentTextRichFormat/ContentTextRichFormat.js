@@ -10,41 +10,16 @@ module.exports = {
     let data = {
       padding: 17,
       detector: null,
-      mode: '',
-      modePathList: [],
       contentHTML: '',
       $container: null,
-      $editor: null,
-      codeMirrorEditor: null,
-      $CodeMirror: null,
-      styleSheet: null,
+      $summernote: null,
+      turndownService: null,
+      
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'asp': 'Active Server Page',
-        'aspx': 'Active Server Page Extended File',
-        'c': 'C/C++ Source Code File',
-        'css': 'Cascading Style Sheet',
-        'jsp': 'Java Server Page',
         'html': 'Hypertext Markup Language File',
         'htm': 'Hypertext Markup Language File',
-        'java': 'Java Source Code File',
-        'less': 'LESS Style Sheet',
-        'js': 'JavaScript File',
-        'json': 'JavaScript Object Notation File',
-        'pl': 'Perl Script',
-        'php': 'PHP Source Code File',
-        'py': 'Python Script',
-        'r': 'R Script File',
-        'rb': 'Ruby Source Code',
-        'sass': 'Syntactically Awesome StyleSheets File',
-        'scss': 'Sass Cascading Style Sheet',
-        'sh': 'Bash Shell Script',
-        'sql': 'Structured Query Language Data File',
-        'vb': 'Visual Basic Project Item File',
-        'vue': 'Vue.js Single-file components',
-        'xhtml': 'Extensible Hypertext Markup Language ',
-        'xml': 'XML File',
-        'yaml': 'YAML Document'
+        'md': 'Markdown Documentation File',
       }
     }
     
@@ -73,14 +48,6 @@ module.exports = {
     }
   },
   computed: {
-    detectorText: function () {
-      let detectorText = this.contentHTML
-      if (detectorText.endsWith('\n')) {
-        detectorText = detectorText + '|'
-      }
-      return detectorText
-    },
-    
     styleFontSize: function () {
       return `calc(1em * ${this.config.fontSizeRatio})`
     },
@@ -128,11 +95,7 @@ module.exports = {
         case 'md':
           let contentText = this.lib.ElectronFileHelper.readFileSync(filePath)
           contentHTML = new showdown.Converter().makeHtml(contentText)
-          
-          var turndownService = new TurndownService()
-          var markdown = turndownService.turndown(contentHTML)
-          console.log(markdown)
-            break
+          break
         default:
           contentHTML = `<h1>${filePath}</h1><p>Hello world</p>`
       }
@@ -150,9 +113,20 @@ module.exports = {
               .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
               .appendTo(this.$container)
       
-      window.$('#summernote').summernote({
+      // Summernote Configuration
+      // https://summernote.org/deep-dive/
+      this.$summernote = window.$('#summernote')
+      this.$summernote.summernote({
         airMode: true,
         disableDragAndDrop: true,
+        callbacks: {
+          onChange: (content, $editable) => {
+            this.contentHTML = content
+          },
+          onInit: () => {
+            //this.resizeToFitContent(true)
+          }
+        }
       });
         
       return this
@@ -208,25 +182,21 @@ module.exports = {
       
       return this
     },
-    createTempFile: function () {
-      let content = this.contentText
-      
-      // 我需要一個檔案名稱
-      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
-      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
-      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
-      
-      return filepath
-    },
-    getContent: function () {
-      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
-        return ''
-      }
-      return this.codeMirrorEditor.getValue()
-    },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)
-      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
+      
+      switch(ext) {
+        case 'md':
+          //let contentMD = this.contentHTML
+          if (this.turndownService === null 
+                  || this.turndownService === undefined) {
+            this.turndownService = new TurndownService()
+          }
+          let markdown = this.turndownService.turndown(this.contentHTML)
+          this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
+      }
+      
       return this
     },
     getFilters: function (filePath) {

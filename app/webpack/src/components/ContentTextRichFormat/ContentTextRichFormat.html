@@ -1,10 +1,10 @@
 <div data-component="ContentTextRichFormat"
-     v-if="status.fileType === 'code'">
+     v-if="status.fileType === 'text-rich-format'">
   <div class="content-code resize-detector"
        v-bind:style="{
           'top': config.menuBarHeight + 'px',
           'fontSize': styleFontSize,
           'lineHeight': styleLineHeight,
        }"
-       ref="ResizeDetector">{{ detectorText }}</div>
+       ref="ResizeDetector">{{ contentHTML }}</div>
 </div>
