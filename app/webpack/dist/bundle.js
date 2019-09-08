@@ -1905,41 +1905,16 @@ module.exports = {
     let data = {
       padding: 17,
       detector: null,
-      mode: '',
-      modePathList: [],
       contentHTML: '',
       $container: null,
-      $editor: null,
-      codeMirrorEditor: null,
-      $CodeMirror: null,
-      styleSheet: null,
+      $summernote: null,
+      turndownService: null,
+      
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
-        'asp': 'Active Server Page',
-        'aspx': 'Active Server Page Extended File',
-        'c': 'C/C++ Source Code File',
-        'css': 'Cascading Style Sheet',
-        'jsp': 'Java Server Page',
         'html': 'Hypertext Markup Language File',
         'htm': 'Hypertext Markup Language File',
-        'java': 'Java Source Code File',
-        'less': 'LESS Style Sheet',
-        'js': 'JavaScript File',
-        'json': 'JavaScript Object Notation File',
-        'pl': 'Perl Script',
-        'php': 'PHP Source Code File',
-        'py': 'Python Script',
-        'r': 'R Script File',
-        'rb': 'Ruby Source Code',
-        'sass': 'Syntactically Awesome StyleSheets File',
-        'scss': 'Sass Cascading Style Sheet',
-        'sh': 'Bash Shell Script',
-        'sql': 'Structured Query Language Data File',
-        'vb': 'Visual Basic Project Item File',
-        'vue': 'Vue.js Single-file components',
-        'xhtml': 'Extensible Hypertext Markup Language ',
-        'xml': 'XML File',
-        'yaml': 'YAML Document'
+        'md': 'Markdown Documentation File',
       }
     }
     
@@ -1968,14 +1943,6 @@ module.exports = {
     }
   },
   computed: {
-    detectorText: function () {
-      let detectorText = this.contentHTML
-      if (detectorText.endsWith('\n')) {
-        detectorText = detectorText + '|'
-      }
-      return detectorText
-    },
-    
     styleFontSize: function () {
       return `calc(1em * ${this.config.fontSizeRatio})`
     },
@@ -2023,11 +1990,7 @@ module.exports = {
         case 'md':
           let contentText = this.lib.ElectronFileHelper.readFileSync(filePath)
           contentHTML = new showdown.Converter().makeHtml(contentText)
-          
-          var turndownService = new TurndownService()
-          var markdown = turndownService.turndown(contentHTML)
-          console.log(markdown)
-            break
+          break
         default:
           contentHTML = `<h1>${filePath}</h1><p>Hello world</p>`
       }
@@ -2045,15 +2008,29 @@ module.exports = {
               .css('height', `calc(100vh - ${this.config.menuBarHeight}px)`)
               .appendTo(this.$container)
       
-      window.$('#summernote').summernote({
+      // Summernote Configuration
+      // https://summernote.org/deep-dive/
+      this.$summernote = window.$('#summernote')
+      this.$summernote.summernote({
         airMode: true,
         disableDragAndDrop: true,
+        callbacks: {
+          onChange: (content, $editable) => {
+            this.contentHTML = content
+          },
+          onInit: () => {
+            this.$container.find('.note-editor > .note-editing-area > .note-editable').css({
+              'max-height': `calc(100vh - ${this.config.menuBarHeight}px)`
+            })
+            this.resizeToFitContent(true)
+          }
+        }
       });
         
       return this
     },
     resizeToFitContent: function (isRestrictSize) {
-      //window.resizeTo(800,800)
+      //window.resizeTo(600,800)
       //return console.error('resizeToFitContent')
       
       setTimeout(() => {
@@ -2103,25 +2080,21 @@ module.exports = {
       
       return this
     },
-    createTempFile: function () {
-      let content = this.contentText
-      
-      // 我需要一個檔案名稱
-      let filename = `tmp-${DateHelper.getCurrentTimeString()}.txt`
-      let filepath = this.lib.ElectronFileHelper.resolve(`cache/${filename}`)
-      this.lib.ElectronFileHelper.writeFileSync(filepath, content)
-      
-      return filepath
-    },
-    getContent: function () {
-      if (this.codeMirrorEditor === undefined || this.codeMirrorEditor === null) {
-        return ''
-      }
-      return this.codeMirrorEditor.getValue()
-    },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)
-      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
+      let ext = this.lib.ElectronFileHelper.getExt(filePath)
+      
+      switch(ext) {
+        case 'md':
+          //let contentMD = this.contentHTML
+          if (this.turndownService === null 
+                  || this.turndownService === undefined) {
+            this.turndownService = new TurndownService()
+          }
+          let markdown = this.turndownService.turndown(this.contentHTML)
+          this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
+      }
+      
       return this
     },
     getFilters: function (filePath) {
@@ -15966,7 +15939,7 @@ exports.push([module.i, ".resize-detector[data-v-3737f2f2] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentRichTextContainer textarea {\n  opacity: 0;\n  width: 100vw;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","ContentTextRichFormat.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,YAAA;ACCF;ADHA;EAKI,UAAA;EACA,YAAA;ACCJ;ADGA;;;EAGE,wCAAA;ACDF;ADIA;EACE,eAAA;ACFF","file":"ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n  \n  textarea {\n    opacity: 0;\n    width: 100vw;\n  }\n}\n\n.CodeMirror-scrollbar-filler, \n.CodeMirror-gutter-filler, \n.CodeMirror {\n  background-color: transparent !important;\n}\n\n.CodeMirror {\n  font-size: 1rem;\n}","#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n}\n#ContentRichTextContainer textarea {\n  opacity: 0;\n  width: 100vw;\n}\n.CodeMirror-scrollbar-filler,\n.CodeMirror-gutter-filler,\n.CodeMirror {\n  background-color: transparent !important;\n}\n.CodeMirror {\n  font-size: 1rem;\n}\n"]}]);
+exports.push([module.i, "#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n  font-family: Noto Sans CJK TC;\n}\n#ContentRichTextContainer .note-editable {\n  max-height: calc(100vh - 40px) !important;\n  overflow-y: auto;\n}\n#ContentRichTextContainer .note-editable p,\n#ContentRichTextContainer .note-editable h1,\n#ContentRichTextContainer .note-editable h2,\n#ContentRichTextContainer .note-editable h3,\n#ContentRichTextContainer .note-editable h4,\n#ContentRichTextContainer .note-editable h5,\n#ContentRichTextContainer .note-editable h6,\n#ContentRichTextContainer .note-editable li {\n  margin-bottom: 0;\n  margin-top: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","ContentTextRichFormat.global.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,YAAA;EACA,6BAAA;ACCF;ADJA;EAMI,yCAAA;EACA,gBAAA;ACCJ;ADRA;;;;;;;;EAUM,gBAAA;EACA,aAAA;ACQN","file":"ContentTextRichFormat.global.less?vue&type=style&index=1&lang=less&","sourcesContent":["#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n  font-family: Noto Sans CJK TC;\n  \n  .note-editable {\n    max-height: calc(100vh - 40px) !important;\n    overflow-y: auto;\n    \n    p,h1,h2,h3,h4,h5,h6,li {\n      margin-bottom: 0;\n      margin-top: 0;\n    }\n  }\n}","#ContentRichTextContainer {\n  position: absolute;\n  width: 100vw;\n  font-family: Noto Sans CJK TC;\n}\n#ContentRichTextContainer .note-editable {\n  max-height: calc(100vh - 40px) !important;\n  overflow-y: auto;\n}\n#ContentRichTextContainer .note-editable p,\n#ContentRichTextContainer .note-editable h1,\n#ContentRichTextContainer .note-editable h2,\n#ContentRichTextContainer .note-editable h3,\n#ContentRichTextContainer .note-editable h4,\n#ContentRichTextContainer .note-editable h5,\n#ContentRichTextContainer .note-editable h6,\n#ContentRichTextContainer .note-editable li {\n  margin-bottom: 0;\n  margin-top: 0;\n}\n"]}]);
 
 
 /***/ }),
@@ -15980,7 +15953,7 @@ exports.push([module.i, "#ContentRichTextContainer {\n  position: absolute;\n  w
 
 exports = module.exports = __webpack_require__(/*! C:/Users/USER/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-af5d77da] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","ContentTextRichFormat.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAIA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;EACA,sBAAA;EACA,YAAA;ACDF","file":"ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  //overflow-y: auto;\n  //overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n  //margin-right: 20px;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  font-family: monospace;\n  padding: 4px;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-af5d77da] {\n  z-index: 10;\n  opacity: 0.5;\n  color: blue;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  font-family: Noto Sans CJK TC;\n}\n.resize-detector[data-v-af5d77da]  p,\n.resize-detector[data-v-af5d77da]  h1,\n.resize-detector[data-v-af5d77da]  h2,\n.resize-detector[data-v-af5d77da]  h3,\n.resize-detector[data-v-af5d77da]  h4,\n.resize-detector[data-v-af5d77da]  h5,\n.resize-detector[data-v-af5d77da]  h6,\n.resize-detector[data-v-af5d77da]  li {\n  color: red;\n  margin-top: 0 !important;\n  margin-bottom: 0 !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentTextRichFormat/ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","ContentTextRichFormat.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,WAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,6BAAA;ACCF;ADEA;;;;;;;;EAEI,UAAA;EACA,wBAAA;EACA,2BAAA;ACMJ","file":"ContentTextRichFormat.less?vue&type=style&index=0&id=af5d77da&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: blue;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  font-family: Noto Sans CJK TC;\n}\n\n.resize-detector ::v-deep {\n  p,h1,h2,h3,h4,h5,h6,li {\n    color: red;\n    margin-top: 0 !important;\n    margin-bottom: 0 !important;\n  }\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: blue;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  font-family: Noto Sans CJK TC;\n}\n.resize-detector ::v-deep p,\n.resize-detector ::v-deep h1,\n.resize-detector ::v-deep h2,\n.resize-detector ::v-deep h3,\n.resize-detector ::v-deep h4,\n.resize-detector ::v-deep h5,\n.resize-detector ::v-deep h6,\n.resize-detector ::v-deep li {\n  color: red;\n  margin-top: 0 !important;\n  margin-bottom: 0 !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -16239,21 +16212,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.status.fileType === "code"
+  return _vm.status.fileType === "text-rich-format"
     ? _c("div", { attrs: { "data-component": "ContentTextRichFormat" } }, [
-        _c(
-          "div",
-          {
-            ref: "ResizeDetector",
-            staticClass: "content-code resize-detector",
-            style: {
-              top: _vm.config.menuBarHeight + "px",
-              fontSize: _vm.styleFontSize,
-              lineHeight: _vm.styleLineHeight
-            }
+        _c("div", {
+          ref: "ResizeDetector",
+          staticClass: "content-code resize-detector",
+          style: {
+            top: _vm.config.menuBarHeight + "px",
+            fontSize: _vm.styleFontSize,
+            lineHeight: _vm.styleLineHeight
           },
-          [_vm._v(_vm._s(_vm.detectorText))]
-        )
+          domProps: { innerHTML: _vm._s(_vm.contentHTML) }
+        })
       ])
     : _vm._e()
 }

@@ -68,3 +68,11 @@ https://www.python.org/downloads/
 ## Associate *.vue into "HTML files (text/html)"
 
 https://stackoverflow.com/a/53271901/6645399
+
+## Git
+
+```
+git pull
+git commit -m "0908"
+git push
+```
