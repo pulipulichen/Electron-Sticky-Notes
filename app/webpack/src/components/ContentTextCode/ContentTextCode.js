@@ -383,6 +383,11 @@ module.exports = {
     getFilters: function (filePath) {
       let ext = this.lib.ElectronFileHelper.getExt(filePath)
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
+    },
+    openEditor: function () {
+      this.saveFile() // 先儲存再開啟
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
+      return this
     }
   }
 }

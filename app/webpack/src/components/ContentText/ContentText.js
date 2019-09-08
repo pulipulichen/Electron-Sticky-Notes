@@ -131,6 +131,21 @@ module.exports = {
     },
     getFilters: function (filePath) {
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath)
+    },
+    openEditor: function () {
+      if (typeof(this.status.filePath) === 'string') {
+        this.saveFile() // 先儲存再開啟
+        this.lib.ElectronFileHelper.openItem(this.status.filePath)
+      }
+      else {
+        // 建立暫存檔案
+        let tmpFilePath = this.status.mainComponent.createTempFile()
+        // 開啟暫存檔案
+        this.lib.ElectronFileHelper.openItem(tmpFilePath)
+        
+        this.cleanTempFile()
+      }
+      return this
     }
   }
 }

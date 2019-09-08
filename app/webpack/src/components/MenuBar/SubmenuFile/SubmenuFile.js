@@ -62,6 +62,8 @@ module.exports = {
     },
     openEditor: function () {
       //console.error('openEdtior')
+      this.status.mainComponent.openEditor()
+      /*
       if (typeof(this.status.filePath) === 'string') {
         this.saveFile() // 先儲存再開啟
         this.lib.ElectronFileHelper.openItem(this.status.filePath)
@@ -74,6 +76,7 @@ module.exports = {
         
         this.cleanTempFile()
       }
+       */
       return this
     },
     cleanTempFile: function () {

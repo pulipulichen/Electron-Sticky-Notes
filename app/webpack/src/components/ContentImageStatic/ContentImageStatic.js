@@ -155,6 +155,9 @@ module.exports = {
     },
     getFilters: function (filePath) {
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
+    },
+    openEditor: function () {
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
     }
   } // methods
 }
