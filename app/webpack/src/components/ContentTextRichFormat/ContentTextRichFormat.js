@@ -20,6 +20,7 @@ module.exports = {
         'html': 'Hypertext Markup Language File',
         'htm': 'Hypertext Markup Language File',
         'md': 'Markdown Documentation File',
+        'docx': 'Microsoft Word Open XML Document',
       }
     }
     
@@ -79,13 +80,14 @@ module.exports = {
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         
-        this.contentHTML = this.convertToHTML(this.status.filePath)
-        this.setupEditor()
-        
+        this.convertToHTML(this.status.filePath, (contentHTML) => {
+          this.contentHTML = contentHTML
+          this.setupEditor()
+        })
       }
       return this
     },
-    convertToHTML: function (filePath) {
+    convertToHTML: function (filePath, callback) {
       console.log(`convertToHTML: ${filePath}`)
       let ext = this.lib.ElectronFileHelper.getExt(filePath)
       
@@ -95,12 +97,18 @@ module.exports = {
         case 'md':
           let contentText = this.lib.ElectronFileHelper.readFileSync(filePath)
           contentHTML = new showdown.Converter().makeHtml(contentText)
+          callback(contentHTML)
+          return this
+          break
+        case 'docx': 
+          this.lib.ElectronTextFileHelper.DOCXToHTML(filePath, callback)
+          return this
           break
         default:
           contentHTML = `<h1>${filePath}</h1><p>Hello world</p>`
+          callback(contentHTML)
+          return this
       }
-      
-      return contentHTML
     },
     setupEditor: function () {
       this.$container = window.$('<div id="ContentRichTextContainer"></div>')
@@ -198,6 +206,11 @@ module.exports = {
           }
           let markdown = this.turndownService.turndown(this.contentHTML)
           this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
+          break;
+        case 'docx':
+          this.lib.ElectronTextFileHelper.HTMLtoDOCX(this.contentHTML, (base64) => {
+            this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+          })
       }
       
       return this

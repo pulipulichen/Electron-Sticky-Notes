@@ -92,7 +92,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['md'].indexOf(ext) === -1) {
+    if (['md', 'docx'].indexOf(ext) === -1) {
       return false
     }
 
@@ -102,8 +102,9 @@ let ElectronTextFileHelper = {
     }
 
     let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
-    console.error(['Please check file type: ', fileTypeResult, ext])
-    return ((ext === 'md' && fileTypeResult === undefined))
+    console.error(['Please check file type: ', ext, fileTypeResult])
+    return ((ext === 'md' && fileTypeResult === undefined)
+            || (ext === 'docx' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff') ) {
@@ -118,10 +119,10 @@ let ElectronTextFileHelper = {
     this.init()
     return this.lib.ElectronFileHelper.readFileSync(filepath)
   },
-  docxToHTML: function (filePath, callback) {
+  DOCXToHTML: function (filePath, callback) {
     if (typeof(callback) !== 'function' 
             || typeof(filePath) !== 'string' 
-            || filePath.endsWith('.docx')
+            || filePath.endsWith('.docx') === false
             || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
       return this
     }
@@ -133,10 +134,34 @@ let ElectronTextFileHelper = {
     this.lib.mammoth.convertToHtml({path: filePath})
       .then(function(result){
           let html = result.value; // The generated HTML
+          console.log(html)
           //var messages = result.messages; // Any messages, such as warnings during conversion
           callback(html)
       })
       .done();
+  },
+  HTMLtoDOCX: function (html, callback) {
+    if (typeof(callback) !== 'function' || typeof(html) !== 'string') {
+      return this
+    }
+    
+    if (this.lib.htmlDocx === null) {
+      this.lib.htmlDocx = require('html-docx-js')
+    }
+    
+    let convertedBlob = this.lib.htmlDocx.asBlob(html);
+    //let convertedBase64 = converted.toString('base64')
+    //console.log(convertedBase64)
+    //callback(convertedBase64)
+    
+    let reader = new FileReader();
+    reader.readAsDataURL(convertedBlob); 
+    reader.onloadend = function() {
+        let base64data = reader.result;                
+        //console.log(base64data);
+        callback(base64data)
+    }
+    return this
   }
 }
 
