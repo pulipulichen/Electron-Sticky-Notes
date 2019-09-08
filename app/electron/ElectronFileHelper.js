@@ -482,7 +482,7 @@ let ElectronFileHelper = {
     }
     
     return filterArray
-  }
+  },
 }
 
 //ElectronFileHelper.init()

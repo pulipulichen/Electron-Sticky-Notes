@@ -50,6 +50,7 @@
     "jquery": "^3.4.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "mammoth": "^1.4.8",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "read-chunk": "^3.2.0",

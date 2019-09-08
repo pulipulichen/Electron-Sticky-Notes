@@ -2,6 +2,8 @@ let ElectronTextFileHelper = {
   inited: false,
   lib: {
     ElectronFileHelper: null,
+    mammoth: null,
+    htmlDocx: null,
   },
   init: function () {
     if (this.inited === true) {
@@ -116,6 +118,26 @@ let ElectronTextFileHelper = {
     this.init()
     return this.lib.ElectronFileHelper.readFileSync(filepath)
   },
+  docxToHTML: function (filePath, callback) {
+    if (typeof(callback) !== 'function' 
+            || typeof(filePath) !== 'string' 
+            || filePath.endsWith('.docx')
+            || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
+      return this
+    }
+    
+    if (this.lib.mammoth === null) {
+      this.lib.mammoth = require("mammoth")
+    }
+    
+    this.lib.mammoth.convertToHtml({path: filePath})
+      .then(function(result){
+          let html = result.value; // The generated HTML
+          //var messages = result.messages; // Any messages, such as warnings during conversion
+          callback(html)
+      })
+      .done();
+  }
 }
 
 
