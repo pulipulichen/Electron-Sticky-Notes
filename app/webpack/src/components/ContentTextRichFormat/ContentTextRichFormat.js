@@ -206,11 +206,14 @@ module.exports = {
           }
           let markdown = this.turndownService.turndown(this.contentHTML)
           this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
-          break;
+          return this
+          break
         case 'docx':
           this.lib.ElectronTextFileHelper.HTMLtoDOCX(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
           })
+          return this
+          break
       }
       
       return this

@@ -3,7 +3,7 @@ let ElectronTextFileHelper = {
   lib: {
     ElectronFileHelper: null,
     mammoth: null,
-    htmlDocx: null,
+    html2docx: null,
   },
   init: function () {
     if (this.inited === true) {
@@ -139,12 +139,22 @@ let ElectronTextFileHelper = {
           callback(html)
       })
       .done();
+    return this
   },
   HTMLtoDOCX: function (html, callback) {
     if (typeof(callback) !== 'function' || typeof(html) !== 'string') {
       return this
     }
     
+    if (this.lib.html2docx === null) {
+      this.lib.html2docx = require('html2docx')
+    }
+    this.lib.html2docx.create(html)
+      .then(buffer => {
+        callback(buffer.toString('base64'))
+    })
+    
+    /*
     if (this.lib.htmlDocx === null) {
       this.lib.htmlDocx = require('html-docx-js')
     }
@@ -161,8 +171,43 @@ let ElectronTextFileHelper = {
         //console.log(base64data);
         callback(base64data)
     }
+    */
     return this
-  }
+  },
+  ODTToHTML: function (filePath, callback) {
+    if (typeof(callback) !== 'function' 
+            || typeof(filePath) !== 'string' 
+            || filePath.endsWith('.odt') === false
+            || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
+      return this
+    }
+    
+  },
+  HTMLtoODT: function (html, callback) {
+    if (typeof(callback) !== 'function' || typeof(html) !== 'string') {
+      return this
+    }
+    
+    /*
+    if (this.lib.htmlDocx === null) {
+      this.lib.htmlDocx = require('html-docx-js')
+    }
+    
+    let convertedBlob = this.lib.htmlDocx.asBlob(html);
+    //let convertedBase64 = converted.toString('base64')
+    //console.log(convertedBase64)
+    //callback(convertedBase64)
+    
+    let reader = new FileReader();
+    reader.readAsDataURL(convertedBlob); 
+    reader.onloadend = function() {
+        let base64data = reader.result;                
+        //console.log(base64data);
+        callback(base64data)
+    }
+    */
+    return this
+  },
 }
 
 

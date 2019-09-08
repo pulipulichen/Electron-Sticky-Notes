@@ -128,8 +128,9 @@ let VueController = {
       }
       if (this.config.debug.useTestRichFormatTextFile === true) {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/README.md')
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.word.docx')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.word.docx')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt.docx')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
