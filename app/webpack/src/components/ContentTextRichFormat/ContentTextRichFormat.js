@@ -11,6 +11,7 @@ module.exports = {
       padding: 17,
       detector: null,
       contentHTML: '',
+      changed: false,
       $container: null,
       $summernote: null,
       turndownService: null,
@@ -140,6 +141,10 @@ module.exports = {
         callbacks: {
           onChange: (content, $editable) => {
             this.contentHTML = content
+            
+            if (this.status.isReady === true) {
+              this.changed = true
+            }
           },
           onInit: () => {
             this.$container.find('.note-editor > .note-editing-area > .note-editable').css({
@@ -216,23 +221,27 @@ module.exports = {
           }
           let markdown = this.turndownService.turndown(this.contentHTML)
           this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
+          this.changed = false
           return this
           break
         case 'docx':
           this.lib.ElectronTextFileHelper.HTMLtoDOCX(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break
         case 'odt':
           this.lib.ElectronTextFileHelper.HTMLtoODT(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break
         case 'rtf':
           this.lib.ElectronTextFileHelper.HTMLtoRTF(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break

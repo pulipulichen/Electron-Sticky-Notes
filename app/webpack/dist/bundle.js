@@ -1921,6 +1921,9 @@ module.exports = {
     },
     getFilters: function (filePath) {
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
+    },
+    openEditor: function () {
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
     }
   } // methods
 }
@@ -2295,6 +2298,10 @@ var viewer = OpenSeadragon({
     },
     getFilters: function (filePath) {
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath, true)
+    },
+    openEditor: function () {
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
+      return this
     }
   } // methods
 }
@@ -2554,6 +2561,21 @@ module.exports = {
     },
     getFilters: function (filePath) {
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, filePath)
+    },
+    openEditor: function () {
+      if (typeof(this.status.filePath) === 'string') {
+        this.saveFile() // 先儲存再開啟
+        this.lib.ElectronFileHelper.openItem(this.status.filePath)
+      }
+      else {
+        // 建立暫存檔案
+        let tmpFilePath = this.status.mainComponent.createTempFile()
+        // 開啟暫存檔案
+        this.lib.ElectronFileHelper.openItem(tmpFilePath)
+        
+        this.cleanTempFile()
+      }
+      return this
     }
   }
 }
@@ -3063,6 +3085,11 @@ module.exports = {
     getFilters: function (filePath) {
       let ext = this.lib.ElectronFileHelper.getExt(filePath)
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
+    },
+    openEditor: function () {
+      this.saveFile() // 先儲存再開啟
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
+      return this
     }
   }
 }
@@ -3234,6 +3261,7 @@ module.exports = {
       padding: 17,
       detector: null,
       contentHTML: '',
+      changed: false,
       $container: null,
       $summernote: null,
       turndownService: null,
@@ -3363,6 +3391,10 @@ module.exports = {
         callbacks: {
           onChange: (content, $editable) => {
             this.contentHTML = content
+            
+            if (this.status.isReady === true) {
+              this.changed = true
+            }
           },
           onInit: () => {
             this.$container.find('.note-editor > .note-editing-area > .note-editable').css({
@@ -3439,23 +3471,27 @@ module.exports = {
           }
           let markdown = this.turndownService.turndown(this.contentHTML)
           this.lib.ElectronFileHelper.writeFileSync(filePath, markdown)
+          this.changed = false
           return this
           break
         case 'docx':
           this.lib.ElectronTextFileHelper.HTMLtoDOCX(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break
         case 'odt':
           this.lib.ElectronTextFileHelper.HTMLtoODT(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break
         case 'rtf':
           this.lib.ElectronTextFileHelper.HTMLtoRTF(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+            this.changed = false
           })
           return this
           break
@@ -3466,6 +3502,12 @@ module.exports = {
     getFilters: function (filePath) {
       let ext = this.lib.ElectronFileHelper.getExt(filePath)
       return this.lib.ElectronFileHelper.getFilters(this.filterConfigJSON, ext)
+    },
+    openEditor: function () {
+      if (this.changed === true && window.confirm('File is revised. Do you want to save before opening?')) {
+        this.saveFile() // 先儲存再開啟
+      }
+      this.lib.ElectronFileHelper.openItem(this.status.filePath)
     }
   }
 }
@@ -3970,6 +4012,8 @@ module.exports = {
     },
     openEditor: function () {
       //console.error('openEdtior')
+      this.status.mainComponent.openEditor()
+      /*
       if (typeof(this.status.filePath) === 'string') {
         this.saveFile() // 先儲存再開啟
         this.lib.ElectronFileHelper.openItem(this.status.filePath)
@@ -3982,6 +4026,7 @@ module.exports = {
         
         this.cleanTempFile()
       }
+       */
       return this
     },
     cleanTempFile: function () {
