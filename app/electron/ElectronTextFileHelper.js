@@ -5,7 +5,7 @@ let ElectronTextFileHelper = {
     mammoth: null,
     html2docx: null,
     odt2html: null,
-    
+    ODTDocument: null,
   },
   init: function () {
     if (this.inited === true) {
@@ -138,7 +138,7 @@ let ElectronTextFileHelper = {
     this.lib.mammoth.convertToHtml({path: filePath})
       .then(function(result){
           let html = result.value; // The generated HTML
-          console.log(html)
+          //console.log(html)
           //var messages = result.messages; // Any messages, such as warnings during conversion
           callback(html)
       })
@@ -186,9 +186,16 @@ let ElectronTextFileHelper = {
       return this
     }
     
-    let ODTDocument = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/odt.js'))
-    let html = new ODTDocument(filePath).getHTMLUnsafe()
-    console.log(html)
+    if (this.lib.ODTDocument === null) {
+      window.JSZip = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/JSZip.2.4.0.min.js'))
+      //console.log(window.JSZip)
+      this.lib.ODTDocument = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/odt.js'))
+    }
+    
+    //console.log(filePath)
+    let buffer = this.lib.ElectronFileHelper.readFileBufferSync(filePath)
+    let html = new this.lib.ODTDocument(buffer).getHTMLUnsafe()
+    //console.log(html)
     callback(html)
     return this
   },
@@ -197,24 +204,21 @@ let ElectronTextFileHelper = {
       return this
     }
     
-    /*
-    if (this.lib.htmlDocx === null) {
-      this.lib.htmlDocx = require('html-docx-js')
+    if (this.lib.ODTDocument === null) {
+      window.JSZip = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/JSZip.2.4.0.min.js'))
+      //console.log(window.JSZip)
+      this.lib.ODTDocument = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/odt.js'))
     }
     
-    let convertedBlob = this.lib.htmlDocx.asBlob(html);
-    //let convertedBase64 = converted.toString('base64')
-    //console.log(convertedBase64)
-    //callback(convertedBase64)
+    // https://github.com/codexa/odt.js/blob/master/test/test.js#L42
+    let emptyFilePath = this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/empty.odt')
+    let empty = this.lib.ElectronFileHelper.readFileBufferSync(emptyFilePath)
     
-    let reader = new FileReader();
-    reader.readAsDataURL(convertedBlob); 
-    reader.onloadend = function() {
-        let base64data = reader.result;                
-        //console.log(base64data);
-        callback(base64data)
-    }
-    */
+    let odtdoc = new this.lib.ODTDocument(empty)
+    odtdoc.setHTMLUnsafe(html)
+    let odt = odtdoc.getODT('base64')
+    callback(odt)
+    
     return this
   },
 }

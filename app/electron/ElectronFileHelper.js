@@ -81,6 +81,10 @@ let ElectronFileHelper = {
     this.init()
     return this.lib.fs.readFileSync(filepath)
   },
+  readFileBufferSync: function (filepath) {
+    this.init()
+    return this.lib.fs.readFileSync(filepath)
+  },
   writeFileSync: function (filepath, content) {
     this.init()
     this.lib.fs.writeFileSync(filepath, content, 'utf8')

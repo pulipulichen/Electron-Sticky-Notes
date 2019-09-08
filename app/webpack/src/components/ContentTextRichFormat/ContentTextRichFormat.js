@@ -21,6 +21,8 @@ module.exports = {
         'htm': 'Hypertext Markup Language File',
         'md': 'Markdown Documentation File',
         'docx': 'Microsoft Word Open XML Document',
+        'odt': 'OpenDocument Text Document',
+        'rtf': 'Rich Text Format File'
       }
     }
     
@@ -88,7 +90,7 @@ module.exports = {
       return this
     },
     convertToHTML: function (filePath, callback) {
-      console.log(`convertToHTML: ${filePath}`)
+      //console.log(`convertToHTML: ${filePath}`)
       let ext = this.lib.ElectronFileHelper.getExt(filePath)
       
       let contentHTML
@@ -214,6 +216,12 @@ module.exports = {
           break
         case 'docx':
           this.lib.ElectronTextFileHelper.HTMLtoDOCX(this.contentHTML, (base64) => {
+            this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+          })
+          return this
+          break
+        case 'odt':
+          this.lib.ElectronTextFileHelper.HTMLtoODT(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
           })
           return this
