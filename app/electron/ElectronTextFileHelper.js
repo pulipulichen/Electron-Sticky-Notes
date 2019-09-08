@@ -4,8 +4,12 @@ let ElectronTextFileHelper = {
     ElectronFileHelper: null,
     mammoth: null,
     html2docx: null,
+    
     odt2html: null,
     ODTDocument: null,
+    
+    rtfToHTML: null,
+    htmlToRtf: null,
   },
   init: function () {
     if (this.inited === true) {
@@ -108,7 +112,7 @@ let ElectronTextFileHelper = {
     return ((ext === 'md' && fileTypeResult === undefined)
             || (ext === 'docx' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
             || (ext === 'odt' && fileTypeResult === 'application/vnd.oasis.opendocument.text')
-            || (ext === 'rtf' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
+            || (ext === 'rtf' && fileTypeResult === 'application/rtf'))
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff') ) {
@@ -123,13 +127,15 @@ let ElectronTextFileHelper = {
     this.init()
     return this.lib.ElectronFileHelper.readFileSync(filepath)
   },
-  DOCXToHTML: function (filePath, callback) {
+  DOCXtoHTML: function (filePath, callback) {
     if (typeof(callback) !== 'function' 
             || typeof(filePath) !== 'string' 
             || filePath.endsWith('.docx') === false
             || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
       return this
     }
+    
+    this.init()
     
     if (this.lib.mammoth === null) {
       this.lib.mammoth = require("mammoth")
@@ -150,6 +156,7 @@ let ElectronTextFileHelper = {
       return this
     }
     
+    this.init()
     if (this.lib.html2docx === null) {
       this.lib.html2docx = require('html2docx')
     }
@@ -178,13 +185,15 @@ let ElectronTextFileHelper = {
     */
     return this
   },
-  ODTToHTML: function (filePath, callback) {
+  ODTtoHTML: function (filePath, callback) {
     if (typeof(callback) !== 'function' 
             || typeof(filePath) !== 'string' 
             || filePath.endsWith('.odt') === false
             || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
       return this
     }
+    
+    this.init()
     
     if (this.lib.ODTDocument === null) {
       window.JSZip = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/JSZip.2.4.0.min.js'))
@@ -204,6 +213,8 @@ let ElectronTextFileHelper = {
       return this
     }
     
+    this.init()
+    
     if (this.lib.ODTDocument === null) {
       window.JSZip = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/JSZip.2.4.0.min.js'))
       //console.log(window.JSZip)
@@ -221,6 +232,47 @@ let ElectronTextFileHelper = {
     
     return this
   },
+  RTFtoHTML: function (filePath, callback) {
+    if (typeof(callback) !== 'function' 
+            || typeof(filePath) !== 'string' 
+            || filePath.endsWith('.rtf') === false
+            || this.lib.ElectronFileHelper.existsSync(filePath) === false) {
+      return this
+    }
+    
+    this.init()
+    
+    if (this.lib.rtfToHTML === null) {
+      this.lib.rtfToHTML = require('@iarna/rtf-to-html')
+      this.lib.fs = require('fs')
+    }
+    
+    console.log(filePath)
+    this.lib.fs.createReadStream(filePath)
+            .pipe(this.lib.rtfToHTML((err, html) => {
+              console.log(err)
+              console.log(html)
+              callback(html)
+            }))
+    return this
+  },
+  HTMLtoRTF: function (html, callback) {
+    if (typeof(callback) !== 'function' || typeof(html) !== 'string') {
+      return this
+    }
+    
+    this.init()
+    
+    if (this.lib.htmlToRtf === null) {
+      this.lib.htmlToRtf = require('html-to-rtf')
+    }
+    
+    // https://github.com/codexa/odt.js/blob/master/test/test.js#L42
+    let rtf = this.lib.htmlToRtf.convertHtmlToRtf(html)
+    callback(rtf.toString('base64'))
+    
+    return this
+  }
 }
 
 

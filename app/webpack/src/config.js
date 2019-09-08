@@ -22,6 +22,6 @@ module.exports = {
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
-    useTestRichFormatTextFile: true,
+    useTestRichFormatTextFile: false,
   }
 }

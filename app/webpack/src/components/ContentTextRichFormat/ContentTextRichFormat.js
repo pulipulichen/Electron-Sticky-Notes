@@ -103,11 +103,15 @@ module.exports = {
           return this
           break
         case 'docx': 
-          this.lib.ElectronTextFileHelper.DOCXToHTML(filePath, callback)
+          this.lib.ElectronTextFileHelper.DOCXtoHTML(filePath, callback)
           return this
           break
         case 'odt': 
-          this.lib.ElectronTextFileHelper.ODTToHTML(filePath, callback)
+          this.lib.ElectronTextFileHelper.ODTtoHTML(filePath, callback)
+          return this
+          break
+        case 'rtf': 
+          this.lib.ElectronTextFileHelper.RTFtoHTML(filePath, callback)
           return this
           break
         default:
@@ -222,6 +226,12 @@ module.exports = {
           break
         case 'odt':
           this.lib.ElectronTextFileHelper.HTMLtoODT(this.contentHTML, (base64) => {
+            this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+          })
+          return this
+          break
+        case 'rtf':
+          this.lib.ElectronTextFileHelper.HTMLtoRTF(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
           })
           return this

@@ -131,6 +131,7 @@ let VueController = {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.word.docx')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt.docx')
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.rtf')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }

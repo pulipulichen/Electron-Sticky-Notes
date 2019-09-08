@@ -1616,6 +1616,7 @@ let VueController = {
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.word.docx')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt.docx')
         this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.odt')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/hello world.rtf')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
@@ -3325,11 +3326,15 @@ module.exports = {
           return this
           break
         case 'docx': 
-          this.lib.ElectronTextFileHelper.DOCXToHTML(filePath, callback)
+          this.lib.ElectronTextFileHelper.DOCXtoHTML(filePath, callback)
           return this
           break
         case 'odt': 
-          this.lib.ElectronTextFileHelper.ODTToHTML(filePath, callback)
+          this.lib.ElectronTextFileHelper.ODTtoHTML(filePath, callback)
+          return this
+          break
+        case 'rtf': 
+          this.lib.ElectronTextFileHelper.RTFtoHTML(filePath, callback)
           return this
           break
         default:
@@ -3444,6 +3449,12 @@ module.exports = {
           break
         case 'odt':
           this.lib.ElectronTextFileHelper.HTMLtoODT(this.contentHTML, (base64) => {
+            this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
+          })
+          return this
+          break
+        case 'rtf':
+          this.lib.ElectronTextFileHelper.HTMLtoRTF(this.contentHTML, (base64) => {
             this.lib.ElectronFileHelper.writeFileBase64Sync(filePath, base64)
           })
           return this
@@ -4470,7 +4481,7 @@ module.exports = {
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
-    useTestRichFormatTextFile: true,
+    useTestRichFormatTextFile: false,
   }
 }
 
