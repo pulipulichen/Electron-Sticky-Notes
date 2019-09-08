@@ -2002,6 +2002,10 @@ module.exports = {
           this.lib.ElectronTextFileHelper.DOCXToHTML(filePath, callback)
           return this
           break
+        case 'odt': 
+          this.lib.ElectronTextFileHelper.ODTToHTML(filePath, callback)
+          return this
+          break
         default:
           contentHTML = `<h1>${filePath}</h1><p>Hello world</p>`
           callback(contentHTML)

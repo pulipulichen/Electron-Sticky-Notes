@@ -4,6 +4,8 @@ let ElectronTextFileHelper = {
     ElectronFileHelper: null,
     mammoth: null,
     html2docx: null,
+    odt2html: null,
+    
   },
   init: function () {
     if (this.inited === true) {
@@ -92,7 +94,7 @@ let ElectronTextFileHelper = {
 
     //console.log(filepath)
     let ext = this.lib.ElectronFileHelper.getExt(filepath)
-    if (['md', 'docx'].indexOf(ext) === -1) {
+    if (['md', 'docx', 'odt', 'rtf'].indexOf(ext) === -1) {
       return false
     }
 
@@ -104,7 +106,9 @@ let ElectronTextFileHelper = {
     let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
     console.error(['Please check file type: ', ext, fileTypeResult])
     return ((ext === 'md' && fileTypeResult === undefined)
-            || (ext === 'docx' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
+            || (ext === 'docx' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            || (ext === 'odt' && fileTypeResult === 'application/vnd.oasis.opendocument.text')
+            || (ext === 'rtf' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff') ) {
@@ -182,6 +186,11 @@ let ElectronTextFileHelper = {
       return this
     }
     
+    let ODTDocument = require(this.lib.ElectronFileHelper.resolve('./app/webpack/src/vendors/odt.js/odt.js'))
+    let html = new ODTDocument(filePath).getHTMLUnsafe()
+    console.log(html)
+    callback(html)
+    return this
   },
   HTMLtoODT: function (html, callback) {
     if (typeof(callback) !== 'function' || typeof(html) !== 'string') {
