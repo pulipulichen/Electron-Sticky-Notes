@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Electron-Sticky-Notes
+GenericName=Electron-Sticky-Notes
+Comment=Electron-Sticky-Notes
+Exec=npm --prefix /home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes run 1.run-production
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=/home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes/app/imgs/icon.png
+Categories=GNOME;GTK;Office
+
+
