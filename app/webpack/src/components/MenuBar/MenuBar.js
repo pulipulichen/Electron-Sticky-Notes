@@ -53,7 +53,11 @@ module.exports = {
     }
   },  // computed: {
   mounted: function () {
-    window.$(this.$refs.Submenu).dropdown()
+    // https://github.com/Semantic-Org/Semantic-UI/issues/2041#issuecomment-87927840
+    // prevent dropdown
+    window.$(this.$refs.Submenu).dropdown({
+      allowTab: false
+    })
     this.initHotkeys()
   },
   methods: {

@@ -1180,6 +1180,13 @@ module.exports = {
       return detectorText
     }
   },
+  watch: {
+    'status.isReady': function () {
+      if (this.status.isReady === true) {
+        this.$refs.Textarea.focus()
+      }
+    }
+  },
   mounted: function () {
     setTimeout(() => {
       this.setupText()
@@ -2395,7 +2402,11 @@ module.exports = {
     }
   },  // computed: {
   mounted: function () {
-    window.$(this.$refs.Submenu).dropdown()
+    // https://github.com/Semantic-Org/Semantic-UI/issues/2041#issuecomment-87927840
+    // prevent dropdown
+    window.$(this.$refs.Submenu).dropdown({
+      allowTab: false
+    })
     this.initHotkeys()
   },
   methods: {
@@ -15978,7 +15989,7 @@ exports.push([module.i, "@font-face {\n  font-family: \"summernote\";\n  font-st
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EAEA,kBAAA;EACA,OAAA;ACAF;ADMA;EACE,YAAA;EAEA,kBAAA;EACA,OAAA;EACA,4BAAA;EACA,2BAAA;EACA,wBAAA;ACLF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto;\n  //height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  \n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n  //background-attachment:fixed;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  position: absolute;\n  left: 0;\n}\n.content-image {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-15c4da9f] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n.content-image[data-v-15c4da9f] {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageStatic/ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","ContentImageStatic.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;ACEF;ADIA;EACE,YAAA;EAEA,kBAAA;EACA,OAAA;EACA,4BAAA;EACA,2BAAA;EACA,wBAAA;ACHF","file":"ContentImageStatic.less?vue&type=style&index=0&id=15c4da9f&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto;\n  //height: auto !important;\n}\n\n.content-image {\n  width: 100vw;\n  \n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n  //background-attachment:fixed;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n.content-image {\n  width: 100vw;\n  position: absolute;\n  left: 0;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: contain;\n}\n"]}]);
 
 
 /***/ }),

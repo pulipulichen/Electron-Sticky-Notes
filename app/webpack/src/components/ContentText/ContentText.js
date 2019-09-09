@@ -50,6 +50,13 @@ module.exports = {
       return detectorText
     }
   },
+  watch: {
+    'status.isReady': function () {
+      if (this.status.isReady === true) {
+        this.$refs.Textarea.focus()
+      }
+    }
+  },
   mounted: function () {
     setTimeout(() => {
       this.setupText()
