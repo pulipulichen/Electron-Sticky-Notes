@@ -552,8 +552,15 @@ module.exports = {
       }
     },
     getSizeOfDetector: function () {
-      if (this.detector === null || this.detector.length === 0) {
+      if (this.detector === null) {
         this.detector = window.$(this.$refs.ResizeDetector)
+        if (this.detector.length === 0) {
+          this.detector = null
+          return {
+            width: null,
+            height: null
+          }
+        }
       }
       let width = this.detector.width()
       width = width + this.padding
@@ -3220,7 +3227,7 @@ module.exports = {
   debug: {
     useTestContentText: false,
     useTestCodeFile: false,
-    useTestImageStaticFile: true,
+    useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
     useTestRichFormatTextFile: false,

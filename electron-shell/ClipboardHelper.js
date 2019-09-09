@@ -38,6 +38,9 @@ let ClipboardHelper = {
     let text = clipboard.readText('clipboard')
     //console.log('[')
     //console.log(text)
+    if (typeof(text) === 'string') {
+      text = text.trim()
+    }
     return text
   },
   getImageDataURL: function () {
