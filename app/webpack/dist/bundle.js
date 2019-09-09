@@ -1251,6 +1251,9 @@ module.exports = {
     },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)
+      if (typeof(filePath) !== 'string') {
+        filePath = this.status.filePath
+      }
       this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this
     },
@@ -1789,6 +1792,9 @@ module.exports = {
       return this.codeMirrorEditor.getValue()
     },
     saveFile: function (filePath) {
+      if (typeof(filePath) !== 'string') {
+        filePath = this.status.filePath
+      }
       //console.error('saveFile: ' + filePath)
       this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this
@@ -16279,7 +16285,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.status.fileType === "code"
+  return _vm.status.fileType === "text-code"
     ? _c("div", { attrs: { "data-component": "ContentTextCode" } }, [
         _c(
           "div",

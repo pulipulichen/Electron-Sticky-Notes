@@ -376,6 +376,9 @@ module.exports = {
       return this.codeMirrorEditor.getValue()
     },
     saveFile: function (filePath) {
+      if (typeof(filePath) !== 'string') {
+        filePath = this.status.filePath
+      }
       //console.error('saveFile: ' + filePath)
       this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this

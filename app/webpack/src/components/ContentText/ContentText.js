@@ -126,6 +126,9 @@ module.exports = {
     },
     saveFile: function (filePath) {
       //console.error('saveFile: ' + filePath)
+      if (typeof(filePath) !== 'string') {
+        filePath = this.status.filePath
+      }
       this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
       return this
     },
