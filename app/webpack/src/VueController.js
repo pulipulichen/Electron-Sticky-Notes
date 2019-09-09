@@ -30,7 +30,8 @@ let VueController = {
       fileType: 'text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
-      theme: null
+      theme: null,
+      platform: 'win32'
     },
     lib: {},
   },
@@ -56,6 +57,8 @@ let VueController = {
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     this.lib.WindowHelper = WindowHelper
+    
+    this.status.platform = this.lib.ElectronHelper.getPlatform()
     
     
     this.status.mode = this.lib.win.mode

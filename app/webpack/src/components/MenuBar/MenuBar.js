@@ -30,14 +30,14 @@ module.exports = {
     htmlHeaderWithIcon: function () {
       let header = this.header
       switch (this.status.fileType) {
-        case 'code':
+        case 'text-code':
           header = '<i class="code icon"></i>' + header
           break
         case 'image-static':
         case 'image-viewer':
           header = '<i class="file image icon"></i>' + header
           break
-        case 'rich-format':
+        case 'text-rich-format':
           header = '<i class="file alternate icon"></i>' + header
           break
       }

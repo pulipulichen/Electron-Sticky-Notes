@@ -1018,22 +1018,24 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "item",
-        on: {
-          click: function($event) {
-            return _vm.openEditor()
-          }
-        }
-      },
-      [
-        _c("i", { staticClass: "edit icon" }),
-        _vm._v("\n       Open in editor...\n       "),
-        _c("div", { staticClass: "description" }, [_vm._v("ctrl+e")])
-      ]
-    )
+    _vm.status.platform === "win32"
+      ? _c(
+          "div",
+          {
+            staticClass: "item",
+            on: {
+              click: function($event) {
+                return _vm.openEditor()
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "edit icon" }),
+            _vm._v("\n       Open in editor...\n       "),
+            _c("div", { staticClass: "description" }, [_vm._v("ctrl+e")])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -1515,7 +1517,8 @@ let VueController = {
       fileType: 'text', // default
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
-      theme: null
+      theme: null,
+      platform: 'win32'
     },
     lib: {},
   },
@@ -1541,6 +1544,8 @@ let VueController = {
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7___default.a
+    
+    this.status.platform = this.lib.ElectronHelper.getPlatform()
     
     
     this.status.mode = this.lib.win.mode
@@ -3666,14 +3671,14 @@ module.exports = {
     htmlHeaderWithIcon: function () {
       let header = this.header
       switch (this.status.fileType) {
-        case 'code':
+        case 'text-code':
           header = '<i class="code icon"></i>' + header
           break
         case 'image-static':
         case 'image-viewer':
           header = '<i class="file image icon"></i>' + header
           break
-        case 'rich-format':
+        case 'text-rich-format':
           header = '<i class="file alternate icon"></i>' + header
           break
       }
@@ -4503,11 +4508,20 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuTheme/Subm
 /***/ (function(module, exports) {
 
 module.exports = {
+  debug: {
+    useTestContentText: false,
+    useTestCodeFile: false,
+    useTestImageStaticFile: false,
+    useTestImageViewerFile: false,
+    useTestPlainTextFile: false,
+    useTestRichFormatTextFile: true,
+  },
+  
   locale: 'zh-TW',
   maxHeightRatio: 0.7,
-  minHeightPx: 250,
+  minHeightPx: 350,
   maxWidthRatio: 0.5,
-  minWidthPx: 200,
+  minWidthPx: 390,
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
@@ -4520,14 +4534,7 @@ module.exports = {
     '#45aaf2', '#4b7bec', '#a55eea', '#d1d8e0', '#778ca3'
   ],
   
-  debug: {
-    useTestContentText: false,
-    useTestCodeFile: false,
-    useTestImageStaticFile: false,
-    useTestImageViewerFile: false,
-    useTestPlainTextFile: false,
-    useTestRichFormatTextFile: false,
-  }
+  
 }
 
 /***/ }),

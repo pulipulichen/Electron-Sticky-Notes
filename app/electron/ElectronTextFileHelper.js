@@ -108,7 +108,7 @@ let ElectronTextFileHelper = {
     }
 
     let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
-    console.error(['Please check file type: ', ext, fileTypeResult])
+    //console.error(['Please check file type: ', ext, fileTypeResult])
     return ((ext === 'md' && fileTypeResult === undefined)
             || (ext === 'docx' && fileTypeResult === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
             || (ext === 'odt' && fileTypeResult === 'application/vnd.oasis.opendocument.text')

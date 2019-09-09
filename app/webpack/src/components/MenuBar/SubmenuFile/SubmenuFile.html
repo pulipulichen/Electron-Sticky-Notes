@@ -21,7 +21,8 @@
        <div class="description">ctrl+o</div>
      </div>
      <div class="item"
-          v-on:click="openEditor()">
+          v-on:click="openEditor()"
+          v-if="(status.platform === 'win32')">
        <i class="edit icon"></i>
        Open in editor...
        <div class="description">ctrl+e</div>

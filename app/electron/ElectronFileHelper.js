@@ -290,13 +290,12 @@ let ElectronFileHelper = {
         //console.log(execCommand)
 
         //const exec = require('child_process').exec
-        this.lib.exec(path, () => {
-          
-        })
+        this.lib.exec(path, () => {})
       }
     }
     else if (process.platform === 'linux') {
-      console.error('How to open in Linux? ', path)
+      console.error('It cannot open in Linux now.', path)
+      //this.lib.exec(`"${path}"`, () => {})
     }
   },
   showInFolder: function (path) {
