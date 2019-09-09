@@ -276,6 +276,7 @@ module.exports = {
         else {
           this.codeMirrorEditor = CodeMirror.fromTextArea(this.$editor[0], {
             lineNumbers: false,
+            lineWrapping: true,
             mode: this.mode,
             matchBrackets: true
           })

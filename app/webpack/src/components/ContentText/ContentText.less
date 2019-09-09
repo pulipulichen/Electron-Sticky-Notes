@@ -17,10 +17,10 @@
     outline: none;
     outline-width: 0;
   }
-}
-
-.CodeMirror {
--webkit-app-region: no-drag;
+  
+  &.is-ready {
+    white-space: normal;
+  }
 }
 
 .resize-detector {
@@ -37,4 +37,8 @@
   width: auto !important;
   height: auto !important;
   white-space: pre;
+  
+  &.is-ready {
+    white-space: normal;
+  }
 }
