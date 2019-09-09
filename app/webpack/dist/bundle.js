@@ -4205,7 +4205,7 @@ module.exports = {
   },
   computed: {
     enableFontSizeControl: function () {
-      return (['text', 'text-code', 'text-rich-format'].indexOf(this.status.fileType) > -1)
+      return (['text', 'text-code'].indexOf(this.status.fileType) > -1)
     },
   },
   //mounted: function () {
@@ -4237,12 +4237,20 @@ module.exports = {
       return this
     },
     fontSizeLarger: function () {
+      if (this.status.fileType === 'text-rich-format') {
+        return this
+      }
+      
       this.config.fontSizeRatio = this.config.fontSizeRatio + this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = true
       //console.log(this.config.fontSizeRatio)
       return this
     },
     fontSizeSmaller: function () {
+      if (this.status.fileType === 'text-rich-format') {
+        return this
+      }
+      
       this.config.fontSizeRatio = this.config.fontSizeRatio - this.config.fontSizeAdjustInterval
       this.status.fontSizeAdjustIsEnlarge = false
       //console.log(this.config.fontSizeRatio)
