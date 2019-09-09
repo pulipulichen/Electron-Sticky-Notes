@@ -1,7 +1,5 @@
-#pragma compile(Icon, '../app/imgs/icon128.ico')
 #pragma compile(Console, True)
 #include <MsgBoxConstants.au3>
-
 
 FileChangeDir(@ScriptDir)
 If $CmdLine[0] = False Then
