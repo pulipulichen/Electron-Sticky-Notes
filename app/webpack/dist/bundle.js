@@ -4517,12 +4517,12 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuTheme/Subm
 
 module.exports = {
   debug: {
-    useTestContentText: false,
+    useTestContentText: true,
     useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
-    useTestRichFormatTextFile: true,
+    useTestRichFormatTextFile: false,
   },
   
   locale: 'zh-TW',

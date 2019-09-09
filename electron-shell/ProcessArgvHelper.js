@@ -15,6 +15,7 @@ let PrcoessArgvHelper = {
         //console.log(this.excludeList[0])
         //console.log(this.excludeList.indexOf(arg))
         if (arg.endsWith('electron.exe') === false 
+                && arg.endsWith('electron') === false 
                 && this.excludeList.indexOf(arg) === -1
                 && fs.existsSync(arg)) {
           arg = path.resolve(arg)

@@ -96,12 +96,13 @@ module.exports = function (filePath, callback) {
   //win.rendererSideName.filepath = filepath
   //win.rendererSideName.mode = mode
   win.mode = mode
-  
+  //console.log('[[', filePath)
   if (filePath !== undefined) {
     win.filePath = filePath
   }
   else {
     let clipboardImage = ClipboardHelper.getImageDataURL()
+    
     if (clipboardImage !== undefined) {
       win.imageDataURL = clipboardImage
     }

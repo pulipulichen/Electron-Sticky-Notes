@@ -8,7 +8,9 @@ let ClipboardHelper = {
     let filepaths = []
     
     let clipboardText = clipboard.readText('clipboard')
-    if (fs.existsSync(clipboardText)) {
+    //console.log('[', clipboardText, ']')
+    if (clipboardText.endsWith('/node_modules/electron/dist/electron') === false 
+            && fs.existsSync(clipboardText)) {
       filepaths.push(clipboardText)
     }
 
@@ -25,14 +27,18 @@ let ClipboardHelper = {
     const rawFilePath = clipboard.readBuffer('FileNameW').toString('ucs2')
     let clipboardFilePath = rawFilePath.replace(new RegExp(String.fromCharCode(0), 'g'), '')
     
-    if (fs.existsSync(clipboardFilePath)) {
+    if (clipboardFilePath.endsWith('/node_modules/electron/dist/electron') === false 
+            && fs.existsSync(clipboardFilePath)) {
       filepaths.push(path.resolve(clipboardFilePath))
     }
     
     return filepaths
   },
   getText: function () {
-    return clipboard.readText('clipboard')
+    let text = clipboard.readText('clipboard')
+    //console.log('[')
+    //console.log(text)
+    return text
   },
   getImageDataURL: function () {
     let dataURL = clipboard.readImage('clipboard').toDataURL()
