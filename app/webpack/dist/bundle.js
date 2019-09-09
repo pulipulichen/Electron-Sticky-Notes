@@ -4517,8 +4517,8 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuTheme/Subm
 
 module.exports = {
   debug: {
-    useTestContentText: true,
-    useTestCodeFile: false,
+    useTestContentText: false,
+    useTestCodeFile: true,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
