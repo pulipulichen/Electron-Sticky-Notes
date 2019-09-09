@@ -274,12 +274,9 @@ let VueController = {
       
       if (this.config.debug.useTestContentText === true) {
         this.status.contentText = `<!-- Create a simple CodeMirror instance -->
-  <link rel="stylesheet" href="lib/codemirror.css">
-  <script src="lib/codemirror.js"></script>
+  
   <script>
-    var editor = CodeMirror.fromTextArea(myTextarea, {
-      lineNumbers: true
-    });
+    let message = 'Hello world.'
   </script>`
       }
       if (this.config.debug.useTestImageStaticFile === true) {
@@ -555,7 +552,7 @@ module.exports = {
       }
     },
     getSizeOfDetector: function () {
-      if (this.detector === null) {
+      if (this.detector === null || this.detector.length === 0) {
         this.detector = window.$(this.$refs.ResizeDetector)
       }
       let width = this.detector.width()
@@ -576,6 +573,7 @@ module.exports = {
       */
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
         
         if (typeof(callback) === 'function') {
@@ -3221,8 +3219,8 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuTheme/Subm
 module.exports = {
   debug: {
     useTestContentText: false,
-    useTestCodeFile: true,
-    useTestImageStaticFile: false,
+    useTestCodeFile: false,
+    useTestImageStaticFile: true,
     useTestImageViewerFile: false,
     useTestPlainTextFile: false,
     useTestRichFormatTextFile: false,
@@ -3309,6 +3307,11 @@ if (true) {
 
 let WindowHelper = {
   resizeToFitContent: function (width, maxWidth, height, maxHeight, isRestrictSize) {
+    if (isNaN(width) || isNaN(height)) {
+      console.trace('Width or height is not a number')
+      return this
+    }
+    
     if (isRestrictSize !== false) {
       if (width < maxWidth) {
         width = maxWidth
@@ -15996,7 +15999,7 @@ exports.push([module.i, "#OpenSeadragonContainer {\n  position: absolute;\n  lef
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;ACEF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  left: 0;\n  \n  //width: auto !important;\n  //height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n"]}]);
+exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentImageViewer/ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","ContentImageViewer.less"],"names":[],"mappings":"AAAA;EACE,WAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EACA,OAAA;ACEF","file":"ContentImageViewer.less?vue&type=style&index=0&id=e5fadfc2&lang=less&scoped=true&","sourcesContent":[".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行 \n  position: absolute;\n  left: 0;\n  \n  //width: auto !important;\n  //height: auto !important;\n}",".resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  left: 0;\n}\n"]}]);
 
 
 /***/ }),
@@ -16142,7 +16145,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.status.fileType === "image-static"
+  return _vm.status.fileType === "image-static" &&
+    typeof _vm.imagePath === "string"
     ? _c("div", { attrs: { "data-component": "ContentImageStatic" } }, [
         _c("img", {
           ref: "ResizeDetector",

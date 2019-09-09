@@ -94,7 +94,7 @@ module.exports = {
       }
     },
     getSizeOfDetector: function () {
-      if (this.detector === null) {
+      if (this.detector === null || this.detector.length === 0) {
         this.detector = window.$(this.$refs.ResizeDetector)
       }
       let width = this.detector.width()
@@ -115,6 +115,7 @@ module.exports = {
       */
       setTimeout(() => {
         let {width, height} = this.getSizeOfDetector()
+        //console.log(width, height)
         this.lib.WindowHelper.resizeToFitContent(width, this.config.minWidthPx, height, this.config.minHeightPx, isRestrictSize)
         
         if (typeof(callback) === 'function') {

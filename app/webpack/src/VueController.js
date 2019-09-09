@@ -97,12 +97,9 @@ let VueController = {
       
       if (this.config.debug.useTestContentText === true) {
         this.status.contentText = `<!-- Create a simple CodeMirror instance -->
-  <link rel="stylesheet" href="lib/codemirror.css">
-  <script src="lib/codemirror.js"></script>
+  
   <script>
-    var editor = CodeMirror.fromTextArea(myTextarea, {
-      lineNumbers: true
-    });
+    let message = 'Hello world.'
   </script>`
       }
       if (this.config.debug.useTestImageStaticFile === true) {

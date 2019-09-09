@@ -1,5 +1,10 @@
 let WindowHelper = {
   resizeToFitContent: function (width, maxWidth, height, maxHeight, isRestrictSize) {
+    if (isNaN(width) || isNaN(height)) {
+      console.trace('Width or height is not a number')
+      return this
+    }
+    
     if (isRestrictSize !== false) {
       if (width < maxWidth) {
         width = maxWidth

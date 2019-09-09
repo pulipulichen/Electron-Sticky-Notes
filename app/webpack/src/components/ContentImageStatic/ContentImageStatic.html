@@ -1,5 +1,6 @@
 <div data-component="ContentImageStatic"
-     v-if="status.fileType === 'image-static'">
+     v-if="status.fileType === 'image-static' 
+            && (typeof(imagePath) === 'string')">
   <img class="resize-detector"
        v-bind:src="imagePath"
        v-bind:style="{
