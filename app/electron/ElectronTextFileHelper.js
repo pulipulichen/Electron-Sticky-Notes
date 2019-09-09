@@ -247,7 +247,7 @@ let ElectronTextFileHelper = {
       this.lib.fs = require('fs')
     }
     
-    console.log(filePath)
+    console.error('Cannot convert html to rtf', filePath)
     this.lib.fs.createReadStream(filePath)
             .pipe(this.lib.rtfToHTML((err, html) => {
               console.log(err)
