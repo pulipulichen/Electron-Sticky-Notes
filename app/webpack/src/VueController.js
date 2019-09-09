@@ -60,7 +60,6 @@ let VueController = {
     
     this.status.platform = this.lib.ElectronHelper.getPlatform()
     
-    
     this.status.mode = this.lib.win.mode
     if (typeof(this.lib.win.filePath) === 'string') {
       this.status.filePath = this.lib.win.filePath

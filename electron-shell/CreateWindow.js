@@ -97,36 +97,42 @@ module.exports = function (filePath, callback) {
   //win.rendererSideName.mode = mode
   win.mode = mode
   //console.log('[[', filePath)
+  
   if (filePath !== undefined) {
     win.filePath = filePath
+    //console.log('[[', filePath)
   }
   else {
     let clipboardImage = ClipboardHelper.getImageDataURL()
     
     if (clipboardImage !== undefined) {
       win.imageDataURL = clipboardImage
+      //console.log(`image: [${clipboardImage}]`)
     }
     else {
       let clipboardText = ClipboardHelper.getText()
       if (typeof(clipboardText) === 'string' && clipboardText !== '') {
         win.contentText = clipboardText
+        //console.log(`[${clipboardText}]`)
       }
     }
   }
   
   //return win
+  
+  win.hide()
+  
+  IPCEventManager(win)
+  
   win.webContents.once('dom-ready', () => {
-    
+
     //const electronVibrancy = require('electron-vibrancy')
     //electronVibrancy.SetVibrancy(win, 0)
-    
+
     if (typeof(callback) === 'function') {
       callback(win)
     }
   })
   
-  win.hide()
-  
-  IPCEventManager(win)
   return win
 }

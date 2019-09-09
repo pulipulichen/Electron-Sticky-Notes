@@ -33,6 +33,7 @@ app.commandLine.appendSwitch('disable-site-isolation-trials');
 
 //app.on('activate', () => {
 app.on('ready', () => {
+  //console.log('filePathList.length', filePathList.length)
   if (filePathList.length > 0) {
     filePathList.forEach(filePath => {
       createWindow(filePath)

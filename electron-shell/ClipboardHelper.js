@@ -35,6 +35,10 @@ let ClipboardHelper = {
     return filepaths
   },
   getText: function () {
+    if (process.platform !== 'win32') {
+      return undefined
+    }
+    
     let text = clipboard.readText('clipboard')
     //console.log('[')
     //console.log(text)
@@ -44,6 +48,10 @@ let ClipboardHelper = {
     return text
   },
   getImageDataURL: function () {
+    if (process.platform !== 'win32') {
+      return undefined
+    }
+    
     let dataURL = clipboard.readImage('clipboard').toDataURL()
     if (dataURL !== 'data:image/png;base64,') {
       return dataURL
