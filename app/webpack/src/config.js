@@ -16,7 +16,7 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
-  
+  isAlwaysTop: true,
   cacheAliveDay: 1,
   
   // https://flatuicolors.com/palette/de

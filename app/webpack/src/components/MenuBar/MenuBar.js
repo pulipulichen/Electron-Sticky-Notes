@@ -26,6 +26,13 @@ module.exports = {
     'submenu-size': SubmenuSize,
     'submenu-file': SubmenuFile,
   },
+  watch: {
+    'status.isReady': function () {
+      if (this.status.isReady === true) {
+        this.toggleAlwaysOnTop(true)
+      }
+    }
+  },
   computed: {
     htmlHeaderWithIcon: function () {
       let header = this.header
