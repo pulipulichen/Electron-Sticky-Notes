@@ -10,7 +10,7 @@ module.exports = {
   
   locale: 'zh-TW',
   maxHeightRatio: 0.7,
-  minHeightPx: 350,
+  minHeightPx: 400, // 因為加入了new跟empty
   maxWidthRatio: 0.5,
   minWidthPx: 390,
   menuBarHeight: 40,

@@ -2411,7 +2411,7 @@ module.exports = {
   },
   methods: {
     initHotkeys: function () {
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
         //console.log(handler.key)
         switch (handler.key) {
           case 'ctrl+`':
@@ -2442,6 +2442,12 @@ module.exports = {
             break
           case 'ctrl+e':
             this.$refs.SubmenuFile.openEditor()
+            break
+          case 'ctrl+n':
+            this.$refs.SubmenuFile.newFile()
+            break
+          case 'ctrl+0':
+            this.$refs.SubmenuFile.emptyFile()
             break
         }
       })
@@ -2787,6 +2793,18 @@ module.exports = {
         this.status.filePath = filePath
         this.$parent.resetNoteHeader()
       }
+      return this
+    },
+    newFile: function () {
+      this.initIPC()
+      this.ipc.send('open-another-win', {
+        enableClipboard: false
+      })
+      return this
+    },
+    emptyFile: function () {
+      this.newFile()
+      window.close()
       return this
     }
   }
@@ -3246,7 +3264,7 @@ module.exports = {
   
   locale: 'zh-TW',
   maxHeightRatio: 0.7,
-  minHeightPx: 350,
+  minHeightPx: 400, // 因為加入了new跟empty
   maxWidthRatio: 0.5,
   minWidthPx: 390,
   menuBarHeight: 40,
@@ -16557,6 +16575,40 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
+    _c(
+      "div",
+      {
+        staticClass: "item",
+        on: {
+          click: function($event) {
+            return _vm.newFile()
+          }
+        }
+      },
+      [
+        _c("i", { staticClass: "external alternate icon" }),
+        _vm._v("\n     New\n     "),
+        _c("div", { staticClass: "description" }, [_vm._v("ctrl+n")])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "item",
+        on: {
+          click: function($event) {
+            return _vm.emptyFile()
+          }
+        }
+      },
+      [
+        _c("i", { staticClass: "sticky note outline icon" }),
+        _vm._v("\n    Empty\n    "),
+        _c("div", { staticClass: "description" }, [_vm._v("ctrl+e")])
+      ]
+    ),
+    _vm._v(" "),
     _vm.enableSaveFile
       ? _c(
           "div",
@@ -16570,7 +16622,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "save icon" }),
-            _vm._v("\n       Save\n       "),
+            _vm._v("\n     Save\n     "),
             _c("div", { staticClass: "description" }, [_vm._v("ctrl+s")])
           ]
         )
@@ -16589,7 +16641,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "save outline icon" }),
-            _vm._v("\n       Save as...\n       "),
+            _vm._v("\n     Save as...\n     "),
             _c("div", { staticClass: "description" }, [_vm._v("ctrl+shift+s")])
           ]
         )
@@ -16608,7 +16660,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "folder open outline icon" }),
-            _vm._v("\n       Open folder...\n       "),
+            _vm._v("\n     Open folder...\n     "),
             _c("div", { staticClass: "description" }, [_vm._v("ctrl+o")])
           ]
         )
@@ -16627,7 +16679,7 @@ var render = function() {
           },
           [
             _c("i", { staticClass: "edit icon" }),
-            _vm._v("\n       Open in editor...\n       "),
+            _vm._v("\n     Open in editor...\n     "),
             _c("div", { staticClass: "description" }, [_vm._v("ctrl+e")])
           ]
         )

@@ -62,7 +62,7 @@ module.exports = {
   },
   methods: {
     initHotkeys: function () {
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
         //console.log(handler.key)
         switch (handler.key) {
           case 'ctrl+`':
@@ -93,6 +93,12 @@ module.exports = {
             break
           case 'ctrl+e':
             this.$refs.SubmenuFile.openEditor()
+            break
+          case 'ctrl+n':
+            this.$refs.SubmenuFile.newFile()
+            break
+          case 'ctrl+0':
+            this.$refs.SubmenuFile.emptyFile()
             break
         }
       })

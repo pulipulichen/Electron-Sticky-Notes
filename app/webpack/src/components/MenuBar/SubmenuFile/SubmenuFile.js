@@ -114,6 +114,18 @@ module.exports = {
         this.$parent.resetNoteHeader()
       }
       return this
+    },
+    newFile: function () {
+      this.initIPC()
+      this.ipc.send('open-another-win', {
+        enableClipboard: false
+      })
+      return this
+    },
+    emptyFile: function () {
+      this.newFile()
+      window.close()
+      return this
     }
   }
 }

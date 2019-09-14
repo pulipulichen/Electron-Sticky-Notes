@@ -1,3 +1,5 @@
+/* global __dirname */
+
 //listen to an open-file-dialog command and sending back selected information
 const electron = require('electron')
 const ipc = electron.ipcMain
@@ -5,13 +7,18 @@ const dialog = electron.dialog
 const fs = require('fs')
 const path = require('path')
 
-const CreateWindow = require('./CreateWindow')
+let inited = false
+
 
 module.exports = function (mainWindow) {
-  
-  ipc.on('open-another-win', function (event, filepath) {
-    console.log(filepath)
-    CreateWindow(filepath)
+  if (inited === true) {
+    return this
+  }
+  ipc.on('open-another-win', function (event, options) {
+    //console.log(options)
+    const CreateWindow = require(path.join(__dirname, './CreateWindow'))
+    CreateWindow(options)
+    return this
   })
 
   ipc.on('open-file-dialog', function (event, filePath, filters) {
@@ -143,5 +150,9 @@ module.exports = function (mainWindow) {
   ipc.on('windowMoving', (e, {mouseX, mouseY}) => {
     const { x, y } = electron.screen.getCursorScreenPoint()
     mainWindow.setPosition(x - mouseX, y - mouseY)
-  });
+  })
+  
+  // ---------------------
+  inited = true
+  return this
 } // module.exports = function (mainWindow) {

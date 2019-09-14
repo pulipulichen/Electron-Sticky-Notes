@@ -1,3 +1,5 @@
+/* global __dirname */
+
 const debug = {
   useMousePositionDisplay: true
 }
@@ -21,7 +23,7 @@ if (process.argv.indexOf('--mode') - process.argv.indexOf('development') === -1)
 // For test
 //mode = 'development'
 
-module.exports = function (filePath, callback) {
+module.exports = function (options, callback) {
   
   let iconPath = path.join(__dirname, '../app/imgs/icon.ico')
   if (process.platform === 'linux') {
@@ -98,9 +100,15 @@ module.exports = function (filePath, callback) {
   win.mode = mode
   //console.log('[[', filePath)
   
-  if (filePath !== undefined) {
-    win.filePath = filePath
+  if (typeof(options) === 'object' 
+          && typeof(options.filePath) === 'string') {
+    win.filePath = options.filePath
     //console.log('[[', filePath)
+  }
+  else if (typeof(options) === 'object' 
+          && typeof(options.enableClipboard) === 'boolean' 
+          && options.enableClipboard === false) {
+    // do notihing
   }
   else {
     let clipboardImage = ClipboardHelper.getImageDataURL()
