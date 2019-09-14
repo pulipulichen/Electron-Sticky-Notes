@@ -85,6 +85,7 @@ module.exports = {
         
         this.convertToHTML(this.status.filePath, (contentHTML) => {
           this.contentHTML = contentHTML
+          this.$parent.addRecent(window.$(this.contentHTML).text())
           this.setupEditor()
         })
       }

@@ -112,7 +112,7 @@ module.exports = {
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
-        
+        this.$parent.addRecent(this.contentText)
         this.setupMode()
         this.setupEditor()
         

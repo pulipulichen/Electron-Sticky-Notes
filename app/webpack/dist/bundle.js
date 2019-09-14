@@ -326,11 +326,13 @@ let VueController = {
         this.status.fileType = 'image-static'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageStatic
+        this.addRecent()
       }
       else if (this.lib.ElectronImageFileHelper.isViewerSupportedImageFile(this.status.filePath)) {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageViewer
+        this.addRecent()
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'text-code'
@@ -340,15 +342,17 @@ let VueController = {
         this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         this.status.mainComponent = this.$refs.ContentText
+        this.addRecent(this.status.contentText)
       }
       else if (this.lib.ElectronTextFileHelper.isRichFormatFile(this.status.filePath)) {
         this.status.fileType = 'text-rich-format'
         this.status.mainComponent = this.$refs.ContentTextRichFormat
       }
       else if (typeof(this.status.imageDataURL) === 'string') {
-        this.status.fileType = 'image'
+        this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImage
+        this.addRecent()
       }
       else {
         this.status.mainComponent = this.$refs.ContentText
@@ -1589,7 +1593,7 @@ module.exports = {
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
-        
+        this.$parent.addRecent(this.contentText)
         this.setupMode()
         this.setupEditor()
         
@@ -2082,6 +2086,7 @@ module.exports = {
         
         this.convertToHTML(this.status.filePath, (contentHTML) => {
           this.contentHTML = contentHTML
+          this.$parent.addRecent(window.$(this.contentHTML).text())
           this.setupEditor()
         })
       }
