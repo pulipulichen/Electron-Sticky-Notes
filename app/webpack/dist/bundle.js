@@ -248,6 +248,11 @@ let VueController = {
       this.status.imageDataURL = this.lib.win.imageDataURL
     }
     
+    if (typeof(this.config.isPinTop) === 'boolean') {
+//      this.status.isPinTop = this.config.isPinTop
+      console.log('ok')
+    }
+    
     //console.log(this.status.contentText)
     
     // 其他
@@ -2360,7 +2365,7 @@ module.exports = {
   watch: {
     'status.isReady': function () {
       if (this.status.isReady === true) {
-        this.toggleAlwaysOnTop(true)
+        this.toggleAlwaysOnTop(this.config.isPinTop)
       }
     }
   },
@@ -3449,7 +3454,7 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
-  isAlwaysTop: false,
+  isPinTop: false,
   cacheAliveDay: 1,
   maxRecentFileListCount: 10,
   

@@ -31,7 +31,7 @@ module.exports = {
   watch: {
     'status.isReady': function () {
       if (this.status.isReady === true) {
-        this.toggleAlwaysOnTop(true)
+        this.toggleAlwaysOnTop(this.config.isPinTop)
       }
     }
   },
