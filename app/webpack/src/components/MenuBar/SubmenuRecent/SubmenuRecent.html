@@ -1,14 +1,12 @@
 <fragment>
-  <div class="item" ref="Submenu">
-      <i class="dropdown icon"></i>
-      Publish To Web
-      <div class="menu">
-        <div class="item">Google Docs</div>
-        <div class="item">Google Drive</div>
-        <div class="item">Dropbox</div>
-        <div class="item">Adobe Creative Cloud</div>
-        <div class="item">Private FTP</div>
-        <div class="item">Another Service...</div>
-      </div>
-    </div>
+  <div class="item recent-file-select"
+       ref="RecentFileListDropdownContainer">
+    <select class="ui floating dropdown" 
+            ref="RecentFileListDropdown">
+      <option v-for="file in recentFileList"
+              v-bind:value="file.filename">
+        {{ file.content }}
+      </option>
+    </select>
+  </div>
 </fragment>

@@ -13,13 +13,16 @@ module.exports = {
   mounted: function () {
     //this.initSelect()
     //this.themes = this.config.themes
-    window.$(this.$refs.Submenu).dropdown({
-      allowTab: false
-    })
-    
+    //window.$(this.$refs.Submenu).dropdown({
+    //  allowTab: false
+    //})
     this.updateRecentFileList()
   },
   methods: {
+    initSelect: function () {
+      window.$(this.$refs.RecentFileListDropdown).dropdown()
+      return this
+    },
     updateRecentFileList: function () {
       this.recentFileList = [
         {
@@ -42,8 +45,10 @@ module.exports = {
           'filename': '201909140505.tmp.txt',
           'content': 'aaa'
         },
-        
       ]
+      
+      this.initSelect()
+      return this
     }
   }
 }

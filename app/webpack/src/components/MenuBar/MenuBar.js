@@ -57,12 +57,22 @@ module.exports = {
   mounted: function () {
     // https://github.com/Semantic-Org/Semantic-UI/issues/2041#issuecomment-87927840
     // prevent dropdown
-    window.$(this.$refs.Submenu).dropdown({
-      allowTab: false
-    })
+    
+    this.initDropdown()
     this.initHotkeys()
   },
   methods: {
+    initDropdown: function () {
+      window.$(this.$refs.Submenu).dropdown({
+        allowTab: false
+      })
+      
+      //setTimeout(() => {
+      //  window.$('.ui.dropdown').dropdown({
+      //    allowTab: false
+      //  })
+      //}, 0)
+    },
     initHotkeys: function () {
       this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
         //console.log(handler.key)
