@@ -20,6 +20,7 @@ module.exports = {
   },
   methods: {
     initSelect: function () {
+      // 如何? 可以嗎？
       let model = `
   <div class="ui basic modal">
     <div class="header">Header</div>
