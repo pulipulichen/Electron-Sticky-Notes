@@ -3,7 +3,7 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale
     return {
-      recentFileList: [],
+      //recentFileList: [],
       $modal: null,
       $list: null
     }
@@ -59,11 +59,43 @@ module.exports = {
       return this
     },
     updateRecentFileList: function (callback) {
+      if (typeof(callback) !== 'function') {
+        return false
+      }
+      
       this.initModal()
       
+      this.getRecentFileList((recentFileList) => {
+        this.$list.empty()
+        let _this = this
+        recentFileList.forEach(file => {
+          let header = file.content
+          let description = file.filename
+
+          let item = window.$(`<div class="item">
+                <div class="header">${header}</div>
+                <div class="description">
+                  ${description}
+                </div>
+              </div>`).appendTo(this.$list)
+
+          item.attr('data-filename', file.filename)
+          item.click(function () {
+            let filename = this.getAttribute('data-filename')
+            _this.openNote(filename)
+          })
+        }) 
+
+        callback()
+      })
+      return this
+    },
+    getRecentFileList: function (callback) {
+      if (typeof(callback) !== 'function') {
+        return false
+      }
       
-      
-      this.recentFileList = [
+      let recentFileList = [
         {
           'filename': '201909140505.tmp.txt',
           'content': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
@@ -106,22 +138,12 @@ module.exports = {
         },
       ]
       
-      this.$list.empty()
-      this.recentFileList.forEach(file => {
-        let header = file.content
-        let description = file.filename
-        
-        this.$list.append(`<div class="item">
-              <div class="header">${header}</div>
-              <div class="description">
-                ${description}
-              </div>
-            </div>`)
-      }) 
+      callback(recentFileList)
+      return this
+    },
+    openNote: function (filename) {
+      console.error('openNote', filename)
       
-      if (typeof(callback) === 'function') {
-        callback()
-      }
       return this
     }
   }
