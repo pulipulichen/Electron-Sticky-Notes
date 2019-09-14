@@ -4,7 +4,8 @@ const DateHelper = require('../../helpers/DateHelper')
 const SubmenuTheme = require('./SubmenuTheme/SubmenuTheme.vue').default
 const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue').default
 const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
-
+const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
+//
 const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
 
 module.exports = {
@@ -25,11 +26,12 @@ module.exports = {
     'submenu-theme': SubmenuTheme,
     'submenu-size': SubmenuSize,
     'submenu-file': SubmenuFile,
+    'submenu-recent': SubmenuRecent,
   },
   watch: {
     'status.isReady': function () {
       if (this.status.isReady === true) {
-        this.toggleAlwaysOnTop(true)
+        this.toggleAlwaysOnTop(this.config.isPinTop)
       }
     }
   },
@@ -55,12 +57,22 @@ module.exports = {
   mounted: function () {
     // https://github.com/Semantic-Org/Semantic-UI/issues/2041#issuecomment-87927840
     // prevent dropdown
-    window.$(this.$refs.Submenu).dropdown({
-      allowTab: false
-    })
+    
+    this.initDropdown()
     this.initHotkeys()
   },
   methods: {
+    initDropdown: function () {
+      window.$(this.$refs.Submenu).dropdown({
+        allowTab: false
+      })
+      
+      //setTimeout(() => {
+      //  window.$('.ui.dropdown').dropdown({
+      //    allowTab: false
+      //  })
+      //}, 0)
+    },
     initHotkeys: function () {
       this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
         //console.log(handler.key)
