@@ -2334,7 +2334,7 @@ const SubmenuTheme = __webpack_require__(/*! ./SubmenuTheme/SubmenuTheme.vue */ 
 const SubmenuSize = __webpack_require__(/*! ./SubmenuSize/SubmenuSize.vue */ "./app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.vue").default
 const SubmenuFile = __webpack_require__(/*! ./SubmenuFile/SubmenuFile.vue */ "./app/webpack/src/components/MenuBar/SubmenuFile/SubmenuFile.vue").default
 const SubmenuRecent = __webpack_require__(/*! ./SubmenuRecent/SubmenuRecent.vue */ "./app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.vue").default
-
+//
 const hotkeys = __webpack_require__(/*! ../../vendors/hotkeys/hotkeys.min */ "./app/webpack/src/vendors/hotkeys/hotkeys.min.js")
 
 module.exports = {
