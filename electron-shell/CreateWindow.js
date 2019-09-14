@@ -106,8 +106,8 @@ module.exports = function (options, callback) {
     //console.log('[[', filePath)
   }
   else if (typeof(options) === 'object' 
-          && typeof(options.enableClipboard) === 'boolean' 
-          && options.enableClipboard === false) {
+          && typeof(options.doEmpty) === 'boolean' 
+          && options.doEmpty === true) {
     // do notihing
   }
   else {

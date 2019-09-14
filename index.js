@@ -15,6 +15,10 @@ const ProcessArgvHelper = require('./electron-shell/ProcessArgvHelper.js')
 const ClipboardHelper = require('./electron-shell/ClipboardHelper.js')
 
 let filePathList = ProcessArgvHelper.getFilePaths().concat(ClipboardHelper.getFilePaths())
+let doEmpty = (process.argv.indexOf('empty') > -1)
+if (doEmpty === true) {
+  filePathList = []
+}
 //console.log(filePathList)
 //console.log(ClipboardHelper.getImageDataURL())
 
@@ -37,7 +41,8 @@ app.on('ready', () => {
   if (filePathList.length > 0) {
     filePathList.forEach(filePath => {
       createWindow({
-        filePath: filePath
+        filePath: filePath,
+        doEmpty: doEmpty
       })
     })
   }

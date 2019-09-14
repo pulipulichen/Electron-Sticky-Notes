@@ -118,7 +118,7 @@ module.exports = {
     newFile: function () {
       this.initIPC()
       this.ipc.send('open-another-win', {
-        enableClipboard: false
+        doEmpty: true
       })
       return this
     },
