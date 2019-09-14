@@ -79,6 +79,7 @@ let VueController = {
     
     // 其他
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {
+      this.removeExpiredCache()
       this._afterMounted()
     })
   },  // mounted: function () {
@@ -184,6 +185,27 @@ let VueController = {
       
       return this
     },
+    removeExpiredCache: function () {
+      let cachePath = this.lib.ElectronFileHelper.resolve(`cache`)
+      this.lib.ElectronFileHelper.readDirectory(cachePath, (data) => {
+        data.file.forEach(file => {
+          let isInRecent = false
+          for (let i = 0; i < this.status.recentFileList.length; i++) {
+            if (this.status.recentFileList[i].filePath === file) {
+              isInRecent = true
+              break
+            }
+          }
+          
+          if (isInRecent === false 
+                  && file.indexOf('tmp-') > -1 
+                  && file.endsWith('.txt')) {
+            this.lib.ElectronFileHelper.removeIfExpire(file, this.config.cacheAliveDay)
+          }
+        })
+      })
+      return this
+    },
     addRecent: function (contentText) {
       let fileType = this.status.fileType
       let filePath = this.status.filePath
@@ -193,6 +215,10 @@ let VueController = {
         return (file.filePath !== filePath)
       })
       
+      if (typeof(contentText) === 'string' && contentText.length > 100) {
+        contentText = contentText.slice(0, 100)
+      }
+      
       list.unshift({
         fileType: fileType,
         filePath: filePath,
@@ -201,7 +227,7 @@ let VueController = {
       })
       
       this.status.recentFileList = list.slice(0, this.config.maxRecentFileListCount)
-      console.log(this.status.recentFileList)
+      //console.log(this.status.recentFileList)
       
       this.lib.ElectronHelper.persist(this, this.persistAttrs)
       return this

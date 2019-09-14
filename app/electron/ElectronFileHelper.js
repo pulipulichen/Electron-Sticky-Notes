@@ -421,7 +421,7 @@ let ElectronFileHelper = {
   isExpire: function (filePath, aliveDays) {
     let currentMSTime = (new Date()).getTime()
     let maxIntervalMS = aliveDays * 1000 * 60 * 60 * 24
-    maxIntervalMS = 1000  // for test
+    //maxIntervalMS = 1000  // for test
     let interval = currentMSTime - this.getCreateUnixMS(filePath)
     //console.log(interval)
     return (interval > maxIntervalMS)

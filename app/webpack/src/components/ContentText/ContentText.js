@@ -86,6 +86,7 @@ module.exports = {
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
+        
         //console.log(this.contentText)
       }
       return this
@@ -149,7 +150,9 @@ module.exports = {
       if (typeof(filePath) !== 'string') {
         filePath = this.status.filePath
       }
-      this.lib.ElectronFileHelper.writeFileSync(filePath, this.getContent())
+      let contentText = this.getContent()
+      this.$parent.addRecent(contentText)
+      this.lib.ElectronFileHelper.writeFileSync(filePath, contentText)
       return this
     },
     getFilters: function (filePath) {
