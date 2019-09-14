@@ -71,11 +71,6 @@ let VueController = {
       this.status.imageDataURL = this.lib.win.imageDataURL
     }
     
-    if (typeof(this.config.isPinTop) === 'boolean') {
-//      this.status.isPinTop = this.config.isPinTop
-      console.log('ok')
-    }
-    
     //console.log(this.status.contentText)
     
     // 其他
