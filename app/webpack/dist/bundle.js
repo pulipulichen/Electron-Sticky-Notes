@@ -2944,7 +2944,19 @@ module.exports = {
   },
   methods: {
     initSelect: function () {
-      window.$(this.$refs.RecentFileListDropdown).dropdown()
+      let model = `
+  <div class="ui basic modal">
+    <div class="header">Header</div>
+    <div class="content">
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+  </div>`
+      window.$('body').append(model)
+      window.$('.ui.basic.modal')
+        .modal('show')
+      ;
       return this
     },
     updateRecentFileList: function () {
@@ -16936,28 +16948,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c(
-      "div",
-      {
-        ref: "RecentFileListDropdownContainer",
-        staticClass: "item recent-file-select"
-      },
-      [
-        _c(
-          "select",
-          {
-            ref: "RecentFileListDropdown",
-            staticClass: "ui floating dropdown"
-          },
-          _vm._l(_vm.recentFileList, function(file) {
-            return _c("option", { domProps: { value: file.filename } }, [
-              _vm._v("\n        " + _vm._s(file.content) + "\n      ")
-            ])
-          }),
-          0
-        )
-      ]
-    )
+    _c("div", { staticClass: "item" }, [_vm._v("\n    Recent...\n  ")])
   ])
 }
 var staticRenderFns = []

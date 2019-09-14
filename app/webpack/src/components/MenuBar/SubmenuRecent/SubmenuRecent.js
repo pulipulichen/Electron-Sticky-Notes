@@ -20,7 +20,19 @@ module.exports = {
   },
   methods: {
     initSelect: function () {
-      window.$(this.$refs.RecentFileListDropdown).dropdown()
+      let model = `
+  <div class="ui basic modal">
+    <div class="header">Header</div>
+    <div class="content">
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+  </div>`
+      window.$('body').append(model)
+      window.$('.ui.basic.modal')
+        .modal('show')
+      ;
       return this
     },
     updateRecentFileList: function () {
