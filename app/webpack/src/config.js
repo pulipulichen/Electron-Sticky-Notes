@@ -3,14 +3,15 @@ module.exports = {
     useTestContentText: false,
     useTestPlainTextFile: false,
     useTestCodeFile: false,
-    useTestImageStaticFile: true,
+    useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestRichFormatTextFile: false,
+    openRecent: true,
   },
   
   locale: 'zh-TW',
   maxHeightRatio: 0.7,
-  minHeightPx: 200, // 因為加入了new跟empty
+  minHeightPx: 400, // 因為加入了new跟empty
   maxWidthRatio: 0.5,
   minWidthPx: 390,
   menuBarHeight: 40,

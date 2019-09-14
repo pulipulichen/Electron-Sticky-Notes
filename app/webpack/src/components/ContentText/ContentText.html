@@ -17,5 +17,6 @@
       'lineHeight': styleLineHeight,
     }"
     id="Textarea"
+    v-on:change="change"
     v-bind:class="{'is-ready': status.isReady === true}"></textarea>
 </div>

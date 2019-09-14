@@ -251,6 +251,9 @@ let VueController = {
     if (typeof(this.lib.win.imageDataURL) === 'string') {
       this.status.imageDataURL = this.lib.win.imageDataURL
     }
+    if (this.lib.win.enableAutoSave === true) {
+      this.status.enableAutoSave = true
+    }
     
     //console.log(this.status.contentText)
     
@@ -1244,29 +1247,20 @@ module.exports = {
     'status.isReady': function () {
       if (this.status.isReady === true 
               && this.status.fileType === 'text') {
+        this.setupText()
+        this.resizeToFitContent()
         this.$refs.Textarea.focus()
       }
     },
-    'contentText': function () {
-      if (this.status.isReady === false) {
-        return false
-      }
-      
-      if (this.status.enableAutoSave === true) {
-        if (typeof(this.status.filePath) !== 'string') {
-          this.status.filePath = this.createTempFile()
-        }
-        
-        this.$parent.addRecent(this.contentText)
-      }
-    }
   },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.setupText()
       this.resizeToFitContent()
     }, 0)
   },
+  */
   methods: {
     setupText: function () {
       //console.log(this.status)
@@ -1279,6 +1273,9 @@ module.exports = {
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
         
+        if (typeof(this.status.filePath) === 'string') {
+          this.$parent.addRecent(this.contentText)
+        }
         //console.log(this.contentText)
       }
       return this
@@ -1364,6 +1361,16 @@ module.exports = {
         this.cleanTempFile()
       }
       return this
+    },
+    change: function () {
+      console.log('change', this.status.enableAutoSave)
+      if (this.status.enableAutoSave === true) {
+        if (typeof(this.status.filePath) !== 'string') {
+          this.status.filePath = this.createTempFile()
+        }
+
+        this.$parent.addRecent(this.contentText)
+      }
     }
   }
 }
@@ -1576,6 +1583,11 @@ module.exports = {
                   .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
         this.codeMirrorEditor.refresh()
       }
+    },
+    'status.isReady': function () {
+      //this.setupStyle()
+      this.setupCode()
+      //this.resizeToFitContent()
     }
   },
   computed: {
@@ -1600,6 +1612,7 @@ module.exports = {
       return lineHeight
     },
   },
+  /*
   mounted: function () {
    
     setTimeout(() => {
@@ -1608,6 +1621,7 @@ module.exports = {
       //this.resizeToFitContent()
     }, 0)
   },
+  */
   methods: {
     setupCode: function () {
       //console.log(this.status)
@@ -2895,7 +2909,7 @@ module.exports = {
       return this
     },
     newFile: function () {
-      this.initIPC()
+      //this.initIPC()
       this.ipc.send('open-another-win', {
         doEmpty: true
       })
@@ -3040,13 +3054,14 @@ module.exports = {
     }
   },
   watch: {
-    /*
     'status.isReady': function () {
-      if (this.status.isReady === true) {
-        this.open()
+      if (this.status.isReady === true 
+              && this.config.debug.openRecent === true) {
+        setTimeout(() => {
+          this.open()
+        }, 1000)
       }
     }
-     */
   },  // watch: {
   //computed: {
   //},
@@ -3099,23 +3114,36 @@ module.exports = {
       this.initModal()
       
       this.getRecentFileList((recentFileList) => {
+        //console.log(recentFileList)
+        
         this.$list.empty()
         let _this = this
         recentFileList.forEach(file => {
-          let header = file.content
-          let description = file.filename
+          let header = file.contentText
+          let description = this.lib.ElectronFileHelper.basename(file.filePath)
+
+          let content
+          if (typeof(header) === 'string') {
+            content = `<div class="header">${header}</div>
+                  <div class="description">
+                    ${description}
+                  </div>`
+          }
+          else {
+            content = `<div class="header">${description}</div>`
+          }
 
           let item = window.$(`<div class="item">
-                <div class="header">${header}</div>
-                <div class="description">
-                  ${description}
+                <i class="sticky note outline icon"></i>
+                <div class="content">
+                  ${content}
                 </div>
               </div>`).appendTo(this.$list)
 
-          item.attr('data-filename', file.filename)
+          item.attr('data-filepath', file.filePath)
           item.click(function () {
-            let filename = this.getAttribute('data-filename')
-            _this.openNote(filename)
+            let filePath = this.getAttribute('data-filepath')
+            _this.openNote(filePath)
           })
         }) 
 
@@ -3128,6 +3156,7 @@ module.exports = {
         return false
       }
       
+      /*
       let recentFileList = [
         {
           'filename': '201909140505.tmp.txt',
@@ -3170,13 +3199,18 @@ module.exports = {
           'content': 'aaa'
         },
       ]
+      */
       
-      callback(recentFileList)
+      callback(this.status.recentFileList.slice(1))
       return this
     },
-    openNote: function (filename) {
-      console.error('openNote', filename)
-      
+    
+    openNote: function (filePath) {
+      //console.error('openNote', filePath)
+      //return
+      this.lib.ipc.send('open-another-win', {
+        filePath: filePath
+      })
       return this
     }
   }
@@ -3629,14 +3663,15 @@ module.exports = {
     useTestContentText: false,
     useTestPlainTextFile: false,
     useTestCodeFile: false,
-    useTestImageStaticFile: true,
+    useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestRichFormatTextFile: false,
+    openRecent: true,
   },
   
   locale: 'zh-TW',
   maxHeightRatio: 0.7,
-  minHeightPx: 200, // 因為加入了new跟empty
+  minHeightPx: 400, // 因為加入了new跟empty
   maxWidthRatio: 0.5,
   minWidthPx: 390,
   menuBarHeight: 40,
@@ -16459,7 +16494,7 @@ exports.push([module.i, ".resize-detector[data-v-e5fadfc2] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.content-text.is-ready[data-v-313a1aed] {\n  white-space: normal;\n}\n.resize-detector[data-v-313a1aed] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n.resize-detector.is-ready[data-v-313a1aed] {\n  white-space: normal;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EAGA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,gBAAA;ACHF;ADKE;EACE,aAAA;EACA,gBAAA;ACHJ;ADME;EACE,mBAAA;ACJJ;ADQA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EACA,UAAA;EAAW,WAAA;EACX,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACNF;ADQE;EACE,mBAAA;ACNJ","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  //font-size: 1rem;\n  //line-height: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n  \n  &.is-ready {\n    white-space: normal;\n  }\n}\n\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  \n  &.is-ready {\n    white-space: normal;\n  }\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.content-text.is-ready {\n  white-space: normal;\n}\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  opacity: 0;\n  z-index: -1;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n.resize-detector.is-ready {\n  white-space: normal;\n}\n"]}]);
+exports.push([module.i, ".content-text[data-v-313a1aed] {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text[data-v-313a1aed]:focus {\n  outline: none;\n  outline-width: 0;\n}\n.content-text.is-ready[data-v-313a1aed] {\n  white-space: normal;\n}\n.resize-detector[data-v-313a1aed] {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n.resize-detector.is-ready[data-v-313a1aed] {\n  white-space: normal;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/ContentText/ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","ContentText.less"],"names":[],"mappings":"AAEA;EACE,YAAA;EACA,0BAAA;EACA,YAAA;EAGA,0CAAA;EACA,eAAA;EACA,eAAA;EACA,2BAAA;EACA,6BAAA;EACA,gBAAA;ACHF;ADKE;EACE,aAAA;EACA,gBAAA;ACHJ;ADME;EACE,mBAAA;ACJJ;ADQA;EACE,WAAA;EACA,YAAA;EACA,YAAA;EAEA,kBAAA;EAEA,gBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,sBAAA;EACA,uBAAA;EACA,gBAAA;ACRF;ADUE;EACE,mBAAA;ACRJ","file":"ContentText.less?vue&type=style&index=0&id=313a1aed&lang=less&scoped=true&","sourcesContent":["@menu-bar-height: 40px;\n\n.content-text {\n  width: 100vw;\n  height: calc(100vh - @menu-bar-height);\n  resize: none;\n  //font-size: 1rem;\n  //line-height: 1.5rem;\n  background-color: rgba(255,255,255,0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n  \n  &:focus {\n    outline: none;\n    outline-width: 0;\n  }\n  \n  &.is-ready {\n    white-space: normal;\n  }\n}\n\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  //opacity: 0;z-index:-1;  // 要測試的時候，就註解這一行\n  position: absolute;\n  \n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255,0,0,0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n  \n  &.is-ready {\n    white-space: normal;\n  }\n}",".content-text {\n  width: 100vw;\n  height: calc(100vh - 40px);\n  resize: none;\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0.5rem;\n  border-width: 0;\n  -webkit-app-region: no-drag;\n  font-family: Noto Sans CJK TC;\n  white-space: pre;\n}\n.content-text:focus {\n  outline: none;\n  outline-width: 0;\n}\n.content-text.is-ready {\n  white-space: normal;\n}\n.resize-detector {\n  z-index: 10;\n  opacity: 0.5;\n  color: green;\n  position: absolute;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: inline;\n  background-color: rgba(255, 0, 0, 0.5);\n  width: auto !important;\n  height: auto !important;\n  white-space: pre;\n}\n.resize-detector.is-ready {\n  white-space: normal;\n}\n"]}]);
 
 
 /***/ }),
@@ -16557,7 +16592,7 @@ exports.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#SubmenuRecentModal .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal .content .header {\n  max-width: 100%;\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AAAA;EAEI,gCAAA;EACA,kBAAA;EACA,gBAAA;ACAJ;ADJA;EAOM,eAAA;EACA,uBAAA;EACA,kBAAA;ACAN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuRecentModal {\n  .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    \n    .header {\n      max-width: 100%;\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n    }\n  }\n}","#SubmenuRecentModal .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal .content .header {\n  max-width: 100%;\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n}\n"]}]);
+exports.push([module.i, "#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AACE;EACE,gCAAA;EACA,kBAAA;EACA,gBAAA;ACAJ;ADHE;EAMI,eAAA;ACAN;ADNE;EAUI,+BAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;ACDN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuRecentModal {\n  &> .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    \n    .item {\n      cursor: pointer;\n    }\n    \n    .header {\n      max-width: calc(100vw - 5.5rem);\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n      white-space: nowrap;\n    }\n  }\n}","#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n"]}]);
 
 
 /***/ }),
@@ -16719,6 +16754,7 @@ var render = function() {
       attrs: { id: "Textarea" },
       domProps: { value: _vm.contentText },
       on: {
+        change: _vm.change,
         input: function($event) {
           if ($event.target.composing) {
             return

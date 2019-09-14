@@ -116,7 +116,7 @@ module.exports = {
       return this
     },
     newFile: function () {
-      this.initIPC()
+      //this.initIPC()
       this.ipc.send('open-another-win', {
         doEmpty: true
       })

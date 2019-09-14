@@ -74,6 +74,9 @@ let VueController = {
     if (typeof(this.lib.win.imageDataURL) === 'string') {
       this.status.imageDataURL = this.lib.win.imageDataURL
     }
+    if (this.lib.win.enableAutoSave === true) {
+      this.status.enableAutoSave = true
+    }
     
     //console.log(this.status.contentText)
     

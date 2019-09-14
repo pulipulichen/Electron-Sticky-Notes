@@ -126,6 +126,10 @@ module.exports = function (options, callback) {
     }
   }
   
+  if (typeof(options) === 'object' && options.enableAutoSave === true) {
+    win.enableAutoSave = true
+  }
+  
   //return win
   
   win.hide()

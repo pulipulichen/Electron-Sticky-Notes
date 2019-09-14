@@ -54,29 +54,20 @@ module.exports = {
     'status.isReady': function () {
       if (this.status.isReady === true 
               && this.status.fileType === 'text') {
+        this.setupText()
+        this.resizeToFitContent()
         this.$refs.Textarea.focus()
       }
     },
-    'contentText': function () {
-      if (this.status.isReady === false) {
-        return false
-      }
-      
-      if (this.status.enableAutoSave === true) {
-        if (typeof(this.status.filePath) !== 'string') {
-          this.status.filePath = this.createTempFile()
-        }
-        
-        this.$parent.addRecent(this.contentText)
-      }
-    }
   },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.setupText()
       this.resizeToFitContent()
     }, 0)
   },
+  */
   methods: {
     setupText: function () {
       //console.log(this.status)
@@ -89,6 +80,9 @@ module.exports = {
               && this.status.contentText !== '') {
         this.contentText = this.status.contentText
         
+        if (typeof(this.status.filePath) === 'string') {
+          this.$parent.addRecent(this.contentText)
+        }
         //console.log(this.contentText)
       }
       return this
@@ -174,6 +168,16 @@ module.exports = {
         this.cleanTempFile()
       }
       return this
+    },
+    change: function () {
+      console.log('change', this.status.enableAutoSave)
+      if (this.status.enableAutoSave === true) {
+        if (typeof(this.status.filePath) !== 'string') {
+          this.status.filePath = this.createTempFile()
+        }
+
+        this.$parent.addRecent(this.contentText)
+      }
     }
   }
 }

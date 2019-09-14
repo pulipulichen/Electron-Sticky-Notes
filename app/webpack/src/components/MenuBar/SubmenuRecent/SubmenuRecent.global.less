@@ -1,13 +1,18 @@
 #SubmenuRecentModal {
-  .content {
+  &> .content {
     max-height: calc(100vh - 5.5rem);
     overflow-x: hidden;
     overflow-y: auto;
     
+    .item {
+      cursor: pointer;
+    }
+    
     .header {
-      max-width: 100%;
+      max-width: calc(100vw - 5.5rem);
       text-overflow: ellipsis;
       overflow-x: hidden;
+      white-space: nowrap;
     }
   }
 }

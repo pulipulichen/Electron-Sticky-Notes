@@ -70,6 +70,11 @@ module.exports = {
                   .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
         this.codeMirrorEditor.refresh()
       }
+    },
+    'status.isReady': function () {
+      //this.setupStyle()
+      this.setupCode()
+      //this.resizeToFitContent()
     }
   },
   computed: {
@@ -94,6 +99,7 @@ module.exports = {
       return lineHeight
     },
   },
+  /*
   mounted: function () {
    
     setTimeout(() => {
@@ -102,6 +108,7 @@ module.exports = {
       //this.resizeToFitContent()
     }, 0)
   },
+  */
   methods: {
     setupCode: function () {
       //console.log(this.status)

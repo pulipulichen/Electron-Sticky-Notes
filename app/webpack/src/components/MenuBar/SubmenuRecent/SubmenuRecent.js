@@ -9,13 +9,14 @@ module.exports = {
     }
   },
   watch: {
-    /*
     'status.isReady': function () {
-      if (this.status.isReady === true) {
-        this.open()
+      if (this.status.isReady === true 
+              && this.config.debug.openRecent === true) {
+        setTimeout(() => {
+          this.open()
+        }, 1000)
       }
     }
-     */
   },  // watch: {
   //computed: {
   //},
@@ -68,23 +69,36 @@ module.exports = {
       this.initModal()
       
       this.getRecentFileList((recentFileList) => {
+        //console.log(recentFileList)
+        
         this.$list.empty()
         let _this = this
         recentFileList.forEach(file => {
-          let header = file.content
-          let description = file.filename
+          let header = file.contentText
+          let description = this.lib.ElectronFileHelper.basename(file.filePath)
+
+          let content
+          if (typeof(header) === 'string') {
+            content = `<div class="header">${header}</div>
+                  <div class="description">
+                    ${description}
+                  </div>`
+          }
+          else {
+            content = `<div class="header">${description}</div>`
+          }
 
           let item = window.$(`<div class="item">
-                <div class="header">${header}</div>
-                <div class="description">
-                  ${description}
+                <i class="sticky note outline icon"></i>
+                <div class="content">
+                  ${content}
                 </div>
               </div>`).appendTo(this.$list)
 
-          item.attr('data-filename', file.filename)
+          item.attr('data-filepath', file.filePath)
           item.click(function () {
-            let filename = this.getAttribute('data-filename')
-            _this.openNote(filename)
+            let filePath = this.getAttribute('data-filepath')
+            _this.openNote(filePath)
           })
         }) 
 
@@ -97,6 +111,7 @@ module.exports = {
         return false
       }
       
+      /*
       let recentFileList = [
         {
           'filename': '201909140505.tmp.txt',
@@ -139,13 +154,18 @@ module.exports = {
           'content': 'aaa'
         },
       ]
+      */
       
-      callback(recentFileList)
+      callback(this.status.recentFileList.slice(1))
       return this
     },
-    openNote: function (filename) {
-      console.error('openNote', filename)
-      
+    
+    openNote: function (filePath) {
+      //console.error('openNote', filePath)
+      //return
+      this.lib.ipc.send('open-another-win', {
+        filePath: filePath
+      })
       return this
     }
   }
