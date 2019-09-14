@@ -30,18 +30,27 @@ module.exports = {
       }
     }
   },
+  watch: {
+    'status.isReady': function () {
+      this.setupImage()
+      this.initDetector()
+    }
+  },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.setupImage()
       this.initDetector()
     }, 0)
   },
+  */
   methods: {
     setupImage: function () {
       if (this.status.fileType === 'image-static'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.imagePath = this.status.filePath.split('\\').join('/')
+        this.$parent.addRecent()
         //console.log([this.imagePath, this.status.filePath])
       }
       return this

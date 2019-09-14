@@ -52,7 +52,8 @@ module.exports = {
   },
   watch: {
     'status.isReady': function () {
-      if (this.status.isReady === true) {
+      if (this.status.isReady === true 
+              && this.status.fileType === 'text') {
         this.$refs.Textarea.focus()
       }
     },
@@ -82,6 +83,7 @@ module.exports = {
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
+      //console.log(this.status.contentText)
       if (this.status.fileType === 'text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {

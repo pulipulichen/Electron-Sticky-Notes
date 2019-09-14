@@ -60,6 +60,7 @@ module.exports = {
       }
     }
   },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.initDetector()
@@ -67,12 +68,20 @@ module.exports = {
       //this.resizeToFitContent()
     }, 0)
   },
+  */
+  watch: {
+    'status.isReady': function () {
+      this.setupImage()
+      this.initDetector()
+    }
+  },
   methods: {
     setupImage: function () {
       if (this.status.fileType === 'image-viewer') {
         if (typeof(this.status.filePath) === 'string' 
                 && this.status.filePath !== '') {
           this.imagePath = this.status.filePath
+          this.$parent.addRecent()
           //console.log(this.imagePath)
         }
         else if (typeof(this.status.imageDataURL) === 'string' 

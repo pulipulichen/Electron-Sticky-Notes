@@ -255,7 +255,11 @@ let VueController = {
     //console.log(this.status.contentText)
     
     // 其他
+    
+    this.setupFile()
+      
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {
+      //console.log(this.status.recentFileList)
       this.removeExpiredCache()
       this._afterMounted()
     })
@@ -265,7 +269,6 @@ let VueController = {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
       this.setupWindowSizeConfig()
-      this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
@@ -326,23 +329,25 @@ let VueController = {
         this.status.fileType = 'image-static'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageStatic
-        this.addRecent()
+        //this.addRecent()
       }
       else if (this.lib.ElectronImageFileHelper.isViewerSupportedImageFile(this.status.filePath)) {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageViewer
-        this.addRecent()
+        //this.addRecent()
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'text-code'
+        this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentTextCode
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        //console.log(this.status.contentText)
         this.status.mainComponent = this.$refs.ContentText
-        this.addRecent(this.status.contentText)
+        //this.addRecent(this.status.contentText)
       }
       else if (this.lib.ElectronTextFileHelper.isRichFormatFile(this.status.filePath)) {
         this.status.fileType = 'text-rich-format'
@@ -352,7 +357,7 @@ let VueController = {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImage
-        this.addRecent()
+        //this.addRecent()
       }
       else {
         this.status.mainComponent = this.$refs.ContentText
@@ -525,18 +530,27 @@ module.exports = {
       }
     }
   },
+  watch: {
+    'status.isReady': function () {
+      this.setupImage()
+      this.initDetector()
+    }
+  },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.setupImage()
       this.initDetector()
     }, 0)
   },
+  */
   methods: {
     setupImage: function () {
       if (this.status.fileType === 'image-static'
               && typeof(this.status.filePath) === 'string' 
               && this.status.filePath !== '') {
         this.imagePath = this.status.filePath.split('\\').join('/')
+        this.$parent.addRecent()
         //console.log([this.imagePath, this.status.filePath])
       }
       return this
@@ -863,6 +877,7 @@ module.exports = {
       }
     }
   },
+  /*
   mounted: function () {
     setTimeout(() => {
       this.initDetector()
@@ -870,12 +885,20 @@ module.exports = {
       //this.resizeToFitContent()
     }, 0)
   },
+  */
+  watch: {
+    'status.isReady': function () {
+      this.setupImage()
+      this.initDetector()
+    }
+  },
   methods: {
     setupImage: function () {
       if (this.status.fileType === 'image-viewer') {
         if (typeof(this.status.filePath) === 'string' 
                 && this.status.filePath !== '') {
           this.imagePath = this.status.filePath
+          this.$parent.addRecent()
           //console.log(this.imagePath)
         }
         else if (typeof(this.status.imageDataURL) === 'string' 
@@ -1219,7 +1242,8 @@ module.exports = {
   },
   watch: {
     'status.isReady': function () {
-      if (this.status.isReady === true) {
+      if (this.status.isReady === true 
+              && this.status.fileType === 'text') {
         this.$refs.Textarea.focus()
       }
     },
@@ -1249,6 +1273,7 @@ module.exports = {
       //console.log([this.status.fileType === 'plain-text'
       //        , typeof(this.status.contentText) === 'string' 
       //        , this.status.contentText !== ''])
+      //console.log(this.status.contentText)
       if (this.status.fileType === 'text'
               && typeof(this.status.contentText) === 'string' 
               && this.status.contentText !== '') {
@@ -2050,6 +2075,9 @@ module.exports = {
                   .css('line-height', `calc(1em * ${this.config.fontSizeRatio} + 0.4285em)`)
         this.codeMirrorEditor.refresh()
       }
+    },
+    'status.isReady': function () {
+      this.setupDocument()
     }
   },
   computed: {
@@ -2066,6 +2094,7 @@ module.exports = {
       return lineHeight
     },
   },
+  /*
   mounted: function () {
    
     setTimeout(() => {
@@ -2074,6 +2103,7 @@ module.exports = {
       //this.resizeToFitContent()
     }, 0)
   },
+  */
   methods: {
     setupDocument: function () {
       //console.log(this.status)
@@ -3597,10 +3627,10 @@ component.options.__file = "app/webpack/src/components/MenuBar/SubmenuTheme/Subm
 module.exports = {
   debug: {
     useTestContentText: false,
-    useTestCodeFile: false,
-    useTestImageStaticFile: false,
-    useTestImageViewerFile: false,
     useTestPlainTextFile: false,
+    useTestCodeFile: false,
+    useTestImageStaticFile: true,
+    useTestImageViewerFile: false,
     useTestRichFormatTextFile: false,
   },
   

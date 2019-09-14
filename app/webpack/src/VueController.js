@@ -78,7 +78,11 @@ let VueController = {
     //console.log(this.status.contentText)
     
     // 其他
+    
+    this.setupFile()
+      
     this.lib.ElectronHelper.mount(this, this.persistAttrs, () => {
+      //console.log(this.status.recentFileList)
       this.removeExpiredCache()
       this._afterMounted()
     })
@@ -88,7 +92,6 @@ let VueController = {
       //console.log(this.components)
       //this.components['menu-bar'].methods.resetNoteHeader()
       this.setupWindowSizeConfig()
-      this.setupFile()
       
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
@@ -149,23 +152,25 @@ let VueController = {
         this.status.fileType = 'image-static'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageStatic
-        this.addRecent()
+        //this.addRecent()
       }
       else if (this.lib.ElectronImageFileHelper.isViewerSupportedImageFile(this.status.filePath)) {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageViewer
-        this.addRecent()
+        //this.addRecent()
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'text-code'
+        this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentTextCode
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
+        //console.log(this.status.contentText)
         this.status.mainComponent = this.$refs.ContentText
-        this.addRecent(this.status.contentText)
+        //this.addRecent(this.status.contentText)
       }
       else if (this.lib.ElectronTextFileHelper.isRichFormatFile(this.status.filePath)) {
         this.status.fileType = 'text-rich-format'
@@ -175,7 +180,7 @@ let VueController = {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImage
-        this.addRecent()
+        //this.addRecent()
       }
       else {
         this.status.mainComponent = this.$refs.ContentText

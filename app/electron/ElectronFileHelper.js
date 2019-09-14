@@ -413,7 +413,7 @@ let ElectronFileHelper = {
   getCreateUnixMS: function (path) {
     if (this.existsSync(path)) {
       let unixMS = this.lib.fs.statSync(path).birthtime
-      console.log(unixMS)
+      //console.log(unixMS)
       return unixMS
     }
     return false
