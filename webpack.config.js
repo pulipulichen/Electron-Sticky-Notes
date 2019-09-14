@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
     //devtool: false,
     entry: {
       //'test': './[tmp/test.js',
-      'bundle': './app/webpack/src/bundle.js'
+      'bundle': './app/webpack/src/index.js'
     },
     output: {
       path: path.resolve('./app/webpack/dist/'),

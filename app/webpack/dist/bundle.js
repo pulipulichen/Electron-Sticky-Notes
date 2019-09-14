@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./app/webpack/src/bundle.js","vendors"]);
+/******/ 	deferredModules.push(["./app/webpack/src/index.js","vendors"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -391,26 +391,6 @@ const i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
 })
 
 /* harmony default export */ __webpack_exports__["default"] = (i18n);
-
-/***/ }),
-
-/***/ "./app/webpack/src/bundle.js":
-/*!***********************************!*\
-  !*** ./app/webpack/src/bundle.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
-window.jQuery = window.$ = $
-
-__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
-__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
-
-// ----------------------------------------
-
-//require('./VueI18n')
-__webpack_require__(/*! ./VueController */ "./app/webpack/src/VueController.js")
 
 /***/ }),
 
@@ -2921,7 +2901,7 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale
     return {
-      
+      recentFileList: []
     }
   },
   //watch: {
@@ -2931,9 +2911,38 @@ module.exports = {
   mounted: function () {
     //this.initSelect()
     //this.themes = this.config.themes
+    window.$(this.$refs.Submenu).dropdown({
+      allowTab: false
+    })
+    
+    this.updateRecentFileList()
   },
   methods: {
-    
+    updateRecentFileList: function () {
+      this.recentFileList = [
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaa'
+        },
+        {
+          'filename': '201909140506.tmp.txt',
+          'content': 'bbb'
+        },
+        {
+          'filename': '201909140507.tmp.txt',
+          'content': 'ccc'
+        },
+        {
+          'filename': '201909140508.tmp.txt',
+          'content': 'ddd'
+        },
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaa'
+        },
+        
+      ]
+    }
   }
 }
 
@@ -3413,8 +3422,9 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
-  isAlwaysTop: true,
+  isAlwaysTop: false,
   cacheAliveDay: 1,
+  maxRecentFileListCount: 10,
   
   // https://flatuicolors.com/palette/de
   themes: [
@@ -3593,6 +3603,26 @@ let i18nConfig = {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (i18nConfig);
+
+/***/ }),
+
+/***/ "./app/webpack/src/index.js":
+/*!**********************************!*\
+  !*** ./app/webpack/src/index.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const $ = __webpack_require__(/*! jquery */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\jquery\\dist\\jquery.js")
+window.jQuery = window.$ = $
+
+__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.css */ "./app/webpack/src/vendors/semantic-ui/semantic.min.css")
+__webpack_require__(/*! ./vendors/semantic-ui/semantic.min.js */ "./app/webpack/src/vendors/semantic-ui/semantic.min.js")
+
+// ----------------------------------------
+
+//require('./VueI18n')
+__webpack_require__(/*! ./VueController */ "./app/webpack/src/VueController.js")
 
 /***/ }),
 
@@ -16890,7 +16920,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("fragment")
+  return _c("fragment", [
+    _c("div", { ref: "Submenu", staticClass: "item" }, [
+      _c("i", { staticClass: "dropdown icon" }),
+      _vm._v("\n      Publish To Web\n      "),
+      _c("div", { staticClass: "menu" }, [
+        _c("div", { staticClass: "item" }, [_vm._v("Google Docs")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [_vm._v("Google Drive")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [_vm._v("Dropbox")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [_vm._v("Adobe Creative Cloud")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [_vm._v("Private FTP")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item" }, [_vm._v("Another Service...")])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
