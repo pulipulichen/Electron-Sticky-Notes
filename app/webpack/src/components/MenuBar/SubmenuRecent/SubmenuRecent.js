@@ -9,11 +9,13 @@ module.exports = {
     }
   },
   watch: {
+    /*
     'status.isReady': function () {
       if (this.status.isReady === true) {
         this.open()
       }
     }
+     */
   },  // watch: {
   //computed: {
   //},

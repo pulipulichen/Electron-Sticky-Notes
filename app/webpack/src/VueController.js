@@ -186,7 +186,7 @@ let VueController = {
       let filePath = this.status.filePath
       
       // check if recent list has same filePath
-      let list = this.recentFileList.filter(file => {
+      let list = this.status.recentFileList.filter(file => {
         return (file.filePath !== filePath)
       })
       
@@ -194,11 +194,15 @@ let VueController = {
         fileType: fileType,
         filePath: filePath,
         contentText: contentText,
-        updateUnixMS: (new Data).getTime()
+        updateUnixMS: (new Date()).getTime()
       })
       
-      this.recentFileList = list.slice(0, this.config.maxRecentFileListCount)
+      this.status.recentFileList = list.slice(0, this.config.maxRecentFileListCount)
+      console.log(this.status.recentFileList)
       
+      // 要怎麼持久化呢？
+      
+      return this
     }
   } // methods: {
 }

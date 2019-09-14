@@ -67,6 +67,8 @@ module.exports = {
         allowTab: false
       })
       
+      window.$(this.$refs.Submenu).find('.menu:first').css('max-height', `calc(100vh - ${this.config.menuBarHeight}px)`)
+      
       //setTimeout(() => {
       //  window.$('.ui.dropdown').dropdown({
       //    allowTab: false
