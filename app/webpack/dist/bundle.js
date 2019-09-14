@@ -510,7 +510,7 @@ exports.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"
 
 exports = module.exports = __webpack_require__(/*! ../../../../../../../../../../../usr/lib/node_modules/css-loader/dist/runtime/api.js */ "../../../../../usr/lib/node_modules/css-loader/dist/runtime/api.js")(true);
 // Module
-exports.push([module.i, ".recent-file-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.recent-file-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n", "",{"version":3,"sources":["/home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AAAA;EAEI,8BAAA;ACAJ;ADEI;EACE,2BAAA;ACAN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":[".recent-file-select {\n  i.dropdown.icon {\n    margin-top: -0.5rem !important;\n\n    &:before {\n      content: \"\\f0d7\" !important;\n    }\n  }\n}\n  \n\n",".recent-file-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.recent-file-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n"]}]);
+exports.push([module.i, "#SubmenuRecentModal .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal .content .header {\n  max-width: 100%;\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n}\n", "",{"version":3,"sources":["/home/pudding/NetBeansProjects/[electron]/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AAAA;EAEI,gCAAA;EACA,kBAAA;EACA,gBAAA;ACAJ;ADJA;EAOM,eAAA;EACA,uBAAA;EACA,kBAAA;ACAN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuRecentModal {\n  .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    \n    .header {\n      max-width: 100%;\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n    }\n  }\n}","#SubmenuRecentModal .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal .content .header {\n  max-width: 100%;\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n}\n"]}]);
 
 
 
@@ -1139,7 +1139,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c("div", { staticClass: "item" }, [_vm._v("\n    Recent...\n  ")])
+    _c("div", { staticClass: "item", on: { click: _vm.open } }, [
+      _c("i", { staticClass: "external alternate icon" }),
+      _vm._v("\n    Recent...\n    "),
+      _c("div", { staticClass: "description" }, [_vm._v("ctrl+r")])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -4380,7 +4384,8 @@ module.exports = {
     initModal: function () {
       if (this.$modal === null || this.$modal === undefined) {
         this.$modal = window.$(`
-      <div class="ui modal ">
+      <div class="ui modal" id="SubmenuRecentModal">
+        <i class="close icon"></i>
         <div class="header">Recent Notes</div>
         <div class="content">
           <div class="ui list recent-list">
@@ -4418,7 +4423,30 @@ module.exports = {
     },
     updateRecentFileList: function (callback) {
       this.initModal()
+      
+      
+      
       this.recentFileList = [
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        },
+        {
+          'filename': '201909140506.tmp.txt',
+          'content': 'bbb'
+        },
+        {
+          'filename': '201909140507.tmp.txt',
+          'content': 'ccc'
+        },
+        {
+          'filename': '201909140508.tmp.txt',
+          'content': 'ddd'
+        },
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaa'
+        },
         {
           'filename': '201909140505.tmp.txt',
           'content': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'

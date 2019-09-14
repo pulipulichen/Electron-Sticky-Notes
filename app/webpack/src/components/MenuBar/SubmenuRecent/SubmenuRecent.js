@@ -21,7 +21,8 @@ module.exports = {
     initModal: function () {
       if (this.$modal === null || this.$modal === undefined) {
         this.$modal = window.$(`
-      <div class="ui modal ">
+      <div class="ui modal" id="SubmenuRecentModal">
+        <i class="close icon"></i>
         <div class="header">Recent Notes</div>
         <div class="content">
           <div class="ui list recent-list">
@@ -59,7 +60,30 @@ module.exports = {
     },
     updateRecentFileList: function (callback) {
       this.initModal()
+      
+      
+      
       this.recentFileList = [
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        },
+        {
+          'filename': '201909140506.tmp.txt',
+          'content': 'bbb'
+        },
+        {
+          'filename': '201909140507.tmp.txt',
+          'content': 'ccc'
+        },
+        {
+          'filename': '201909140508.tmp.txt',
+          'content': 'ddd'
+        },
+        {
+          'filename': '201909140505.tmp.txt',
+          'content': 'aaa'
+        },
         {
           'filename': '201909140505.tmp.txt',
           'content': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'

@@ -1,11 +1,13 @@
-.recent-file-select {
-  i.dropdown.icon {
-    margin-top: -0.5rem !important;
-
-    &:before {
-      content: "\f0d7" !important;
+#SubmenuRecentModal {
+  .content {
+    max-height: calc(100vh - 5.5rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    .header {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
     }
   }
 }
-  
-
