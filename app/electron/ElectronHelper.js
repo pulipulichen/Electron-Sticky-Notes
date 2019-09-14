@@ -71,10 +71,34 @@ let ElectronHelper = {
       //console.log(attrs)
       attrs.forEach(attr => {
         //console.log(attr)
+        /*
         if (typeof(data[attr]) !== 'undefined') {
           //console.log(attr)
           vue[attr] = data[attr]
         }
+        */
+        let dataNode = data
+        let vueNode = vue
+
+        let parts = attr.split('.')
+        for (let i = 0; i < parts.length; i++) {
+          let part = parts[i]
+          if (i < parts.length - 1) {
+            if (typeof(dataNode[part]) === 'undefined') {
+              break
+            }
+
+            if (typeof(vueNode[part]) === 'undefined') {
+              vueNode[part] = {}
+            }
+
+            vueNode = vueNode[part]
+            dataNode = dataNode[part]
+          }
+          else {
+            vueNode[part] = dataNode[part]
+          }
+        } // for
       })
       
       if (typeof(callback) === 'function') {
@@ -91,7 +115,28 @@ let ElectronHelper = {
     
     let data = {}
     attrs.forEach(attr => {
-      data[attr] = vue[attr]
+      let dataNode = data
+      let vueNode = vue
+      
+      let parts = attr.split('.')
+      for (let i = 0; i < parts.length; i++) {
+        let part = parts[i]
+        if (i < parts.length - 1) {
+          if (typeof(vueNode[part]) === 'undefined') {
+            break
+          }
+          
+          if (typeof(dataNode[part]) === 'undefined') {
+            dataNode[part] = {}
+          }
+          
+          dataNode = dataNode[part]
+          vueNode = vueNode[part]
+        }
+        else {
+          dataNode[part] = vueNode[part]
+        }
+      } // for
     })
     
     let dataString = JSON.stringify(data, null, "\t")

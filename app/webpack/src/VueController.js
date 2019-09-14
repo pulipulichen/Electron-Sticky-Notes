@@ -36,6 +36,7 @@ let VueController = {
       recentFileList: []
     },
     lib: {},
+    persistAttrs: ['status.recentFileList']
   },
   components: { 
     'menu-bar': MenuBar,
@@ -90,8 +91,10 @@ let VueController = {
       
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
-      this.status.isReady = true
-      this.lib.win.show()
+      setTimeout(() => {
+        this.status.isReady = true
+        this.lib.win.show()
+      }, 0)
     },
     setupFile: function () {
       // -------------------------------------
@@ -200,8 +203,7 @@ let VueController = {
       this.status.recentFileList = list.slice(0, this.config.maxRecentFileListCount)
       console.log(this.status.recentFileList)
       
-      // 要怎麼持久化呢？
-      
+      this.lib.ElectronHelper.persist(this, this.persistAttrs)
       return this
     }
   } // methods: {
