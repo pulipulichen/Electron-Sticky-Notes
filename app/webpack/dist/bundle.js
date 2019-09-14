@@ -200,7 +200,6 @@ let VueController = {
       winID: null,
       isMaximized: false,
       isPinTop: false,
-      isReady: false,
       contentText: '',
       imageDataURL: null,
       filePath: null,
@@ -210,7 +209,14 @@ let VueController = {
       theme: null,
       platform: 'win32',
       enableAutoSave: false,
-      recentFileList: []
+      recentFileList: [],
+      
+      isReady: false,
+    },
+    progress: {
+      component: false,
+      data: false,
+      display: false
     },
     lib: {},
     persistAttrs: ['status.recentFileList']
