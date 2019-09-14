@@ -1647,7 +1647,9 @@ let VueController = {
       fontSizeAdjustIsEnlarge: null,
       mainComponent: null,
       theme: null,
-      platform: 'win32'
+      platform: 'win32',
+      enableAutoSave: false,
+      recentFileList: []
     },
     lib: {},
   },
@@ -1682,6 +1684,7 @@ let VueController = {
     }
     if (typeof(this.lib.win.contentText) === 'string') {
       this.status.contentText = this.lib.win.contentText
+      this.status.enableAutoSave = true
     }
     if (typeof(this.lib.win.imageDataURL) === 'string') {
       this.status.imageDataURL = this.lib.win.imageDataURL
@@ -1794,6 +1797,25 @@ let VueController = {
       
       return this
     },
+    addRecent: function (contentText) {
+      let fileType = this.status.fileType
+      let filePath = this.status.filePath
+      
+      // check if recent list has same filePath
+      let list = this.recentFileList.filter(file => {
+        return (file.filePath !== filePath)
+      })
+      
+      list.unshift({
+        fileType: fileType,
+        filePath: filePath,
+        contentText: contentText,
+        updateUnixMS: (new Data).getTime()
+      })
+      
+      this.recentFileList = list.slice(0, this.config.maxRecentFileListCount)
+      
+    }
   } // methods: {
 }
 
@@ -2602,6 +2624,19 @@ module.exports = {
     'status.isReady': function () {
       if (this.status.isReady === true) {
         this.$refs.Textarea.focus()
+      }
+    },
+    'contentText': function () {
+      if (this.status.isReady === false) {
+        return false
+      }
+      
+      if (this.status.enableAutoSave === true) {
+        if (typeof(this.status.filePath) !== 'string') {
+          this.status.filePath = this.createTempFile()
+        }
+        
+        this.$parent.addRecent(this.contentText)
       }
     }
   },

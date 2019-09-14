@@ -55,6 +55,19 @@ module.exports = {
       if (this.status.isReady === true) {
         this.$refs.Textarea.focus()
       }
+    },
+    'contentText': function () {
+      if (this.status.isReady === false) {
+        return false
+      }
+      
+      if (this.status.enableAutoSave === true) {
+        if (typeof(this.status.filePath) !== 'string') {
+          this.status.filePath = this.createTempFile()
+        }
+        
+        this.$parent.addRecent(this.contentText)
+      }
     }
   },
   mounted: function () {
