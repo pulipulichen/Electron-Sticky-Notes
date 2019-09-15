@@ -29,18 +29,6 @@ module.exports = {
         <div class="header">Recent Notes</div>
         <div class="content">
           <div class="ui list recent-list">
-            <div class="item">
-              <div class="header">Header</div>
-              <div class="description">
-                Click a link in our <a>description</a>.
-              </div>
-            </div>
-            <div class="item">
-              <a class="header">Learn More</a>
-              <div class="description">
-                Learn more about this site on <a>our FAQ page</a>.
-              </div>
-            </div>
           </div>
         </div>
       </div>`).appendTo('body')

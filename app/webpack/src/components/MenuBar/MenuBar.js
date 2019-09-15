@@ -34,6 +34,10 @@ module.exports = {
               && this.config.isPinTop === true) {
         this.toggleAlwaysOnTop(true)
       }
+      
+      if (this.config.debug.openSubmenu === true) {
+        this.$refs.Submenu.click()
+      }
     }
   },
   computed: {
@@ -77,7 +81,7 @@ module.exports = {
       //}, 0)
     },
     initHotkeys: function () {
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0,ctrl+t', (event, handler) => {
         //console.log(handler.key)
         switch (handler.key) {
           case 'ctrl+`':
@@ -114,6 +118,9 @@ module.exports = {
             break
           case 'ctrl+0':
             this.$refs.SubmenuFile.emptyFile()
+            break
+          case 'ctrl+t':
+            this.$refs.SubmenuTheme.open()
             break
         }
       })

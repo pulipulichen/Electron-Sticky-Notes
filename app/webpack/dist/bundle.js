@@ -2524,6 +2524,10 @@ module.exports = {
               && this.config.isPinTop === true) {
         this.toggleAlwaysOnTop(true)
       }
+      
+      if (this.config.debug.openSubmenu === true) {
+        this.$refs.Submenu.click()
+      }
     }
   },
   computed: {
@@ -2567,7 +2571,7 @@ module.exports = {
       //}, 0)
     },
     initHotkeys: function () {
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0', (event, handler) => {
+      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0,ctrl+t', (event, handler) => {
         //console.log(handler.key)
         switch (handler.key) {
           case 'ctrl+`':
@@ -2604,6 +2608,9 @@ module.exports = {
             break
           case 'ctrl+0':
             this.$refs.SubmenuFile.emptyFile()
+            break
+          case 'ctrl+t':
+            this.$refs.SubmenuTheme.open()
             break
         }
       })
@@ -3117,18 +3124,6 @@ module.exports = {
         <div class="header">Recent Notes</div>
         <div class="content">
           <div class="ui list recent-list">
-            <div class="item">
-              <div class="header">Header</div>
-              <div class="description">
-                Click a link in our <a>description</a>.
-              </div>
-            </div>
-            <div class="item">
-              <a class="header">Learn More</a>
-              <div class="description">
-                Learn more about this site on <a>our FAQ page</a>.
-              </div>
-            </div>
           </div>
         </div>
       </div>`).appendTo('body')
@@ -3570,19 +3565,25 @@ module.exports = {
   data() {    
     this.$i18n.locale = this.config.locale
     return {
-      themes: []
+      themes: [],
+      $modal: null,
+      $list: null
     }
   },
   watch: {
     'themes': function () {
       if (Array.isArray(this.themes) && this.themes.length > 0) {
-        this.initTheme()
-        this.initSelect()
+        this.initDefaultTheme()
+        this.initModal()
       }
-    },
-    'status.theme': function () {
-      window.$(this.$refs.ThemeDropdownContainer).find('.ui.dropdown.selection').css('background-color', this.status.theme)
-      //window.$(this.$refs.ThemeDropdownContainer).find('.ui.dropdown.selection .menu').css('max-height', `calc(100vh - ${this.config.menuBarHeight}px - 40px)`)
+    },    
+    'progress.display': function () {
+      if (this.progress.display === true 
+              && this.config.debug.openTheme === true) {
+        setTimeout(() => {
+          this.open()
+        }, 1000)
+      }
     }
   },  // watch: {
   //computed: {
@@ -3592,26 +3593,59 @@ module.exports = {
     this.themes = this.config.themes
   },
   methods: {
-    initSelect: function () {
-      window.$(this.$refs.ThemeDropdown).dropdown()
-      
-      setTimeout(() => {
-        //console.log(window.$(this.$refs.ThemeDropdownContainer).find('.menu .item[data-value]').length)
-        window.$(this.$refs.ThemeDropdownContainer).find('.menu .item[data-value]').each((i, div) => {
-          div = window.$(div)
-          div.css('border-color', div.attr('data-value'))
-        })
-      }, 0)
+    initModal: function () {
+      let _this = this
+      if (this.$modal === null || this.$modal === undefined) {
+        this.$modal = window.$(`
+      <div class="ui basic modal" id="SubmenuThemeModal">
+        <i class="close icon"></i>
+        <div class="header">Themes</div>
+        <div class="content">
+          <div class="ui list theme-list">
+          </div>
+        </div>
+      </div>`).appendTo('body')
+        this.$modal.modal('hide')
+
+        this.$list = this.$modal.find('.theme-list:first')
         
+        this.themes.forEach(theme => {
+          let item = window.$(`<a class="theme-item" href="#" tabindex="0"></a>`)
+                  .appendTo(this.$list)
+          item.attr('data-theme', theme)
+          item.css('background-color', theme)
+          item.attr('title', `Change theme: ${theme}`)
+          if (theme === this.status.theme) {
+            item.addClass('current')
+          }
+          item.click(function () {
+            _this.status.theme = this.getAttribute('data-theme')
+            _this.close()
+          })
+        })
+        
+        //console.log(this.$list.length)
+      }
+      return this
     },
-    initTheme: function () {
+    initDefaultTheme: function () {
       //console.log('initTheme')
       let min = 0
       let max = this.config.themes.length - 1
       let id = Math.floor(Math.random() * (max - min + 1)) + min;
       this.status.theme = this.config.themes[id]
       return this
-    }
+    },
+    open: function () {
+      this.$modal.modal('show', () => {
+        this.$modal.find('.theme-item.current').focus()
+      })
+      return this
+    },
+    close: function () {
+      this.$modal.modal('hide')
+      return this
+    },
   }
 }
 
@@ -3649,6 +3683,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&":
+/*!*************************************************************************************************************!*\
+  !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less& ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_style_loader_index_js_C_Users_pudding_AppData_Roaming_npm_node_modules_css_loader_dist_cjs_js_sourceMap_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_loaders_stylePostLoader_js_C_Users_pudding_AppData_Roaming_npm_node_modules_less_loader_dist_cjs_js_sourceMap_SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.vue":
 /*!**************************************************************************!*\
   !*** ./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.vue ***!
@@ -3662,8 +3712,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SubmenuTheme.js?vue&type=script&lang=js& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.js?vue&type=script&lang=js&?3f96");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _SubmenuTheme_global_less_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SubmenuTheme.global.less?vue&type=style&index=0&lang=less& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&");
-/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
-/* harmony import */ var _SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue");
+/* harmony import */ var _SubmenuTheme_less_vue_type_style_index_1_lang_less___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SubmenuTheme.less?vue&type=style&index=1&lang=less& */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&");
+/* harmony import */ var _C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\runtime\\componentNormalizer.js");
+/* harmony import */ var _SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue */ "./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.json?vue&type=custom&index=0&blockType=i18n&issuerPath=D%3A%5Cxampp%5Chtdocs%5Cprojects-electron%5CElectron-Sticky-Notes%5Capp%5Cwebpack%5Csrc%5Ccomponents%5CMenuBar%5CSubmenuTheme%5CSubmenuTheme.vue");
+
 
 
 
@@ -3672,7 +3724,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _SubmenuTheme_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["render"],
   _SubmenuTheme_html_vue_type_template_id_cb1a8538___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -3685,7 +3737,7 @@ var component = Object(_C_Users_pudding_AppData_Roaming_npm_node_modules_vue_loa
 
 /* custom blocks */
 
-if (typeof _SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_4__["default"] === 'function') Object(_SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_4__["default"])(component)
+if (typeof _SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_5__["default"] === 'function') Object(_SubmenuTheme_json_vue_type_custom_index_0_blockType_i18n_issuerPath_D_3A_5Cxampp_5Chtdocs_5Cprojects_electron_5CElectron_Sticky_Notes_5Capp_5Cwebpack_5Csrc_5Ccomponents_5CMenuBar_5CSubmenuTheme_5CSubmenuTheme_vue__WEBPACK_IMPORTED_MODULE_5__["default"])(component)
 
 /* hot reload */
 if (false) { var api; }
@@ -3708,8 +3760,10 @@ module.exports = {
     useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
-    useTestRichFormatTextFile: true,
-    openRecent: true,
+    useTestRichFormatTextFile: false,
+    openSubmenu: false,
+    openRecent: false,
+    openTheme: false
   },
   
   locale: 'zh-TW',
@@ -16607,7 +16661,7 @@ exports.push([module.i, ".resize-detector[data-v-af5d77da] {\n  z-index: 10;\n  
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label[data-v-0c5ef76e] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;EACA,wBAAA;ACRF;ADYA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACVF;ADaA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACZF;ADeA;EACE,4BAAA;ACbF;ADgBA;EACE,gBAAA;EACA,kBAAA;ACdF;ADiBA;EAOI,kBAAA;EACA,mBAAA;ACrBJ","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["//@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".top-toggle i[data-v-0c5ef76e] {\n  opacity: 0.3 !important;\n}\n.top-toggle.active[data-v-0c5ef76e] {\n  background: transparent !important;\n}\n.top-toggle.active i[data-v-0c5ef76e] {\n  opacity: 0.9 !important;\n}\n#app .item.note-header[data-v-0c5ef76e] {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu[data-v-0c5ef76e] {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item[data-v-0c5ef76e] {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted[data-v-0c5ef76e] {\n  padding: 0 0.5rem !important;\n}\n.menu.visible[data-v-0c5ef76e] {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.menu-bar-submenu[data-v-0c5ef76e]  .menu {\n  min-width: 17rem !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","MenuBar.less"],"names":[],"mappings":"AAEA;EAEI,uBAAA;ACFJ;ADME;EAIE,kCAAA;ACPJ;ADGE;EAEI,uBAAA;ACFN;ADQA;EACE,6BAAA;EACA,sBAAA;EAEA,8BAAA;EACA,gBAAA;EACA,uBAAA;EACA,mBAAA;EAEA,mBAAA;EACA,wBAAA;ACRF;ADYA;EACE,6BAAA;EACA,gBAAA;EACA,eAAA;EACA,gBAAA;ACVF;ADaA;EACE,eAAA;EACA,gBAAA;EAEA,2BAAA;ACZF;ADeA;EACE,4BAAA;ACbF;ADgBA;EACE,gBAAA;EACA,kBAAA;ACdF;ADiBA;EACE,2BAAA;ACfF","file":"MenuBar.less?vue&type=style&index=0&id=0c5ef76e&lang=less&scoped=true&","sourcesContent":["//@menu-height: 40px;\n\n.top-toggle {\n  i {\n    opacity: 0.3 !important;\n  }\n  \n  \n  &.active {\n    i {\n      opacity: 0.9 !important;\n    }\n    background: transparent !important;\n  }\n}\n\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  //background-color: red !important; // for test\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  //-webkit-app-region: drag;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n\n\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n\n.item {\n  border-width: 0;\n  background: none;\n  \n  -webkit-app-region: no-drag;\n}\n\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.menu-bar-submenu ::v-deep .menu {\n  min-width: 17rem !important;\n}",".top-toggle i {\n  opacity: 0.3 !important;\n}\n.top-toggle.active {\n  background: transparent !important;\n}\n.top-toggle.active i {\n  opacity: 0.9 !important;\n}\n#app .item.note-header {\n  font-family: Noto Sans CJK TC;\n  width: 100% !important;\n  max-width: calc(100vw - 13rem);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  pointer-events: all;\n  -webkit-app-region: drag;\n}\n.ui.menu {\n  background-color: transparent;\n  box-shadow: none;\n  border-width: 0;\n  margin-bottom: 0;\n}\n.item {\n  border-width: 0;\n  background: none;\n  -webkit-app-region: no-drag;\n}\n.item.fitted {\n  padding: 0 0.5rem !important;\n}\n.menu.visible {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.menu-bar-submenu ::v-deep .menu {\n  min-width: 17rem !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -16663,7 +16717,21 @@ exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu {\n  max-height: 19rem !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","SubmenuTheme.global.less"],"names":[],"mappings":"AAAA;ECCE;;;;;;GAMC;AACH;ADRA;EAEI,8BAAA;ACSJ;ADPI;EACE,2BAAA;ACSN;ADdA;EAUI,4BAAA;ACOJ;ADjBA;;EAcM,mCAAA;EACA,8BAAA;EACA,kCAAA;ACON","file":"SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","sourcesContent":[".theme-select {\n  i.dropdown.icon {\n    margin-top: -0.5rem !important;\n\n    &:before {\n      content: \"\\f0d7\" !important;\n    }\n  }\n  \n  .menu {\n    max-height: 19rem !important;\n    \n    .item[data-value],\n    .item.active[data-value] {\n      border-width: 0 0 0 1rem !important;\n      border-style: solid !important;\n      border-left-width: 1rem !important;\n\n    }\n  }\n    \n  \n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n  \n\n",".theme-select {\n  /*\n  .ui.dropdown.selection > .text {\n    border-width: 0 !important;\n    border-left-width: 1rem !important;\n    border-left-style: solid !important;\n  }\n  */\n}\n.theme-select i.dropdown.icon {\n  margin-top: -0.5rem !important;\n}\n.theme-select i.dropdown.icon:before {\n  content: \"\\f0d7\" !important;\n}\n.theme-select .menu {\n  max-height: 19rem !important;\n}\n.theme-select .menu .item[data-value],\n.theme-select .menu .item.active[data-value] {\n  border-width: 0 0 0 1rem !important;\n  border-style: solid !important;\n  border-left-width: 1rem !important;\n}\n"]}]);
+exports.push([module.i, "#SubmenuThemeModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n  text-align: center;\n}\n#SubmenuThemeModal > .content .theme-item {\n  cursor: pointer;\n  border: 3px solid white;\n  border-radius: 2rem;\n  width: 4rem;\n  height: 4rem;\n  display: inline-block;\n  margin: 0.5rem;\n}\n#SubmenuThemeModal > .content .theme-item.current {\n  box-shadow: 0 0 1em gold;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","SubmenuTheme.global.less"],"names":[],"mappings":"AACE;EACE,gCAAA;EACA,kBAAA;EACA,gBAAA;EACA,kBAAA;ACAJ;ADJE;EAOI,eAAA;EACA,uBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,qBAAA;EACA,cAAA;ACAN;ADEM;EACE,wBAAA;ACAR","file":"SubmenuTheme.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuThemeModal {\n  &> .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    text-align: center;\n    \n    .theme-item {\n      cursor: pointer;\n      border: 3px solid white;\n      border-radius: 2rem;\n      width: 4rem;\n      height: 4rem;\n      display: inline-block;\n      margin: 0.5rem;\n      \n      &.current {\n        box-shadow: 0 0 1em gold;\n      }\n    }\n    \n  }\n}","#SubmenuThemeModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n  text-align: center;\n}\n#SubmenuThemeModal > .content .theme-item {\n  cursor: pointer;\n  border: 3px solid white;\n  border-radius: 2rem;\n  width: 4rem;\n  height: 4rem;\n  display: inline-block;\n  margin: 0.5rem;\n}\n#SubmenuThemeModal > .content .theme-item.current {\n  box-shadow: 0 0 1em gold;\n}\n"]}]);
+
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
+// Module
+exports.push([module.i, ".theme-label {\n  border-radius: 3px;\n  text-align: center;\n}\n.theme-label .theme-overlay {\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0 0.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&","SubmenuTheme.less"],"names":[],"mappings":"AAAA;EACE,kBAAA;EACA,kBAAA;ACCF;ADHA;EAKI,0CAAA;EACA,iBAAA;ACCJ","file":"SubmenuTheme.less?vue&type=style&index=1&lang=less&","sourcesContent":[".theme-label {\n  border-radius: 3px;\n  text-align: center;\n  \n  .theme-overlay {\n    background-color: rgba(255,255,255,0.7);    \n    padding: 0 0.5rem;\n  }\n}",".theme-label {\n  border-radius: 3px;\n  text-align: center;\n}\n.theme-label .theme-overlay {\n  background-color: rgba(255, 255, 255, 0.7);\n  padding: 0 0.5rem;\n}\n"]}]);
 
 
 /***/ }),
@@ -17351,53 +17419,24 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c(
-      "div",
-      { ref: "ThemeDropdownContainer", staticClass: "item theme-select" },
-      [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.status.theme,
-                expression: "status.theme"
-              }
-            ],
-            ref: "ThemeDropdown",
-            staticClass: "ui floating dropdown",
-            style: { backgroundColor: _vm.status.theme },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.status,
-                  "theme",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              }
-            }
-          },
-          _vm._l(_vm.themes, function(theme) {
-            return _c(
-              "option",
-              { style: { backgroundColor: theme }, domProps: { value: theme } },
-              [_vm._v("\n        " + _vm._s(theme.toUpperCase()) + "\n      ")]
-            )
-          }),
-          0
-        )
-      ]
-    )
+    _c("div", { staticClass: "item", on: { click: _vm.open } }, [
+      _c("i", { staticClass: "external alternate icon" }),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "theme-label",
+          style: { "background-color": _vm.status.theme + " !important" }
+        },
+        [
+          _c("span", { staticClass: "theme-overlay" }, [
+            _vm._v("\n        Theme: " + _vm._s(_vm.status.theme) + "\n      ")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "description" }, [_vm._v("ctrl+t")])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -17675,6 +17714,27 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
 var update = add("48cfadb8", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\index.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader!C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/cjs.js?sourceMap!C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-loader/lib/loaders/stylePostLoader.js!C:/Users/pudding/AppData/Roaming/npm/node_modules/less-loader/dist/cjs.js?sourceMap!./SubmenuTheme.less?vue&type=style&index=1&lang=less& */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\cjs.js?sourceMap!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-loader\\lib\\loaders\\stylePostLoader.js!C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\less-loader\\dist\\cjs.js?sourceMap!./app/webpack/src/components/MenuBar/SubmenuTheme/SubmenuTheme.less?vue&type=style&index=1&lang=less&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/vue-style-loader/lib/addStylesClient.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\vue-style-loader\\lib\\addStylesClient.js").default
+var update = add("67db263b", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

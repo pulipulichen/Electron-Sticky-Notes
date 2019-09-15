@@ -1,15 +1,13 @@
 <fragment>
-  <div class="item theme-select"
-       ref="ThemeDropdownContainer">
-    <select class="ui floating dropdown" 
-            v-model="status.theme"
-            ref="ThemeDropdown"
-            v-bind:style="{'backgroundColor': status.theme}">
-      <option v-for="theme in themes"
-              v-bind:value="theme"
-              v-bind:style="{'backgroundColor': theme}">
-        {{ theme.toUpperCase() }}
-      </option>
-    </select>
+  <div class="item" 
+       v-on:click="open">
+    <i class="external alternate icon"></i>
+    <span class="theme-label"
+          v-bind:style="{'background-color': status.theme + ' !important'}">
+      <span class="theme-overlay">
+        Theme: {{ status.theme }}
+      </span>
+    </span>
+    <div class="description">ctrl+t</div>
   </div>
 </fragment>

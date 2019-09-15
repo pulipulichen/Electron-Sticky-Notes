@@ -5,8 +5,10 @@ module.exports = {
     useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
-    useTestRichFormatTextFile: true,
-    openRecent: true,
+    useTestRichFormatTextFile: false,
+    openSubmenu: false,
+    openRecent: false,
+    openTheme: false
   },
   
   locale: 'zh-TW',

@@ -1,32 +1,23 @@
-.theme-select {
-  i.dropdown.icon {
-    margin-top: -0.5rem !important;
-
-    &:before {
-      content: "\f0d7" !important;
-    }
-  }
-  
-  .menu {
-    max-height: 19rem !important;
+#SubmenuThemeModal {
+  &> .content {
+    max-height: calc(100vh - 5.5rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
     
-    .item[data-value],
-    .item.active[data-value] {
-      border-width: 0 0 0 1rem !important;
-      border-style: solid !important;
-      border-left-width: 1rem !important;
-
+    .theme-item {
+      cursor: pointer;
+      border: 3px solid white;
+      border-radius: 2rem;
+      width: 4rem;
+      height: 4rem;
+      display: inline-block;
+      margin: 0.5rem;
+      
+      &.current {
+        box-shadow: 0 0 1em gold;
+      }
     }
-  }
     
-  
-  /*
-  .ui.dropdown.selection > .text {
-    border-width: 0 !important;
-    border-left-width: 1rem !important;
-    border-left-style: solid !important;
   }
-  */
 }
-  
-
