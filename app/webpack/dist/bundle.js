@@ -2561,7 +2561,9 @@ module.exports = {
   methods: {
     initDropdown: function () {
       window.$(this.$refs.Submenu).dropdown({
-        allowTab: false
+        allowTab: false,
+        selectOnKeydown: false,
+        forceSelection: false,
       })
       
       window.$(this.$refs.Submenu).find('.menu:first').css('max-height', `calc(100vh - ${this.config.menuBarHeight}px)`)
@@ -16883,7 +16885,7 @@ exports.push([module.i, "#SubmenuRecentModal > .content {\n  max-height: calc(10
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a66] {\n  text-align: center;\n  line-height: 1.5rem;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","SubmenuSize.less"],"names":[],"mappings":"AAAA;EAOI,kBAAA;EACA,mBAAA;ACLJ","file":"SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","sourcesContent":[".font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n}\n"]}]);
+exports.push([module.i, ".font-size-control-panel .font-size-label[data-v-5d413a66] {\n  text-align: center;\n  line-height: 1.5rem;\n  text-transform: initial;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuSize/SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","SubmenuSize.less"],"names":[],"mappings":"AAAA;EAOI,kBAAA;EACA,mBAAA;EACA,uBAAA;ACLJ","file":"SubmenuSize.less?vue&type=style&index=0&id=5d413a66&lang=less&scoped=true&","sourcesContent":[".font-size-control-panel {\n  .font-size-minus {\n    //text-align: left;\n    //padding-left: 0 !important;\n  }\n  \n  .font-size-label {\n    text-align: center;\n    line-height: 1.5rem;\n    text-transform: initial;\n  }\n  \n  .font-size-plus {\n    //text-align: right;\n    //padding-right: 0 !important;\n  }\n}",".font-size-control-panel .font-size-label {\n  text-align: center;\n  line-height: 1.5rem;\n  text-transform: initial;\n}\n"]}]);
 
 
 /***/ }),
@@ -17427,9 +17429,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("fragment", [
     _c(
-      "div",
+      "a",
       {
         staticClass: "item",
+        attrs: { href: "#" },
         on: {
           click: function($event) {
             return _vm.newFile()
@@ -17444,9 +17447,10 @@ var render = function() {
     ),
     _vm._v(" "),
     _c(
-      "div",
+      "a",
       {
         staticClass: "item",
+        attrs: { href: "#" },
         on: {
           click: function($event) {
             return _vm.emptyFile()
@@ -17462,7 +17466,7 @@ var render = function() {
     _vm._v(" "),
     _vm.enableSaveFile
       ? _c(
-          "div",
+          "a",
           {
             staticClass: "item",
             on: {
@@ -17472,6 +17476,7 @@ var render = function() {
             }
           },
           [
+            _vm._v('\n     href="#"\n     '),
             _c("i", { staticClass: "save icon" }),
             _vm._v("\n     Save\n     "),
             _c("div", { staticClass: "description" }, [_vm._v("ctrl+s")])
@@ -17481,9 +17486,10 @@ var render = function() {
     _vm._v(" "),
     _vm.enableSaveFileAs
       ? _c(
-          "div",
+          "a",
           {
             staticClass: "item",
+            attrs: { href: "#" },
             on: {
               click: function($event) {
                 return _vm.saveFileAs()
@@ -17500,9 +17506,10 @@ var render = function() {
     _vm._v(" "),
     typeof _vm.status.filePath === "string"
       ? _c(
-          "div",
+          "a",
           {
             staticClass: "item",
+            attrs: { href: "#" },
             on: {
               click: function($event) {
                 return _vm.openFolder()
@@ -17519,9 +17526,10 @@ var render = function() {
     _vm._v(" "),
     _vm.status.platform === "win32"
       ? _c(
-          "div",
+          "a",
           {
             staticClass: "item",
+            attrs: { href: "#" },
             on: {
               click: function($event) {
                 return _vm.openEditor()
@@ -17560,11 +17568,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c("div", { staticClass: "item", on: { click: _vm.open } }, [
-      _c("i", { staticClass: "external alternate icon" }),
-      _vm._v("\n    Recent notes...\n    "),
-      _c("div", { staticClass: "description" }, [_vm._v("ctrl+r")])
-    ])
+    _c(
+      "a",
+      { staticClass: "item", attrs: { href: "#" }, on: { click: _vm.open } },
+      [
+        _c("i", { staticClass: "external alternate icon" }),
+        _vm._v("\n    Recent notes...\n    "),
+        _c("div", { staticClass: "description" }, [_vm._v("ctrl+r")])
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -17646,9 +17658,10 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c(
-      "div",
+      "a",
       {
         staticClass: "item",
+        attrs: { href: "#" },
         on: {
           click: function($event) {
             return _vm.resizeToFitContent()
@@ -17686,24 +17699,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("fragment", [
-    _c("div", { staticClass: "item", on: { click: _vm.open } }, [
-      _c("i", { staticClass: "external alternate icon" }),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "theme-label",
-          style: { "background-color": _vm.status.theme + " !important" }
-        },
-        [
-          _c("span", { staticClass: "theme-overlay" }, [
-            _vm._v("\n        Theme: " + _vm._s(_vm.status.theme) + "\n      ")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "description" }, [_vm._v("ctrl+t")])
-    ])
+    _c(
+      "a",
+      { staticClass: "item", attrs: { href: "#" }, on: { click: _vm.open } },
+      [
+        _c("i", { staticClass: "external alternate icon" }),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "theme-label",
+            style: { "background-color": _vm.status.theme + " !important" }
+          },
+          [
+            _c("span", { staticClass: "theme-overlay" }, [
+              _vm._v(
+                "\n        Theme: " + _vm._s(_vm.status.theme) + "\n      "
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "description" }, [_vm._v("ctrl+t")])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

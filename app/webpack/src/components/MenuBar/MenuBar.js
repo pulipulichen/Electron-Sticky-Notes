@@ -71,7 +71,9 @@ module.exports = {
   methods: {
     initDropdown: function () {
       window.$(this.$refs.Submenu).dropdown({
-        allowTab: false
+        allowTab: false,
+        selectOnKeydown: false,
+        forceSelection: false,
       })
       
       window.$(this.$refs.Submenu).find('.menu:first').css('max-height', `calc(100vh - ${this.config.menuBarHeight}px)`)
