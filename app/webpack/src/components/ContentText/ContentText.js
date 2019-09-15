@@ -184,6 +184,9 @@ module.exports = {
 
         this.$parent.addRecent(this.contentText)
       }
+    },
+    keypress: function (event) {
+      console.log(event.keyCode)
     }
   }
 }

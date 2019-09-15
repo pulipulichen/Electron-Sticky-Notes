@@ -1405,6 +1405,9 @@ module.exports = {
 
         this.$parent.addRecent(this.contentText)
       }
+    },
+    keypress: function (event) {
+      console.log(event.keyCode)
     }
   }
 }
@@ -17048,6 +17051,7 @@ var render = function() {
       domProps: { value: _vm.contentText },
       on: {
         change: _vm.change,
+        keypress: _vm.keydown,
         input: function($event) {
           if ($event.target.composing) {
             return
