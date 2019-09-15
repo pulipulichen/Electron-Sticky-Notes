@@ -5,7 +5,7 @@ module.exports = {
     useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
-    useTestRichFormatTextFile: false,
+    useTestRichFormatTextFile: true,
     openRecent: true,
   },
   

@@ -12,7 +12,7 @@ module.exports = {
       viewerElement: null,
       viewElementOpenSeadragon: null,
       viewer: null,
-      type: 'image-static',
+      type: 'image-viewer',
       
       // https://fileinfo.com/extension/css
       filterConfigJSON: {

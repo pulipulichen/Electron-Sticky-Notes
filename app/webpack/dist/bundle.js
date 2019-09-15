@@ -854,7 +854,7 @@ module.exports = {
       viewerElement: null,
       viewElementOpenSeadragon: null,
       viewer: null,
-      type: 'image-static',
+      type: 'image-viewer',
       
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
@@ -3708,7 +3708,7 @@ module.exports = {
     useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
-    useTestRichFormatTextFile: false,
+    useTestRichFormatTextFile: true,
     openRecent: true,
   },
   
@@ -16635,7 +16635,7 @@ exports.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"
 
 exports = module.exports = __webpack_require__(/*! C:/Users/pudding/AppData/Roaming/npm/node_modules/css-loader/dist/runtime/api.js */ "C:\\Users\\pudding\\AppData\\Roaming\\npm\\node_modules\\css-loader\\dist\\runtime\\api.js")(true);
 // Module
-exports.push([module.i, "#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AACE;EACE,gCAAA;EACA,kBAAA;EACA,gBAAA;ACAJ;ADHE;EAMI,eAAA;ACAN;ADNE;EAUI,+BAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;ACDN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuRecentModal {\n  &> .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    \n    .item {\n      cursor: pointer;\n    }\n    \n    .header {\n      max-width: calc(100vw - 5.5rem);\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n      white-space: nowrap;\n    }\n  }\n}","#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n"]}]);
+exports.push([module.i, "#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n#SubmenuRecentModal > .content .description {\n  padding-top: 0 !important;\n  padding-bottom: inherit !important;\n}\n", "",{"version":3,"sources":["D:/xampp/htdocs/projects-electron/Electron-Sticky-Notes/app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","SubmenuRecent.global.less"],"names":[],"mappings":"AACE;EACE,gCAAA;EACA,kBAAA;EACA,gBAAA;ACAJ;ADHE;EAMI,eAAA;ACAN;ADNE;EAUI,+BAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;ACDN;ADZE;EAiBI,yBAAA;EACA,kCAAA;ACFN","file":"SubmenuRecent.global.less?vue&type=style&index=0&lang=less&","sourcesContent":["#SubmenuRecentModal {\n  &> .content {\n    max-height: calc(100vh - 5.5rem);\n    overflow-x: hidden;\n    overflow-y: auto;\n    \n    .item {\n      cursor: pointer;\n    }\n    \n    .header {\n      max-width: calc(100vw - 5.5rem);\n      text-overflow: ellipsis;\n      overflow-x: hidden;\n      white-space: nowrap;\n    }\n    \n    .description {\n      padding-top: 0 !important;\n      padding-bottom: inherit !important;\n    }\n  }\n}","#SubmenuRecentModal > .content {\n  max-height: calc(100vh - 5.5rem);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n#SubmenuRecentModal > .content .item {\n  cursor: pointer;\n}\n#SubmenuRecentModal > .content .header {\n  max-width: calc(100vw - 5.5rem);\n  text-overflow: ellipsis;\n  overflow-x: hidden;\n  white-space: nowrap;\n}\n#SubmenuRecentModal > .content .description {\n  padding-top: 0 !important;\n  padding-bottom: inherit !important;\n}\n"]}]);
 
 
 /***/ }),
@@ -17227,7 +17227,7 @@ var render = function() {
   return _c("fragment", [
     _c("div", { staticClass: "item", on: { click: _vm.open } }, [
       _c("i", { staticClass: "external alternate icon" }),
-      _vm._v("\n    Recent...\n    "),
+      _vm._v("\n    Recent notes...\n    "),
       _c("div", { staticClass: "description" }, [_vm._v("ctrl+r")])
     ])
   ])
