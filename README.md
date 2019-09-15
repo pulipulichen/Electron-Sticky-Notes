@@ -6,6 +6,13 @@ A sticky nodes app based on Electron.
 - Commits: https://github.com/pulipulichen/Electron-Sticky-Notes/commits/master
 - Download: https://github.com/pulipulichen/Electron-Sticky-Notes/releases
 
+# Author
+Pulipuli Chen <blog@pulipuli.info>
+- Blog: http://blog.pulipuli.info/
+- About: http://blog.pulipuli.info/p/about_38.html
+- Donate: http://blog.pulipuli.info/p/donation.html
+
+
 ----
 
 # Electron Builder

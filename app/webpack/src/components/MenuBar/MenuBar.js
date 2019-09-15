@@ -5,6 +5,7 @@ const SubmenuTheme = require('./SubmenuTheme/SubmenuTheme.vue').default
 const SubmenuSize = require('./SubmenuSize/SubmenuSize.vue').default
 const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
 const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
+const SubmenuAbout = require('./SubmenuAbout/SubmenuAbout.vue').default
 //
 const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
 
@@ -27,6 +28,7 @@ module.exports = {
     'submenu-size': SubmenuSize,
     'submenu-file': SubmenuFile,
     'submenu-recent': SubmenuRecent,
+    'submenu-about': SubmenuAbout
   },
   watch: {
     'progress.display': function () {
