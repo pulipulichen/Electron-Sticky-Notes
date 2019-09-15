@@ -1282,7 +1282,8 @@ module.exports = {
       }
     },
     'progress.display': function () {
-      if (this.progress.display === true) {
+      if (this.progress.display === true 
+              && this.status.fileType === this.type) {
         this.$refs.Textarea.focus()
       }
     }
@@ -3111,7 +3112,7 @@ module.exports = {
       return this
     },
     newFile: function () {
-      //this.initIPC()
+      this.initIPC()
       this.ipc.send('open-another-win', {
         doEmpty: true
       })

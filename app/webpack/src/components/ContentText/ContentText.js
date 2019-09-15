@@ -61,7 +61,8 @@ module.exports = {
       }
     },
     'progress.display': function () {
-      if (this.progress.display === true) {
+      if (this.progress.display === true 
+              && this.status.fileType === this.type) {
         this.$refs.Textarea.focus()
       }
     }
