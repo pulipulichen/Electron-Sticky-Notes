@@ -1,7 +1,7 @@
 const OpenSeadragon = require('../../vendors/openseadragon-bin-2.4.1/openseadragon.min.js')
 
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
     return {
@@ -12,6 +12,8 @@ module.exports = {
       viewerElement: null,
       viewElementOpenSeadragon: null,
       viewer: null,
+      type: 'image-static',
+      
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
         'bmp': 'Bitmap Image File',
@@ -70,9 +72,13 @@ module.exports = {
   },
   */
   watch: {
-    'status.isReady': function () {
-      this.setupImage()
-      this.initDetector()
+    'progress.component': function () {
+      if (this.progress.component === true 
+              && this.status.fileType === this.type) {
+        this.setupImage()
+        this.initDetector()
+        this.progress.data = true
+      }
     }
   },
   methods: {

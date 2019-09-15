@@ -1,5 +1,5 @@
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
     return {
@@ -9,8 +9,8 @@ module.exports = {
     }
   },
   watch: {
-    'status.isReady': function () {
-      if (this.status.isReady === true 
+    'progress.display': function () {
+      if (this.progress.display === true 
               && this.config.debug.openRecent === true) {
         setTimeout(() => {
           this.open()

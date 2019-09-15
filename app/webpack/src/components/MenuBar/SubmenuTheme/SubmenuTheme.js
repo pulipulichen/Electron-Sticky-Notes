@@ -1,5 +1,5 @@
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
     return {

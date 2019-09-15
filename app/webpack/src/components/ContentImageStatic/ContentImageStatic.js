@@ -1,5 +1,5 @@
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
     return {
@@ -10,7 +10,8 @@ module.exports = {
       filterConfigJSON: {
         'svg': 'Scalable Vector Graphics File',
       },
-      basicRatio: null
+      basicRatio: null,
+      type: 'image-static'
     }
   },
   computed: {
@@ -31,9 +32,13 @@ module.exports = {
     }
   },
   watch: {
-    'status.isReady': function () {
-      this.setupImage()
-      this.initDetector()
+    'progress.component': function () {
+      if (this.progress.component === true 
+              && this.status.fileType === this.type) {
+        this.setupImage()
+        this.initDetector()
+        this.progress.data = true
+      }
     }
   },
   /*

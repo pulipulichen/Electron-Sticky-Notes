@@ -5,7 +5,7 @@ const createCSSSelector = require('../../vendors/css-rule-builder/css-rule-build
 const DateHelper = require('../../helpers/DateHelper')
 
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     let data = {
       padding: 17,
@@ -18,6 +18,7 @@ module.exports = {
       codeMirrorEditor: null,
       $CodeMirror: null,
       styleSheet: null,
+      type: 'text-code',
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
         'asp': 'Active Server Page',
@@ -71,11 +72,13 @@ module.exports = {
         this.codeMirrorEditor.refresh()
       }
     },
-    'status.isReady': function () {
-      //this.setupStyle()
-      this.setupCode()
-      //this.resizeToFitContent()
-    }
+    'progress.component': function () {
+      if (this.progress.component === true 
+              && this.status.fileType === this.type) {
+        this.setupCode()
+        this.progress.data = true
+      }
+    },
   },
   computed: {
     detectorText: function () {
@@ -345,7 +348,7 @@ module.exports = {
       }
     },
     resizeIfOverflow: function () {
-      if (this.status.isReady === false) {
+      if (this.progress.display === false) {
         return this
       }
       

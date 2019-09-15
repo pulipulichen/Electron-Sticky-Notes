@@ -1,12 +1,13 @@
 const DateHelper = require('../../helpers/DateHelper')
 
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     let data = {
       padding: 15,
       detector: null,
       contentText: '',
+      type: 'text',
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
         'txt': 'Plain Text File',
@@ -51,14 +52,19 @@ module.exports = {
     }
   },
   watch: {
-    'status.isReady': function () {
-      if (this.status.isReady === true 
-              && this.status.fileType === 'text') {
+    'progress.component': function () {
+      if (this.progress.component === true 
+              && this.status.fileType === this.type) {
         this.setupText()
         this.resizeToFitContent()
-        this.$refs.Textarea.focus()
+        this.progress.data = true
       }
     },
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.$refs.Textarea.focus()
+      }
+    }
   },
   /*
   mounted: function () {
@@ -109,7 +115,7 @@ module.exports = {
       }
     },
     resizeIfOverflow: function () {
-      if (this.status.isReady === false) {
+      if (this.progress.display === false) {
         return this
       }
       

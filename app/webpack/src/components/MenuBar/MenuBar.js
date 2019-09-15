@@ -9,7 +9,7 @@ const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
 const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
 
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
     this.lib.hotkeys = hotkeys
@@ -29,9 +29,10 @@ module.exports = {
     'submenu-recent': SubmenuRecent,
   },
   watch: {
-    'status.isReady': function () {
-      if (this.status.isReady === true) {
-        this.toggleAlwaysOnTop(this.config.isPinTop)
+    'progress.display': function () {
+      if (this.progress.display === true 
+              && this.config.isPinTop === true) {
+        this.toggleAlwaysOnTop(true)
       }
     }
   },

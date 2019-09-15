@@ -34,7 +34,7 @@ let VueController = {
       enableAutoSave: false,
       recentFileList: [],
       
-      isReady: false,
+      //isReady: false,
     },
     progress: {
       component: false,
@@ -51,6 +51,18 @@ let VueController = {
     'content-image-static': ContentImageStatic,
     'content-text-code': ContentTextCode,
     'content-text-rich-format': ContentTextRichFormat,
+  },
+  watch: {
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.lib.win.show()
+      }
+    },
+    'progress.data': function () {
+      if (this.progress.data === true) {
+        this.progress.display = true
+      }
+    }
   },
   mounted: function () {
     // 基本
@@ -105,8 +117,7 @@ let VueController = {
       this.$refs.MenuBar.resetNoteHeader()
       //console.log('OK')
       setTimeout(() => {
-        this.status.isReady = true
-        this.lib.win.show()
+        this.progress.component = true
       }, 0)
     },
     setupFile: function () {

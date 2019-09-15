@@ -7,7 +7,7 @@
           'lineHeight': styleLineHeight,
        }"
        ref="ResizeDetector"
-       v-bind:class="{'is-ready': status.isReady}">{{ detectorText }}</div>
+       v-bind:class="{'is-ready': progress.display}">{{ detectorText }}</div>
   <textarea 
     class="content-text"
     v-model="contentText"
@@ -18,5 +18,5 @@
     }"
     id="Textarea"
     v-on:change="change"
-    v-bind:class="{'is-ready': status.isReady === true}"></textarea>
+    v-bind:class="{'is-ready': progress.display === true}"></textarea>
 </div>

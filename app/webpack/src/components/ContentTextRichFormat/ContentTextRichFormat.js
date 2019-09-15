@@ -5,7 +5,7 @@ const showdown = require('../../vendors/showdown/showdown.min.js')
 const TurndownService = require('../../vendors/turndown/turndown.js')
 
 module.exports = {
-  props: ['lib', 'status', 'config'],
+  props: ['lib', 'status', 'config', 'progress'],
   data() {    
     let data = {
       padding: 17,
@@ -15,6 +15,7 @@ module.exports = {
       $container: null,
       $summernote: null,
       turndownService: null,
+      type: 'text-rich-format',
       
       // https://fileinfo.com/extension/css
       filterConfigJSON: {
@@ -50,9 +51,13 @@ module.exports = {
         this.codeMirrorEditor.refresh()
       }
     },
-    'status.isReady': function () {
-      this.setupDocument()
-    }
+    'progress.component': function () {
+      if (this.progress.component === true 
+              && this.status.fileType === this.type) {
+        this.setupDocument()
+        this.progress.data = true
+      }
+    },
   },
   computed: {
     styleFontSize: function () {
@@ -148,7 +153,7 @@ module.exports = {
           onChange: (content, $editable) => {
             this.contentHTML = content
             
-            if (this.status.isReady === true) {
+            if (this.progress.display === true) {
               this.changed = true
             }
           },
@@ -192,7 +197,7 @@ module.exports = {
       }
     },
     resizeIfOverflow: function () {
-      if (this.status.isReady === false) {
+      if (this.progress.display === false) {
         return this
       }
       
