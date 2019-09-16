@@ -8,13 +8,13 @@ const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
 const SubmenuAbout = require('./SubmenuAbout/SubmenuAbout.vue').default
 //
 //const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
-
+const keypress = require('../../vendors/keypress/keypress')
 
 module.exports = {
   props: ['lib', 'status', 'config', 'progress'],
   data() {    
     this.$i18n.locale = this.config.locale
-    this.lib.hotkeys = hotkeys
+    //this.lib.hotkeys = hotkeys
     //console.log(this.$parent.a())
     return {
       header: '',
@@ -86,6 +86,16 @@ module.exports = {
       //}, 0)
     },
     initHotkeys: function () {
+      
+      //console.log(keypress)
+      let listener = new keypress.Listener();
+      
+      listener.simple_combo("ctrl `", () => {
+        this.toggleAlwaysOnTop()
+      })
+      
+      return
+
       this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0,ctrl+t', (event, handler) => {
         //console.log(handler.key)
         switch (handler.key) {

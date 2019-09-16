@@ -177,7 +177,7 @@ module.exports = {
       return this
     },
     change: function () {
-      console.log('change', this.status.enableAutoSave)
+      //console.log('change', this.status.enableAutoSave)
       if (this.status.enableAutoSave === true) {
         if (typeof(this.status.filePath) !== 'string') {
           this.status.filePath = this.createTempFile()
