@@ -1,10 +1,10 @@
 //console.log('@TODO OK')
 const exec = require('child_process').exec
 const path = require('path')
-const DateHelper = require('./app/helpers/DateHelper.js').default
+const DateHelper = require('./app/webpack/src/helpers/DateHelper.js').default
 const fs = require('fs')
 const os = require('os')
-const getLastLine = require('./build-scripts/fileTools.js').getLastLine
+const getLastLine = require('./electron-shell/fileTools.js').getLastLine
 const getSize = require('get-folder-size')
 
 const pjson = require('./package.json')
