@@ -7,7 +7,8 @@ const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
 const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
 const SubmenuAbout = require('./SubmenuAbout/SubmenuAbout.vue').default
 //
-const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
+//const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
+
 
 module.exports = {
   props: ['lib', 'status', 'config', 'progress'],
