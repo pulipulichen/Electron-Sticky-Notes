@@ -14,6 +14,9 @@ Vue.use(Fragment.Plugin)
 
 import i18n from './VueI18n'
 
+const keypress = require('./vendors/keypress/keypress')
+
+
 let VueController = {
   el: '#app',
   i18n: i18n,
@@ -78,6 +81,7 @@ let VueController = {
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     this.lib.WindowHelper = WindowHelper
+    this.lib.keypress = new keypress.Listener();
     
     this.status.platform = this.lib.ElectronHelper.getPlatform()
     

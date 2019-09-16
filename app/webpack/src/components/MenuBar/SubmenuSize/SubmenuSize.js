@@ -8,6 +8,13 @@ module.exports = {
     return {
     }
   },
+  watch: {
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
+    }
+  },
   computed: {
     enableFontSizeControl: function () {
       return (['text', 'text-code'].indexOf(this.status.fileType) > -1)
@@ -17,6 +24,16 @@ module.exports = {
     //this.initHotkeys()
   //},
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl pageup", () => {
+        this.fontSizeLarger()
+      })
+      keypress.simple_combo("ctrl pagedown", () => {
+        this.fontSizeSmaller()
+      })
+      return this
+    },
     /*
     initHotkeys: function () {
       console.log('aaa')

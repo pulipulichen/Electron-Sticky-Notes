@@ -7,8 +7,6 @@ const SubmenuFile = require('./SubmenuFile/SubmenuFile.vue').default
 const SubmenuRecent = require('./SubmenuRecent/SubmenuRecent.vue').default
 const SubmenuAbout = require('./SubmenuAbout/SubmenuAbout.vue').default
 //
-//const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
-const keypress = require('../../vendors/keypress/keypress')
 
 module.exports = {
   props: ['lib', 'status', 'config', 'progress'],
@@ -41,6 +39,10 @@ module.exports = {
       if (this.config.debug.openSubmenu === true) {
         this.$refs.Submenu.click()
       }
+      
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
     }
   },
   computed: {
@@ -67,7 +69,6 @@ module.exports = {
     // prevent dropdown
     
     this.initDropdown()
-    this.initHotkeys()
   },
   methods: {
     initDropdown: function () {
@@ -87,58 +88,15 @@ module.exports = {
     },
     initHotkeys: function () {
       
-      //console.log(keypress)
-      let listener = new keypress.Listener();
-      
-      listener.simple_combo("ctrl `", () => {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl `", () => {
         this.toggleAlwaysOnTop()
       })
-      
-      return
-
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0,ctrl+t', (event, handler) => {
-        //console.log(handler.key)
-        switch (handler.key) {
-          case 'ctrl+`':
-            this.toggleAlwaysOnTop()
-            break
-          case 'ctrl+m':
-            this.toggleMaximize()
-            break
-            
-          case 'alt+`':
-            this.$refs.SubmenuSize.resizeToFitContent()
-            break
-          case 'ctrl+pageup':
-            this.$refs.SubmenuSize.fontSizeLarger()
-            break
-          case 'ctrl+pagedown':
-            this.$refs.SubmenuSize.fontSizeSmaller()
-            break
-            
-          case 'ctrl+s':
-            this.$refs.SubmenuFile.saveFile()
-            break
-          case 'ctrl+shift+s':
-            this.$refs.SubmenuFile.saveFileAs()
-            break
-          case 'ctrl+o':
-            this.$refs.SubmenuFile.openFolder()
-            break
-          case 'ctrl+e':
-            this.$refs.SubmenuFile.openEditor()
-            break
-          case 'ctrl+n':
-            this.$refs.SubmenuFile.newFile()
-            break
-          case 'ctrl+0':
-            this.$refs.SubmenuFile.emptyFile()
-            break
-          case 'ctrl+t':
-            this.$refs.SubmenuTheme.open()
-            break
-        }
+      keypress.simple_combo("ctrl m", () => {
+        this.toggleMaximize()
       })
+      
+      return this
     },
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {

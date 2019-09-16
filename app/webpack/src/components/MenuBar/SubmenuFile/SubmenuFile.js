@@ -17,10 +17,44 @@ module.exports = {
       return (['text', 'text-code', 'text-rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
     }
   },
+  watch: {
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
+    }
+  },
   //mounted: function () {
     //this.initHotkeys()
   //},
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl s", () => {
+        this.saveFile()
+      })
+      keypress.simple_combo("ctrl shift s", () => {
+        this.saveFileAs()
+      })
+      
+      keypress.simple_combo("ctrl o", () => {
+        this.openFolder()
+      })
+      
+      keypress.simple_combo("ctrl e", () => {
+        this.openEditor()
+      })
+      
+      keypress.simple_combo("ctrl n", () => {
+        this.newFile()
+      })
+      
+      keypress.simple_combo("ctrl 0", () => {
+        this.emptyFile()
+      })
+      
+      return this
+    },
     /*
     initHotkeys: function () {
       this.lib.hotkeys('ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {

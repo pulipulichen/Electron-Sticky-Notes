@@ -1798,6 +1798,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_fragment__WEBPACK_IMPORTED_M
 
 
 
+const keypress = __webpack_require__(/*! ./vendors/keypress/keypress */ "./app/webpack/src/vendors/keypress/keypress.js")
+
+
 let VueController = {
   el: '#app',
   i18n: _VueI18n__WEBPACK_IMPORTED_MODULE_9__["default"],
@@ -1862,6 +1865,7 @@ let VueController = {
     this.lib.ipc = this.lib.electron.ipcRenderer
     
     this.lib.WindowHelper = _helpers_WindowHelper__WEBPACK_IMPORTED_MODULE_7___default.a
+    this.lib.keypress = new keypress.Listener();
     
     this.status.platform = this.lib.ElectronHelper.getPlatform()
     
@@ -4105,8 +4109,6 @@ const SubmenuFile = __webpack_require__(/*! ./SubmenuFile/SubmenuFile.vue */ "./
 const SubmenuRecent = __webpack_require__(/*! ./SubmenuRecent/SubmenuRecent.vue */ "./app/webpack/src/components/MenuBar/SubmenuRecent/SubmenuRecent.vue").default
 const SubmenuAbout = __webpack_require__(/*! ./SubmenuAbout/SubmenuAbout.vue */ "./app/webpack/src/components/MenuBar/SubmenuAbout/SubmenuAbout.vue").default
 //
-//const hotkeys = require('../../vendors/hotkeys/hotkeys.min')
-const keypress = __webpack_require__(/*! ../../vendors/keypress/keypress */ "./app/webpack/src/vendors/keypress/keypress.js")
 
 module.exports = {
   props: ['lib', 'status', 'config', 'progress'],
@@ -4139,6 +4141,10 @@ module.exports = {
       if (this.config.debug.openSubmenu === true) {
         this.$refs.Submenu.click()
       }
+      
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
     }
   },
   computed: {
@@ -4165,7 +4171,6 @@ module.exports = {
     // prevent dropdown
     
     this.initDropdown()
-    this.initHotkeys()
   },
   methods: {
     initDropdown: function () {
@@ -4185,58 +4190,15 @@ module.exports = {
     },
     initHotkeys: function () {
       
-      //console.log(keypress)
-      let listener = new keypress.Listener();
-      
-      listener.simple_combo("ctrl `", () => {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl `", () => {
         this.toggleAlwaysOnTop()
       })
-      
-      return
-
-      this.lib.hotkeys('ctrl+`,ctrl+m,alt+`,ctrl+pageup,ctrl+pagedown,ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e,ctrl+n,ctrl+0,ctrl+t', (event, handler) => {
-        //console.log(handler.key)
-        switch (handler.key) {
-          case 'ctrl+`':
-            this.toggleAlwaysOnTop()
-            break
-          case 'ctrl+m':
-            this.toggleMaximize()
-            break
-            
-          case 'alt+`':
-            this.$refs.SubmenuSize.resizeToFitContent()
-            break
-          case 'ctrl+pageup':
-            this.$refs.SubmenuSize.fontSizeLarger()
-            break
-          case 'ctrl+pagedown':
-            this.$refs.SubmenuSize.fontSizeSmaller()
-            break
-            
-          case 'ctrl+s':
-            this.$refs.SubmenuFile.saveFile()
-            break
-          case 'ctrl+shift+s':
-            this.$refs.SubmenuFile.saveFileAs()
-            break
-          case 'ctrl+o':
-            this.$refs.SubmenuFile.openFolder()
-            break
-          case 'ctrl+e':
-            this.$refs.SubmenuFile.openEditor()
-            break
-          case 'ctrl+n':
-            this.$refs.SubmenuFile.newFile()
-            break
-          case 'ctrl+0':
-            this.$refs.SubmenuFile.emptyFile()
-            break
-          case 'ctrl+t':
-            this.$refs.SubmenuTheme.open()
-            break
-        }
+      keypress.simple_combo("ctrl m", () => {
+        this.toggleMaximize()
       })
+      
+      return this
     },
     toggleAlwaysOnTop: function (isPinTop) {
       if (typeof(isPinTop) !== 'boolean') {
@@ -4631,10 +4593,44 @@ module.exports = {
       return (['text', 'text-code', 'text-rich-format', 'image-static', 'image-viewer'].indexOf(this.status.fileType) > -1)
     }
   },
+  watch: {
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
+    }
+  },
   //mounted: function () {
     //this.initHotkeys()
   //},
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl s", () => {
+        this.saveFile()
+      })
+      keypress.simple_combo("ctrl shift s", () => {
+        this.saveFileAs()
+      })
+      
+      keypress.simple_combo("ctrl o", () => {
+        this.openFolder()
+      })
+      
+      keypress.simple_combo("ctrl e", () => {
+        this.openEditor()
+      })
+      
+      keypress.simple_combo("ctrl n", () => {
+        this.newFile()
+      })
+      
+      keypress.simple_combo("ctrl 0", () => {
+        this.emptyFile()
+      })
+      
+      return this
+    },
     /*
     initHotkeys: function () {
       this.lib.hotkeys('ctrl+s,ctrl+shift+s,ctrl+o,ctrl+e', (event, handler) => {
@@ -5155,6 +5151,13 @@ module.exports = {
     return {
     }
   },
+  watch: {
+    'progress.display': function () {
+      if (this.progress.display === true) {
+        this.initHotkeys()
+      }
+    }
+  },
   computed: {
     enableFontSizeControl: function () {
       return (['text', 'text-code'].indexOf(this.status.fileType) > -1)
@@ -5164,6 +5167,16 @@ module.exports = {
     //this.initHotkeys()
   //},
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl pageup", () => {
+        this.fontSizeLarger()
+      })
+      keypress.simple_combo("ctrl pagedown", () => {
+        this.fontSizeSmaller()
+      })
+      return this
+    },
     /*
     initHotkeys: function () {
       console.log('aaa')
@@ -5349,11 +5362,14 @@ module.exports = {
       }
     },    
     'progress.display': function () {
-      if (this.progress.display === true 
-              && this.config.debug.openTheme === true) {
-        setTimeout(() => {
-          this.open()
-        }, 1000)
+      if (this.progress.display === true) {
+        if (this.config.debug.openTheme === true) {
+          setTimeout(() => {
+            this.open()
+          }, 1000)
+        }
+        
+        this.initHotkeys()
       }
     }
   },  // watch: {
@@ -5364,6 +5380,13 @@ module.exports = {
     this.themes = this.config.themes
   },
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl t", () => {
+        this.open()
+      })
+      return this
+    },
     initModal: function () {
       let _this = this
       if (this.$modal === null || this.$modal === undefined) {

@@ -16,11 +16,14 @@ module.exports = {
       }
     },    
     'progress.display': function () {
-      if (this.progress.display === true 
-              && this.config.debug.openTheme === true) {
-        setTimeout(() => {
-          this.open()
-        }, 1000)
+      if (this.progress.display === true) {
+        if (this.config.debug.openTheme === true) {
+          setTimeout(() => {
+            this.open()
+          }, 1000)
+        }
+        
+        this.initHotkeys()
       }
     }
   },  // watch: {
@@ -31,6 +34,13 @@ module.exports = {
     this.themes = this.config.themes
   },
   methods: {
+    initHotkeys: function () {
+      let keypress = this.lib.keypress
+      keypress.simple_combo("ctrl t", () => {
+        this.open()
+      })
+      return this
+    },
     initModal: function () {
       let _this = this
       if (this.$modal === null || this.$modal === undefined) {
