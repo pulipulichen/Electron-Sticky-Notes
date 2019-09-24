@@ -36,6 +36,7 @@ let VueController = {
       platform: 'win32',
       enableAutoSave: false,
       recentFileList: [],
+      openFromClipboard: true,
       
       //isReady: false,
     },
@@ -124,7 +125,7 @@ let VueController = {
         this.progress.component = true
       }, 0)
     },
-    setupFile: function () {
+    setupDebugFile: function () {
       // -------------------------------------
       // For test
       
@@ -169,36 +170,55 @@ let VueController = {
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
       
+      return this
+    },
+    setupFile: function () {
+      
       // -------------------------------------
       // For test
+      
+      this.setupDebugFile()
+      
+      // -------------------------------------
+      //console.log(this.status.contentText)
+      if (this.status.contentText === undefined
+              || this.status.contentText === null
+              || this.status.contentText === '') {
+        this.status.openFromClipboard = false
+      }
       
       if (this.lib.ElectronImageFileHelper.isStaticImageFile(this.status.filePath)) {
         this.status.fileType = 'image-static'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageStatic
+        this.status.openFromClipboard = false
         //this.addRecent()
       }
       else if (this.lib.ElectronImageFileHelper.isViewerSupportedImageFile(this.status.filePath)) {
         this.status.fileType = 'image-viewer'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentImageViewer
+        this.status.openFromClipboard = false
         //this.addRecent()
       }
       else if (this.lib.ElectronTextFileHelper.isCodeFile(this.status.filePath)) {
         this.status.fileType = 'text-code'
         this.status.contentText = null
         this.status.mainComponent = this.$refs.ContentTextCode
+        this.status.openFromClipboard = false
       }
       else if (this.lib.ElectronTextFileHelper.isTextFile(this.status.filePath)) {
         this.status.fileType = 'text'
         this.status.contentText = this.lib.ElectronFileHelper.readFileSync(this.status.filePath)
         //console.log(this.status.contentText)
         this.status.mainComponent = this.$refs.ContentText
+        this.status.openFromClipboard = false
         //this.addRecent(this.status.contentText)
       }
       else if (this.lib.ElectronTextFileHelper.isRichFormatFile(this.status.filePath)) {
         this.status.fileType = 'text-rich-format'
         this.status.mainComponent = this.$refs.ContentTextRichFormat
+        this.status.openFromClipboard = false
       }
       else if (typeof(this.status.imageDataURL) === 'string') {
         this.status.fileType = 'image-viewer'

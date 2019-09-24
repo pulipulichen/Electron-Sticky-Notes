@@ -201,5 +201,9 @@ module.exports = {
       }
       return this
     },
+    emptyFile: function () {
+      this.$refs.SubmenuFile.emptyFile()
+      return this
+    }
   }
 }

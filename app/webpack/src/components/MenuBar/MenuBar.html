@@ -70,6 +70,11 @@
       </div>
     </a>
     <a class="fitted item"
+       v-if="status.openFromClipboard === true"
+       v-on:click="emptyFile()">
+      <i class="sticky note outline icon"></i>
+    </a>
+    <a class="fitted item"
       v-on:click="minimize()">
       <i class="window minimize icon"></i>
     </a>

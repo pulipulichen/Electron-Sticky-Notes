@@ -1,21 +1,21 @@
 <fragment>
   <a class="item"
      href="#"
-        v-on:click="newFile()">
+     v-on:click="newFile()">
      <i class="external alternate icon"></i>
      New
      <div class="description">ctrl+n</div>
   </a>
   <a class="item"
      href="#"
-        v-on:click="emptyFile()">
+     v-on:click="emptyFile()">
     <i class="sticky note outline icon"></i>
     Empty
     <div class="description">ctrl+e</div>
   </a>
   <a class="item"
-        v-on:click="saveFile()"
-        v-if="enableSaveFile">
+     v-on:click="saveFile()"
+     v-if="enableSaveFile">
      href="#"
      <i class="save icon"></i>
      Save
