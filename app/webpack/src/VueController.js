@@ -150,8 +150,9 @@ let VueController = {
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }
       if (this.config.debug.useTestCodeFile === true) {
-        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/postcss.config.js')
+        //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/postcss.config.js')
         //this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/newhtml.html')
+        this.status.filePath = this.lib.ElectronFileHelper.resolve('demo/note.xml')
         //console.log(this.status.filePath)
         //console.log(this.lib.ElectronImageFileHelper.isImageFile(this.status.filePath))
       }

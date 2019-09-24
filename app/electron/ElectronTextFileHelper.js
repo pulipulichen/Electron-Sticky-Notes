@@ -76,7 +76,9 @@ let ElectronTextFileHelper = {
 
     let fileTypeResult = this.lib.ElectronFileHelper.getFileTypeMIME(filepath)
     //console.error(['Please check file type: ', ext, fileTypeResult])
-    return (fileTypeResult === undefined)
+    return (fileTypeResult === undefined
+            || fileTypeResult === 'application/xml')
+            
     /*
     if ( (fileTypeResult === undefined && ext === 'csv')
             || (fileTypeResult === undefined && ext === 'arff'
