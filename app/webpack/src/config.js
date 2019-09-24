@@ -2,7 +2,7 @@ module.exports = {
   debug: {
     useTestContentText: false,
     useTestPlainTextFile: false,
-    useTestCodeFile: true,
+    useTestCodeFile: false,
     useTestImageStaticFile: false,
     useTestImageViewerFile: false,
     useTestRichFormatTextFile: false,
@@ -19,7 +19,7 @@ module.exports = {
   menuBarHeight: 40,
   fontSizeRatio: 1,
   fontSizeAdjustInterval: 0.2,
-  isPinTop: false,
+  isPinTop: true,
   cacheAliveDay: 1,
   maxRecentFileListCount: 10, //
   
