@@ -2851,6 +2851,10 @@ module.exports = {
     openDonatePage: function () {
       this.lib.ElectronHelper.openURL('http://blog.pulipuli.info/p/donation.html')
       return this
+    },
+    submitNewIssue: function () {
+      this.lib.ElectronHelper.openURL('https://github.com/pulipulichen/Electron-Sticky-Notes/issues/new')
+      return this
     }
   }
 }
@@ -18607,6 +18611,23 @@ var render = function() {
       [
         _c("i", { staticClass: "github square icon" }),
         _vm._v("\n     Project website...\n  ")
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass: "item",
+        attrs: { href: "#", accesskey: "" },
+        on: {
+          click: function($event) {
+            return _vm.submitNewIssue()
+          }
+        }
+      },
+      [
+        _c("i", { staticClass: "flag icon" }),
+        _vm._v("\n     Submit Issue...\n  ")
       ]
     ),
     _vm._v(" "),

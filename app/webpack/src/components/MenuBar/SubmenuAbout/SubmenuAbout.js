@@ -22,6 +22,10 @@ module.exports = {
     openDonatePage: function () {
       this.lib.ElectronHelper.openURL('http://blog.pulipuli.info/p/donation.html')
       return this
+    },
+    submitNewIssue: function () {
+      this.lib.ElectronHelper.openURL('https://github.com/pulipulichen/Electron-Sticky-Notes/issues/new')
+      return this
     }
   }
 }
